@@ -21,7 +21,7 @@
 		<br>
 		Password: <input type="password" name="password">
 		<br>
-		Confirm Password: <input type="password" name="confirm">
+		Retype Password: <input type="password" name="retype">
 		<br><br>
 		<input id="btn_register" type="submit" value="SUBMIT">
 	</form>
