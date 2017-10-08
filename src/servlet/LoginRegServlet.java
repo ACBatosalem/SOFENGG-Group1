@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -8,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import bean.User;
 import service.UserService;
 
 /**
  * Servlet implementation class LoginRegServlet
  */
-@WebServlet(urlPatterns={"/login", "/register", "/logout", "/relog"})
+@WebServlet(urlPatterns={"/login/*", "/register", "/logout", "/relog", "/ajaxLoginEmail/*"})
 public class LoginRegServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,6 +54,9 @@ public class LoginRegServlet extends HttpServlet {
 			break;
 		case "/relog" :
 			Relog(request, response);
+			break;
+		case "/ajaxLoginEmail" :
+			checkEmailValidity(request, response);
 			break;
 		}
 	}
@@ -88,17 +98,17 @@ public class LoginRegServlet extends HttpServlet {
 			
 			if (user.getType().equals("APS")) {
 				//redirect to aps successful login page
-				request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+				request.getRequestDispatcher("home_aps.jsp").forward(request, response);
 				System.out.println("Successfully logged in as APS user");
 			} else if (user.getType().equals("ORG")) {
 				//redirect to org successful login page
-				request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+				request.getRequestDispatcher("home_org.jsp").forward(request, response);
 				System.out.println("Successfully logged in as ORG user");
 			}
 		} else {
 			//redirect to the error page or w/e
+			request.setAttribute("msg", "Login failed!");
 			request.getRequestDispatcher("loginreg.jsp").forward(request, response);
-			System.out.println("Login failed!");
 		}
 	}
 	
@@ -122,6 +132,20 @@ public class LoginRegServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("loginreg.jsp");
 		}
+	}
+	
+	private void checkEmailValidity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// TODO Auto-generated method stub
+		String url = request.getPathInfo().substring(1);
+		String email = URLDecoder.decode(url, "UTF-8");
+		JsonObject json = new JsonObject();
+		
+		if (UserService.getUserByEmail(email) == null)
+			json.addProperty("validity", "invalid");
+		else json.addProperty("validity", "valid");
+		System.out.println(json.toString());
+		response.setContentType("application/json");
+		response.getWriter().write(json.toString());
 	}
 	
 	/**
