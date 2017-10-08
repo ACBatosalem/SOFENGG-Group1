@@ -24,7 +24,7 @@ public class UserService {
 		em.close();
 	}*/
 	
-	public static User getUserByEmail(String email) {
+	public static User getUserByUsername(String username) {
 		User user = null;
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysqldb");
@@ -34,8 +34,8 @@ public class UserService {
 		try{
 			trans.begin();
 			
-			TypedQuery<User> query = em.createQuery("SELECT members FROM members members WHERE memEmail = :email", User.class);
-			query.setParameter("email", email);
+			TypedQuery<User> query = em.createQuery("SELECT orgs FROM orgs orgs WHERE orgAlias = :username", User.class);
+			query.setParameter("username", username);
 			if (query.getResultList() != null && query.getResultList().size() > 0)
 				user = (User) query.getResultList().get(0);
 			
@@ -60,7 +60,7 @@ public class UserService {
 		try{
 			trans.begin();
 			
-			TypedQuery<User> query = em.createQuery("SELECT members FROM members members", User.class);
+			TypedQuery<User> query = em.createQuery("SELECT orgs FROM orgs orgs", User.class);
 			users = query.getResultList();
 			
 			trans.commit();

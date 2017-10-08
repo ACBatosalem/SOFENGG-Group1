@@ -2,18 +2,18 @@ package bean;
 
 import javax.persistence.*;
 
-@Entity(name="members")
+@Entity(name="orgs")
 public class User {
 	@Id
-	@Column(name="memID")
+	@Column(name="orgID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="memEmail")
-	private String email;
-	@Column(name="memPW")
+	@Column(name="orgName")
+	private String name;
+	@Column(name="orgAlias")
+	private String alias;
+	@Column(name="orgPW")
 	private String password;
-	@Column(name="memType")
-	private String type;
 	
 	public int getId() {
 		return id;
@@ -23,12 +23,20 @@ public class User {
 		this.id = id;
 	}
 	
-	public String getEmail() {
-		return email;
+	public String getName() {
+		return name;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getAlias() {
+		return alias;
+	}
+	
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 	
 	public String getPassword() {
@@ -38,19 +46,9 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getType() {
-		return type;
-	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", type=" + type + "]";
+		return "User [id=" + id + ", name=" + name + ", alias=" + alias + ", password=" + password + "]";
 	}
-	
-	
 }

@@ -21,7 +21,7 @@ import service.UserService;
 /**
  * Servlet implementation class LoginRegServlet
  */
-@WebServlet(urlPatterns={"/login/*", "/register", "/logout", "/relog", "/ajaxLoginEmail/*"})
+@WebServlet(urlPatterns={"/login/*", "/register", "/logout", "/relog"})
 public class LoginRegServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +38,7 @@ public class LoginRegServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		String path = request.getServletPath();
 		
@@ -55,9 +55,6 @@ public class LoginRegServlet extends HttpServlet {
 		case "/relog" :
 			Relog(request, response);
 			break;
-		case "/ajaxLoginEmail" :
-			checkEmailValidity(request, response);
-			break;
 		}
 	}
 
@@ -67,7 +64,7 @@ public class LoginRegServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String retype = request.getParameter("retype");
 		
-		User user = UserService.getUserByEmail(email);
+		User user = UserService.getUserByUsername(email);
 		
 		if (user != null && user.getPassword() == null && password.equals(retype)) {
 			UserService.updatePassword(user.getId(), password);
@@ -88,27 +85,20 @@ public class LoginRegServlet extends HttpServlet {
 	
 	private void LoginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String email = request.getParameter("email");
+		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 		
-		User user = UserService.getUserByEmail(email);
+		User user = UserService.getUserByUsername(username);
 		
-		if (user != null && user.getPassword().equals(password)) {
-			request.getSession().setAttribute("user", email);
-			
-			if (user.getType().equals("APS")) {
-				//redirect to aps successful login page
-				request.getRequestDispatcher("home_aps.jsp").forward(request, response);
-				System.out.println("Successfully logged in as APS user");
-			} else if (user.getType().equals("ORG")) {
-				//redirect to org successful login page
-				request.getRequestDispatcher("home_org.jsp").forward(request, response);
-				System.out.println("Successfully logged in as ORG user");
-			}
+		response.setContentType("text/html;charset=UTF-8");
+		if (user == null) {
+			response.getWriter().write("This user is invalid or unauthorized!");
+		} else if (!user.getPassword().equals(password)) {
+			response.getWriter().write("The password is incorrect.");
+		} else if (user.getAlias().equals("CSO")) {
+			response.getWriter().write("aps");
 		} else {
-			//redirect to the error page or w/e
-			request.setAttribute("msg", "Login failed!");
-			request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+			response.getWriter().write("org");
 		}
 	}
 	
@@ -132,20 +122,6 @@ public class LoginRegServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("loginreg.jsp");
 		}
-	}
-	
-	private void checkEmailValidity(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
-		String url = request.getPathInfo().substring(1);
-		String email = URLDecoder.decode(url, "UTF-8");
-		JsonObject json = new JsonObject();
-		
-		if (UserService.getUserByEmail(email) == null)
-			json.addProperty("validity", "invalid");
-		else json.addProperty("validity", "valid");
-		System.out.println(json.toString());
-		response.setContentType("application/json");
-		response.getWriter().write(json.toString());
 	}
 	
 	/**

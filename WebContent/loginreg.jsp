@@ -9,9 +9,9 @@
 </head>
 <body>
 	<form id="loginform" action="login" method="POST">
-		Email: <input id="login_email" type="email" name="email" onchange="checkEmailForLogin()"> <span id="login_email_msg"></span>
+		Username: <input id="login_username" type="text" name="username">
 		<br>
-		Password: <input id="login_password" type="password" name="password"> <span id="login_password_msg"></span>
+		Password: <input id="login_password" type="password" name="password"> 
 		<br><br>
 		<input id="btn_login" type="submit" value="LOGIN">
 	</form>
@@ -20,7 +20,7 @@
 	<br><br>
 	
 	<form id="registerform" action="register" method="POST">
-		Email: <input type="email" name="email">
+		Username: <input type="text" name="username">
 		<br>
 		Password: <input type="password" name="password">
 		<br>
@@ -32,55 +32,34 @@
 	<p id="register_msg"></p>
 	
 	<script>
-	var ching = 10;
-	
-	function checkBlanksForLogin() {
-		var email = $("#login_email").val();
-		var password = $("#login_password").val();
-		email = email.trim();
-		password = password.trim();
-		if (email == "" || password == "") {
-			$("#login_msg").text("Please fill out all fields.");
-			return true;
-		} else $("#login_msg").text("");
-		return false;
-	}
-	
-	function checkEmailForLogin() {
-		//do the regex?
-		console.log("Hellooo");
-		var ajaxdata = $("#login_email").val();
-		$.ajax({
-            "method"   : "post",
-            "url"	   : "ajaxLoginEmail/" + ajaxdata,
-            "dataType" : "json",
-            "success"  : function(data){
-            	ching = data;
-            	console.log(data);
-            	if (data.validity == "valid")
-  					$("#login_email_msg").val("This email is valid.");
-            	else $("#login_email_msg").val("Invalid email!");
-            }
-		});
-	}
 	
 	function validateLogin ()
 	{    
-		checkBlanksForLogin();
-		//checkEmailForLogin
-		//checkPasswordForLogin
+		var username = $("#login_username").val().trim();
+		var pw = $("#login_password").val();
+		if (username == "" || pw == "") {
+			$("#login_msg").text("Please fill out all fields.");
+			return true;
+		} else $("#login_msg").text("");
 		
-		/* var email = $("#login_email").val();
-		var password = $("#login_password").val();
-		var ajaxdata = "email=" + email + "&password=" + password;
-	    $.ajax({
-	                type     : "POST",
-	                url		 : "login/" + ajaxdata,
-	                success  : function(data){ 
-	      				
-	                },
-	                async    :    false,
-	    }); */
+		$.ajax({ 
+            type        : 'POST', 
+            url         : 'login',
+            data        : {user:username, password:pw},
+            dataType    : 'html',
+            success     : function(data) {
+            	if (data == "aps")
+            		window.location = "home_aps.jsp";
+            	else if (data == "org")
+            		window.location = "home_org.jsp";
+            	else
+            		$("#login_msg").text(data);
+            },
+            error   : function(xhr,status,error){
+                console.log(xhr);   
+                alert(status);
+            }
+        });
 	
 	}
 	
