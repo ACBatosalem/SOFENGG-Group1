@@ -1,0 +1,73 @@
+
+<html>
+<head>
+    <!-- STYLES -->
+    <link type="text/css" href="CSS/login_style.css" rel="stylesheet">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>CSO APS | Login</title>
+<script src="jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div id="imagediv">
+        <img src="cso.png">
+    </div>
+    <div id="logindiv">
+        <div id="logingroup">
+            <form id="loginform" action="login" method="POST">
+                <div class="option">
+                    <span class="label"> Username </span> <br><input id="login_username" type="text" name="username">
+                </div>
+                <br>
+                <div class="option">
+                    <span class="label"> Password </span> <br><input id="login_password" type="password" name="password"> 
+                    <br>
+                </div>
+                <input id="btn_login" type="submit" value="LOGIN">
+            </form>
+        <span id="login_msg"></span>
+        </div>
+    </div>
+    
+	<script>
+	
+	function validateLogin ()
+	{    
+		var username = $("#login_username").val().trim();
+		var pw = $("#login_password").val();
+		if (username == "" || pw == "") {
+			$("#login_msg").text("Please fill out all fields.");
+			return true;
+		} else $("#login_msg").text("");
+		
+		$.ajax({ 
+            type        : 'POST', 
+            url         : 'login',
+            data        : {user:username, password:pw},
+            dataType    : 'html',
+            success     : function(data) {
+            	if (data == "aps")
+            		window.location = "home_aps.jsp";
+            	else if (data == "org")
+            		window.location = "home_org.jsp";
+            	else
+            		$("#login_msg").text(data);
+            },
+            error   : function(xhr,status,error){
+                console.log(xhr);   
+                alert(status);
+            }
+        });
+	
+	}
+	
+	$(document).ready(function(){
+		$("#loginform").submit(function(e){
+			e.preventDefault();
+			validateLogin();
+		});
+	});
+
+	</script>
+</body>
+</html>

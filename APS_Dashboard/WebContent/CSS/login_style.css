@@ -1,0 +1,85 @@
+body{
+    background-color: white;
+    
+}
+
+#logindiv{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: green;
+    float: right;
+    width: 30%;
+    min-width: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logingroup{
+ max-width: 300px;
+ min-width: 100px;
+ width: 100%;
+ margin: 0 auto;
+ padding-left: 20px;
+ padding-right: 20px;
+}
+
+.label{
+    font-size: 20px;    
+    color: white;
+    font-family: sans-serif;
+}
+
+
+#btn_login{
+    float: right;
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: limegreen;
+    border-radius: 5px;
+    border: 0px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 75px;
+}
+
+#login_username{    
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#login_password{
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#imagediv{
+    width: 70%;
+    height: 100%;
+    text-align: center;
+}
+
+#imagediv img{
+    width: 90%;
+    height: 90%;
+    text-align: center;
+}
+
+#login_msg{
+	color: white;
+	font-size: 15px;
+	font-family: sans-serif;
+}
