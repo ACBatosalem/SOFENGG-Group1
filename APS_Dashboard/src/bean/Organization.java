@@ -8,10 +8,10 @@ public class Organization {
 	@Column(name="orgID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="orgName")
+	@Column(name="orgFullName")
 	private String name;
-	@Column(name="orgAlias")
-	private String alias;
+	@Column(name="orgUserName")
+	private String userName;
 	@Column(name="orgPW")
 	private String password;
 	
@@ -31,12 +31,12 @@ public class Organization {
 		this.name = name;
 	}
 	
-	public String getAlias() {
-		return alias;
+	public String getUserName() {
+		return userName;
 	}
 	
-	public void setAlias(String alias) {
-		this.alias = alias;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public String getPassword() {
@@ -49,6 +49,6 @@ public class Organization {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", alias=" + alias + ", password=" + password + "]";
+		return "User [id=" + id + ", name=" + name + ", userName=" + userName + ", password=" + password + "]";
 	}
 }

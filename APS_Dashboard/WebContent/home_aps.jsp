@@ -7,6 +7,17 @@
 <title>APS | Dashboard</title>
 </head>
 <body>
+	<script src = "jquery-3.2.1.js">
+	<script>
+		$(document).onload(function(){
+			var sessionun = $("#sessionun").text();
+			alert(sessionun);
+			console.log(sessionun);
+			if (sessionun == "")
+				window.location = "loginreg.jsp"
+		});
+	</script>
+	<div id="sessionun">${sessionScope.sessionun}</div>
 	Welcome APS!
 	<a href="logout"><button type='submit'>Logout</button></a>
 	<a href="getAllOrgs"><button type='submit'>Edit Organizations</button></a>

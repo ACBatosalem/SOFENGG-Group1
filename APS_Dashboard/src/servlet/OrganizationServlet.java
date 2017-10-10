@@ -42,8 +42,8 @@ public class OrganizationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String path = request.getServletPath();
-		
-		switch(path) {
+		if(!((String) request.getSession().getAttribute("sessionun") == null)) {
+			switch(path) {
 			case "/getAllOrgs" :
 				GetAllOrgs(request, response);
 				break;
@@ -59,7 +59,9 @@ public class OrganizationServlet extends HttpServlet {
 			case "/updateOrg":
 				UpdateOrg(request,response);
 				break;
-		}
+			}
+		} else response.sendRedirect("loginreg.jsp");
+		
 	}
 	
 	private void UpdateOrg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -67,16 +69,20 @@ public class OrganizationServlet extends HttpServlet {
 		Organization org = new Organization();
 		
 		org.setName(request.getParameter("name"));
-		org.setAlias(request.getParameter("alias"));
+		org.setUserName(request.getParameter("username"));
 		
 		// call studentservice to update student into db
-		OrganizationService.updateOrg(id, org);
+		//OrganizationService.updateOrg(id, org);
 		response.setContentType("text/html;charset=UTF-8");
-		if(OrganizationService.updateOrg(id, org)) {
-			response.getWriter().write("updated");
-		} else {
-			response.getWriter().write("Organization was not updated");
-		}
+		if(!OrganizationService.findOrgByNameOrUserName(request.getParameter("name"), 
+														request.getParameter("username"))){
+			if(OrganizationService.updateOrg(id, org)) {
+				response.getWriter().write("updated");
+			} else {
+				response.getWriter().write("Organization was not updated");
+			}
+		} else response.getWriter().write("Name or Username is already taken");
+		
 		// getAllStudents
 		
 	}
@@ -106,28 +112,28 @@ public class OrganizationServlet extends HttpServlet {
 		String password = "";
 		Organization org = new Organization();
 		
-		org.setName(request.getParameter("name"));
-		org.setAlias(request.getParameter("alias"));
-		
-		for(int i = 0; i < 6; i++) {
-			password += (char) (97 + r.nextInt(26));
-		}
-		
-		System.out.println(password);
-		
-		org.setPassword(password);
-
-		response.setContentType("text/html;charset=UTF-8");
-		if(OrganizationService.addOrg(org)) {
-			response.getWriter().write("added");
-		} else {
-			response.getWriter().write("Organization not added");
-		}
+		if(!OrganizationService.findOrgByNameOrUserName(request.getParameter("name"), 
+				request.getParameter("username"))) {
+			org.setName(request.getParameter("name"));
+			org.setUserName(request.getParameter("username"));
+			
+			for(int i = 0; i < 6; i++) {
+				password += (char) (97 + r.nextInt(26));
+			}
+			org.setPassword(password);
+	
+			response.setContentType("text/html;charset=UTF-8");
+			if(OrganizationService.addOrg(org)) {
+				response.getWriter().write("added");
+			} else {
+				response.getWriter().write("Organization was not added");
+			}
+		} else response.getWriter().write("Name or Username is already taken");
 		
 	}
 
 	private void GetAllOrgs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		List<Organization> orgs = OrganizationService.getAllOrgs();
 		
 		// bind studentlist to request scope

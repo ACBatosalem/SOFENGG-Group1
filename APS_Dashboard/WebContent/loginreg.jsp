@@ -54,7 +54,7 @@
 </head>
 <body>
 	<div id="imagediv">
-        <img src="res/cso.png">
+        <img src="res/dlsulogo.png">
     </div>
     <div id="logindiv">
         <div id="logingroup">

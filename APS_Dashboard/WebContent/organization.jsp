@@ -45,26 +45,26 @@
 			$("#addOrgForm").submit(function(e){
 				e.preventDefault();
 				var name = $("#addOrg_name").val().trim();
-				var alias = $("#addOrg_alias").val().trim();
-				if (name == "" || alias == "")
+				var username = $("#addOrg_username").val().trim();
+				if (name == "" || username == "")
 					$("#addOrg_msg").text("Please lang. Fill out all the fields!");
 				else if (name.length <= 5)
 					$("#addOrg_msg").text("Name must be 6 characters or more.");
-				else if (alias.length < 2)
-					$("#addOrg_msg").text("Alias must be 2 characters or more.");
+				else if (username.length < 2)
+					$("#addOrg_msg").text("Username must be 2 characters or more.");
 				else {
 					$("#addOrg_msg").text("");
 					$.ajax({
 						type        : 'POST', 
 			            url         : 'addOrg',
-			            data        : {name:name, alias:alias},
+			            data        : {name:name, username:username},
 			            dataType    : 'html',
 			            success     : function(data) {
 			            	if (data == "added"){
 			            		window.location = "getAllOrgs";
 			            	}
 			            	else{
-			            		$("#login_msg").text(data);
+			            		$("#addOrg_msg").text(data);
 			            	}
 			            },
 			            error   : function(xhr,status,error){
@@ -84,7 +84,7 @@
 	Add Organization:
 	<form id="addOrgForm" action="addOrg" method="POST">
 		Name <input id="addOrg_name" type="text" name="name"><br>
-		Alias <input id="addOrg_alias" type="text" name="alias"><br>
+		Username <input id="addOrg_username" type="text" name="username"><br>
 		<input id="btn_addorg" type="submit" value="Add Organization"><br>
 	</form>
 	<span id="addOrg_msg"></span>
@@ -92,7 +92,7 @@
 	<c:forEach items="${orgs}" var="s">
 		<div data-orgid="${s.id }">
 			Name : ${s.name } <br>
-			Alias :${s.alias } <br>
+			Username :${s.userName } <br>
 			Password : ${s.password } <br>
 			<button class="deletebutton" data-orgid="${s.id }"> Delete </button>
 			<button class="updatebutton" data-orgid="${s.id }"> Update </button>

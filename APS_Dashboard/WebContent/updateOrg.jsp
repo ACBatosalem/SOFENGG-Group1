@@ -14,19 +14,19 @@
 				e.preventDefault();
 				var id = $("#org_id").val();
 				var name = $("#updateOrg_name").val().trim();
-				var alias = $("#updateOrg_alias").val().trim();
-				if (name == "" || alias == "")
+				var username = $("#updateOrg_username").val().trim();
+				if (name == "" || username == "")
 					$("#updateOrg_msg").text("Please lang. Fill out all the fields!");
 				else if (name.length <= 5)
 					$("#updateOrg_msg").text("Name must be 6 characters or more.");
-				else if (alias.length < 2)
-					$("#updateOrg_msg").text("Alias must be 2 characters or more.");
+				else if (username.length < 2)
+					$("#updateOrg_msg").text("Username must be 2 characters or more.");
 				else {
 					$("#updateOrg_msg").text("");
 					$.ajax({
 						type        : 'POST', 
 			            url         : 'updateOrg',
-			            data        : {id:id, name:name, alias:alias},
+			            data        : {id:id, name:name, username:username},
 			            dataType    : 'html',
 			            success     : function(data) {
 			            	if (data == "updated"){
@@ -50,7 +50,7 @@
 	<form id="updateOrgForm" action="updateOrg" method="POST" id="updateOrg">
 		<input id="org_id" type="hidden" value="${org.id }" name="id">
 		Name <input id="updateOrg_name" type="text" name="name" value="${org.name}"><br>
-		Alias <input id="updateOrg_alias" type="text" name="alias" value="${org.alias}"><br>
+		Username <input id="updateOrg_username" type="text" name="username" value="${org.userName}"><br>
 		<input id="btn_updateOrg" type="submit" value="Update Organization"><br>
 	</form>
 	<span id="updateOrg_msg"></span>

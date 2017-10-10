@@ -37,7 +37,7 @@ public class OrganizationService {
 		try{
 			trans.begin();
 			
-			TypedQuery<Organization> query = em.createQuery("SELECT orgs FROM orgs orgs WHERE orgAlias = :username", Organization.class);
+			TypedQuery<Organization> query = em.createQuery("SELECT orgs FROM orgs orgs WHERE orgUserName = :username", Organization.class);
 			query.setParameter("username", username);
 			if (query.getResultList() != null && query.getResultList().size() > 0)
 				user = (Organization) query.getResultList().get(0);
@@ -52,6 +52,36 @@ public class OrganizationService {
 		em.close();
 		
 		return user;
+	}
+	
+	public static boolean findOrgByNameOrUserName(String fullname, String username) {
+		boolean found = false;
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysqldb");
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction trans = em.getTransaction();
+		
+		try{
+			trans.begin();
+			
+			TypedQuery<Organization> query = 
+					em.createQuery("SELECT orgs FROM orgs orgs WHERE orgUserName = :username OR orgFullName = :name"
+							, Organization.class);
+			query.setParameter("name", fullname);
+			query.setParameter("username", username);
+			if (query.getResultList() != null && query.getResultList().size() > 0)
+				found = true;
+			
+			trans.commit();
+		}catch(Exception e){
+			if(trans!=null){
+				trans.rollback();
+			}
+			e.printStackTrace();
+		}
+		em.close();
+		
+		return found;
 	}
 	
 	public static List<Organization> getAllOrgs() {
@@ -145,7 +175,7 @@ public class OrganizationService {
 			
 			// update the student's info
 			student.setName(newinfo.getName());
-			student.setAlias(newinfo.getAlias());
+			student.setUserName(newinfo.getUserName());
 			
 			trans.commit();
 			updated = true;

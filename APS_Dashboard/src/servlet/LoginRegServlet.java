@@ -11,7 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import bean.Organization;
 import service.OrganizationService;
@@ -19,7 +19,7 @@ import service.OrganizationService;
 /**
  * Servlet implementation class LoginRegServlet
  */
-@WebServlet(urlPatterns={"/login/*", "/logout"})
+@WebServlet(urlPatterns={"/loginpage", "/login/*", "/logout"})
 public class LoginRegServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,6 +41,9 @@ public class LoginRegServlet extends HttpServlet {
 		String path = request.getServletPath();
 		
 		switch (path) {
+		case "/loginpage" :
+			request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+			break;
 		case "/login" : 
 			LoginUser(request, response);
 			break;
@@ -55,13 +58,16 @@ public class LoginRegServlet extends HttpServlet {
 		String username = request.getParameter("user");
 		String password = request.getParameter("password");
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("sessionun", username);
+		
 		Organization user = OrganizationService.getOrgByUsername(username);
 		response.setContentType("text/html;charset=UTF-8");
 		if (user == null) {
 			response.getWriter().write("This user is invalid or unauthorized!");
 		} else if (!user.getPassword().equals(password)) {
 			response.getWriter().write("The password is incorrect.");
-		} else if (user.getAlias().equals("CSO")) {
+		} else if (user.getUserName().equals("CSO")) {
 			response.getWriter().write("aps");
 		} else {
 			response.getWriter().write("org");
@@ -71,7 +77,7 @@ public class LoginRegServlet extends HttpServlet {
 	private void Logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		request.getSession().invalidate();
-		System.out.println("Logged out");
+		System.out.println("Logged out " + (String) request.getSession().getAttribute("sessionun"));
 		response.sendRedirect("loginreg.jsp");
 	}
 
