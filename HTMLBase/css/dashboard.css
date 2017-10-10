@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+/* 
+COLOR SCHEME 
+BG - #E5EDF3
+SELECTED - #2C9D77
+UNSELECTED - #B1C5BE
+STRONG - #126B4D
+*/
+/* BG, OVERLAY, CONTENT */
+#main-bg {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    background-color: #E5EDF3;
+    height:100%;
+    width:100%;
+    z-index: -1;
+}
+
+#main-overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height:100%;
+    width:100%;
+    z-index: -1;
+}
+
+#main {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+/* NAVIGATION */
+.nav {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #126B4D;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+}
+
+.nav-item {
+    line-height: 50px;
+    height: 50px;
+    color: white;
+    margin: 0px 30px;
+    font-family: "Open Sans";
+    font-size: 20px;
+}
+
+.nav-button {
+    background: none;
+    border-style: none;
+    font-size: 18px;
+    font-family: "Open Sans";
+}
+
+#nav-title {
+    flex-grow: 2;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50px;
+}
+
+/* GROUP BUTTONS */
+.group-button-container {
+    display: flex;
+    padding: 10px 10px;
+    font-family: "Open Sans";
+    flex-direction: column;
+    color: #126B4D;
+}
+
+.main-group-container {
+    align-items: flex-end;
+    width: 100%;
+    display: flex;
+}
+
+.options-box {
+    font-size: 20px;
+}
+
+.orgs-choicebox {
+    height: 30px;
+    width: 200px;
+    margin: 10px 40px;
+    border-style: solid;
+    border-width: 2px;
+    color: #126B4D;
+    font-size: 18px;
+    border-color: #126B4D;
+    font-family: "Open Sans";
+    background-color: #E5EDF3;
+}
+
+
+/* TABS OPTION */
+.tab-main {
+    margin: 10px;
+    width: 100%;
+}
+
+.tab-option {    
+    margin: 0 0px 0 0;
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0;
+    float: right;
+    font-size: 18px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: white;
+    border-left: 30px solid transparent;
+    border-bottom: 30px solid green;
+    border-bottom-color: #B1C5BE;
+    filter: alpha(opacity=30);
+    font-family: "Open Sans";
+    background: none;
+    cursor: pointer;
+    border-top: none;
+    border-right: none;
+    margin-left: -20px;
+    z-index: 0;
+}
+
+.tab-option:hover, .tab-option.selected {   
+    border-bottom-color: #126B4D;
+}
+
+.tab-option:hover {
+    z-index: 3;
+    border-bottom-color: #2C9D8A;
+}
+
+.tab-option.selected {
+    z-index: 2;
+}
+
+.tab-options {
+    border-bottom: solid;
+    height: 30px;
+    color: #126B4D;
+    width: 100%;
+}
+
+
+
+/* TABLE VIEW */
+
+table, th, td {
+    text-align: center;
+    border-width: 2px;
+    font-family: "Open Sans";
+    border-style: solid; 
+    background-color: #E5EDF3;
+    padding: 5px;
+    border-color: 126B4D;
+    color: #126B4D;
+}
+
+table {   
+    width: 100%;
+    border-collapse: collapse; 
+    border-width: 3px;
+}
+
+.header.timestamp {
+    width: 20%;
+}
+
+.header.org {
+    width: 20%;
+}
+
+.header.title {
+    width: 30%;
+}
+
+.header.date {
+    width: 15%;
+}
+
+.header.status {
+    width: 10%;
+}
+
+
+.header {
+    color: white;
+    background-color: #126B4D;
+}
+
+.activities-option {
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.activities-option-button {
+    background: none;
+    border-style: none;
+    font-size: 20px;
+    width: 70px;
+    height: 40px;
+    color: #E5EDF3;
+    background-color: #126B4D;
+    border-radius: 3em;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #126B4D;
+    text-align: center;
+    transition: 0.2s;
+    margin: 10px;
+}
+
+.activities-option-button:hover {
+    background-color: #E5EDF3;
+    color: #126B4D;
+}
+
+.activities-option-label {
+    font-family: 'Open Sans';
+    margin: 20px;
+    font-size: 20px;
+}
+
+#acads-tab {
+    margin-top: 10px
+    width: 100%;
+    margin: 0 auto;
+    height: 100px;
+    border-style: solid;
+    border-color: #126B4D;   
+}
+
+.checkbox-input {
+
+}
+
+.option-box {
+}

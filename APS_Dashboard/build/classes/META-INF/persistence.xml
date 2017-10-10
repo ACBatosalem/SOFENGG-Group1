@@ -10,12 +10,13 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/aps_dashboard" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="javax.persistence.jdbc.password" value="#define JONAL 123" />
 
 			<!-- SQL dialect -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			
 			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			
 			<!-- Create/update tables automatically using mapping metadata -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			

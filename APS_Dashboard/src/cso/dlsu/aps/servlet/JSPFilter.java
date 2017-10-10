@@ -1,4 +1,4 @@
-package servlet;
+package cso.dlsu.aps.servlet;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -15,43 +15,23 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet Filter implementation class FilterPage
  */
 @WebFilter("/*")
-public class FilterPages implements Filter {
+public class JSPFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public FilterPages() {
-        // TODO Auto-generated constructor stub
+    public JSPFilter() {
+    	
     }
 
-	/**
-	 * @see Filter#destroy()
-	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
+
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		
-		if(((HttpServletRequest)request).getServletPath().endsWith(".jsp")){
-			System.out.println(((HttpServletRequest)request).getServletPath());
+		if(((HttpServletRequest)request).getServletPath().endsWith(".jsp"))
 			((HttpServletResponse) response).sendRedirect("loginpage");
-			
-		}
-		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
 	}
-
 }

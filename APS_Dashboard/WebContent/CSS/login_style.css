@@ -1,18 +1,18 @@
 body{
-    background-color: white;
-    
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
 }
 
 #logindiv{
     position: absolute;
+    right: 0;
     top: 0;
     bottom: 0;
-    right: 0;
     background-color: green;
-    float: right;
     width: 30%;
     min-width: 350px;
-    height: 100%;
+    min-height: inherit;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,9 +33,8 @@ body{
     font-family: sans-serif;
 }
 
-
 #btn_login{
-    float: right;
+    margin-top: 40px;
     width: 50%;
     font-size: 15px;
     color: white;
@@ -66,20 +65,21 @@ body{
     border-radius: 4px;
 }
 
-#imagediv{
+#imagecontainer{
+    position: absolute;
     width: 70%;
-    height: 100%;
-    text-align: center;
+    height: inherit;
+    flex-grow: 2;
+}
+
+#imagediv{
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 #imagediv img{
-    width: 90%;
-    height: 90%;
-    text-align: center;
-}
-
-#login_msg{
-	color: white;
-	font-size: 15px;
-	font-family: sans-serif;
+    width: inherit;
+    height: inherit;
 }

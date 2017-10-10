@@ -1,8 +1,10 @@
-package service;
+package cso.dlsu.aps.service;
 
 import javax.persistence.*;
+
+import cso.dlsu.aps.bean.Organization;
+
 import java.util.List;
-import bean.Organization;
 
 public class OrganizationService {
 	
