@@ -40,8 +40,15 @@ public class FilterPages implements Filter {
 		
 		if(((HttpServletRequest)request).getServletPath().endsWith(".jsp")){
 			System.out.println(((HttpServletRequest)request).getServletPath());
-			((HttpServletResponse) response).sendRedirect("loginpage");
 			
+			if(((HttpServletRequest)request).getServletPath().startsWith("/loginreg"))
+				((HttpServletResponse) response).sendRedirect("loginpage");
+			
+			else if(((HttpServletRequest)request).getServletPath().startsWith("/home_aps"))
+				((HttpServletResponse) response).sendRedirect("success_APS");
+			
+			else if(((HttpServletRequest)request).getServletPath().startsWith("/home_org"))
+				((HttpServletResponse) response).sendRedirect("success");
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
