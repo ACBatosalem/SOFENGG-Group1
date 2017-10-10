@@ -26,8 +26,15 @@ public class JSPFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(((HttpServletRequest)request).getServletPath().endsWith(".jsp"))
+		if(((HttpServletRequest)request).getServletPath().startsWith("/loginreg"))
 			((HttpServletResponse) response).sendRedirect("loginpage");
+		
+		else if(((HttpServletRequest)request).getServletPath().startsWith("/home_aps"))
+			((HttpServletResponse) response).sendRedirect("success_APS");
+		
+		else if(((HttpServletRequest)request).getServletPath().startsWith("/home_org"))
+			((HttpServletResponse) response).sendRedirect("success");
+		
 		chain.doFilter(request, response);
 	}
 

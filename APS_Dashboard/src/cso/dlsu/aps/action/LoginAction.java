@@ -29,8 +29,8 @@ public class LoginAction implements ActionHandler {
 		else if (!user.getPassword().equals(password))
 			response.getWriter().write("The password is incorrect.");
 		else if (user.getUserName().equals("CSO"))
-			response.getWriter().write("aps");
+			request.getRequestDispatcher("home_aps.jsp").forward(request, response);
 		else
-			response.getWriter().write("org");				
+			request.getRequestDispatcher("home_org.jsp").forward(request, response);			
 	}
 }

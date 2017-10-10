@@ -53,7 +53,7 @@ public class APSController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			actions.get(request.getServletPath()).execute(request, response);
+		actions.get(request.getServletPath()).execute(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
