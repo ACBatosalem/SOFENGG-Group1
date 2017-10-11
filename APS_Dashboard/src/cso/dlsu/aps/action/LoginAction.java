@@ -15,11 +15,10 @@ public class LoginAction implements ActionHandler {
 	// TODO Comments and documentations
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
+		String username = request.getParameter("user").toUpperCase();
 		String password = request.getParameter("password");
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("sessionun", username);
+		
 		
 		Organization user = OrganizationService.getOrgByUsername(username);
 		response.setContentType("text/html;charset=UTF-8");
@@ -28,9 +27,16 @@ public class LoginAction implements ActionHandler {
 			response.getWriter().write("This user is invalid or unauthorized!");
 		else if (!user.getPassword().equals(password))
 			response.getWriter().write("The password is incorrect.");
-		else if (user.getUserName().equals("CSO"))
-			request.getRequestDispatcher("home_aps.jsp").forward(request, response);
-		else
-			request.getRequestDispatcher("home_org.jsp").forward(request, response);			
+		else if (user.getUserName().equals("CSO")){
+			response.getWriter().write("aps");
+			HttpSession session = request.getSession();
+			session.setAttribute("sessionun", username);
+		}
+		else{
+			System.out.println("here");
+			response.getWriter().write("org");
+			HttpSession session = request.getSession();
+			session.setAttribute("sessionun", username);
+		}
 	}
 }

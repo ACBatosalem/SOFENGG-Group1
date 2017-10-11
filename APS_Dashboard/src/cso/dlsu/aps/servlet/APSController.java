@@ -9,16 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cso.dlsu.aps.action.ActionHandler;
-import cso.dlsu.aps.action.CheckUsernameAction;
-import cso.dlsu.aps.action.HomeAction;
-import cso.dlsu.aps.action.LoginAction;
-import cso.dlsu.aps.action.LogoutAction;
-import cso.dlsu.aps.action.organization.AddOrganizationAction;
-import cso.dlsu.aps.action.organization.DeleteOrganizationAction;
-import cso.dlsu.aps.action.organization.GetAllOrganizationsAction;
-import cso.dlsu.aps.action.organization.GetOrganizationAction;
-import cso.dlsu.aps.action.organization.UpdateOrganization;
+import cso.dlsu.aps.action.*;
+import cso.dlsu.aps.action.organization.*;
 
 /**
  * Servlet implementation class Controller
@@ -34,7 +26,9 @@ import cso.dlsu.aps.action.organization.UpdateOrganization;
 							"/deleteOrg",
 							"/getOrg",
 							"/updateOrg",
-							"/checkUsername"})
+							"/checkUsername",
+							"/homeAPS",
+							"/homeORG"})
 public class APSController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private HashMap <String, ActionHandler> actions;
@@ -52,6 +46,8 @@ public class APSController extends HttpServlet {
         actions.put("/getOrg", new GetOrganizationAction());
         actions.put("/updateOrg", new UpdateOrganization());
         actions.put("/checkUsername", new CheckUsernameAction());
+        actions.put("/homeAPS", new SuccessLoginAPS());
+        actions.put("/homeORG", new SuccessLoginOrg());
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
