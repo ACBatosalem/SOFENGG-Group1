@@ -80,7 +80,7 @@
 	</script>
 </head>
 <body>
-	<a href="home_aps.jsp"><button type='submit'>Go Back</button></a>
+	<a href="homeAPS"><button type='submit'>Go Back</button></a>
 	Add Organization:
 	<form id="addOrgForm" action="addOrg" method="POST">
 		Name <input id="addOrg_name" type="text" name="name"><br>
