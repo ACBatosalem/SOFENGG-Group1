@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.aps.action.ActionHandler;
 import cso.dlsu.aps.action.CheckUsernameAction;
+import cso.dlsu.aps.action.HomeAction;
 import cso.dlsu.aps.action.LoginAction;
-import cso.dlsu.aps.action.LoginRedirectAction;
 import cso.dlsu.aps.action.LogoutAction;
 import cso.dlsu.aps.action.organization.AddOrganizationAction;
 import cso.dlsu.aps.action.organization.DeleteOrganizationAction;
@@ -22,6 +22,9 @@ import cso.dlsu.aps.action.organization.UpdateOrganization;
 
 /**
  * Servlet implementation class Controller
+ * This controller serves as the main controller for the whole system.
+ * It accepts all url patterns and has a hashmap of ActionHandlers 
+ * with a key of a String.
  */
 @WebServlet(urlPatterns={	"/logout",
 							"/login",
@@ -34,7 +37,6 @@ import cso.dlsu.aps.action.organization.UpdateOrganization;
 							"/checkUsername"})
 public class APSController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
     private HashMap <String, ActionHandler> actions;
     
     public APSController() {
@@ -43,7 +45,7 @@ public class APSController extends HttpServlet {
         
         actions.put("/logout", new LogoutAction());
         actions.put("/login", new LoginAction());
-        actions.put("/home", new LoginRedirectAction());
+        actions.put("/home", new HomeAction());
         actions.put("/getAllOrgs", new GetAllOrganizationsAction());
         actions.put("/addOrg", new AddOrganizationAction());
         actions.put("/deleteOrg", new DeleteOrganizationAction());

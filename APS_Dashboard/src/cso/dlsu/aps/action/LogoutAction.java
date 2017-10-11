@@ -12,7 +12,7 @@ public class LogoutAction implements ActionHandler {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
 		System.out.println("Logged out " + (String) request.getSession().getAttribute("sessionun"));
-		response.sendRedirect("loginreg.jsp");
+		response.sendRedirect("home");
 	}
 	
 }
