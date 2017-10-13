@@ -27,6 +27,8 @@ import cso.dlsu.aps.action.organization.*;
 							"/homeAPS/getOrg",
 							"/homeAPS/changePassword",
 							"/homeORG/changePassword",
+							"/homeAPS/updatePassword",
+							"/homeORG/updatePassword",
 							"/homeAPS",
 							"/homeORG"})
 public class APSController extends HttpServlet {
@@ -46,6 +48,8 @@ public class APSController extends HttpServlet {
         actions.put("/homeAPS/getOrg", new GetOrganizationAction());
         actions.put("/homeAPS/changePassword", new ChangePasswordAction());
         actions.put("/homeORG/changePassword", new ChangePasswordAction());
+        actions.put("/homeAPS/updatePassword", new UpdatePasswordAction());
+        actions.put("/homeORG/updatePassword", new UpdatePasswordAction());
         actions.put("/homeAPS", new SuccessLoginAPS());
         actions.put("/homeORG", new SuccessLoginOrg());
     }
