@@ -7,7 +7,7 @@
 		<title>CSO APS | Login</title>
 		
 	    <!-- LIBRARIES -->
-	    <script src="jquery-3.2.1.js"></script>
+	    <script src="JavaScript/jquery-3.2.1.js"></script>
 		
 		<!-- STYLES -->
 	    <link type="text/css" href="CSS/login_style.css" rel="stylesheet">
@@ -45,40 +45,6 @@
 						return false;
 				});
 			});
-		/*	function validateLogin () {    
-				var username = $("#login_username").val().trim();
-				var pw = $("#login_password").val();
-				
-				if (username == "" || pw == "") {
-					$("#login_msg").text("Please fill out all fields.");
-					return false;
-				} else {
-					$('#login_msg').text("");
-					return true;
-				}
-			}
-			
-			function checkLogin () {
-				var username = $("#login_username").val().trim();
-				$.ajax({ 
-		            type:		'POST', 
-		            url: 		'checkUsername',
-		            data: 		{user:username},
-		            dataType: 	'html',
-		            success: 	
-			            function (data) {
-			            	if(username == "")
-			            		$('#login_msg').text("");
-			            	
-							if (data == "false")
-								$('#login_msg').text("The username does not exist!");
-		            	},
-		        	error: 
-			        	function (xhr, status, error) {
-			                $('#login_msg').text("");
-			            }
-		        });
-			}*/
 		</script>
 	</head>
 	<body>

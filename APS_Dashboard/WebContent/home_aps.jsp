@@ -20,6 +20,7 @@
 	<div id="sessionun">${sessionScope.sessionun}</div>
 	Welcome APS!
 	<a href="logout"><button type='submit'>Logout</button></a>
-	<a href="getAllOrgs"><button type='submit'>Edit Organizations</button></a>
+	<a href="homeAPS/getAllOrgs"><button type='submit'>Edit Organizations</button></a>
+	<a href="homeAPS/changePassword"><button type='submit'>Change Password</button></a>
 </body>
 </html>

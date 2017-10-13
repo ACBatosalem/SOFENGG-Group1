@@ -21,12 +21,12 @@ import cso.dlsu.aps.action.organization.*;
 @WebServlet(urlPatterns={	"/logout",
 							"/login",
 							"/home",
-							"/getAllOrgs",
-							"/addOrg",
-							"/deleteOrg",
-							"/getOrg",
-							"/updateOrg",
-							"/checkUsername",
+							"/homeAPS/getAllOrgs",
+							"/homeAPS/addOrg",
+							"/homeAPS/deleteOrg",
+							"/homeAPS/getOrg",
+							"/homeAPS/changePassword",
+							"/homeORG/changePassword",
 							"/homeAPS",
 							"/homeORG"})
 public class APSController extends HttpServlet {
@@ -40,12 +40,12 @@ public class APSController extends HttpServlet {
         actions.put("/logout", new LogoutAction());
         actions.put("/login", new LoginAction());
         actions.put("/home", new HomeAction());
-        actions.put("/getAllOrgs", new GetAllOrganizationsAction());
-        actions.put("/addOrg", new AddOrganizationAction());
-        actions.put("/deleteOrg", new DeleteOrganizationAction());
-        actions.put("/getOrg", new GetOrganizationAction());
-        actions.put("/updateOrg", new UpdateOrganization());
-        actions.put("/checkUsername", new CheckUsernameAction());
+        actions.put("/homeAPS/getAllOrgs", new GetAllOrganizationsAction());
+        actions.put("/homeAPS/addOrg", new AddOrganizationAction());
+        actions.put("/homeAPS/deleteOrg", new DeleteOrganizationAction());
+        actions.put("/homeAPS/getOrg", new GetOrganizationAction());
+        actions.put("/homeAPS/changePassword", new ChangePasswordAction());
+        actions.put("/homeORG/changePassword", new ChangePasswordAction());
         actions.put("/homeAPS", new SuccessLoginAPS());
         actions.put("/homeORG", new SuccessLoginOrg());
     }

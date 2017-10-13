@@ -29,7 +29,21 @@ public class APSFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		if(((HttpServletRequest)request).getServletPath().endsWith(".jsp"))
 			((HttpServletResponse)response).sendRedirect("home");
-		else 
+		else if (((HttpServletRequest)request).getServletPath().startsWith("/homeAPS")){
+			if((String) ((HttpServletRequest)request).getSession().getAttribute("sessionun") != null &&
+				((String) ((HttpServletRequest)request).getSession().getAttribute("sessionun")).equals("CSO")) {
+				System.out.println(((HttpServletRequest)request).getServletPath());
+				chain.doFilter(request, response);
+			} else ((HttpServletResponse)response).sendRedirect("/APS_Dashboard/home");
+		}
+		else if (((HttpServletRequest)request).getServletPath().startsWith("/homeORG")){
+			if((String) ((HttpServletRequest)request).getSession().getAttribute("sessionun") != null &&
+				!((String) ((HttpServletRequest)request).getSession().getAttribute("sessionun")).equals("CSO")) {
+				System.out.println(((HttpServletRequest)request).getServletPath());
+				chain.doFilter(request, response);
+			} else ((HttpServletResponse)response).sendRedirect("/APS_Dashboard/home");
+		}
+		else
 			chain.doFilter(request, response);
 	}
 

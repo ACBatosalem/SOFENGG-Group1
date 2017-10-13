@@ -11,7 +11,11 @@ public class HomeAction implements ActionHandler {
 	//TODO Make comments and documentation
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+		if((String) request.getSession().getAttribute("sessionun") == null)
+			request.getRequestDispatcher("loginreg.jsp").forward(request, response);
+		else if (((String) request.getSession().getAttribute("sessionun")).equals("CSO"))
+			response.sendRedirect("homeAPS");
+		else response.sendRedirect("homeORG");
 	}
 
 }
