@@ -7,7 +7,7 @@
 <title>APS | Dashboard</title>
 </head>
 <body>
-	<script src = "jquery-3.2.1.js">
+	<script src = "scripts/jquery-3.2.1.js">
 	<script>
 		$(document).onload(function(){
 			var sessionun = $("#sessionun").text();

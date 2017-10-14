@@ -8,7 +8,7 @@
 </head>
 <body>
 	Welcome ORG!
-	<a href="logout"><button type='submit'>Logout</button></a>
-	<a href="homeORG/changePassword"><button type='submit'>Change Password</button></a>
+	<a href="logout"> <button type='submit'> Logout </button></a>
+	<a href="homeORG/changePassword"> <button type='submit'>Change Password</button></a>
 </body>
 </html>

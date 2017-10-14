@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity(name="orgs")
 public class Organization {
+	
 	@Id
 	@Column(name="orgID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -14,6 +15,12 @@ public class Organization {
 	private String userName;
 	@Column(name="orgPW")
 	private String password;
+	
+	public static final String TABLE = "orgs";
+	public static final String COL_ID = "id";
+	public static final String COL_FULLNAME = "fullname";
+	public static final String COL_USERNAME = "username";
+	public static final String COL_PASSWORD = "password";
 	
 	public int getId() {
 		return id;

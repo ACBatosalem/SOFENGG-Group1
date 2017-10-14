@@ -1,0 +1,181 @@
+body {
+    background-color: #E5EDF3;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;  
+}
+
+@media (max-width: 100px){
+    #logindiv{
+        width: 100% !important;
+        background-color: #E5EDF3 !important;
+    	text-align: center;
+    	padding: 20px !important;
+    }
+    
+    #logindiv .label{
+        color: black;
+    }
+    
+    #logindiv #btn_login{
+        background-color: #126B4D;
+    }
+    
+    #logindiv #btn_login:hover{
+        background-color: #2C9D77;    
+    }
+    
+    #logindiv img{
+        margin: auto;
+        display: inherit !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 60%;
+        max-height: 60%;
+    }
+    
+    #loginimage{
+        display: none;
+        
+    }
+    
+    #imagediv{
+    	display: none;
+    }
+}
+
+@media (max-width: 1920px){
+	#logindiv{
+	    background-repeat: no-repeat;
+	    background-size: 30px 30px;
+        width: 100% !important;
+        background-image: url(../res/dlsulogo.png);      
+    	background-size:     cover;
+    	background-position: left;  
+    	text-align: center;
+    	padding: 20px !important;
+    }
+    
+    #logindiv .label{
+        color: black;
+    }
+    
+    #logindiv #btn_login{
+        background-color: #126B4D;
+    }
+    
+    #logindiv #btn_login:hover{
+        background-color: #2C9D77;    
+    }
+    
+    #logindiv img{
+        margin: auto;
+        display: inherit !important;
+        width: auto !important;
+        height: auto !important;
+        max-width: 60%;
+        max-height: 60%;
+    }
+    
+    #loginimage{
+        display: none;
+        
+    }
+    
+    #imagediv{
+    	display: none;
+    }
+}
+
+
+#logindiv img{
+    display: none;
+}
+
+#logindiv{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #126B4D;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logingroup{
+     max-width: 300px;
+     width: 80%;
+     margin: 0 auto;
+     resize: none;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+
+.label{
+    font-size: 20px;    
+    color: white;
+    font-family: sans-serif;
+}
+
+
+#btn_login{
+    min-width: 69px;
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #B1C5BE;
+    border-radius: 5px;
+    border: 4px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+
+}
+
+#btn_login:hover{
+    background-color: #2C9D77;
+    
+}
+
+#login_username{    
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    resize: none;
+}
+
+#login_password{
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    resize: none;
+}
+
+#imagediv{
+    width: 70%;
+    height: 100%;
+    text-align: center;
+   	
+}
+
+#imagediv img{
+    width: auto;
+    height: auto;
+    max-width: inherit;
+    max-height: inherit;
+    text-align: center;
+}
+
+#login_msg{
+	color: white;
+	font-size: 15px;
+	font-family: sans-serif;
+}

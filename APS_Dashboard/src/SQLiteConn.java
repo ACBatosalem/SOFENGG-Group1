@@ -7,8 +7,7 @@ public class SQLiteConn {
 	public static void createNewDatabase(String fileName) {
 		 
         String url = "jdbc:sqlite:src/" + fileName;
- 
-        try (Connection conn = DriverManager.getConnection(url)) {
+         try (Connection conn = DriverManager.getConnection(url)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());

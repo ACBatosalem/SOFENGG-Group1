@@ -7,10 +7,10 @@
 		<title>CSO APS | Login</title>
 		
 	    <!-- LIBRARIES -->
-	    <script src="JavaScript/jquery-3.2.1.js"></script>
+	    <script src="scripts/jquery-3.2.1.js"></script>
 		
 		<!-- STYLES -->
-	    <link type="text/css" href="CSS/login_style.css" rel="stylesheet">
+	    <link type="text/css" href="styles/login_style.css" rel="stylesheet">
 	    
 		<!-- SCRIPTS -->
 		<script>
@@ -52,7 +52,7 @@
 		<div id = "imagecontainer">
 			<!-- IMAGE DIV START -->
 			<div id="imagediv">
-		        <img src="res/dlsulogo.png">
+		        <img src="resources/dlsulogo.png">
 		    </div>
 		    <!-- IMAGE DIV END -->
 		</div>

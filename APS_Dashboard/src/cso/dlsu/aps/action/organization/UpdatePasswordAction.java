@@ -17,7 +17,6 @@ public class UpdatePasswordAction implements ActionHandler{
 		String username = (String) request.getSession().getAttribute("sessionun");
 		String oldPW = request.getParameter("old_pw");
 		String newPW = request.getParameter("new_pw");
-		String retypePW = request.getParameter("retype_pw");
 		
 		Organization org = OrganizationService.getOrgByUsername(username);
 		
@@ -25,6 +24,7 @@ public class UpdatePasswordAction implements ActionHandler{
 			OrganizationService.updatePassword(org.getId(), newPW);
 			response.getWriter().write("Password successfully changed!");
 		}
+		
 		else response.getWriter().write("Input for current password is incorrect!");
 	}
 

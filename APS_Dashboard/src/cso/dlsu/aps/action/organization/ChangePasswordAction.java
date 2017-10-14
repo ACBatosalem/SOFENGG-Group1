@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.aps.action.ActionHandler;
-import cso.dlsu.aps.bean.Organization;
-import cso.dlsu.aps.service.OrganizationService;
 
 public class ChangePasswordAction implements ActionHandler {
 
