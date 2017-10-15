@@ -30,14 +30,6 @@ $(document).ready(function(){
         }
     });
     
-    $('#close-modal').on('click', function() {
-         $('#activity-modal').fadeOut();
-    });
-    
-    $('tr').on('click', function() {
-        $('#activity-modal').fadeIn();
-    })
-    
     $('#notif').on('click', function(){
         $('#notification-panel').slideToggle();
         $('#account-settings').slideUp();

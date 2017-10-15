@@ -4,48 +4,19 @@
 	<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>CSO APS | Login</title>
+		<title> CSO APS | Login </title>
 		
-	    <!-- LIBRARIES -->
-	    <script src="scripts/jquery-3.2.1.js"></script>
+		<!-- LIBRARIES -->
+		<script src= "libraries/jquery-3.2.1.js"> </script>
+		<link href = "libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
+		<link href = "styles/main.css" rel = "stylesheet" type="text/css">
 		
 		<!-- STYLES -->
-	    <link type="text/css" href="styles/login_style.css" rel="stylesheet">
+	    <link type="text/css" href="styles/login.css" rel="stylesheet">
 	    
 		<!-- SCRIPTS -->
-		<script>
-			$(document).ready(function(){
-				$("#loginform").submit(function(e){
-					e.preventDefault();
-					var username = $("#login_username").val().trim();		
-					var pw = $("#login_password").val();		
-					if (username == "" || pw == "") {		
-						$("#login_msg").text("Please fill out all fields.");
-						return true;
-					} else $("#login_msg").text("");		
-						$.ajax({ 		
-							type        : 'POST', 		
-							url         : 'login',		
-							data        : {user:username, password:pw},		
-							dataType    : 'html',		
-					 		success     : function(data) {		
-								if (data == "aps")		
-									window.location = "homeAPS";		
-								else if (data == "org")		
-									window.location = "homeORG";		
-								else{		
-									$("#login_msg").text(data);		
-								}		
-							},		
-					 		error   : function(xhr,status,error){		
-								console.log(xhr);   		
-								alert(status);		
-							}		
-						});
-						return false;
-				});
-			});
-		</script>
+		<script src = "scripts/login.js"> </script>
 	</head>
 	<body>
 		<!-- IMAGE CONTAINER START -->
@@ -82,7 +53,7 @@
 	                
 	                <!-- LOGIN MESSAGE -->
 	                <p id="login_msg"> </p>
-	                <input id="btn_login" type="submit" value="LOGIN">
+	                <input class = "btn" id="btn_login" type="submit" value="LOGIN">
 	            </form>
 	            <!-- LOGIN FORM END -->
 	        </div>

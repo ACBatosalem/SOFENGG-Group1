@@ -3,20 +3,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Change Password</title>
-<script src="../JavaScript/jquery-3.2.1.js"></script>
-<script src="../JavaScript/ChangePassword.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Change Password</title>
+	
+	<!-- LIBRARIES -->
+	<script src= "../libraries/jquery-3.2.1.js"> </script>
+	<link href = "../libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+    <!-- STYLES -->
+    <link href="../styles/change-password.css" rel = "stylesheet">
+	
+	<!-- SCRIPTS -->
+	<script src="../scripts/change-password.js"> </script>
 </head>
 <body>
-	<a href="javascript:history.back()"><button type='submit'>Go Back</button></a> <br>
-	${sessionScope.sessionun} <br>
-	<form id="changePasswordForm" method="POST">
-		Old Password: <input id="old_pw" type="password" name="old"> <br>
-		New Password: <input id="new_pw" type="password" name="new"> <br>
-		Retype Password: <input id="retype_pw" type="password" name="retype"> <br>
-		<input id="btn_changePassword" type="submit" value="Change Password">
-	</form>
-	<p id="changePW_msg"></p>
+    <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
+    <div id = "main-bg"> </div>
+    <div id = "main-overlay"> </div>
+    
+    <div id = "main">
+		<!-- NAV CONTENT START -->
+        <nav class = "nav">
+			<!--  NAV TITLE LABEL -->
+			<h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
+			<!-- NAV GREETING LABEL -->
+			<h3 class = "nav-item nav-label"> Good Day! CSO </h3>
+			<!-- NAV SIGN OUT BUTTON -->
+			<button id = "signout" class = "nav-item nav-button"> Sign Out </button>
+		</nav>
+		<!-- NAV CONTENT END -->
+		
+        <!-- MAIN CONTENT START -->
+        <div class = "main-content">
+			<!-- MAIN GROUP CONTAINER START -->
+            <div class = "main-group-container">
+				<!-- MAIN CONTAINER HEADER START -->
+                <div class = "main-container-header">
+					<!-- NAV TITLE START -->
+                    <p id = "nav-title" class = "nav-item nav-label">
+						<!-- BACK BUTTON START -->
+						<a href="javascript:history.back()">
+							<button id = "btn_back" type='submit'>
+								Go Back
+							</button>
+						</a>
+						<!-- BACK BUTTON END -->
+						${user.userName} 
+					</p>
+					<!-- NAV TITLE END -->
+                </div>
+				<!-- MAIN CONTAINER HEADER END -->
+				
+				<!-- MAIN CONTAINER CONTENT START -->
+				<div class = "main-container-content">
+					<!-- CHANGE PASSWORD FORM START -->
+					<form id="changePasswordForm" method="POST">
+						<!-- OLD PASSWORD -->
+						<span> Old Password </span> <input id="old_pw" type="password" name="old"> <br>
+						<!-- NEW PASSWORD -->
+						<span> New Password </span> <input id="new_pw" type="password" name="new"> <br>
+						<!-- RETYPE PASSWORD -->
+						<span> Retype Password </span> <input id="retype_pw" type="password" name="retype"> <br>
+						<!-- SUBMIT BUTTON PASSWORD -->
+						<input id="btn_changePassword" type="submit" value="Change Password">
+					</form>
+					<!-- CHANGE PASSWORD FORM END -->
+					<p id="changePW_msg"></p>
+                </div>       
+				<!-- MAIN CONTAINER CONTENT END -->
+            </div>
+			<!-- MAIN GROUP CONTAINER END -->
+        </div>    
+		<!-- MAIN CONTENT END -->
+    </div>
 </body>
 </html>

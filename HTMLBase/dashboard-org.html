@@ -1,0 +1,242 @@
+<html>
+    <head>
+        <!-- LIBRARIES -->
+        <script type = "application/javascript" src="resources/jquery-3.2.1.min.js"> </script>
+        <link href="resources/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- STYLES -->
+        <link href="css/dashboard.css" rel = "stylesheet" >
+
+        <!-- JAVASCRIPTS -->
+        <script type = "application/javascript" src="js/dashboard.js"> </script>
+
+    </head>
+    <body>
+        <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
+        <div id = "main-bg"> </div>
+        <div id = "main-overlay"> </div>
+        
+        <!-- MAIN START -->
+        <div id = "main"> 
+            <!-- NAV START -->
+            <nav class = "nav">
+                <!--  NAV TITLE LABEL -->
+                <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
+                <!-- NAV GREETING LABEL -->
+                <h3 class = "nav-item nav-label"> Good Day! LSCS </h3>
+                <button class = "nav-item nav-button" id = "user-settings">
+                    <i class = "fa fa-user-circle-o">
+                    
+                    </i>
+                </button>
+                <button id = "notif" class = "nav-item nav-button">
+                    <i class = "fa fa-bell">
+                    </i>
+                </button>
+                
+            </nav>
+            <!-- NAV END -->
+            
+            <!-- MAIN CONTENT START -->
+            <div class = "main-content"> 
+                <!-- MAIN BUTTON CONTAINER START -->
+                <div class = "main-group-container">
+                    <!-- GROUP BUTTON CONTAINER START -->
+                    <div class = "group-button-container">
+                        <!-- INPUT BOXES: ACADS, NON-ACADS START -->
+                        <form>
+                            <!-- ACADEMIC -->
+                            <div class = "options-box">
+                                <label id = "acads-grp" class = "container"> 
+                                <input id = "acads-opt" type="checkbox" name="view-options">
+                                    <span class = "checkmark"> </span>
+                                    <span class = "namelabel"> ACADEMIC </span> 
+                                </label>
+                            </div>
+                            <!-- NON ACADEMIC -->
+                            <div class = "options-box">
+                                <label id = "non-acads-grp" class = "container"> 
+                                    <input id = "nonacads-opt" type="checkbox" name="view-options"> 
+                                    <span class = "checkmark"> </span>
+                                    <span class = "namelabel"> NON-ACADEMIC </span> 
+                                </label>
+                            </div>
+                        </form>
+                        <!-- INPUT BOXES END -->
+                    </div>
+                    <!-- GROUP BUTTON CONTAINER END -->
+
+                </div>
+                <!-- MAIN BUTTON CONTAINER END -->
+                
+                <!-- TAB MAIN START -->
+                <div class = "tab-main"> 
+                    <!-- TAB OPTIONS START -->
+                    <div class = "tab-options">
+                        <!-- TAB OPTIONS: Activities, GOSM, Academic -->
+                        <button id = "acads-tab-btn" class = "tab-option tab-button"> Academic </button>
+                        <button id = "act-tab-btn" class = "tab-option tab-button selected"> Activities </button>
+                    </div>
+                    <!-- TAB OPTIONS END -->
+                    
+                    <!-- ACTIVITIES CONTAINER START -->
+                    <div id = "act-tab" class = "activites-container-tab">
+                        <!-- ACTIVITIES TABLE START -->
+                        <table class = "activities">
+                            <!-- HEADERS START -->
+                            <tr class = "headers"> 
+                                <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                <th class = "header timestamp"> Time Stamp </th>
+                                <th class = "header org"> Organization Name </th>
+                                <th class = "header title"> Title </th>
+                                <th class = "header date"> Date </th>
+                                <th class = "header status"> Status </th>
+                            </tr>
+                            <!-- HEADERS END -->
+                            
+                            <tr> 
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                                <td>
+                                Hello po sa inyong lahat
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- ACTIVITIES TABLE END -->
+                        
+                        <!-- ACTIVITIES OPTION START -->
+                        <div class = "activities-option">
+                            <!-- ACTIVITIES OPTIONS: LEFT, LABEL, RIGHT -->
+                            <button class = "activities-options activities-option-button"> 
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                            </button>
+                            <label class = "activities-options activities-option-label"> Page 1 of X </label> 
+                            <button class = "activities-options activities-option-button"> 
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <!-- ACTIVITIES OPTION END -->
+                    </div>
+                    <!-- ACTIVITIES CONTAINER END --> 
+                    
+                    <!-- ACADEMIC CONTAINER START -->
+                    <div id = "acads-tab">
+
+                    
+                    </div>
+                    <!-- ACADEMIC CONTAINER END -->
+                
+                </div>
+                <!-- TAB MAIN END -->
+            </div>
+            <!-- MAIN CONTENT END -->
+            
+            <!-- MODAL START -->
+            <div id = "activity-modal"> 
+                <!-- MODAL BG -->
+                <div id = "bg-modal"> </div>
+                <!-- MODAL MAIN START -->
+                <div id = "main-modal">
+                    <!-- MODAL TITLE -->
+                    <h1 class = "modal-text"> Acitivity title </h1>
+                    <!-- SPLIT START -->
+                    <div class = "split-modal">
+                        <!-- CHILDREN START -->
+                        <div class = "split-child">
+                            <!-- DETAILS -->
+                            <h3 id = "act-time" class = "details"> Time:  </h3>
+                            <h3 id = "act-venue" class = "details"> Venue:  </h3>
+                            <h3 id = "act-submittedby" class = "details"> Submitted by:  </h3>
+                            <br>
+                            <h3 id = "act-dates" class = "details"> Activity Date/s:  </h3>
+                            <br>
+                            <h3 id = "act-checkedby" class = "details"> Checked by:  </h3>
+                            <h3 id = "act-datechecked" class = "details"> Date checked:  </h3>
+                            <br>
+                            <h3 id = "act-SASsubmit" class = "details"> Type of SAS Submission: </h3>
+                            <h3 id = "act-remarks" class = "details"> Remarks:  </h3>
+                        </div>
+                        <div class = "split-child">   
+                            <!-- DETAILS -->
+                            <h3 id = "act-timestamp" class = "details"> Time Stamp:  </h3>
+                            <h3 id = "act-tieup" class = "details"> Tie-up:  </h3>
+                            <h3 id = "act-datesubmit" class = "details"> Date Submitted:  </h3>
+                            <br>
+                            <h3 id = "act-datetype" class = "details"> Date Type:  </h3>
+                            <br>
+                            <h3 id = "act-natureact" class = "details"> Nature of Activity:  </h3>
+                            <h3 id = "act-typeact" class = "details"> Type of Activity:  </h3>
+                        </div>
+                        <!-- CHILDREN END -->
+                        <button id = "close-modal"> <i class = "fa fa-close"> </i></button>
+                    </div>
+                    <!-- SPLIT END -->
+                </div>
+                <!-- MODAL MAIN END -->
+            </div>
+            <!-- MODAL END -->
+            
+            <div id = "notification-panel">
+                <div id = "notification-list">
+                    <div class = "notification-item">
+                        Hello, I'm a notification!
+                    </div>
+                    <div class = "notification-item">
+                        Hello, I'm a notification!
+                    </div>
+                    <div class = "notification-item">
+                        Hello, I'm a notification!
+                    </div>
+                    <div class = "notification-item">
+                        Hello, I'm a notification!
+                    </div>
+                    <div class = "notification-item">
+                        Hello, I'm a notification!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ACCOUNT SETTINGS START -->
+            <div id = "account-settings">
+                <a href = "homeORG/changePassword">
+                    <button id = "changepass" class = "nav-setting">
+                        Change Password
+                    </button>
+                </a>
+                <a href = "logout">
+                    <button id = "signout" class = "nav-setting"> Sign Out </button>
+                </a>
+            </div>
+            <!-- ACCOUNT SETTINGS END -->
+        </div>
+        <!-- MAIN END -->
+    </body>
+</html>
