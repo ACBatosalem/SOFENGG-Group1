@@ -16,7 +16,7 @@ public class AddOrganizationAction implements ActionHandler {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		if(!OrganizationService.findOrgByNameOrUserName(request.getParameter("name"), 
+		if(!OrganizationService.findOrgByNameOrUserName(request.getParameter("name").toUpperCase(), 
 				request.getParameter("username").toUpperCase())) {
 			Random randomizer = new Random();
 			String password = "";
@@ -27,7 +27,7 @@ public class AddOrganizationAction implements ActionHandler {
 			
 			Organization org = new Organization();
 			
-			org.setName(request.getParameter("name"));
+			org.setName(request.getParameter("name").toUpperCase());
 			org.setUserName(request.getParameter("username").toUpperCase());
 			org.setPassword(password);
 	
