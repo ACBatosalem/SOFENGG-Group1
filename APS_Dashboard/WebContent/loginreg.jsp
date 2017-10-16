@@ -13,32 +13,24 @@
 		<link href = "styles/main.css" rel = "stylesheet" type="text/css">
 		
 		<!-- STYLES -->
-	    <link type="text/css" href="styles/login.css" rel="stylesheet">
+	    <link type="text/css" href="styles/login1.css" rel="stylesheet">
 	    
 		<!-- SCRIPTS -->
 		<script src = "scripts/login.js"> </script>
 	</head>
 	<body>
-		<!-- IMAGE CONTAINER START -->
-		<div id = "imagecontainer">
-			<!-- IMAGE DIV START -->
-			<div id="imagediv">
-		        <img src="resources/dlsulogo.png">
-		    </div>
-		    <!-- IMAGE DIV END -->
-		</div>
-		<!-- IMAGE CONTAINER END -->
 		
 		<!-- LOGIN DIV START -->
 	    <div id="logindiv">
 	    	<!-- LOGIN GROUP START -->
 	        <div id="logingroup">
+                <img src="resources/dlsulogo.png">
 	        	<!-- LOGIN FORM START -->
-	            <form id="loginform" action="login" method="POST">
+	            <form id="loginform" action="login" onsubmit = "return validateLogin()" method="POST">
 	                <!-- USERNAME START -->
 	                <div class="option">
 	                    <span class="label"> Username </span> <br>
-	                    <input id="login_username"  type="text" name="username">
+	                    <input id="login_username" onblur = "checkUsername()" type="text" name="username">
 	                </div>
 	                <br>
 	                <!-- USERNAME END -->
@@ -53,7 +45,7 @@
 	                
 	                <!-- LOGIN MESSAGE -->
 	                <p id="login_msg"> </p>
-	                <input class = "btn" id="btn_login" type="submit" value="LOGIN">
+	                <input id="btn_login" type="submit" value="LOGIN">
 	            </form>
 	            <!-- LOGIN FORM END -->
 	        </div>

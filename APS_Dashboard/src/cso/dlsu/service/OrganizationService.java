@@ -130,7 +130,7 @@ public class OrganizationService {
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
 						"FROM " + Organization.TABLE + " " + 
-						"WHERE " + Organization.COL_USERNAME + " = ? AND " +
+						"WHERE " + Organization.COL_USERNAME + " = ? OR " +
 						Organization.COL_FULLNAME + " = ?";
 		Organization organization = null;
 		

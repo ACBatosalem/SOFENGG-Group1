@@ -5,6 +5,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import cso.dlsu.bean.Organization;
+import cso.dlsu.service.OrganizationService;
 
 public class ChangePasswordAction implements ActionHandler {
 

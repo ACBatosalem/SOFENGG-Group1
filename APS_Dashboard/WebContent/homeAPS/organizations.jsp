@@ -49,7 +49,7 @@
 	                    <!-- NAV TITLE START -->
 	                	<p id = "nav-title" class = "nav-item nav-label">
 		                	<!-- BACK BUTTON LINK START -->
-		                	<a href="javascript:history.back()">
+		                	<a href="/APS_Dashboard/homeAPS">
 		                    	<button id = "btn_back" type='submit'> Go Back </button>
 		                    </a>
 		                    <!-- BACK BUTTON LINK END -->
@@ -85,7 +85,7 @@
 	                        	<!-- ORG START -->
 	                            <div data-orgid="${org.id}">
 	                                <!-- DELETE BUTTON FOR ORG -->
-	                                <button class="deletebutton" data-orgid="${s.id }"> 
+	                                <button class="deletebutton" data-orgid="${org.id }"> 
 	                                	Delete 
 	                                </button>
 	                                <!-- ORG INFORMATION -->

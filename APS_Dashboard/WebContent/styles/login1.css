@@ -1,0 +1,110 @@
+body{
+    background-color: #E5EDF3;
+    
+}
+
+#logindiv{
+    text-align: center;
+}
+
+#logindiv{
+    width: 100% !important;
+    background-color: #E5EDF3 !important;
+}
+
+#logindiv .label{
+    color: black;
+}
+
+#logindiv #btn_login{
+    background-color: #126B4D;
+}
+    
+#logindiv #btn_login:hover{
+    background-color: #2C9D77;    
+}
+    
+#logingroup img{
+    margin: auto;
+    display: inherit !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    padding-bottom: 10px;
+}
+
+
+#logindiv{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #126B4D;
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logingroup{
+     max-width: 300px;
+     width: 80%;
+     margin: 0 auto;
+     resize: none;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+
+.label{
+    font-size: 20px;    
+    color: white;
+    font-family: sans-serif;
+}
+
+
+#btn_login{
+    min-width: 69px;
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #B1C5BE;
+    border-radius: 5px;
+    border: 4px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+
+}
+
+#btn_login:hover{
+    background-color: #2C9D77;
+    
+}
+
+#login_username{    
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    resize: none;
+}
+
+#login_password{
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+    resize: none;
+}
+
+#login_msg{
+	color: black;
+	font-size: 15px;
+	font-family: sans-serif;
+}

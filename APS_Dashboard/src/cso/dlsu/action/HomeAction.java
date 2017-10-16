@@ -13,7 +13,7 @@ public class HomeAction implements ActionHandler {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if((String) request.getSession().getAttribute("sessionun") == null)
 			request.getRequestDispatcher("loginreg.jsp").forward(request, response);
-		else if (((String) request.getSession().getAttribute("sessionun")).equals("CSO"))
+		else if (((String) request.getSession().getAttribute("sessionun")).equals("APS"))
 			response.sendRedirect("homeAPS");
 		else response.sendRedirect("homeORG");
 	}

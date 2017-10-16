@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("button.deletebutton").click(function(){
 		var id= $(this).attr("data-orgid");
-		
+		//alert(id);
 		$.ajax({
 			"url" : "deleteOrg",
 			"method" : "POST",
@@ -64,9 +64,11 @@ $(document).ready(function(){
 	});
 	
     $("#add-org").click(function(){
-        if($("#add-org").text() == "Cancel")
+        if($("#add-org").text() == "Cancel"){
             $("#add-org").text("Add a New User");
-        else{
+            $("#addOrg_name").val("");
+            $("#addOrg_username").val("");
+        } else {
             $("#add-org").text("Cancel");
         }
         $("#addOrg_msg").text("");
@@ -80,8 +82,8 @@ var usernameregex = /^([A-Za-z]{2,20}$)/;
 var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
 function checkfullname (check) {
-	if(check.length <= 5) 
-		return "Name must be 6 characters or more.";
+	if(check.length < 7) 
+		return "Name must be 7 characters or more.";
 	else if (!fullnameregex.test(check))
 		return "Name must only contain letters."
 	else
@@ -90,7 +92,7 @@ function checkfullname (check) {
 
 
 function checkusername (check) {
-	if(check.length <= 2) 
+	if(check.length < 2) 
 		return "Username must be 2 characters or more.";
 	else if (!usernameregex.test(check))
 		return "Username must only contain letters."
