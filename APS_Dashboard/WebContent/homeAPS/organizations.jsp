@@ -69,7 +69,7 @@
 	                    <!-- ADD ORG FORM START -->
 	                    <form id="addOrgForm" action="homeAPS/addOrg" method="POST">
 	                        <!-- ADD ORG FORM START -->
-	                        Name <input id="addOrg_name" type="text" name="name"><br><br> 
+	                        <!-- Name <input id="addOrg_name" type="text" name="name"><br><br> -->
 	                        Username <input id="addOrg_username" type="text" name="username"><br> 
 	                        <input id="btn_addorg" type="submit" value="Add Organization">
 	                    </form>

@@ -29,15 +29,15 @@ $(document).ready(function(){
 	
 	$("#addOrgForm").submit(function(e){
 		e.preventDefault();
-		var name = $("#addOrg_name").val().trim();
+		//var name = $("#addOrg_name").val().trim();
 		var username = $("#addOrg_username").val().trim();
 		
 		$("#addOrg_msg").text("");
 		
-		if (name == "" || username == "")
+		if (/*name == "" ||*/ username == "")
 			$("#addOrg_msg").text("Please fill out all the fields!");
 		else {
-			$("#addOrg_msg").text($("#addOrg_msg").text() + checkfullname(name)
+			$("#addOrg_msg").text($("#addOrg_msg").text() /*+ checkfullname(name)*/
 					+ checkusername(username));
 		}
 		
@@ -47,7 +47,7 @@ $(document).ready(function(){
 			$.ajax({
 				type        : 'POST', 
 	            url         : 'addOrg',
-	            data        : {name:name, username:username},
+	            data        : {/*name:name,*/ username:username},
 	            dataType    : 'html',
 	            success     : function(data) {
 	            	if (data == "added"){
@@ -69,7 +69,7 @@ $(document).ready(function(){
     $("#add-org").click(function(){
         if($("#add-org").text() == "Cancel"){
             $("#add-org").text("Add a New User");
-            $("#addOrg_name").val("");
+            //$("#addOrg_name").val("");
             $("#addOrg_username").val("");
         } else {
             $("#add-org").text("Cancel");
@@ -82,16 +82,16 @@ $(document).ready(function(){
 });
 
 var usernameregex = /^([A-Za-z]{2,20}$)/;
-var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
+//var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
-function checkfullname (check) {
+/*function checkfullname (check) {
 	if(check.length < 7) 
 		return "\nName must be 7 characters or more.";
 	else if (!fullnameregex.test(check))
 		return "\nName must only contain letters."
 	else
 		return "";
-}
+}*/
 
 
 function checkusername (check) {

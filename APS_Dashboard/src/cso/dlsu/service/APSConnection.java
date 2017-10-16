@@ -19,7 +19,7 @@ import cso.dlsu.bean.TieUp;
 
 public class APSConnection {
 	private static final String DRIVER = "jdbc:sqlite:";
-	private static final String DIR = "C:/dlsu-cso/";
+	private static final String DIR = "C:/Users/Carlo Eroles/Documents/SOFENGG/dlsu-cso/";
 	private static final String DB = "aps.db";
 	private static APSConnection instance;
 	
@@ -34,7 +34,6 @@ public class APSConnection {
 		try {
 			createTables();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -67,7 +66,7 @@ public class APSConnection {
 			if(!checkTableExist(connection, Organization.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + Organization.TABLE + "("
 		                + Organization.COL_ID 		+ 	" integer PRIMARY KEY AUTOINCREMENT,"
-		                + Organization.COL_FULLNAME + 	" text NOT NULL UNIQUE,"
+		                //+ Organization.COL_FULLNAME + 	" text NOT NULL UNIQUE,"
 		                + Organization.COL_USERNAME + 	" text NOT NULL UNIQUE," 
 		                + Organization.COL_PASSWORD + 	" text"
 		                + ");"; 
@@ -135,13 +134,13 @@ public class APSConnection {
 	private void createAccountAPS(Connection con) {
 		PreparedStatement statement = null;
 		String query = "INSERT INTO " + Organization.TABLE + " " +
-				"VALUES (?,?,?,?);";
+				"VALUES (?,?,?);";
 		try {
 			statement = con.prepareStatement(query);
 			statement.setNull(1, Types.NULL);
-			statement.setString(2, "CSO Activity Processing and Screening");
-			statement.setString(3, "APS");
-			statement.setString(4, "password");
+			//statement.setString(2, "CSO Activity Processing and Screening");
+			statement.setString(2, "APS");
+			statement.setString(3, "password");
 			statement.executeUpdate();
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Successful INSERT INTO " + Organization.TABLE);

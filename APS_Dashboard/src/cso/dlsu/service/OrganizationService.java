@@ -18,7 +18,7 @@ public class OrganizationService {
 		Organization org = new Organization();
 		
 		org.setId(set.getInt(Organization.COL_ID));
-		org.setName(set.getString(Organization.COL_FULLNAME));
+		//org.setName(set.getString(Organization.COL_FULLNAME));
 		org.setUserName(set.getString(Organization.COL_USERNAME));
 		org.setPassword(set.getString(Organization.COL_PASSWORD));
 		return org;
@@ -29,15 +29,15 @@ public class OrganizationService {
 		PreparedStatement statement = null;
 		boolean added = false;
 		String query = "INSERT INTO " + Organization.TABLE + " " +
-						"VALUES (?, ?, ?, ?);";
+						"VALUES (?, ?, ?);";
 		
 		try {
 			statement = connection.prepareStatement(query);
 			
 			statement.setNull(1, Types.NULL);
-			statement.setString(2, org.getName());
-			statement.setString(3, org.getUserName());
-			statement.setString(4, org.getPassword());
+			//statement.setString(2, org.getName());
+			statement.setString(2, org.getUserName());
+			statement.setString(3, org.getPassword());
 			
 			statement.executeUpdate();
 			added = true;
@@ -124,7 +124,7 @@ public class OrganizationService {
 		return organization;
 	}
 	
-	public static boolean findOrgByNameOrUserName(String fullname, String username) {
+	/*public static boolean findOrgByNameOrUserName(String fullname, String username) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
@@ -177,7 +177,7 @@ public class OrganizationService {
 		}
 		
 		return organization != null;
-	}
+	}*/
 	
 	public static List<Organization> getAllOrgs() {
 		Connection connection = db.connect();
@@ -328,7 +328,7 @@ public class OrganizationService {
 		PreparedStatement statement = null;
 		boolean updated= false;
 		String query = "UPDATE " + Organization.TABLE + " " +
-						"SET " + Organization.COL_FULLNAME + " = ?, " +
+						"SET " + //Organization.COL_FULLNAME + " = ?, " +
 						Organization.COL_USERNAME + " = ?, " +
 						Organization.COL_PASSWORD + " = ? " + 
 						"WHERE " + Organization.COL_ID + " = ?";
@@ -336,10 +336,10 @@ public class OrganizationService {
 		try {
 			statement = connection.prepareStatement(query);
 			
-			statement.setString(1, newinfo.getName());
-			statement.setString(2, newinfo.getUserName());
-			statement.setString(3, newinfo.getPassword());
-			statement.setInt(4, id);
+			//statement.setString(1, newinfo.getName());
+			statement.setString(1, newinfo.getUserName());
+			statement.setString(2, newinfo.getPassword());
+			statement.setInt(3, id);
 			
 			statement.executeUpdate();
 			updated = true;
