@@ -12,6 +12,10 @@ import java.time.LocalDateTime;
 import org.sqlite.JDBC;
 
 import cso.dlsu.bean.Organization;
+import cso.dlsu.bean.Document;
+import cso.dlsu.bean.Transaction;
+import cso.dlsu.bean.ActivityDate;
+import cso.dlsu.bean.TieUp;
 
 public class APSConnection {
 	private static final String DRIVER = "jdbc:sqlite:";
@@ -69,6 +73,55 @@ public class APSConnection {
 		                + ");"; 
 				executeCreateTables(connection, query, Organization.TABLE);
 				createAccountAPS(connection);
+			}
+			
+			if(!checkTableExist(connection, Document.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + Document.TABLE + "("
+		                + Document.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + Document.COL_ORG_ID + 	" integer NOT NULL,"
+		                + Document.COL_TITLE  + 	" text NOT NULL," 
+		                + Document.COL_TERM   + 	" integer NOT NULL,"
+		                + Document.COL_NATURE + 	" text,"
+		                + Document.COL_TYPE   + 	" text,"
+		                + Document.COL_VENUE  + 	" text"
+		                + ");"; 
+				executeCreateTables(connection, query, Document.TABLE);
+			}
+			
+			if(!checkTableExist(connection, Transaction.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + Transaction.TABLE + "("
+		                + Transaction.COL_ID  	  	      + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + Transaction.COL_DOCU_ID 	      + 	" integer NOT NULL,"
+		                + Transaction.COL_STATUS_ID       + 	" integer NOT NULL," 
+		                + Transaction.COL_CHECKER_NAME    + 	" text,"
+		                + Transaction.COL_DATE_SUBMITTED  + 	" datetime NOT NULL,"
+		                + Transaction.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
+		                + Transaction.COL_DATE_CHECKED    + 	" datetime,"
+		                + Transaction.COL_REMARKS         + 	" text"
+		                + ");"; 
+				executeCreateTables(connection, query, Transaction.TABLE);
+			}
+			
+			if(!checkTableExist(connection, ActivityDate.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + ActivityDate.TABLE + "("
+		                + ActivityDate.COL_DOCU_ID    + " integer NOT NULL,"
+		                + ActivityDate.COL_START_DATE + " datetime NOT NULL,"
+		                + ActivityDate.COL_END_DATE   + " datetime NOT NULL,"
+		                + "PRIMARY KEY("  + ActivityDate.COL_DOCU_ID + ", "
+		                				  + ActivityDate.COL_START_DATE + ", "
+		                				  + ActivityDate.COL_END_DATE + ")"
+		                + ");"; 
+				executeCreateTables(connection, query, ActivityDate.TABLE);
+			}
+			
+			if(!checkTableExist(connection, TieUp.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + TieUp.TABLE + "("
+		                + TieUp.COL_DOCU_ID + " integer NOT NULL,"
+		                + TieUp.COL_ORG_ID  + " integer NOT NULL,"
+		                + "PRIMARY KEY("  + TieUp.COL_DOCU_ID + ", "
+		                				  + TieUp.COL_ORG_ID + ")"
+		                + ");";
+				executeCreateTables(connection, query, TieUp.TABLE);
 			}
 			try {
 				connection.close();
