@@ -77,7 +77,7 @@ $(document).ready(function(){
 });
 
 var usernameregex = /^([A-Za-z]{2,20}$)/;
-var fullnameregex = /^([A-Za-z]{5,80}$)/;
+var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
 function checkfullname (check) {
 	if(check.length <= 5) 
