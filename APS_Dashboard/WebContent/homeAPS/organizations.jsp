@@ -85,9 +85,11 @@
 	                        	<!-- ORG START -->
 	                            <div data-orgid="${org.id}">
 	                                <!-- DELETE BUTTON FOR ORG -->
-	                                <button class="deletebutton" data-orgid="${org.id }"> 
-	                                	Delete 
-	                                </button>
+	                                <c:if test = "${org.userName != 'APS'}">
+	                                	<button class="deletebutton" data-orgid="${org.id }"> 
+	                                		Delete 
+	                                	</button>
+	                                </c:if>
 	                                <!-- ORG INFORMATION -->
 	                                ${org.userName} <span id = "tabbing"> </span> ${org.password} 
 	                            </div>

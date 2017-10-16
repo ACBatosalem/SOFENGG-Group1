@@ -32,13 +32,16 @@ $(document).ready(function(){
 		var name = $("#addOrg_name").val().trim();
 		var username = $("#addOrg_username").val().trim();
 		
+		$("#addOrg_msg").text("");
+		
 		if (name == "" || username == "")
 			$("#addOrg_msg").text("Please fill out all the fields!");
-		else if (checkfullname(name) != "")
-			$("#addOrg_msg").text(checkfullname(name));
-		else if (checkusername(username))
-			$("#addOrg_msg").text(checkusername(username));
 		else {
+			$("#addOrg_msg").text($("#addOrg_msg").text() + checkfullname(name)
+					+ checkusername(username));
+		}
+		
+		if($("#addOrg_msg").text() == "") {
 			$("#addOrg_msg").text("");
 			
 			$.ajax({
@@ -83,9 +86,9 @@ var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
 function checkfullname (check) {
 	if(check.length < 7) 
-		return "Name must be 7 characters or more.";
+		return "\nName must be 7 characters or more.";
 	else if (!fullnameregex.test(check))
-		return "Name must only contain letters."
+		return "\nName must only contain letters."
 	else
 		return "";
 }
@@ -93,9 +96,9 @@ function checkfullname (check) {
 
 function checkusername (check) {
 	if(check.length < 2) 
-		return "Username must be 2 characters or more.";
+		return "\nUsername must be 2 characters or more.";
 	else if (!usernameregex.test(check))
-		return "Username must only contain letters."
+		return "\nUsername must only contain letters."
 	else
 		return "";
 }
