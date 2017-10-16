@@ -35,18 +35,29 @@ public class APSFilter implements Filter {
 		String path = ((HttpServletRequest)request).getServletPath();
 		int id = ((HttpServletRequest)request).getSession().getAttribute("sessionID") != null ? 
 				(int)((HttpServletRequest)request).getSession().getAttribute("sessionID") : 0;
+		//System.out.println(id +" ");
 		Organization user = OrganizationService.getOrg(id);
 		
 		if(path.endsWith(".jsp"))
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
 		else if (path.startsWith("/homeAPS")) {
-			if(user != null && user.getUserName().equals("CSO"))
+			if(user != null && user.getUserName().equals("APS"))
 				chain.doFilter(request, response);
+			else if(user != null) 
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
 			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
 		} else if (path.startsWith("/homeORG")) {
-			if(user != null && !user.getUserName().equals("CSO"))
+			if(user != null && !user.getUserName().equals("APS"))
 				chain.doFilter(request, response);
+			else if(user != null) 
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
 			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
+		} else if(path.startsWith("/home")){
+			if(user != null && !user.getUserName().equals("APS"))
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
+			else if(user != null) 
+				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			else chain.doFilter(request, response);
 		} else chain.doFilter(request, response);
 	}
 

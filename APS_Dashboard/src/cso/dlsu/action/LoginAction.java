@@ -25,7 +25,7 @@ public class LoginAction implements ActionHandler {
 			response.getWriter().write("This user is invalid or unauthorized!");
 		else if (!user.getPassword().equals(password))
 			response.getWriter().write("The password is incorrect.");
-		else if (user.getUserName().equals("CSO")) {
+		else if (user.getUserName().equals("APS")) {
 			response.getWriter().write("aps");
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionID", user.getId());

@@ -92,7 +92,7 @@ function checkfullname (check) {
 function checkusername (check) {
 	if(check.length <= 2) 
 		return "Username must be 2 characters or more.";
-	else if (!fullnameregex.test(check))
+	else if (!usernameregex.test(check))
 		return "Username must only contain letters."
 	else
 		return "";

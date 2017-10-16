@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Change Password</title>
+	<title> Change Password </title>
 	
 	<!-- LIBRARIES -->
 	<script src= "../libraries/jquery-3.2.1.js"> </script>
@@ -12,6 +12,7 @@
 	
     <!-- STYLES -->
     <link href="../styles/change-password.css" rel = "stylesheet">
+	<link href = "../styles/main.css" rel = "stylesheet">
 	
 	<!-- SCRIPTS -->
 	<script src="../scripts/change-password.js"> </script>
