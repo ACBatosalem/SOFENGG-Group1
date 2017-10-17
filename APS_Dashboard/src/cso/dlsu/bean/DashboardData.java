@@ -4,20 +4,20 @@ import java.util.Date;
 
 public class DashboardData {
 	
-	private Date timeStamp;
+	private String timeStamp;
 	private String orgName;
 	private String title;
-	private Date date;
+	private String date;
 	private String status;
 	
-	public Date getTimeStamp() {
+	public String getTimeStamp() {
 		return timeStamp;
 	}
-	
-	public void setTimeStamp(Date timeStamp) {
+
+	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
 	}
-	
+
 	public String getOrgName() {
 		return orgName;
 	}
@@ -34,11 +34,11 @@ public class DashboardData {
 		this.title = title;
 	}
 	
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	
-	public void setDate(Date date) {
+
+	public void setDate(String date) {
 		this.date = date;
 	}
 	
@@ -54,5 +54,5 @@ public class DashboardData {
 	public String toString() {
 		return "DashboardData [timeStamp=" + timeStamp + ", orgName=" + orgName + ", title=" + title + ", date=" + date
 				+ ", status=" + status + "]";
-	}	
+	}
 }

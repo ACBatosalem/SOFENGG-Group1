@@ -11,11 +11,11 @@ public class CheckingDetails {
 	
 	public static final String TABLE = "checking_details";
 	public static final String COL_ID = "chk_id";
-	public static final String COL_SUB_IB = "sub_id";
+	public static final String COL_SUB_ID = "sub_id";
 	public static final String COL_STATUS_ID = "status_id";
 	public static final String COL_CHECKER_NAME = "checker_name";
 	public static final String COL_DATE_CHECKED = "date_checked";
-	public static final String COL_REMARKS = "remarls";
+	public static final String COL_REMARKS = "remarks";
 	
 	public int getId() {
 		return id;

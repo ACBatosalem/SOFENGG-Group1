@@ -105,7 +105,7 @@ public class APSConnection {
 			if(!checkTableExist(connection, CheckingDetails.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + CheckingDetails.TABLE + "("
 		                + CheckingDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
-		                + CheckingDetails.COL_SUB_IB	    + 	" integer NOT NULL,"
+		                + CheckingDetails.COL_SUB_ID	    + 	" integer NOT NULL,"
 		                + CheckingDetails.COL_STATUS_ID		+ 	" integer NOT NULL,"
 		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text NOT NULL,"
 		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text NOT NULL,"

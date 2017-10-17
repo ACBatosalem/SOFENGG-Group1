@@ -18,7 +18,7 @@ public class CheckingDetailsService {
 		CheckingDetails check = new CheckingDetails();
 		
 		check.setId(set.getInt(CheckingDetails.COL_ID));
-		check.setSubID(set.getInt(CheckingDetails.COL_SUB_IB));
+		check.setSubID(set.getInt(CheckingDetails.COL_SUB_ID));
 		check.setStatusID(set.getInt(CheckingDetails.COL_STATUS_ID));
 		check.setCheckerName(set.getString(CheckingDetails.COL_CHECKER_NAME));
 		check.setDateChecked(set.getString(CheckingDetails.COL_DATE_CHECKED));
@@ -181,7 +181,7 @@ public class CheckingDetailsService {
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
 						"FROM " + CheckingDetails.TABLE + " " + 
-						"WHERE " + CheckingDetails.COL_SUB_IB + " = ?";
+						"WHERE " + CheckingDetails.COL_SUB_ID + " = ?";
 		CheckingDetails check = null;
 		
 		try {

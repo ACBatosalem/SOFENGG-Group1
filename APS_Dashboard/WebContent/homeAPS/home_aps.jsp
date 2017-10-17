@@ -117,42 +117,25 @@
                                 <th class = "header status"> Status </th>
                             </tr>
                             <!-- HEADERS END -->
-                            
-                            <tr> 
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                                <td>
-                                Hello po sa inyong lahat
-                                </td>
-                            </tr>
+                            <c:forEach items="${dashboard_data}" var="data">
+	                            <tr> 
+	                                <td>
+	                                ${data.timeStamp}
+	                                </td>
+	                                <td>
+	                                 ${data.orgName}
+	                                </td>
+	                                <td>
+	                                 ${data.title}
+	                                </td>
+	                                <td>
+	                                 ${data.date}
+	                                </td>
+	                                <td>
+	                                 ${data.status}
+	                                </td>
+	                            </tr>
+                            </c:forEach>
                         </table>
                         <!-- ACTIVITIES TABLE END -->
                         
