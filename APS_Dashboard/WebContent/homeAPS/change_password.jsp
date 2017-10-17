@@ -62,7 +62,7 @@
 					<!-- NAV TITLE START -->
                     <p id = "nav-title" class = "nav-item nav-label">
 						<!-- BACK BUTTON START -->
-						<a id="btn_link" href="javascript:history.back()">
+						<a id="btn_link" href="/APS_Dashboard/homeAPS">
 							<button id = "btn_back" type='submit'>
 								<i class="fa fa-arrow-left" aria-hidden="true"></i>
 							</button>

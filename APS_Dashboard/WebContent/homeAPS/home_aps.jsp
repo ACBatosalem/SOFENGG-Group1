@@ -89,11 +89,16 @@
                     
                     <!-- ORGS CHOICE BOX START -->
                     <select class = "orgs-choicebox"> 
+                    	<option data-orgid="0">
+                    		All
+                        </option>
                         <c:forEach items="${orgs}" var="org">
                         	<!-- ORG START -->
-                            <option data-orgid="${org.id}">
-                                ${org.userName}
-                            </option>
+                        	<c:if test = "${org.userName != 'APS'}">
+	                            <option data-orgid="${org.id}">
+	                                ${org.userName}
+	                            </option>
+	                        </c:if>
                             <!-- ORG END -->
 	                     </c:forEach>
                     </select>

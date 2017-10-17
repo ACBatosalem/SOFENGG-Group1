@@ -28,19 +28,19 @@
     	<div id = "notification-panel">
 	       	<div id = "notification-list">
 	            <div class = "notification-item">
-	                Hello, I'm a notification!
+	                Thesis Orientation 1 - Early Approved
 	            </div>
 	            <div class = "notification-item">
-	                Hello, I'm a notification!
+	                Thesis Orientation 2 - Early Approved
 	            </div>
 	            <div class = "notification-item">
-	                Hello, I'm a notification!
+	                Thesis Orientation 3 - Early Approved
 	            </div>
 	            <div class = "notification-item">
-	                Hello, I'm a notification!
+	                Internship Orientation 1 - Early Approved
 	            </div>
 	            <div class = "notification-item">
-	                Hello, I'm a notification!
+	                Internship Orientation 2 - Early Approved
 	            </div>
 	        </div>
 	    </div>
@@ -84,7 +84,7 @@
 					<!-- NAV TITLE START -->
                     <p id = "nav-title" class = "nav-item nav-label">
 						<!-- BACK BUTTON START -->
-						<a id="btn_link" href="javascript:history.back()">
+						<a id="btn_link" href="/APS_Dashboard/homeORG">
 							<button id = "btn_back" type='submit'>
 								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
 							</button>

@@ -4,7 +4,7 @@
 	<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title> CSO APS | Login </title>
+		<title> Login </title>
 		
 		<!-- LIBRARIES -->
 		<script src= "libraries/jquery-3.2.1.js"> </script>
@@ -26,11 +26,11 @@
 	        <div id="logingroup">
                 <img src="resources/dlsulogo.png">
 	        	<!-- LOGIN FORM START -->
-	            <form id="loginform" action="login" onsubmit = "return validateLogin()" method="POST">
+	            <form id="loginform" action="login" method="POST">
 	                <!-- USERNAME START -->
 	                <div class="option">
 	                    <span class="label"> Username </span> <br>
-	                    <input id="login_username" onblur = "checkUsername()" type="text" name="username">
+	                    <input id="login_username" type="text" name="username">
 	                </div>
 	                <br>
 	                <!-- USERNAME END -->

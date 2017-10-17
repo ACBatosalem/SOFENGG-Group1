@@ -96,7 +96,7 @@ function checkusername (check) {
 	else if(check.length > 20)
 		return "\nUsername must be 20 characters or less.";
 	else if (!usernameregex.test(check))
-		return "\nUsername must only contain letters."
+		return "\nUsername must only contain capital letters."
 	else
 		return "";
 }

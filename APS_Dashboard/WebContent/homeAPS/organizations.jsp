@@ -60,7 +60,7 @@
 				<div class = "main-group-container">
 					<div class = "main-container-header">
 						<p id = "nav-title" class = "nav-item nav-label">
-						<a id = "btn_link" href="javascript:history.back()">
+						<a id = "btn_link" href="/APS_Dashboard/homeAPS">
 							<button id = "btn_back" type='submit'>
 								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
                             </button>

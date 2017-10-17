@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
 	<head>
+		<title> Home </title>
 		<!-- LIBRARIES -->
 		<script src= "libraries/jquery-3.2.1.js"> </script>
 		<link href = "libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -168,20 +169,20 @@
             <div id = "notification-panel">
                 <div id = "notification-list">
                     <div class = "notification-item">
-                        Hello, I'm a notification!
-                    </div>
-                    <div class = "notification-item">
-                        Hello, I'm a notification!
-                    </div>
-                    <div class = "notification-item">
-                        Hello, I'm a notification!
-                    </div>
-                    <div class = "notification-item">
-                        Hello, I'm a notification!
-                    </div>
-                    <div class = "notification-item">
-                        Hello, I'm a notification!
-                    </div>
+		                Thesis Orientation 1 - Early Approved
+		            </div>
+		            <div class = "notification-item">
+		                Thesis Orientation 2 - Early Approved
+		            </div>
+		            <div class = "notification-item">
+		                Thesis Orientation 3 - Early Approved
+		            </div>
+		            <div class = "notification-item">
+		                Internship Orientation 1 - Early Approved
+		            </div>
+		            <div class = "notification-item">
+		                Internship Orientation 2 - Early Approved
+		            </div>
                 </div>
             </div>
             
