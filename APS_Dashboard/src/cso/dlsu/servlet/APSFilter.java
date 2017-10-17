@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.bean.Organization;
-import cso.dlsu.service.OrganizationService;
 
 /**
  * Servlet Filter implementation class FilterPage

@@ -34,6 +34,6 @@ public class AddOrganizationAction implements ActionHandler {
 			if(OrganizationService.addOrg(org))
 				response.getWriter().write("added");
 			else response.getWriter().write("Organization was not added");	
-		} else response.getWriter().write("Name or username is already taken");
+		} else response.getWriter().write("Username is already taken");
 	}
 }

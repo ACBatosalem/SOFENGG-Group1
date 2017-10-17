@@ -8,11 +8,13 @@
 		<link href = "libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		
 		<!-- STYLES -->
-	    <link href = "styles/dashboard.css" rel = "stylesheet">
-		<link href = "styles/main.css" rel = "stylesheet">
+	    <link type = "text/css" href = "styles/dashboard.css" rel = "stylesheet">
+		<link type = "text/css" href = "styles/main.css" rel = "stylesheet">
+		<link type = "text/css" href = "styles/navigation.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
-		<script src="scripts/dashboard.js"> </script>
+		<script src="scripts/navigation.js"> </script>
+        
 	 </head>
     <body>
         <!-- WEB PAGE BACKGROUND AND OVERLAYS -->

@@ -10,11 +10,12 @@
 	<script src= "../libraries/jquery-3.2.1.js"> </script>
 	<link href = "../libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
-    <!-- STYLES -->
-    <link href="../styles/change-password.css" rel = "stylesheet">
-	<link href = "../styles/main.css" rel = "stylesheet">
-		
+   	<!-- STYLES -->
+    <link href = "../styles/change-password.css" rel = "stylesheet">
+	<link href = "../styles/navigation.css" rel = "stylesheet">
+	
 	<!-- SCRIPTS -->
+	<script src="../scripts/dashboard.js"> </script>
 	<script src="../scripts/change-password.js"> </script>
 </head>
 <body>
@@ -23,6 +24,19 @@
     <div id = "main-overlay"> </div>
     
     <div id = "main">
+        <!-- ACCOUNT SETTINGS START -->
+	    <div id = "account-settings">
+	        <a href = "changePassword">
+	            <button id = "changepass" class = "nav-setting">
+	                Change Password
+	            </button>
+	        </a>
+	        <a href = "../logout">
+	            <button id = "signout" class = "nav-setting"> Sign Out </button>
+	        </a>
+	    </div>
+        <!-- ACCOUNT SETTINGS END -->
+        
 		<!-- NAV START -->
         <nav class = "nav">
             <!--  NAV TITLE LABEL -->
@@ -48,9 +62,9 @@
 					<!-- NAV TITLE START -->
                     <p id = "nav-title" class = "nav-item nav-label">
 						<!-- BACK BUTTON START -->
-						<a href="javascript:history.back()">
+						<a id="btn_link" href="javascript:history.back()">
 							<button id = "btn_back" type='submit'>
-								Go Back
+								<i class="fa fa-arrow-left" aria-hidden="true"></i>
 							</button>
 						</a>
 						<!-- BACK BUTTON END -->

@@ -13,6 +13,8 @@
 		
 		<!-- STYLES -->
 	    <link href = "styles/dashboard.css" rel = "stylesheet">
+		<link href = "styles/navigation.css" rel = "stylesheet">
+		
 		<link href = "styles/main.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
@@ -26,6 +28,19 @@
         
         <!-- MAIN START -->
         <div id = "main"> 
+        	<!-- ACCOUNT SETTINGS START -->
+            <div id = "account-settings">
+                <a href = "homeAPS/changePassword">
+                    <button id = "changepass" class = "nav-setting">
+                        Change Password
+                    </button>
+                </a>
+                <a href = "logout">
+                    <button id = "signout" class = "nav-setting"> Sign Out </button>
+                </a>
+            </div>
+            <!-- ACCOUNT SETTINGS END -->
+            
             <!-- NAV START -->
             <nav class = "nav">
                 <!--  NAV TITLE LABEL -->
@@ -165,19 +180,6 @@
                 <!-- TAB MAIN END -->
             </div>
             <!-- MAIN CONTENT END -->
-                  
-            <!-- ACCOUNT SETTINGS START -->
-            <div id = "account-settings">
-                <a href = "homeAPS/changePassword">
-                    <button id = "changepass" class = "nav-setting">
-                        Change Password
-                    </button>
-                </a>
-                <a href = "logout">
-                    <button id = "signout" class = "nav-setting"> Sign Out </button>
-                </a>
-            </div>
-            <!-- ACCOUNT SETTINGS END -->
         </div>
         <!-- MAIN END -->    
     </body>

@@ -10,12 +10,14 @@
 	<script src= "../libraries/jquery-3.2.1.js"> </script>
 	<link href = "../libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
-    <!-- STYLES -->
-    <link href="../styles/change-password.css" rel = "stylesheet">
-	<link href = "../styles/main.css" rel = "stylesheet">
+   	<!-- STYLES -->
+    <link href = "../styles/change-password.css" rel = "stylesheet">
+	<link href = "../styles/navigation.css" rel = "stylesheet">
 	
 	<!-- SCRIPTS -->
 	<script src="../scripts/change-password.js"> </script>
+    <script src="../scripts/navigation.js"> </script>
+
 </head>
 <body>
     <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
@@ -23,6 +25,38 @@
     <div id = "main-overlay"> </div>
     
     <div id = "main">
+    	<div id = "notification-panel">
+	       	<div id = "notification-list">
+	            <div class = "notification-item">
+	                Hello, I'm a notification!
+	            </div>
+	            <div class = "notification-item">
+	                Hello, I'm a notification!
+	            </div>
+	            <div class = "notification-item">
+	                Hello, I'm a notification!
+	            </div>
+	            <div class = "notification-item">
+	                Hello, I'm a notification!
+	            </div>
+	            <div class = "notification-item">
+	                Hello, I'm a notification!
+	            </div>
+	        </div>
+	    </div>
+	    
+	    <!-- ACCOUNT SETTINGS START -->
+	    <div id = "account-settings">
+	        <a href = "changePassword">
+	            <button id = "changepass" class = "nav-setting">
+	                Change Password
+	            </button>
+	        </a>
+	        <a href = "../logout">
+	            <button id = "signout" class = "nav-setting"> Sign Out </button>
+	        </a>
+	    </div>
+	    <!-- ACCOUNT SETTINGS END -->
 		<!-- NAV CONTENT START -->
         <nav class = "nav">
 			<!--  NAV TITLE LABEL -->
@@ -50,9 +84,9 @@
 					<!-- NAV TITLE START -->
                     <p id = "nav-title" class = "nav-item nav-label">
 						<!-- BACK BUTTON START -->
-						<a href="javascript:history.back()">
+						<a id="btn_link" href="javascript:history.back()">
 							<button id = "btn_back" type='submit'>
-								Go Back
+								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
 							</button>
 						</a>
 						<!-- BACK BUTTON END -->

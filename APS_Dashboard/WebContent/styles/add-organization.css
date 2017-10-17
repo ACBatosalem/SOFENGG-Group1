@@ -33,40 +33,6 @@
     right: 0;
 }
 
-/* NAVIGATION */
-.nav {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #126B4D;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    
-}
-
-.nav-item {
-    line-height: 50px;
-    height: 50px;
-    color: white;
-    margin: 0px 30px;
-    font-family: "Open Sans";
-    font-size: 20px;
-}
-
-.nav-button {
-    background: none;
-    border-style: none;
-    font-size: 18px;
-    font-family: "Open Sans";
-}
-
-#nav-title {
-    flex-grow: 2;
-}
-
 .main-content {
     position: absolute;
     width: 100%;
@@ -79,13 +45,15 @@
 
 .main-group-container{
     position: absolute;
-    height: 80%;
-    width: 70%;
+    height: auto;
+    width: 80%;
     background-color: #126B4D;
     display: flex;
     flex-flow: column;
     align-items: center;
-    
+    border-color: #126B4D;
+    border-bottom-style: solid;
+    border-width: 5px;
 }
 
 .main-container-content{
@@ -93,7 +61,10 @@
     background-color: #E5EDF3;
     width: 98%;
     height: inherit;
-    
+    border-color: #126B4D;
+    border-style: solid;
+    border-bottom: 2px;
+    border-bottom-width: inherit;
 }
 
 .main-container-header{
@@ -104,18 +75,6 @@
     justify-content: flex-start; !important
     
     
-}
-
-.nav-item {
-    line-height: 50px;
-    height: 50px;
-    color: white;
-    font-family: "Open Sans";
-    font-size: 20px;
-}
-
-#nav-title {
-    flex-grow: 2;
 }
 
 #add-org{
@@ -157,11 +116,13 @@
 }
 
 #addOrg_msg{
+    font-family: "Open Sans";
     margin: 15px;
 }
 
-#btn_back{
-    background-image: url(res/left-arrow.png);    
+#btn_back{  
+    background: none;
+    border: none;
 }
 
 #btn_addorg{
@@ -180,6 +141,82 @@
     background-color: #2C9D77;
 }
 
-.deletebutton{
-    margin-top: 10px;
+.deletebutton {
+    font-size: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    border-style: none;
+    background: none;
 }
+
+.deletebutton:hover {
+    color: firebrick;
+}
+
+.btn_delete{
+    font-size: 30px;
+    line-height: 30px;
+}
+
+.empty{
+    width: 20%;
+}
+
+.username{
+    text-align: left; !important
+    width: 40%;
+}
+
+.password{
+    width: 40%;
+}
+
+table{
+    text-align: left;
+}
+
+
+#btn_link {
+    background: none;
+    border: none;
+    text-decoration: none;
+}
+
+#link_back{
+    font-size: 20px;
+    color: white;
+}
+
+#tbl_list {
+    width: 100%;
+}
+
+html, body {
+    height: 100%;
+}
+
+#tbl_container {
+    width: 100%;
+    height: 300px;
+    min-height: 250px;
+    overflow-y: auto;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+}
+
+
+#tbl_container::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: var(--selected);
+}
+
+#tbl_container::-webkit-scrollbar {
+	width: 6px;
+	background-color: var(--strong);
+}
+
+#tbl_container::-webkit-scrollbar-thumb {
+	background-color: var(--strong);
+}
+
+

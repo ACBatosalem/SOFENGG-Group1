@@ -6,12 +6,9 @@ $(document).ready(function(){
 			"url" : "deleteOrg",
 			"method" : "POST",
 			"success" : function(result){
-				
 				if (result){
-					$("div[data-orgid=" + id + "]").remove();
-				}
-					
-				else {
+					$("tr[data-orgid="+id+"]").remove();
+                } else {
 					alert("Error has occured while deleting student");
 				}
 			},
@@ -35,7 +32,7 @@ $(document).ready(function(){
 		$("#addOrg_msg").text("");
 		
 		if (/*name == "" ||*/ username == "")
-			$("#addOrg_msg").text("Please fill out all the fields!");
+			$("#addOrg_msg").text("Please fill out the field first!");
 		else {
 			$("#addOrg_msg").text($("#addOrg_msg").text() /*+ checkfullname(name)*/
 					+ checkusername(username));
@@ -80,7 +77,7 @@ $(document).ready(function(){
 	
 });
 
-var usernameregex = /^([A-Za-z]{2,20}$)/;
+var usernameregex = /^([A-Z]{2,20}$)/;
 //var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
 /*function checkfullname (check) {

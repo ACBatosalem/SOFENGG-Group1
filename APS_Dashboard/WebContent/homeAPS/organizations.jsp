@@ -12,11 +12,12 @@
 		<link href = "../libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		
 		<!-- STYLES -->
-	    <link href = "../styles/add-organization.css" rel = "stylesheet">
-		<link href = "../styles/main.css" rel = "stylesheet">
+	    <link type = "text/css" href = "../styles/add-organization.css" rel = "stylesheet">
+		<link type = "text/css" href = "../styles/navigation.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
 		<script src="../scripts/add-organizations.js"> </script>
+		<script src="../scripts/navigation.js"> </script>
 	</head>
 	<body>
 	    <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
@@ -25,82 +26,89 @@
 	    
 	    <!-- MAIN VIEW PORT START -->
 	    <div id = "main">
-	    	<!-- NAV START -->
-	        <nav class = "nav">
-	            <!--  NAV TITLE LABEL -->
-	            <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
-	            <!-- NAV GREETING LABEL -->
-	            <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
-	            <!-- NAV SIGN OUT BUTTON -->
-	            <a href = "../logout"> 
-	            	<button id = "signout" class = "nav-item nav-button"> 
-	            		Sign Out 
-	            	</button>
-	            </a>
-	        </nav>
-	        <!-- NAV END -->
+		<!-- ACCOUNT SETTINGS START -->
+            <div id = "account-settings">
+                <a href = "homeAPS/changePassword">
+                    <button id = "changepass" class = "nav-setting">
+                        Change Password
+                    </button>
+                </a>
+                <a href = "../logout">
+                    <button id = "signout" class = "nav-setting"> Sign Out </button>
+                </a>
+            </div>
+            <!-- ACCOUNT SETTINGS END -->
+            
+            <!-- NAV START -->
+            <nav class = "nav">
+                <!--  NAV TITLE LABEL -->
+                <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
+                <!-- NAV GREETING LABEL -->
+                <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
+                <!-- NAV SIGN OUT BUTTON -->
+                
+                <button class = "nav-item nav-button" id = "user-settings">
+                    <i class = "fa fa-user-circle-o">
+                    
+                    </i>
+                </button>    
+            </nav>
+            <!-- NAV END -->
 	        
 	        <!-- MAIN CONTENT START -->
 	        <div class = "main-content">
-	        	<!-- MAIN GROUP CONTAINER START -->
-	            <div class = "main-group-container">
-	            	<!-- MAIN CONTAINER HEADER -->
-	                <div class = "main-container-header">
-	                    <!-- NAV TITLE START -->
-	                	<p id = "nav-title" class = "nav-item nav-label">
-		                	<!-- BACK BUTTON LINK START -->
-		                	<a href="/APS_Dashboard/homeAPS">
-		                    	<button id = "btn_back" type='submit'> Go Back </button>
-		                    </a>
-		                    <!-- BACK BUTTON LINK END -->
-		                  	Organization List 
-		                 </p>
-		                 <!-- NAV TITLE END -->
-	                </div>
-	                <!-- MAIN CONTAINER END -->
-	                 
-	                <div class = "main-container-content">
-	                	<!-- ADD ORG START -->
-	                    <button id = "add-org"> 
-	                    	Add a New User
-	                    </button>
-	                    <!-- ADD ORG END -->
-	                    
-	                    <!-- ADD ORG FORM START -->
-	                    <form id="addOrgForm" action="homeAPS/addOrg" method="POST">
-	                        <!-- ADD ORG FORM START -->
-	                        <!-- Name <input id="addOrg_name" type="text" name="name"><br><br> -->
-	                        Username <input id="addOrg_username" type="text" name="username"><br> 
-	                        <input id="btn_addorg" type="submit" value="Add Organization">
-	                    </form>
-	                    <!-- ADD ORG FORM END -->
-	                    
-	                    <!-- ADD ORG MESSAGE -->
-	                    <span id="addOrg_msg"></span>
-	                    
-	                    <!-- LIST OF ORGANIZATIONS START -->
-	                    <div class = "list-organizations">
-	                    	<!-- ITERATION OF EACH ORGANIZATION -->
-	                        <c:forEach items="${orgs}" var="org">
-	                        	<!-- ORG START -->
-	                            <div data-orgid="${org.id}">
-	                                <!-- DELETE BUTTON FOR ORG -->
-	                                <c:if test = "${org.userName != 'APS'}">
-	                                	<button class="deletebutton" data-orgid="${org.id }"> 
-	                                		Delete 
-	                                	</button>
-	                                </c:if>
-	                                <!-- ORG INFORMATION -->
-	                                ${org.userName} <span id = "tabbing"> </span> ${org.password} 
-	                            </div>
-	                            <!-- ORG END -->
-	                        </c:forEach>
-	                    </div>
-	                    <!-- LIST OF ORGANIZATIONS END -->
-	                </div>    
-	            </div>
-	            <!-- MAIN GROUP CONTAINER END -->
-	        </div>
+				<div class = "main-group-container">
+					<div class = "main-container-header">
+						<p id = "nav-title" class = "nav-item nav-label">
+						<a id = "btn_link" href="javascript:history.back()">
+							<button id = "btn_back" type='submit'>
+								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
+                            </button>
+                        </a>
+						Organization List </p>
+					 </div>
+					<div class = "main-container-content">
+						<button id = "add-org"> Add a New User</button>
+						<form id="addOrgForm" action="homeAPS/addOrg" method="POST">
+							Username <input id="addOrg_username" type="text" name="username"> <span id="addOrg_msg"></span>
+							<br>
+							<input id="btn_addorg" type="submit" value="Add Organization">
+						</form>
+						
+						<div class = "list-organizations">
+                            <div id = "tbl_container">
+                                <table id="tbl_list">
+                                    <!-- HEADERS START -->
+                                    <tr class = "headers"> 
+                                        <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                        <th class="header empty">  </th>
+                                        <th class = "header username"> Username </th>
+                                        <th class = "header password"> Password </th>
+                                    </tr>
+                                    <!-- HEADERS END -->
+                                    <c:forEach items="${orgs}" var="org">
+                                        <tr data-orgid="${org.id}">
+                                            <td>
+                                            	<c:if test = "${org.userName != 'APS'}">
+	                                                <button class="deletebutton" data-orgid="${org.id }"> 
+	                                                    <i class="fa fa-trash-o" aria-hidden="true"></i> 
+	                                                </button>
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                            ${org.userName}
+                                            </td>
+                                            <td>
+                                            ${org.password}
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                            </div>
+						</div>    
+					</div>    
+				</div>
+			</div>
 	        <!-- MAIN CONTENT END -->
 	    </div>
 		<!-- MAIN VIEW PORT START -->
