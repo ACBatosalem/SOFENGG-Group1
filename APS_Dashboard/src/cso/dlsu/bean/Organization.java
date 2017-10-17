@@ -9,8 +9,8 @@ public class Organization {
 	@Column(name="orgID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="orgFullName")
-	private String name;
+	//@Column(name="orgFullName")
+	//private String name;
 	@Column(name="orgUserName")
 	private String userName;
 	@Column(name="orgPW")
@@ -18,7 +18,7 @@ public class Organization {
 	
 	public static final String TABLE = "orgs";
 	public static final String COL_ID = "id";
-	public static final String COL_FULLNAME = "fullname";
+	//public static final String COL_FULLNAME = "fullname";
 	public static final String COL_USERNAME = "username";
 	public static final String COL_PASSWORD = "password";
 	
@@ -30,13 +30,13 @@ public class Organization {
 		this.id = id;
 	}
 	
-	public String getName() {
+	/*public String getName() {
 		return name;
 	}
 	
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 	
 	public String getUserName() {
 		return userName;
@@ -56,6 +56,11 @@ public class Organization {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", userName=" + userName + ", password=" + password + "]";
+		return "Organization [id=" + id + ", userName=" + userName + ", password=" + password + "]";
 	}
+
+	/*@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", userName=" + userName + ", password=" + password + "]";
+	}*/
 }

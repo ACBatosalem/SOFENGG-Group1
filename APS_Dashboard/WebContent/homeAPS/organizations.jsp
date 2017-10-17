@@ -26,21 +26,19 @@
 	    <!-- MAIN VIEW PORT START -->
 	    <div id = "main">
 	    	<!-- NAV START -->
-            <nav class = "nav">
-                <!--  NAV TITLE LABEL -->
-                <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
-                <!-- NAV GREETING LABEL -->
-                <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
-                <!-- NAV SIGN OUT BUTTON -->
-                
-                <button class = "nav-item nav-button" id = "user-settings">
-                    <i class = "fa fa-user-circle-o">
-                    
-                    </i>
-                </button>    
-            </nav>
-            <!-- NAV END -->
-
+	        <nav class = "nav">
+	            <!--  NAV TITLE LABEL -->
+	            <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
+	            <!-- NAV GREETING LABEL -->
+	            <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
+	            <!-- NAV SIGN OUT BUTTON -->
+	            <a href = "../logout"> 
+	            	<button id = "signout" class = "nav-item nav-button"> 
+	            		Sign Out 
+	            	</button>
+	            </a>
+	        </nav>
+	        <!-- NAV END -->
 	        
 	        <!-- MAIN CONTENT START -->
 	        <div class = "main-content">
@@ -51,7 +49,7 @@
 	                    <!-- NAV TITLE START -->
 	                	<p id = "nav-title" class = "nav-item nav-label">
 		                	<!-- BACK BUTTON LINK START -->
-		                	<a href="javascript:history.back()">
+		                	<a href="/APS_Dashboard/homeAPS">
 		                    	<button id = "btn_back" type='submit'> Go Back </button>
 		                    </a>
 		                    <!-- BACK BUTTON LINK END -->
@@ -71,7 +69,7 @@
 	                    <!-- ADD ORG FORM START -->
 	                    <form id="addOrgForm" action="homeAPS/addOrg" method="POST">
 	                        <!-- ADD ORG FORM START -->
-	                        Name <input id="addOrg_name" type="text" name="name"><br><br> 
+	                        <!-- Name <input id="addOrg_name" type="text" name="name"><br><br> -->
 	                        Username <input id="addOrg_username" type="text" name="username"><br> 
 	                        <input id="btn_addorg" type="submit" value="Add Organization">
 	                    </form>
@@ -87,9 +85,11 @@
 	                        	<!-- ORG START -->
 	                            <div data-orgid="${org.id}">
 	                                <!-- DELETE BUTTON FOR ORG -->
-	                                <button class="deletebutton" data-orgid="${s.id }"> 
-	                                	Delete 
-	                                </button>
+	                                <c:if test = "${org.userName != 'APS'}">
+	                                	<button class="deletebutton" data-orgid="${org.id }"> 
+	                                		Delete 
+	                                	</button>
+	                                </c:if>
 	                                <!-- ORG INFORMATION -->
 	                                ${org.userName} <span id = "tabbing"> </span> ${org.password} 
 	                            </div>

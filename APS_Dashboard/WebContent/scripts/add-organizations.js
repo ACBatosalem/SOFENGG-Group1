@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("button.deletebutton").click(function(){
 		var id= $(this).attr("data-orgid");
-		
+		//alert(id);
 		$.ajax({
 			"url" : "deleteOrg",
 			"method" : "POST",
@@ -29,22 +29,25 @@ $(document).ready(function(){
 	
 	$("#addOrgForm").submit(function(e){
 		e.preventDefault();
-		var name = $("#addOrg_name").val().trim();
+		//var name = $("#addOrg_name").val().trim();
 		var username = $("#addOrg_username").val().trim();
 		
-		if (name == "" || username == "")
+		$("#addOrg_msg").text("");
+		
+		if (/*name == "" ||*/ username == "")
 			$("#addOrg_msg").text("Please fill out all the fields!");
-		else if (checkfullname(name) != "")
-			$("#addOrg_msg").text(checkfullname(name));
-		else if (checkusername(username))
-			$("#addOrg_msg").text(checkusername(username));
 		else {
+			$("#addOrg_msg").text($("#addOrg_msg").text() /*+ checkfullname(name)*/
+					+ checkusername(username));
+		}
+		
+		if($("#addOrg_msg").text() == "") {
 			$("#addOrg_msg").text("");
 			
 			$.ajax({
 				type        : 'POST', 
 	            url         : 'addOrg',
-	            data        : {name:name, username:username},
+	            data        : {/*name:name,*/ username:username},
 	            dataType    : 'html',
 	            success     : function(data) {
 	            	if (data == "added"){
@@ -64,9 +67,11 @@ $(document).ready(function(){
 	});
 	
     $("#add-org").click(function(){
-        if($("#add-org").text() == "Cancel")
+        if($("#add-org").text() == "Cancel"){
             $("#add-org").text("Add a New User");
-        else{
+            //$("#addOrg_name").val("");
+            $("#addOrg_username").val("");
+        } else {
             $("#add-org").text("Cancel");
         }
         $("#addOrg_msg").text("");
@@ -76,23 +81,23 @@ $(document).ready(function(){
 });
 
 var usernameregex = /^([A-Za-z]{2,20}$)/;
-var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
+//var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
-function checkfullname (check) {
-	if(check.length <= 5) 
-		return "Name must be 6 characters or more.";
+/*function checkfullname (check) {
+	if(check.length < 7) 
+		return "\nName must be 7 characters or more.";
 	else if (!fullnameregex.test(check))
-		return "Name must only contain letters."
+		return "\nName must only contain letters."
 	else
 		return "";
-}
+}*/
 
 
 function checkusername (check) {
-	if(check.length <= 2) 
-		return "Username must be 2 characters or more.";
+	if(check.length < 2) 
+		return "\nUsername must be 2 characters or more.";
 	else if (!usernameregex.test(check))
-		return "Username must only contain letters."
+		return "\nUsername must only contain letters."
 	else
 		return "";
 }
