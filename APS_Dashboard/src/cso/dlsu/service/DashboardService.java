@@ -21,7 +21,7 @@ public class DashboardService {
 	private static DashboardData toDashboardData (ResultSet set) throws SQLException {
 		DashboardData data = new DashboardData();
 		
-		data.setTimeStamp(set.getString(Document.COL_TIME));
+		data.setTimeStamp(set.getString(SubmissionDetails.COL_DATE_SUBMITTED));
 		data.setOrgName(set.getString(Organization.COL_USERNAME));
 		data.setTitle(set.getString(Document.COL_TITLE));
 		data.setDate(set.getString(Document.COL_DATE));
@@ -33,7 +33,7 @@ public class DashboardService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
-		String query = 	"SELECT " + Document.COL_TIME + ", " + Organization.COL_USERNAME + ", "
+		String query = 	"SELECT " + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
 								  + Document.COL_TITLE + ", " + Document.COL_DATE + ", "
 								  + CheckingDetails.COL_STATUS_ID + " " +
 						"FROM ((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
