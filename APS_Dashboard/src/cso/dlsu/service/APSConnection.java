@@ -13,8 +13,8 @@ import org.sqlite.JDBC;
 
 import cso.dlsu.bean.Organization;
 import cso.dlsu.bean.Document;
-import cso.dlsu.bean.Transaction;
-import cso.dlsu.bean.ActivityDate;
+import cso.dlsu.bean.SubmissionDetails;
+import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.TieUp;
 
 public class APSConnection {
@@ -82,35 +82,36 @@ public class APSConnection {
 		                + Document.COL_TERM   + 	" integer NOT NULL,"
 		                + Document.COL_NATURE + 	" text,"
 		                + Document.COL_TYPE   + 	" text,"
-		                + Document.COL_VENUE  + 	" text"
+		                + Document.COL_VENUE  + 	" text,"
+		                + Document.COL_DATE	  +		" text,"
+		                + Document.COL_TIME	  +		" text"
 		                + ");"; 
 				executeCreateTables(connection, query, Document.TABLE);
 			}
 			
-			if(!checkTableExist(connection, Transaction.TABLE)) {
-				String query = "CREATE TABLE IF NOT EXISTS " + Transaction.TABLE + "("
-		                + Transaction.COL_ID  	  	      + 	" integer PRIMARY KEY AUTOINCREMENT,"
-		                + Transaction.COL_DOCU_ID 	      + 	" integer NOT NULL,"
-		                + Transaction.COL_STATUS_ID       + 	" integer NOT NULL," 
-		                + Transaction.COL_CHECKER_NAME    + 	" text,"
-		                + Transaction.COL_DATE_SUBMITTED  + 	" datetime NOT NULL,"
-		                + Transaction.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
-		                + Transaction.COL_DATE_CHECKED    + 	" datetime,"
-		                + Transaction.COL_REMARKS         + 	" text"
+			if(!checkTableExist(connection, SubmissionDetails.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + SubmissionDetails.TABLE + "("
+		                + SubmissionDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + SubmissionDetails.COL_DOCU_ID 	    + 	" integer NOT NULL,"
+		                + SubmissionDetails.COL_DATE_SUBMITTED  + 	" datetime NOT NULL,"
+		                + SubmissionDetails.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
+		                + SubmissionDetails.COL_SUBMITTED_BY 	+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_EMAIL_ADDRESS 	+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_CONTACT_NO 		+ 	" text NOT NULL"
 		                + ");"; 
-				executeCreateTables(connection, query, Transaction.TABLE);
+				executeCreateTables(connection, query, SubmissionDetails.TABLE);
 			}
 			
-			if(!checkTableExist(connection, ActivityDate.TABLE)) {
-				String query = "CREATE TABLE IF NOT EXISTS " + ActivityDate.TABLE + "("
-		                + ActivityDate.COL_DOCU_ID    + " integer NOT NULL,"
-		                + ActivityDate.COL_START_DATE + " datetime NOT NULL,"
-		                + ActivityDate.COL_END_DATE   + " datetime NOT NULL,"
-		                + "PRIMARY KEY("  + ActivityDate.COL_DOCU_ID + ", "
-		                				  + ActivityDate.COL_START_DATE + ", "
-		                				  + ActivityDate.COL_END_DATE + ")"
+			if(!checkTableExist(connection, CheckingDetails.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + CheckingDetails.TABLE + "("
+		                + CheckingDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + CheckingDetails.COL_SUB_IB	    + 	" integer NOT NULL,"
+		                + CheckingDetails.COL_STATUS_ID		+ 	" integer NOT NULL,"
+		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text NOT NULL,"
+		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text NOT NULL,"
+		                + CheckingDetails.COL_REMARKS		+ 	" text NOT NULL"
 		                + ");"; 
-				executeCreateTables(connection, query, ActivityDate.TABLE);
+				executeCreateTables(connection, query, CheckingDetails.TABLE);
 			}
 			
 			if(!checkTableExist(connection, TieUp.TABLE)) {

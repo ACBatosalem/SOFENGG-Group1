@@ -1,25 +1,15 @@
 package cso.dlsu.bean;
 
-import javax.persistence.*;
-
-@Entity(name="documents")
 public class Document {
-	@Id
-	@Column(name="docu_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="org_id")
 	private int orgID;
-	@Column(name="title")
 	private String title;
-	@Column(name="term")
 	private int term;
-	@Column(name="nature")
 	private String nature = null;
-	@Column(name="type")
 	private String type = null;
-	@Column(name="venue")
 	private String venue = null;
+	private String date;
+	private String time;
 	
 	public static final String TABLE = "documents";
 	public static final String COL_ID = "docu_id";
@@ -29,6 +19,8 @@ public class Document {
 	public static final String COL_NATURE = "nature";
 	public static final String COL_TYPE = "type";
 	public static final String COL_VENUE = "venue";
+	public static final String COL_DATE = "date";
+	public static final String COL_TIME = "time";
 	
 	public int getId() {
 		return id;
@@ -85,10 +77,26 @@ public class Document {
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 
 	@Override
 	public String toString() {
 		return "Document [id=" + id + ", orgID=" + orgID + ", title=" + title + ", term=" + term + ", nature=" + nature
-				+ ", type=" + type + ", venue=" + venue + "]";
+				+ ", type=" + type + ", venue=" + venue + ", date=" + date + ", time=" + time + "]";
 	}
 }
