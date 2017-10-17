@@ -28,7 +28,7 @@
 	    <div id = "main">
 		<!-- ACCOUNT SETTINGS START -->
             <div id = "account-settings">
-                <a href = "homeAPS/changePassword">
+                <a href = "changePassword">
                     <button id = "changepass" class = "nav-setting">
                         Change Password
                     </button>

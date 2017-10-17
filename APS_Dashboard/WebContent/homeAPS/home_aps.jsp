@@ -18,7 +18,7 @@
 		<link href = "styles/main.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
-		<script src="scripts/dashboard.js"> </script>
+		<script src="scripts/navigation.js"> </script>
 	
 	</head>
     <body>

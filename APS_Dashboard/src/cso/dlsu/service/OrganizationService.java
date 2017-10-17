@@ -184,7 +184,8 @@ public class OrganizationService {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
-						"FROM " + Organization.TABLE;
+						"FROM " + Organization.TABLE + " " + 
+						"ORDER BY " + Organization.COL_ID + " DESC";
 		List <Organization> organizations = new ArrayList <Organization> ();
 		
 		try {

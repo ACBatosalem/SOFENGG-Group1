@@ -15,7 +15,7 @@
 	<link href = "../styles/navigation.css" rel = "stylesheet">
 	
 	<!-- SCRIPTS -->
-	<script src="../scripts/dashboard.js"> </script>
+	<script src="../scripts/navigation.js"> </script>
 	<script src="../scripts/change-password.js"> </script>
 </head>
 <body>
