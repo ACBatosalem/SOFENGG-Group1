@@ -37,12 +37,14 @@ $(document).ready(function(){
 });
 
 
-var passwordregex = /^([A-Za-z0-9]{6,45}$)/;
+var passwordregex = /^([A-Za-z0-9]{6,25}$)/;
 
 function checkpassword(password) {
 	console.log(passwordregex.test(password));
 	if(password.length < 6) {
 		return "Password must be 6 characters or more";
+	} else if(password.length > 25) {
+		return "Password must be 25 characters or less";
 	} else if (!passwordregex.test(password)) {
 		return "Password must only contain alphanumeric values";
 	} else {

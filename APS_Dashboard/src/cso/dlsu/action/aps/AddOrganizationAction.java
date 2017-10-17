@@ -16,7 +16,7 @@ public class AddOrganizationAction implements ActionHandler {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		if(OrganizationService.getOrgByUsername(request.getParameter("username").toUpperCase()) != null) {
+		if(OrganizationService.getOrgByUsername(request.getParameter("username").toUpperCase()) == null) {
 			Random randomizer = new Random();
 			String password = "";
 			

@@ -33,10 +33,10 @@ public class APSFilter implements Filter {
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 		
 		String path = ((HttpServletRequest)request).getServletPath();
-		int id = ((HttpServletRequest)request).getSession().getAttribute("sessionID") != null ? 
-				(int)((HttpServletRequest)request).getSession().getAttribute("sessionID") : 0;
+		/*int id = ((HttpServletRequest)request).getSession().getAttribute("sessionID") != null ? 
+				(int)((HttpServletRequest)request).getSession().getAttribute("sessionID") : 0;*/
 		//System.out.println(id +" ");
-		Organization user = OrganizationService.getOrg(id);
+		Organization user = (Organization)((HttpServletRequest)request).getSession().getAttribute("user");
 		
 		if(path.endsWith(".jsp"))
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");

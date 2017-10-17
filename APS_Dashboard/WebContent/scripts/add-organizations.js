@@ -97,6 +97,8 @@ var usernameregex = /^([A-Za-z]{2,20}$)/;
 function checkusername (check) {
 	if(check.length < 2) 
 		return "\nUsername must be 2 characters or more.";
+	else if(check.length > 20)
+		return "\nUsername must be 20 characters or less.";
 	else if (!usernameregex.test(check))
 		return "\nUsername must only contain letters."
 	else
