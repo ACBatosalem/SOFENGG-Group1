@@ -20,8 +20,8 @@ public class SubmissionDetailsService {
 		sub.setId(set.getInt(SubmissionDetails.COL_ID));
 		sub.setDocuID(set.getInt(SubmissionDetails.COL_DOCU_ID));
 		sub.setDateSubmitted(set.getString(SubmissionDetails.COL_DATE_SUBMITTED));
-		sub.setSubmittedBy(set.getString(SubmissionDetails.COL_SUBMISSION_TYPE));
 		sub.setSubmissionType(set.getString(SubmissionDetails.COL_SUBMISSION_TYPE));
+		sub.setSubmittedBy(set.getString(SubmissionDetails.COL_SUBMITTED_BY));
 		sub.setEmailAddress(set.getString(SubmissionDetails.COL_EMAIL_ADDRESS));
 		sub.setContactNo(set.getString(SubmissionDetails.COL_CONTACT_NO));
 		return sub;
@@ -40,8 +40,8 @@ public class SubmissionDetailsService {
 			statement.setNull(1, Types.NULL);
 			statement.setInt(2, sub.getDocuID());
 			statement.setString(3, sub.getDateSubmitted());
-			statement.setString(4, sub.getSubmittedBy());
-			statement.setString(5, sub.getSubmissionType());
+			statement.setString(4, sub.getSubmissionType());
+			statement.setString(5, sub.getSubmittedBy());
 			statement.setString(6, sub.getEmailAddress());
 			statement.setString(7, sub.getContactNo());
 			
