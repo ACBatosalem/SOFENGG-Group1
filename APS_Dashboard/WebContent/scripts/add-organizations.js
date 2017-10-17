@@ -71,7 +71,6 @@ $(document).ready(function(){
         }
         $("#addOrg_msg").text("");
         $("#addOrgForm").slideToggle();
-        
     });
 	
 });

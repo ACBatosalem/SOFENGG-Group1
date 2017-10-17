@@ -23,16 +23,21 @@
     <div id = "main-overlay"> </div>
     
     <div id = "main">
-		<!-- NAV CONTENT START -->
+		<!-- NAV START -->
         <nav class = "nav">
-			<!--  NAV TITLE LABEL -->
-			<h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
-			<!-- NAV GREETING LABEL -->
-			<h3 class = "nav-item nav-label"> Good Day! CSO </h3>
-			<!-- NAV SIGN OUT BUTTON -->
-			<button id = "signout" class = "nav-item nav-button"> Sign Out </button>
-		</nav>
-		<!-- NAV CONTENT END -->
+            <!--  NAV TITLE LABEL -->
+            <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
+            <!-- NAV GREETING LABEL -->
+            <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
+            <!-- NAV SIGN OUT BUTTON -->
+            <button class = "nav-item nav-button" id = "user-settings">
+                <i class = "fa fa-user-circle-o">
+                
+                </i>
+            </button>    
+        </nav>
+        <!-- NAV END -->
+
 		
         <!-- MAIN CONTENT START -->
         <div class = "main-content">

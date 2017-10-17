@@ -34,8 +34,7 @@ public class APSFilter implements Filter {
 		
 		String path = ((HttpServletRequest)request).getServletPath();
 		int id = ((HttpServletRequest)request).getSession().getAttribute("sessionID") != null ? 
-				(int)((HttpServletRequest)request).getSession().getAttribute("sessionID") : 0;
-		//System.out.println(id +" ");
+				(int)((HttpServletRequest)request).getSession().getAttribute("sessionID"): 0;
 		Organization user = OrganizationService.getOrg(id);
 		
 		if(path.endsWith(".jsp"))
