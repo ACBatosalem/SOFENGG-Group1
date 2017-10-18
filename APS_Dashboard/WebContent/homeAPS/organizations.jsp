@@ -14,6 +14,7 @@
 		<!-- STYLES -->
 	    <link type = "text/css" href = "../styles/add-organization.css" rel = "stylesheet">
 		<link type = "text/css" href = "../styles/navigation.css" rel = "stylesheet">
+		<link href = "../styles/main.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
 		<script src="../scripts/add-organizations.js"> </script>
@@ -60,7 +61,7 @@
 				<div class = "main-group-container">
 					<div class = "main-container-header">
 						<p id = "nav-title" class = "nav-item nav-label">
-						<a id = "btn_link" href="/APS_Dashboard/homeAPS">
+						<a id = "btn_link" href="${pageContext.request.contextPath}/homeAPS">
 							<button id = "btn_back" type='submit'>
 								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
                             </button>

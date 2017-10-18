@@ -13,6 +13,7 @@
    	<!-- STYLES -->
     <link href = "../styles/change-password.css" rel = "stylesheet">
 	<link href = "../styles/navigation.css" rel = "stylesheet">
+	<link href = "../styles/main.css" rel = "stylesheet">
 	
 	<!-- SCRIPTS -->
 	<script src="../scripts/navigation.js"> </script>
@@ -62,7 +63,7 @@
 					<!-- NAV TITLE START -->
                     <p id = "nav-title" class = "nav-item nav-label">
 						<!-- BACK BUTTON START -->
-						<a id="btn_link" href="/APS_Dashboard/homeAPS">
+						<a id="btn_link" href="${pageContext.request.contextPath}/homeAPS">
 							<button id = "btn_back" type='submit'>
 								<i class="fa fa-arrow-left" aria-hidden="true"></i>
 							</button>

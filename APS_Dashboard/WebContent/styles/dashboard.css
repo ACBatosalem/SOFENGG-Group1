@@ -219,6 +219,7 @@ table {
     width: 100%;
     border-collapse: collapse; 
     border-width: 3px;
+    min-width: 100px;
 }
 
 .header.timestamp {
