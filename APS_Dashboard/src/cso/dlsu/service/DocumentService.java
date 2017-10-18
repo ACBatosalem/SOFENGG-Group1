@@ -11,9 +11,22 @@ import java.util.List;
 
 import cso.dlsu.bean.Document;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class DocumentService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to a Document object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the Document object created from the result set
+	 * @throws SQLException
+	 */
 	private static Document toDocument (ResultSet set) throws SQLException {
 		Document document = new Document();
 		
@@ -29,6 +42,11 @@ public class DocumentService {
 		return document;
 	}
 	
+	/**
+	 * This function is used to add the data of a Document object into the database.
+	 * @param document the Document object whose data will be added into the database
+	 * @return true if the data was successfully added into the database, false if not
+	 */
 	public static boolean addDocument (Document document) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -78,6 +96,10 @@ public class DocumentService {
 		return added;
 	}
 	
+	/**
+	 * This function is used to get all the data from the Document table in the database.
+	 * @return a List object of all the data from the Document table in the database
+	 */
 	public static List<Document> getAllDocuments() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -127,6 +149,12 @@ public class DocumentService {
 		return documents;
 	}
 	
+	/**
+	 * This function is used to get all the data of documents of a specific organization from the Document table in the database.
+	 * @param orgID the id of the organization whose documents are being retrieved from the database
+	 * @return a List object of all the data of documents of a a specific organization that has an id equal to the one specified
+	 * 		   as the parameter
+	 */
 	public static List<Document> getDocumentsOfOrg(int orgID) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -179,6 +207,11 @@ public class DocumentService {
 		return documents;
 	}
 	
+	/**
+	 * This function is used to get the data of a single Document object stored in the database.
+	 * @param id the id of the Document object being retrieved from the database
+	 * @return the Document object with its id equal to the id specified as the parameter
+	 */
 	public static Document getDocument(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -233,6 +266,11 @@ public class DocumentService {
 		return document;
 	}
 	
+	/**
+	 * This function is used to delete a Document object's data from the database.
+	 * @param id the id of the Document object to be deleted from the database
+	 * @return true if the deletion was successful, false if not
+	 */
 	public static boolean deleteDocument(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;

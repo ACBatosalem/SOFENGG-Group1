@@ -11,9 +11,22 @@ import java.util.List;
 
 import cso.dlsu.bean.SubmissionDetails;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class SubmissionDetailsService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to a SubmissionDetails object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the SubmissionDetails object created from the result set
+	 * @throws SQLException
+	 */
 	private static SubmissionDetails toSubmissionDetails (ResultSet set) throws SQLException {
 		SubmissionDetails sub = new SubmissionDetails();
 		
@@ -27,6 +40,11 @@ public class SubmissionDetailsService {
 		return sub;
 	}
 	
+	/**
+	 * This function is used to add the data of a Organization object into the database.
+	 * @param sub the SubmissionDetails object whose data will be added into the database
+	 * @return true if the data was successfully added into the database, false if not
+	 */
 	public static boolean addSubmissionDetails (SubmissionDetails sub) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -74,6 +92,10 @@ public class SubmissionDetailsService {
 		return added;
 	}
 	
+	/**
+	 * This function is used to get all the data from the SubmissionDetails table in the database.
+	 * @return a List object of all the data from the Document table in the database
+	 */
 	public static List<SubmissionDetails> getAllSubmissionDetails() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -123,6 +145,12 @@ public class SubmissionDetailsService {
 		return subs;
 	}
 	
+	/**
+	 * This function is used to get all the data of submissions of a specific document from the SubmissionDetails table in the database.
+	 * @param docuID the id of the document whose submission details are being retrieved from the database
+	 * @return a List object of all the data of submission details of a a specific document that has an id equal to the one specified
+	 * 		   as the parameter
+	 */
 	public static List<SubmissionDetails> getSubmissionDetailsOfDocument(int docuID) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -175,6 +203,11 @@ public class SubmissionDetailsService {
 		return subs;
 	}
 	
+	/**
+	 * This function is used to get the data of a single SubmissionDetails object stored in the database.
+	 * @param id the id of the SubmssionDetails object being retrieved from the database
+	 * @return the SubmissionDetails object with its id equal to the id specified as the parameter
+	 */
 	public static SubmissionDetails getSubmissionDetails(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -229,6 +262,11 @@ public class SubmissionDetailsService {
 		return sub;
 	}
 	
+	/**
+	 * This function is used to delete a SubmissionDetails object's data from the database.
+	 * @param id the id of the SubmissionDetails object to be deleted from the database
+	 * @return true if the deletion was successful, false if not
+	 */
 	public static boolean deleteSubmissionDetails(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;

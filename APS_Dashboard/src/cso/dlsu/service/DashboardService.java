@@ -15,9 +15,22 @@ import cso.dlsu.bean.Organization;
 import cso.dlsu.bean.Status;
 import cso.dlsu.bean.SubmissionDetails;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class DashboardService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to a DashboardData object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the DashboardData object created from the result set
+	 * @throws SQLException
+	 */
 	private static DashboardData toDashboardData (ResultSet set) throws SQLException {
 		DashboardData data = new DashboardData();
 		
@@ -29,6 +42,10 @@ public class DashboardService {
 		return data;
 	}
 	
+	/**
+	 * This function is used to get all the data required for the dashboard from multiple tables in the database.
+	 * @return a List object of all the data from the database required for the dashboard
+	 */
 	public static List<DashboardData> getAllDashboardData() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;

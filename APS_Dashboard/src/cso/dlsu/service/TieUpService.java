@@ -10,9 +10,22 @@ import java.util.List;
 
 import cso.dlsu.bean.TieUp;;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class TieUpService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to a TieUp object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the TieUp object created from the result set
+	 * @throws SQLException
+	 */
 	private static TieUp toTieUp (ResultSet set) throws SQLException {
 		TieUp tieUp = new TieUp();
 		
@@ -21,6 +34,11 @@ public class TieUpService {
 		return tieUp;
 	}
 	
+	/**
+	 * This function is used to add the data of a TieUp object into the database.
+	 * @param tieUp the TieUp object whose data will be added into the database
+	 * @return true if the data was successfully added into the database, false if not
+	 */
 	public static boolean addTieUp (TieUp tieUp) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -63,6 +81,10 @@ public class TieUpService {
 		return added;
 	}
 	
+	/**
+	 * This function is used to get all the data from the TieUp table in the database.
+	 * @return a List object of all the data from the TieUp table in the database
+	 */
 	public static List<TieUp> getAllTieUps() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -112,6 +134,12 @@ public class TieUpService {
 		return tieUps;
 	}
 	
+	/**
+	 * This function is used to get all the data of tie-ups of a specific document from the TieUp table in the database.
+	 * @param docuID the id of the document whose tie-ups are being retrieved from the database
+	 * @return a List object of all the data of tie-ups of a a specific document that has an id equal to the one specified
+	 * 		   as the parameter
+	 */
 	public static List<TieUp> getTieUpsForDocument(int docuID) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -168,6 +196,12 @@ public class TieUpService {
 		
 	}*/
 	
+	/**
+	 * This function is used to delete a Document object's data from the database.
+	 * @param docuID the document id of the TieUp object to be deleted from the database
+	 * @param orgID the organization id of the TieUp object to be deleted from the database
+	 * @return true if the deletion was successful, false if not
+	 */
 	public static boolean deleteTieUp(int docuID, int orgID) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
