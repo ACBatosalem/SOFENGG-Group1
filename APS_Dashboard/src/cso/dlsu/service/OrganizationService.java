@@ -11,9 +11,22 @@ import java.util.List;
 
 import cso.dlsu.bean.Organization;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class OrganizationService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to an Organization object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the Organization object created from the result set
+	 * @throws SQLException
+	 */
 	private static Organization toOrganization (ResultSet set) throws SQLException {
 		Organization org = new Organization();
 		
@@ -24,6 +37,11 @@ public class OrganizationService {
 		return org;
 	}
 	
+	/**
+	 * This function is used to add the data of an Organization object into the database.
+	 * @param org the Organization object whose data will be added into the database
+	 * @return true if the data was successfully added into the database, false if not
+	 */
 	public static boolean addOrg (Organization org) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -68,6 +86,11 @@ public class OrganizationService {
 		return added;
 	}
 	
+	/**
+	 * This function is used to get the data of a single Organization object stored in the database.
+	 * @param username the username of the Organization object being retrieved from the database
+	 * @return the Organization object with its username equal to the username specified as the parameter
+	 */
 	public static Organization getOrgByUsername(String username) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -179,6 +202,10 @@ public class OrganizationService {
 		return organization != null;
 	}*/
 	
+	/**
+	 * This function is used to get all the data from the Organization table in the database.
+	 * @return a List object of all the data from the Organization table in the database
+	 */
 	public static List<Organization> getAllOrgs() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -229,6 +256,11 @@ public class OrganizationService {
 		return organizations;
 	}
 	
+	/**
+	 * This function is used to delete an Organization object's data from the database.
+	 * @param id the id of the Organization object to be deleted from the database
+	 * @return true if the deletion was successful, false if not
+	 */
 	public static boolean deleteOrg(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -270,6 +302,11 @@ public class OrganizationService {
 		return deleted;
 	}
 	
+	/**
+	 * This function is used to get the data of a single Organization object stored in the database.
+	 * @param id the id of the Organization object being retrieved from the database
+	 * @return the Organization object with its id equal to the id specified as the parameter
+	 */
 	public static Organization getOrg(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -324,6 +361,12 @@ public class OrganizationService {
 		return organization;
 	}
 	
+	/**
+	 * This function is used to update an Organization object's data stored in the database.
+	 * @param id the id of the Organization object whose data from the database is being updated
+	 * @param newinfo the Organization object with the data that will replace the currently stored data in the database
+	 * @return true if the update was successful, false if not
+	 */
 	public static boolean updateOrg(int id, Organization newinfo) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -371,6 +414,12 @@ public class OrganizationService {
 		return updated;
 	}
 	
+	/**
+	 * This function is used to update an Organization object's password stored in the database.
+	 * @param id the id of the Organization object whose password from the database is being updated
+	 * @param newPassword the password that will replace the currently stored password in the database
+	 * @return true if the update was successful, false if not
+	 */
 	public static boolean updatePassword(int id, String newPassword) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;

@@ -1,19 +1,16 @@
 package cso.dlsu.bean;
 
-import javax.persistence.*;
-
-@Entity(name="orgs")
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class Organization {
 	
-	@Id
-	@Column(name="orgID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	//@Column(name="orgFullName")
-	//private String name;
-	@Column(name="orgUserName")
 	private String userName;
-	@Column(name="orgPW")
 	private String password;
 	
 	public static final String TABLE = "orgs";
@@ -22,10 +19,18 @@ public class Organization {
 	public static final String COL_USERNAME = "username";
 	public static final String COL_PASSWORD = "password";
 	
+	/**
+	 * This function is used to get the id of the organization.
+	 * @return the id of the organization
+	 */
 	public int getId() {
 		return id;
 	}
 	
+	/**
+	 * This function is used to set the id of the organization.
+	 * @param id the id of the organization
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -38,22 +43,41 @@ public class Organization {
 		this.name = name;
 	}*/
 	
+	/**
+	 * This function is used to get the username of the organization.
+	 * @return the username of the organization
+	 */
 	public String getUserName() {
 		return userName;
 	}
 	
+	/**
+	 * This function is used to set the username of the organization.
+	 * @param userName the username of the organization
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 	
+	/**
+	 * This function is used to get the password of the organization.
+	 * @return the password of the organization
+	 */
 	public String getPassword() {
 		return password;
 	}
 	
+	/**
+	 * This function is used to set the password of the organization.
+	 * @param password the password of the organization
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Organization [id=" + id + ", userName=" + userName + ", password=" + password + "]";

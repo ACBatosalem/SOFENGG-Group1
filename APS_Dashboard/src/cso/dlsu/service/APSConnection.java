@@ -17,18 +17,32 @@ import cso.dlsu.bean.SubmissionDetails;
 import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.TieUp;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class APSConnection {
 	private static final String DRIVER = "jdbc:sqlite:";
-	private static final String DIR = "C:/dlsu-cso/";
+	private static final String DIR = "C:/Users/Carlo Eroles/Documents/SOFENGG/dlsu-cso/";
 	private static final String DB = "aps.db";
 	private static APSConnection instance;
 	
+	/**
+	 * This function is used to get the APSConnection instance.
+	 * @return the instance of the APSConnection
+	 */
 	public static APSConnection getInstance () {
 		if (instance == null)
 			instance = new APSConnection();
 		return instance;
 	}
 	
+	/**
+	 * This is the constructor of the APSConnection object.
+	 */
 	private APSConnection () {
 		(new File(DIR)).mkdirs();
 		try {
@@ -38,6 +52,10 @@ public class APSConnection {
 		}
 	}
 	
+	/**
+	 * This function is used to return the Connection object connected to the database.
+	 * @return the connection to the database
+	 */
 	public Connection connect () {
 		Connection connection = null;
 		String url = DRIVER + DIR + DB;
@@ -59,10 +77,15 @@ public class APSConnection {
 		return connection;
 	}
 
+	/**
+	 * This function is used to create the tables in the database if they do not exist yet.
+	 * @throws SQLException
+	 */
 	private void createTables () throws SQLException {
 		Connection connection = connect();
 		
 		if (connection != null) {
+			//Create organizations table
 			if(!checkTableExist(connection, Organization.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + Organization.TABLE + "("
 		                + Organization.COL_ID 		+ 	" integer PRIMARY KEY AUTOINCREMENT,"
@@ -74,6 +97,7 @@ public class APSConnection {
 				createAccountAPS(connection);
 			}
 			
+			//Create documents table
 			if(!checkTableExist(connection, Document.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + Document.TABLE + "("
 		                + Document.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
@@ -89,6 +113,7 @@ public class APSConnection {
 				executeCreateTables(connection, query, Document.TABLE);
 			}
 			
+			//Create submission_details table
 			if(!checkTableExist(connection, SubmissionDetails.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + SubmissionDetails.TABLE + "("
 		                + SubmissionDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
@@ -102,6 +127,7 @@ public class APSConnection {
 				executeCreateTables(connection, query, SubmissionDetails.TABLE);
 			}
 			
+			//Create checking_details table
 			if(!checkTableExist(connection, CheckingDetails.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + CheckingDetails.TABLE + "("
 		                + CheckingDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
@@ -114,6 +140,7 @@ public class APSConnection {
 				executeCreateTables(connection, query, CheckingDetails.TABLE);
 			}
 			
+			//Create tie_ups table
 			if(!checkTableExist(connection, TieUp.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + TieUp.TABLE + "("
 		                + TieUp.COL_DOCU_ID + " integer NOT NULL,"
@@ -132,6 +159,10 @@ public class APSConnection {
 		
 	}
 	
+	/**
+	 * This function is used to create and add the APS account in the database if it does not exist yet.
+	 * @param con the Connection object connected to the database
+	 */
 	private void createAccountAPS(Connection con) {
 		PreparedStatement statement = null;
 		String query = "INSERT INTO " + Organization.TABLE + " " +
@@ -161,6 +192,12 @@ public class APSConnection {
 		}
 	}
 	
+	/**
+	 * This function is used to execute the creation of tables in the database.
+	 * @param con the Connection object connected to the database
+	 * @param query the query to create the specified table
+	 * @param tableName the name of the table to be created
+	 */
 	private void executeCreateTables(Connection con, String query, String tableName) {
 		PreparedStatement ps = null;
 		try {
@@ -182,6 +219,13 @@ public class APSConnection {
 		}
 	}
 	
+	/**
+	 * This function is used to check whether a table exists in the database.
+	 * @param con the Connection object connected to the database
+	 * @param tableName the name of the table to be created
+	 * @return true if the table exists, false if it does not
+	 * @throws SQLException
+	 */
 	private boolean checkTableExist(Connection con, String tableName) throws SQLException {
 		boolean exist = false;
 		

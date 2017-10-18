@@ -204,12 +204,12 @@ table, th, tr {
     border-style: solid; 
     background-color: #E5EDF3;
     padding: 20px;
-    border-color: 126B4D;
+    border-color: #126B4D;
     color: #126B4D;
 }
 
 td {
-    border-color: 126B4D;
+    border-color: #126B4D;
     border-width: 2px;
     border-style: solid;
 }
@@ -219,7 +219,7 @@ table {
     width: 100%;
     border-collapse: collapse; 
     border-width: 3px;
-    min-width: 100px;
+    min-width: 200px;
 }
 
 .header.timestamp {
@@ -302,7 +302,8 @@ button:focus {
     outline: none;
     border-style: solid;
     border-top-width: 40px;
-    border-color: #126B4D;   
+    border-color: #126B4D; 
+    min-width: 200px;  
 }
 
 tr {

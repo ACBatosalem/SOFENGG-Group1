@@ -11,9 +11,22 @@ import java.util.List;
 
 import cso.dlsu.bean.CheckingDetails;
 
+/**
+ * @author Batosalem, Angelika
+ * @author Eroles, Carlo Miguel
+ * @author Respicio, Michael Ryan
+ * @author Ticug, Jonal Ray
+ * @version 1.0
+ */
 public class CheckingDetailsService {
 	public static final APSConnection db = APSConnection.getInstance();
 	
+	/**
+	 * This function is used to convert a ResultSet to a CheckingDetails object.
+	 * @param set the ResultSet object returned after query execution
+	 * @return the CheckingDetails object created from the result set
+	 * @throws SQLException
+	 */
 	private static CheckingDetails toCheckingDetails (ResultSet set) throws SQLException {
 		CheckingDetails check = new CheckingDetails();
 		
@@ -26,6 +39,11 @@ public class CheckingDetailsService {
 		return check;
 	}
 	
+	/**
+	 * This function is used to add the data of a CheckingDetails object into the database.
+	 * @param check the CheckingDetails object whose data will be added into the database
+	 * @return true if the data was successfully added into the database, false if not
+	 */
 	public static boolean addCheckingDetails (CheckingDetails check) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -72,6 +90,10 @@ public class CheckingDetailsService {
 		return added;
 	}
 	
+	/**
+	 * This function is used to get all the data from the CheckingDetails table in the database.
+	 * @return a List object of all the data from the CheckingDetails table in the database
+	 */
 	public static List<CheckingDetails> getAllCheckingDetails() {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -121,6 +143,11 @@ public class CheckingDetailsService {
 		return checks;
 	}
 	
+	/**
+	 * This function is used to get the data of a single CheckingDetails object stored in the database.
+	 * @param id the id of the CheckingDetails object being retrieved from the database
+	 * @return the CheckingDetails object with its id equal to the id specified as the parameter
+	 */
 	public static CheckingDetails getCheckingDetails(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -175,6 +202,11 @@ public class CheckingDetailsService {
 		return check;
 	}
 	
+	/**
+	 * This function is used to get the data of a CheckingDetails object, of a specific submission, from the database.
+	 * @param sub_id the id of the submission referred by the CheckingDetails object being retrieved from the database
+	 * @return the CheckingDetails object with the submission id equal to the one specified as the parameter
+	 */
 	public static CheckingDetails getCheckingDetailsOfSubmission(int sub_id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
@@ -229,6 +261,11 @@ public class CheckingDetailsService {
 		return check;
 	}
 	
+	/**
+	 * This function is used to delete a CheckingDetails object's data from the database.
+	 * @param id the id of the CheckingDetails object to be deleted from the database
+	 * @return true if the deletion was successful, false if not
+	 */
 	public static boolean deleteCheckingDetails(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
