@@ -1,0 +1,85 @@
+body{
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+}
+
+#logindiv{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: green;
+    width: 30%;
+    min-width: 350px;
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logingroup{
+ max-width: 300px;
+ min-width: 100px;
+ width: 100%;
+ margin: 0 auto;
+ padding-left: 20px;
+ padding-right: 20px;
+}
+
+.label{
+    font-size: 20px;    
+    color: white;
+    font-family: sans-serif;
+}
+
+#btn_login{
+    margin-top: 40px;
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: limegreen;
+    border-radius: 5px;
+    border: 0px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 75px;
+}
+
+#login_username{    
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#login_password{
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 100px;
+    border-radius: 4px;
+}
+
+#imagecontainer{
+    position: absolute;
+    width: 70%;
+    height: inherit;
+    flex-grow: 2;
+}
+
+#imagediv{
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+#imagediv img{
+    width: inherit;
+    height: inherit;
+}

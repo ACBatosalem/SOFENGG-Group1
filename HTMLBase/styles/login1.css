@@ -92,6 +92,10 @@ body{
     padding-bottom: 10px;
 }
 
+#btn_login, .trim {
+
+}
+
 #btn_login:hover, button#btn_login:hover{
     background-color: #2C9D77;
     cursor: pointer;

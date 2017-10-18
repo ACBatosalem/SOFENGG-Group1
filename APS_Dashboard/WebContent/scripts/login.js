@@ -1,5 +1,5 @@
 $(document).ready(function(){
-				$("#loginform").submit(function(e){
+		$("#loginform").submit(function(e){
 		e.preventDefault();
 		var username = $("#login_username").val().trim();		
 		var pw = $("#login_password").val();		
@@ -20,11 +20,19 @@ $(document).ready(function(){
 					else{		
 						$("#login_msg").text(data);		
 					}		
-				},		
-		 		error   : function(xhr,status,error){		
+				},	
+				beforeSend	: function (xhr) {
+					$('#btn_login').prop('disabled', true);
+					$('.trim').show();
+				},
+		 		error   	: function(xhr,status,error){		
 					console.log(xhr);   		
 					alert(status);		
-				}		
+				},	
+				complete	: function (xhr,status) {
+					$('#btn_login').prop('disabled', false);
+					$('.trim').hide();
+				}
 			});
 			return false;
 	});

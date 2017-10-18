@@ -34,6 +34,8 @@ $(document).ready(function(){
          $('#activity-modal').fadeOut();
     });
     
+    $('').css
+    
     $('tr').on('click', function() {
         $('#activity-modal').fadeIn();
     })
