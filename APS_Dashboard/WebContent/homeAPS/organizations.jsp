@@ -74,16 +74,26 @@
 							<br>
 							<input id="btn_addorg" type="submit" value="Add Organization">
 						</form>
-						
-						<div class = "list-organizations">
-                            <div id = "tbl_container">
-                                <table id="tbl_list">
-                                    <!-- HEADERS START -->
+						<div class= "list-organization">
+                            <table class="tbl_list">
                                     <tr class = "headers"> 
                                         <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
                                         <th class="header empty">  </th>
                                         <th class = "header username"> Username </th>
                                         <th class = "header password"> Password </th>
+                                    </tr>
+                            </table>
+                         </div> 
+						<div id = "tbl_container">  
+						<div class = "list-organizations">
+                            
+                                <table class="tbl_list">
+                                    <!-- HEADERS START -->
+                                    <tr class = "headers"> 
+                                        <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                        <th class="header empty">  </th>
+                                        <th class = "header username"> </th>
+                                        <th class = "header password"> </th>
                                     </tr>
                                     <!-- HEADERS END -->
                                     <c:forEach items="${orgs}" var="org">

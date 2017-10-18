@@ -14,7 +14,6 @@
 		<!-- STYLES -->
 	    <link href = "styles/dashboard.css" rel = "stylesheet">
 		<link href = "styles/navigation.css" rel = "stylesheet">
-		
 		<link href = "styles/main.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->

@@ -219,6 +219,7 @@ table {
     width: 100%;
     border-collapse: collapse; 
     border-width: 3px;
+    min-width: 100px;
 }
 
 .header.timestamp {
@@ -245,6 +246,11 @@ table {
 .header {
     color: white;
     background-color: #126B4D;
+    cursor: default;
+}
+
+.headers{
+	cursor: default;
 }
 
 .activities-option {

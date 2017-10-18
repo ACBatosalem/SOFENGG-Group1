@@ -10,9 +10,9 @@
 		<script src= "libraries/jquery-3.2.1.js"> </script>
 		<link href = "libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		
-		<link href = "styles/main.css" rel = "stylesheet" type="text/css">
 		
 		<!-- STYLES -->
+	    <link href = "styles/main.css" rel = "stylesheet" type="text/css">
 	    <link type="text/css" href="styles/login1.css" rel="stylesheet">
 	    
 		<!-- SCRIPTS -->

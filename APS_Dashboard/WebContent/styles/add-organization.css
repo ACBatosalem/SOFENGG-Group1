@@ -137,8 +137,9 @@
     border-radius: 10px;
 }
 
-#btn_addorg:hover{
+#btn_addorg:hover, button#add-org:hover{
     background-color: #2C9D77;
+    cursor: pointer;
 }
 
 .deletebutton {
@@ -159,7 +160,7 @@
 }
 
 .empty{
-    width: 20%;
+    width: 10%;
 }
 
 .username{
@@ -187,13 +188,18 @@ table{
     color: white;
 }
 
-#tbl_list {
+.tbl_list {
     width: 100%;
 }
 
 html, body {
     height: 100%;
+    margin-left: 15px;
+    font-family: "Open Sans";
+    font-size: 20px;
+    color: #126B4D;
 }
+
 
 #tbl_container {
     width: 100%;
@@ -203,7 +209,6 @@ html, body {
     padding-bottom: 10px;
     margin-bottom: 5px;
 }
-
 
 #tbl_container::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -218,5 +223,4 @@ html, body {
 #tbl_container::-webkit-scrollbar-thumb {
 	background-color: var(--strong);
 }
-
 

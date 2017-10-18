@@ -38,22 +38,36 @@ public class APSFilter implements Filter {
 		if(path.endsWith(".jsp"))
 			httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
 		else if (path.startsWith("/homeAPS")) {
-			if(user != null && user.getUserName().equals("APS"))
-				chain.doFilter(request, response);
-			else if(user != null) 
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
-			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(user.getUserName().equals("APS"))
+					chain.doFilter(request, response);
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
+			} else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
 		} else if (path.startsWith("/homeORG")) {
-			if(user != null && !user.getUserName().equals("APS"))
-				chain.doFilter(request, response);
-			else if(user != null) 
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(!user.getUserName().equals("APS"))
+					chain.doFilter(request, response);
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			}
 			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
 		} else if(path.startsWith("/home")){
-			if(user != null && !user.getUserName().equals("APS"))
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
-			else if(user != null) 
-				httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(!user.getUserName().equals("APS"))
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			}
 			else chain.doFilter(request, response);
 		} else chain.doFilter(request, response);
 	}
