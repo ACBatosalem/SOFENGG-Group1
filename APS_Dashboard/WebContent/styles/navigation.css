@@ -13,7 +13,7 @@
 /* NAVIGATION */
 .nav {
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     top: 0;
     left: 0;
     background-color: #126B4D;
@@ -23,6 +23,9 @@
     width: 100%;  
 }
 
+.nav-label {
+	cursor: default;
+}
 
 #signout {
     cursor: pointer;

@@ -246,6 +246,11 @@ table {
 .header {
     color: white;
     background-color: #126B4D;
+    cursor: default;
+}
+
+.headers{
+	cursor: default;
 }
 
 .activities-option {

@@ -14,7 +14,6 @@
 		<!-- STYLES -->
 	    <link type = "text/css" href = "../styles/add-organization.css" rel = "stylesheet">
 		<link type = "text/css" href = "../styles/navigation.css" rel = "stylesheet">
-		<link href = "../styles/main.css" rel = "stylesheet">
 		
 		<!-- SCRIPTS -->
 		<script src="../scripts/add-organizations.js"> </script>
@@ -61,7 +60,7 @@
 				<div class = "main-group-container">
 					<div class = "main-container-header">
 						<p id = "nav-title" class = "nav-item nav-label">
-						<a id = "btn_link" href="${pageContext.request.contextPath}/homeAPS">
+						<a id = "btn_link" href="/APS_Dashboard/homeAPS">
 							<button id = "btn_back" type='submit'>
 								<i id="link_back" class="fa fa-arrow-left" aria-hidden="true"></i>
                             </button>
@@ -75,16 +74,26 @@
 							<br>
 							<input id="btn_addorg" type="submit" value="Add Organization">
 						</form>
-						
-						<div class = "list-organizations">
-                            <div id = "tbl_container">
-                                <table id="tbl_list">
-                                    <!-- HEADERS START -->
+						<div class= "list-organization">
+                            <table class="tbl_list">
                                     <tr class = "headers"> 
                                         <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
                                         <th class="header empty">  </th>
                                         <th class = "header username"> Username </th>
                                         <th class = "header password"> Password </th>
+                                    </tr>
+                            </table>
+                         </div> 
+						<div id = "tbl_container">  
+						<div class = "list-organizations">
+                            
+                                <table class="tbl_list">
+                                    <!-- HEADERS START -->
+                                    <tr class = "headers"> 
+                                        <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                        <th class="header empty">  </th>
+                                        <th class = "header username"> </th>
+                                        <th class = "header password"> </th>
                                     </tr>
                                     <!-- HEADERS END -->
                                     <c:forEach items="${orgs}" var="org">
