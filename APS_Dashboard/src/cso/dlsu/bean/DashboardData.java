@@ -1,7 +1,5 @@
 package cso.dlsu.bean;
 
-import java.util.Date;
-
 public class DashboardData {
 	
 	private String timeStamp;
