@@ -34,8 +34,6 @@ $(document).ready(function(){
          $('#activity-modal').fadeOut();
     });
     
-    $('').css
-    
     $('tr').on('click', function() {
         $('#activity-modal').fadeIn();
     })
@@ -49,3 +47,22 @@ $(document).ready(function(){
         $('#account-settings').slideToggle(); $('#notification-panel').slideUp();
     });
 });
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Activities', 'No. Of Activity'],
+  ['Non-academic', 120],
+  ['Academic', 221]
+]);
+    
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Academic vs. Non-Academic Ratio', 'width': 500, 'height':300, is3D: true};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('acads-tab'));
+  chart.draw(data, options);
+}

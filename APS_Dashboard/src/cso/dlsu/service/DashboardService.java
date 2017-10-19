@@ -98,4 +98,63 @@ public class DashboardService {
 		
 		return data;
 	}
+	
+	/**
+	 * This function is used to get the organization's data required for the dashboard from multiple tables in the database.
+	 * @return a List object of organization's data from the database required for the dashboard
+	 */
+	public static List<DashboardData> getOrgDashboardData(String userName) {
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT " + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
+								  + Document.COL_TITLE + ", " + Document.COL_DATE + ", "
+								  + CheckingDetails.COL_STATUS_ID + " " +
+						"FROM ((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
+								  + " INNER JOIN " + SubmissionDetails.TABLE + " S ON D." + Document.COL_ID + " = S." + SubmissionDetails.COL_DOCU_ID + ") "
+								  + " INNER JOIN " + CheckingDetails.TABLE + " C ON S." + SubmissionDetails.COL_ID + " = C." + CheckingDetails.COL_SUB_ID + " " +
+						"WHERE " + Organization.COL_USERNAME + " = ?";
+				
+		List <DashboardData> data = new ArrayList <DashboardData> ();
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, userName);
+			set = statement.executeQuery();
+			while (set.next())
+				data.add(toDashboardData(set));
+	
+			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Successful SELECT FROM multiple tables");
+		} catch (SQLException e) {
+			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM multiple tables, check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return data;
+	}
 }

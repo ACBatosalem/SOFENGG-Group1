@@ -28,11 +28,11 @@ body{
     color: black;
 }
 
-#logindiv #btn_login{
+#logindiv #btn_login {
     background-color: #126B4D;
 }
     
-#logindiv #btn_login:hover{
+#logindiv #btn_login:hover {
     background-color: #2C9D77;    
 }
     

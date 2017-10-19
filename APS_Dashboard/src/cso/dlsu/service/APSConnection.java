@@ -26,7 +26,7 @@ import cso.dlsu.bean.TieUp;
  */
 public class APSConnection {
 	private static final String DRIVER = "jdbc:sqlite:";
-	private static final String DIR = "C:/Users/Carlo Eroles/Documents/SOFENGG/dlsu-cso/";
+	private static final String DIR = "C:/dlsu-cso/";
 	private static final String DB = "aps.db";
 	private static APSConnection instance;
 	
