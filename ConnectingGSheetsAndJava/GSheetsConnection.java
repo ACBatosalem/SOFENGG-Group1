@@ -158,6 +158,7 @@ public class GSheetsConnection {
         
         times.add(LocalTime.of(8, 0));
         times.add(LocalTime.of(12, 0));
+        times.add(LocalTime.of(15,5));
         times.add(LocalTime.of(16, 0));
         
         try {
