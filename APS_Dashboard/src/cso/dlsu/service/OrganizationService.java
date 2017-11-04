@@ -44,12 +44,13 @@ public class OrganizationService {
 	 */
 	public static boolean addOrg (Organization org) {
 		Connection connection = db.connect();
-		PreparedStatement statement = null;
 		boolean added = false;
+		PreparedStatement statement = null;
 		String query = "INSERT INTO " + Organization.TABLE + " " +
 						"VALUES (?, ?, ?);";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setNull(1, Types.NULL);
@@ -65,9 +66,16 @@ public class OrganizationService {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + Organization.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -76,6 +84,7 @@ public class OrganizationService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -269,6 +278,7 @@ public class OrganizationService {
 						"WHERE " + Organization.COL_ID + " = ?";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setInt(1, id);
@@ -281,9 +291,16 @@ public class OrganizationService {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + Organization.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -292,6 +309,7 @@ public class OrganizationService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -378,6 +396,7 @@ public class OrganizationService {
 						"WHERE " + Organization.COL_ID + " = ?";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			//statement.setString(1, newinfo.getName());
@@ -393,9 +412,16 @@ public class OrganizationService {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful UPDATE IN " + Organization.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -404,6 +430,7 @@ public class OrganizationService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -429,6 +456,7 @@ public class OrganizationService {
 						"WHERE " + Organization.COL_ID + " = ?";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setString(1, newPassword);
@@ -442,9 +470,16 @@ public class OrganizationService {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful UPDATE IN " + Organization.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -453,6 +488,7 @@ public class OrganizationService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();

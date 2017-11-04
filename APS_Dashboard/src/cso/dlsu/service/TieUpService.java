@@ -47,6 +47,7 @@ public class TieUpService {
 						"VALUES (?, ?);";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setInt(1, tieUp.getDocuID());
@@ -60,9 +61,16 @@ public class TieUpService {
 			System.out.println("[" + TieUpService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + TieUp.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -71,6 +79,7 @@ public class TieUpService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -211,6 +220,7 @@ public class TieUpService {
 						"AND " + TieUp.COL_ORG_ID + " = ?";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setInt(1, docuID);
@@ -224,9 +234,16 @@ public class TieUpService {
 			System.out.println("[" + TieUpService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + TieUp.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -235,6 +252,7 @@ public class TieUpService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();

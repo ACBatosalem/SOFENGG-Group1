@@ -55,6 +55,7 @@ public class DocumentService {
 						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setNull(1, Types.NULL);
@@ -75,9 +76,16 @@ public class DocumentService {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + Document.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -86,6 +94,7 @@ public class DocumentService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -279,6 +288,7 @@ public class DocumentService {
 						"WHERE " + Document.COL_ID + " = ?";
 		
 		try {
+			connection.setAutoCommit(false);
 			statement = connection.prepareStatement(query);
 			
 			statement.setInt(1, id);
@@ -291,9 +301,16 @@ public class DocumentService {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + Document.TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
+			try {
+				connection.rollback();
+				System.out.println("Transaction being rolled back.");
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (statement != null) {
 				try {
+					connection.commit();
 					statement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -302,6 +319,7 @@ public class DocumentService {
 			
 			if (connection != null) {
 				try {
+					connection.setAutoCommit(true);
 					connection.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
