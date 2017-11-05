@@ -12,24 +12,32 @@
         <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
-      
+      	<script src="${pageContext.request.contextPath}/libraries/Chart.js" type="application/javascript"> </script>
+        
         <!-- SCRIPTS -->
+         <script> 
+         	var context = "${pageContext.request.contextPath}"; 
+         	var acad = "${academic}";
+         	var nonacad = "${nonacademic}";
+         </script>
         <script src="${pageContext.request.contextPath}/scripts/dashboard.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
         <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/table-styles.css" rel ="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/change_pass.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
+		
 </head>
 <body>
     <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
     <div id = "main-bg"> </div>
     <div id = "main-overlay"> </div>
     
-<div id = "main">
+	<div id = "main">
         <!-- SIDE BAR NAVIGATION START -->
         <nav id="nav">
             <!-- TOP ITEMS -->
@@ -61,7 +69,7 @@
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->
                 <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
-                	<button class = "nav-item nav-button"> 
+                	<button class = "nav-item nav-button selected"> 
                         Statistics
                     <div class = "triangle"> </div>
                 	</button>
@@ -72,7 +80,7 @@
             <div id="bottom_div">
                 <!-- CHANGE PASSWORD BUTTON -->
                 <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/changePassword">
-                 <button id="change_pw" class="nav-item nav-button selected"> 
+                 <button id="change_pw" class="nav-item nav-button"> 
                          Change Password
                      <div class = "triangle"> </div>
                  </button>
@@ -88,29 +96,28 @@
         </nav>
         <!-- SIDE BAR NAVIGATION END -->
 
-        <!-- MAIN CONTENT START -->
-		<div id="main_content">
-		    <!-- MAIN HEADER START -->
-		    <div id="main_header">
-		        <!-- MAIN HEADER TITLE -->
-		        <h1 class="body_label head"> Change Password </h1>
-		    </div>
-		    <!-- MAIN BODY START -->
-		    <div id="main_body">
-		        <form name = "change-pass" id="change-pass-form" action="changePassword" method="POST">
-		            <div class="option">
-		                <p class="label"> Old Password </p>
-		                <input class="field" type="password" name="oldpass">
-		                <p class="label"> New Password </p>
-		                <input class="field" type="password" name="newpass">
-		                <p class="label"> Confirm New Password </p>
-		                <input class="field" type="password" name="cnewpass">
-		                <p class="label" id="error_msg"> </p>
-		                <button id="change_pass" type="submit"> Change Password </button>
-		            </div>
-		        </form>
-		    </div>
-		    <!-- MAIN BODY END -->
+		<!-- MAIN CONTENT START -->
+	    <div id="main_content">
+	        <!-- MAIN HEADER START -->
+	        <div id="main_header">
+	            <!-- MAIN HEADER TITLE -->
+	            <h1 class="body_label head"> Statistics </h1>
+	        </div>
+	        
+	        <div id = "main_body">
+	            <canvas id = "acads-non"> </canvas>
+	            <div class = "count-main">
+	                <div id = "acad" class = "count-container">
+	                    <label class = "label value"> ${academic} </label> <br>
+	                    <label class = "label afield"> ACADEMIC </label>
+	                </div>
+	                <div id = "non-acad" class = "count-container"> 
+	                    <label class = "label value"> ${nonacademic} </label> <br>
+	                    <label class = "label afield"> NON-ACADEMIC </label>
+	
+	                </div>
+	            </div>      
+	        </div>
 		</div>
 		<!-- MAIN CONTENT END -->
     </div>

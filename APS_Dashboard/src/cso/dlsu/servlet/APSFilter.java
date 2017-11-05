@@ -1,11 +1,5 @@
 package cso.dlsu.servlet;
-import main.java.GSheetsConnection;
-import main.java.NoInternetException;
-
 import java.io.IOException;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -36,60 +30,60 @@ public class APSFilter implements Filter {
 		HttpServletRequest httpRequest = ((HttpServletRequest)request);
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 
-        String spreadsheetId = "1zKv-LbZydzzL8YoZIHrDUZQYn12_ctCeqFzmuxFt8uM";
-        String range = "Sheet1";
-        
-        List <LocalTime> times = new ArrayList <LocalTime> ();
-        
-        times.add(LocalTime.of(8, 0));
-        times.add(LocalTime.of(12, 0));
-        times.add(LocalTime.of(15,5));
-        times.add(LocalTime.of(16, 0));
-        
-        try {
-			GSheetsConnection.start(spreadsheetId, range, times);
-		} catch (NoInternetException e) {
-			e.reconnect();
-		}
-//		String path = ((HttpServletRequest)request).getServletPath();
-//		
-//		Organization user = (Organization)((HttpServletRequest)request).getSession().getAttribute("user");
-//		
-//		if(path.endsWith(".jsp"))
-//			httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
-//		else if (path.startsWith("/homeAPS")) {
-//			if(user != null) {
-//				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-//				httpResponse.setHeader("Pragma", "no-cache");
-//				httpResponse.setDateHeader("Expires", 0);
-//				if(user.getUserName().equals("APS"))
-//					chain.doFilter(request, response);
-//				else
-//					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
-//			} else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
-//		} else if (path.startsWith("/homeORG")) {
-//			if(user != null) {
-//				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-//				httpResponse.setHeader("Pragma", "no-cache");
-//				httpResponse.setDateHeader("Expires", 0);
-//				if(!user.getUserName().equals("APS"))
-//					chain.doFilter(request, response);
-//				else
-//					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
-//			}
-//			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
-//		} else if(path.startsWith("/home")){
-//			if(user != null) {
-//				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-//				httpResponse.setHeader("Pragma", "no-cache");
-//				httpResponse.setDateHeader("Expires", 0);
-//				if(!user.getUserName().equals("APS"))
-//					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
-//				else
-//					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
-//			}
-//			else chain.doFilter(request, response);
-//		} else chain.doFilter(request, response);
+//        String spreadsheetId = "1zKv-LbZydzzL8YoZIHrDUZQYn12_ctCeqFzmuxFt8uM";
+//        String range = "Sheet1";
+//        
+//        List <LocalTime> times = new ArrayList <LocalTime> ();
+//        
+//        times.add(LocalTime.of(8, 0));
+//        times.add(LocalTime.of(12, 0));
+//        times.add(LocalTime.of(15,5));
+//        times.add(LocalTime.of(16, 0));
+//        
+//        try {
+//			GSheetsConnection.start(spreadsheetId, range, times);
+//		} catch (NoInternetException e) {
+//			e.reconnect();
+//		}
+		String path = ((HttpServletRequest)request).getServletPath();
+		
+		Organization user = (Organization)((HttpServletRequest)request).getSession().getAttribute("user");
+		
+		if(path.endsWith(".jsp"))
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
+		else if (path.startsWith("/homeAPS")) {
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(user.getUserName().equals("APS"))
+					chain.doFilter(request, response);
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
+			} else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
+		} else if (path.startsWith("/homeORG")) {
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(!user.getUserName().equals("APS"))
+					chain.doFilter(request, response);
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			}
+			else httpResponse.sendRedirect(httpRequest.getContextPath() + "/home");
+		} else if(path.startsWith("/home")){
+			if(user != null) {
+				httpResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+				httpResponse.setHeader("Pragma", "no-cache");
+				httpResponse.setDateHeader("Expires", 0);
+				if(!user.getUserName().equals("APS"))
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeORG");
+				else
+					httpResponse.sendRedirect(httpRequest.getContextPath() + "/homeAPS");
+			}
+			else chain.doFilter(request, response);
+		} else chain.doFilter(request, response);
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

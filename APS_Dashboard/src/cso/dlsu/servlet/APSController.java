@@ -26,6 +26,8 @@ import cso.dlsu.action.organization.SuccessLoginOrg;
 							"/homeAPS/addOrg",
 							"/homeAPS/deleteOrg",
 							"/homeAPS/getOrg",
+							"/homeAPS/getStatistics",
+							"/homeORG/getStatistics",
 							"/homeAPS/changePassword",
 							"/homeORG/changePassword",
 							"/homeAPS/updatePassword",
@@ -51,10 +53,12 @@ public class APSController extends HttpServlet {
         actions.put("/homeAPS/getOrg", new GetOrganizationAction());
         actions.put("/homeAPS/changePassword", new ChangePasswordAction());
         actions.put("/homeAPS/updatePassword", new UpdatePasswordAction());
-
+        actions.put("/homeAPS/getStatistics", new GetStatisticsAction());
+				
         actions.put("/homeORG", new SuccessLoginOrg());
         actions.put("/homeORG/updatePassword", new UpdatePasswordAction());
         actions.put("/homeORG/changePassword", new ChangePasswordAction());
+		actions.put("/homeORG/getStatistics", new GetStatisticsAction());
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

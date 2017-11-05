@@ -329,4 +329,108 @@ public class DocumentService {
 		
 		return deleted;
 	}
+	
+	public static int getCountByNature (String nature, int orgID) {
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT COUNT(*) " + 
+						"FROM " + Document.TABLE + " " + 
+						"WHERE " + Document.COL_NATURE + " = ? AND " +
+								"	" + Document.COL_ORG_ID + " = ?";
+		int count = -1;
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, "Academic");
+			statement.setInt(2, orgID);
+			
+			set = statement.executeQuery();
+			count = set.getInt(1);
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Successful SELECT FROM " + Document.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return count;
+	}
+
+	public static void main (String [] args) {
+		System.out.println(getCountByNature("Academic"));
+	}
+	
+	public static int getCountByNature (String nature) {
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT COUNT(*) " + 
+						"FROM " + Document.TABLE + " " + 
+						"WHERE " + Document.COL_NATURE + " = ?";
+		int count = -1;
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, "Academic");
+			
+			set = statement.executeQuery();
+			count = set.getInt(1);
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Successful SELECT FROM " + Document.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return count;
+	}
 }

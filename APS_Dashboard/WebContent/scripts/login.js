@@ -1,5 +1,5 @@
 $(document).ready(function(){
-		$("#loginform").submit(function(e){
+	$("#loginform").submit(function(e){
 		e.preventDefault();
 		var username = $("#login_username").val().trim();		
 		var pw = $("#login_password").val();		
@@ -23,7 +23,7 @@ $(document).ready(function(){
 				},	
 				beforeSend	: function (xhr) {
 					$('#btn_login').prop('disabled', true);
-					$('.trim').show();
+					$('#loader-ajax').show();
 				},
 		 		error   	: function(xhr,status,error){		
 					console.log(xhr);   		
@@ -31,7 +31,7 @@ $(document).ready(function(){
 				},	
 				complete	: function (xhr,status) {
 					$('#btn_login').prop('disabled', false);
-					$('.trim').hide();
+					$('#loader-ajax').hide();
 				}
 			});
 			return false;

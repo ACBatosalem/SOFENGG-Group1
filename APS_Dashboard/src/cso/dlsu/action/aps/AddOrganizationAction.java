@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import cso.dlsu.action.ActionHandler;
 import cso.dlsu.bean.Organization;
 import cso.dlsu.service.OrganizationService;
@@ -30,10 +32,16 @@ public class AddOrganizationAction implements ActionHandler {
 			org.setUserName(request.getParameter("username").toUpperCase());
 			org.setPassword(password);
 	
-			response.setContentType("text/html;charset=UTF-8");
-			if(OrganizationService.addOrg(org))
-				response.getWriter().write("added");
-			else response.getWriter().write("Organization was not added");	
+
+			if(OrganizationService.addOrg(org)) {
+				Gson gson = new Gson();
+				org = OrganizationService.getOrgByUsername(org.getUserName());
+				String element = gson.toJson(org);
+				
+				response.setContentType("application/json");
+				response.getWriter().print(element);
+				response.getWriter().flush();
+			} else response.getWriter().write("Organization was not added");	
 		} else response.getWriter().write("Username is already taken");
 	}
 }

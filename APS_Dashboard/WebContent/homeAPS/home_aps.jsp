@@ -8,183 +8,226 @@
 		<title> APS | Dashboard </title>
 		
 		<!-- LIBRARIES -->
-		<script src= "libraries/jquery-3.2.1.js"> </script>
-		<link href = "libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		
-		<!-- STYLES -->
-	    <link href = "styles/dashboard.css" rel = "stylesheet">
-		<link href = "styles/navigation.css" rel = "stylesheet">
-		<link href = "styles/main.css" rel = "stylesheet">
-		
-		<!-- SCRIPTS -->
-		<script src="scripts/navigation.js"> </script>
-	
+		 <script> var context = "${pageContext.request.contextPath}"; </script>
+        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
+        <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
+      
+        <!-- SCRIPTS -->
+        <script src="${pageContext.request.contextPath}/scripts/dashboard.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
+        
+        <!-- STYLES -->
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/table-styles.css" rel ="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet">
 	</head>
     <body>
-        <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
-        <div id = "main-bg"> </div>
-        <div id = "main-overlay"> </div>
+        <!-- BACKGROUNDS AND OVERLAYS -->
+        <div id="main-bg"></div>
+        <div id="main_overlay"></div>
         
-        <!-- MAIN START -->
-        <div id = "main"> 
-        	<!-- ACCOUNT SETTINGS START -->
-            <div id = "account-settings">
-                <a href = "homeAPS/changePassword">
-                    <button id = "changepass" class = "nav-setting">
-                        Change Password
-                    </button>
-                </a>
-                <a href = "logout">
-                    <button id = "signout" class = "nav-setting"> Sign Out </button>
-                </a>
-            </div>
-            <!-- ACCOUNT SETTINGS END -->
-            
-            <!-- NAV START -->
-            <nav class = "nav">
-                <!--  NAV TITLE LABEL -->
-                <h1 id = "nav-title" class = "nav-item nav-label"> APS TEAM DASHBOARD </h1>
-                <!-- NAV GREETING LABEL -->
-                <h3 class = "nav-item nav-label"> Good Day! ${user.userName} </h3>
-                <!-- NAV SIGN OUT BUTTON -->
-                
-                <button class = "nav-item nav-button" id = "user-settings">
-                    <i class = "fa fa-user-circle-o">
-                    
-                    </i>
-                </button>    
-            </nav>
-            <!-- NAV END -->
+        <!-- MODAL VIEW START -->
+        <div id = "modal-view" tabindex="1">
+            <!-- MODAL BACKGROUND -->
+            <div id = "modal-bg"> </div>
+            <!-- MODAL CONTENT START -->
+            <div id = "modal-container-outer">
+                <button id = "modal-close"> </button>
+                <label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
+                <label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
 
-            <!-- MAIN CONTENT START -->
-            <div class = "main-content"> 
-                <!-- MAIN BUTTON CONTAINER START -->
-                <div class = "main-group-container">
-                    
-                    <!-- GROUP BUTTON CONTAINER START -->
-                    <div class = "group-button-container">
-                        <!-- INPUT BOXES: ACADS, NON-ACADS START -->
-                        <form>
-                            <!-- ACADEMIC -->
-                            <div class = "options-box">
-                                <label id = "acads-grp" class = "container"> 
-                                <input id = "acads-opt" type="checkbox" name="view-options">
-                                    <span class = "checkmark"> </span>
-                                    <span class = "namelabel"> ACADEMIC </span> 
-                                </label>
-                            </div>
-                            <!-- NON ACADEMIC -->
-                            <div class = "options-box">
-                                <label id = "non-acads-grp" class = "container"> 
-                                    <input id = "nonacads-opt" type="checkbox" name="view-options"> 
-                                    <span class = "checkmark"> </span>
-                                    <span class = "namelabel"> NON-ACADEMIC </span> 
-                                </label>
-                            </div>
-                        </form>
-                        <!-- INPUT BOXES END -->
-                    </div>
-                    <!-- GROUP BUTTON CONTAINER END -->
-                    
-                    <!-- ORGS CHOICE BOX START -->
-                    <select class = "orgs-choicebox"> 
-                    	<option data-orgid="0">
-                    		All
-                        </option>
-                        <c:forEach items="${orgs}" var="org">
-                        	<!-- ORG START -->
-                        	<c:if test = "${org.userName != 'APS'}">
-	                            <option data-orgid="${org.id}">
-	                                ${org.userName}
-	                            </option>
-	                        </c:if>
-                            <!-- ORG END -->
-	                     </c:forEach>
-                    </select>
-                    <!-- ORGS CHOICE BOX END -->
-                    <!-- EDIT ORGANIZATIONS -->
-                    <a href = "homeAPS/getAllOrgs">
-                        <button id = "edit-orgs"> 
-                            Edit Organizations 
-                        </button>
-                    </a>
-                    
-                </div>
-                <!-- MAIN BUTTON CONTAINER END -->
-                
-                <!-- TAB MAIN START -->
-                <div class = "tab-main"> 
-                    <!-- TAB OPTIONS START -->
-                    <div class = "tab-options">
-                        <!-- TAB OPTIONS: Activities, GOSM, Academic -->
-                        <button id = "acads-tab-btn" class = "tab-option tab-button"> Academic </button>
-                        <button id = "act-tab-btn" class = "tab-option tab-button selected"> Activities </button>
-                    </div>
-                    <!-- TAB OPTIONS END -->
-                    
-                    <!-- ACTIVITIES CONTAINER START -->
-                    <div id = "act-tab" class = "activites-container-tab">
-                        <!-- ACTIVITIES TABLE START -->
-                        <table class = "activities">
-                            <!-- HEADERS START -->
-                            <tr class = "headers"> 
-                                <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
-                                <th class = "header timestamp"> Time Stamp </th>
-                                <th class = "header org"> Organization Name </th>
-                                <th class = "header title"> Title </th>
-                                <th class = "header date"> Date </th>
-                                <th class = "header status"> Status </th>
-                            </tr>
-                            <!-- HEADERS END -->
-                            <c:forEach items="${dashboard_data}" var="data">
-	                            <tr> 
-	                                <td>
-	                                ${data.timeStamp}
-	                                </td>
-	                                <td>
-	                                 ${data.orgName}
-	                                </td>
-	                                <td>
-	                                 ${data.title}
-	                                </td>
-	                                <td>
-	                                 ${data.date}
-	                                </td>
-	                                <td>
-	                                 ${data.status}
-	                                </td>
-	                            </tr>
-                            </c:forEach>
-                        </table>
-                        <!-- ACTIVITIES TABLE END -->
-                        
-                        <!-- ACTIVITIES OPTION START -->
-                        <div class = "activities-option">
-                            <!-- ACTIVITIES OPTIONS: LEFT, LABEL, RIGHT -->
-                            <button class = "activities-options activities-option-button"> 
-                                <i class="fa fa-arrow-left" aria-hidden="true"></i> 
-                            </button>
-                            <label class = "activities-options activities-option-label"> Page 1 of X </label> 
-                            <button class = "activities-options activities-option-button"> 
-                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                            </button>
+                <div id = "modal-container">
+                    <div id = "modal-content">
+                        <section id = "details">
+                            <label class = "modal-label modal-division"> Details </label> <br>
+                            <label id = "time" class = "modal-label">Time: </label> <br>
+                            <label id = "venue" class = "modal-label"> Venue: </label> <br>
+                            <label id = "nature" class = "modal-label"> Nature of Activity: </label> <br>
+                            <label id = "type" class = "modal-label"> Type of Activity: </label> <br>
+                            <label id = "actDate" class = "modal-label"> Activity Date/s: </label> <br>
+                            <label id = "tieup" class = "modal-label"> Tie-up: </label>
+                        </section>
+
+                        <div class = "modal-group"> 
+                            <section id = "submission">
+                                <label class = "modal-label modal-division"> Submission </label> <br> 
+                                <label id = "submittedBy" class = "modal-label"> Submitted by: </label> <br> 
+                                <label id = "submitDate" class = "modal-label"> Date Submitted: </label> <br>
+                                <label id = "typeSAS" class = "modal-label"> Type of SAS Submission: </label> <br>
+                            </section>
+
+                            <section id = "checker">
+                                <label class = "modal-label modal-division"> Checker </label> <br>
+                                <label id = "checkedby" class = "modal-label"> Checked by: </label> <br>
+                                <label id = "dateChecked" class = "modal-label"> Date Checked </label> <br>
+                                <label id = "remarks" class = "modal-label"> Remarks: </label> <br>
+                            </section>
                         </div>
-                        <!-- ACTIVITIES OPTION END -->
                     </div>
-                    <!-- ACTIVITIES CONTAINER END --> 
-                    
-                    <!-- ACADEMIC CONTAINER START -->
-                    <div id = "acads-tab">
-
-                    
-                    </div>
-                    <!-- ACADEMIC CONTAINER END -->
-                
                 </div>
-                <!-- TAB MAIN END -->
+            </div>
+            <!-- MODAL CONTENT END -->
+        </div>
+        <!-- MODAL VIEW END -->
+        
+        <!-- MAIN VIEW START -->
+        <div id="main">
+            <!-- SIDE BAR NAVIGATION START -->
+            <nav id="nav">
+                <!-- TOP ITEMS -->
+                <div id="top_div">
+                    <!-- HEADER OVERLAY -->
+                    <div class = "label-header-overlay"> </div>
+                    <!-- HEADER IMAGE -->
+                    <div class = "label-header"> </div>
+                
+                    <!-- HEADER CONTENT START -->
+                    <div id="header">
+                        <!-- LOGIN ICON HOLDER -->
+                        <div class = "icon-holder"> </div>
+                        <!-- DLSU LOGO -->
+                        <img id = "dlsu-logo" src="resources/logo.png">
+                        <!-- ICON HOLDER OVERLAY -->
+                        <div class = "icon-holder-overlay"> </div>
+                    </div>
+                    
+                    <!-- WELCOME MESSAGE -->
+                    <p class="nav label"> Welcome ${user.userName} </p>
+                    <!-- SUBMISSIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}"> 
+	                    <button id="submissions" class="nav-item nav-button selected"> 
+	                            Submissions
+                    		<div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SUBMISSIONS BUTTON LINK END -->
+                    <!-- STATISTICS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
+	                   	<button class = "nav-item nav-button"> 
+	                           Statistics
+	                       <div class = "triangle"> </div>
+	                   	</button>
+                    </a>
+                    <!-- STATISTICS BUTTON LINK END -->
+                    <!-- ORGANIZATIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getAllOrgs"> 
+	                    <button id="orgs" class="nav-item nav-button"> 
+	                            Organizations
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- ORGANIZATIONS BUTTON LINK END -->
+                </div>
+                <!-- BOTTOM ITEMS START -->
+                <div id="bottom_div">
+                    <!-- CHANGE PASSWORD BUTTON -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/changePassword">
+	                    <button id="change_pw" class="nav-item nav-button"> 
+	                            Change Password
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SIGN OUT BUTTON -->
+                    <a class = "nav-link">
+	                    <button id="signout" class="nav-item nav-button">   
+	                            Logout	                       
+	                    </button>
+                    </a>
+                </div>
+                <!-- BOTTOM ITEMS END -->
+            </nav>
+            <!-- SIDE BAR NAVIGATION END -->
+            
+            <!-- MAIN CONTENT START -->
+            <div id="main_content">
+                <!-- MAIN HEADER START -->
+                <div id="main_header">
+                    <!-- MAIN HEADER TITLE -->
+                    <h1 class="body_label head"> Submissions </h1>
+                </div>
+                <!-- FILTER OPTIONS START -->
+                <div class = "filter-options">
+                    <!-- FILTER TTILE -->
+                    <label class = "label filter main"> FILTER </label>
+                    <!-- ACADEMIC CHECKBOX -->
+                    <label class = "container">
+                        <input id = "acad-box" name="academic" type="checkbox"> 
+                        <span class = "checkmark"> </span>    
+                        <label class = "label filter" for="academic"> ACADEMIC </label>
+                    </label>
+                    <!-- NON ACADEMIC CHECKBOX -->
+                    <label class = "container">
+                        <input id = "non-acad-box" name="nonacademic" type="checkbox">
+                        <span class = "checkmark"> </span>    
+                        <label class = "label filter" for="nonacademic"> NON-ACADEMIC </label>
+                    </label>
+                    <!-- ORGANIZATION CHOICEBOX -->
+                    <div class = "filter-container">
+                        <select id = "org-pick" class = "filter_cb">
+                            <option data-orgid="0">
+          		          		All
+	                        </option>
+	                        <c:forEach items="${orgs}" var="org">
+	                        	<!-- ORG START -->
+	                        	<c:if test = "${org.userName != 'APS'}">
+		                            <option data-orgid="${org.id}">
+		                                ${org.userName}
+		                            </option>
+		                        </c:if>
+	                            <!-- ORG END -->
+		                     </c:forEach>
+                        </select>
+                        <label class = "label filter box" for="org-pick"> ORGANIZATION </label>
+                    </div>
+                </div>
+                <!-- FILTER OPTIONS END -->
+                <!-- MAIN BODY START -->
+                <div id="main_body">
+                    <div id = "table-container">
+                        <!-- TABLE SUBMISSIONS START -->
+                        <table id="table_submissions">
+                            <thead>
+                                <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                <tr class = "header"> 
+                                    <th class = "header timestamp"> Timestamp </th>
+                                    <th class = "header org"> Organization </th>
+                                    <th class = "header title"> Title </th>
+                                    <th class = "header date"> Date </th>
+                                    <th class = "header status"> Status </th>
+                                </tr>
+                            </thead>
+
+                            <!-- DATA: SUBMISSIONS -->    
+                            <tbody>
+                                <c:forEach items="${dashboard_data}" var="data">
+	                            <tr> 
+	                                <td> ${data.timeStamp} </td>
+	                                <td> ${data.orgName} </td>
+	                                <td> ${data.title}  </td>
+	                                <td> ${data.date} </td>
+		                            <c:choose>
+		                                <c:when test = "${data.status eq 'EARLY APPROVED'}"> <td class = "early_approved"> ${data.status} </td> </c:when>
+		                                <c:when test = "${data.status eq 'LATE APPROVED'}"> <td class = "late_approved"> ${data.status} </td> </c:when>
+		                                <c:when test = "${data.status eq 'PENDING'}"> <td class = "pending"> ${data.status} </td> </c:when>
+		                                <c:when test = "${data.status eq 'DENIED'}"> <td class = "denied"> ${data.status} </td> </c:when>
+		                                <c:otherwise> <td> ${data.status} </td> </c:otherwise>
+	                                </c:choose>
+	                            </tr>
+                            	</c:forEach>
+                            </tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- TABLE SUBMISSION LIST -->
+                </div>
+                <!-- MAIN BODY END -->
             </div>
             <!-- MAIN CONTENT END -->
         </div>
-        <!-- MAIN END -->    
+        <!-- MAIN VIEW END -->
     </body>
 </html>

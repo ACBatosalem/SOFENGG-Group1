@@ -93,7 +93,7 @@ public class DashboardData {
 	 * @param status the current status of the submitted document
 	 */
 	public void setStatus(String status) {
-		this.status = status;
+		this.status = status.toUpperCase();
 	}
 	
 	/**

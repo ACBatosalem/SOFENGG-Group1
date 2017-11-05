@@ -1,0 +1,30 @@
+
+#canvas-id {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    right: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+.value {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.count-container {
+    padding-top: 30px;
+    width: 50%;
+    text-align: center;
+}
+
+.count-main {
+    width: 400px;
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+#acad label.acad {
+    color: #64865C;
+}
