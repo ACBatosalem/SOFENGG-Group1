@@ -271,6 +271,17 @@ public class CheckingDetailsService {
 	}
 	
 	/**
+	 * This function is used to determine whether a CheckingDetails object exists for a SubmissionDetails object.
+	 * @param sub_id the id of the SubmissionDetails object being checked
+	 * @return true if a CheckingDetails object exists for the SubmissionDetails object, false if not
+	 */
+	public static boolean findSubmissionByID(int sub_id) {
+		if (getCheckingDetailsOfSubmission(sub_id) == null)
+			return false;
+		return true;
+	}
+	
+	/**
 	 * This function is used to delete a CheckingDetails object's data from the database.
 	 * @param id the id of the CheckingDetails object to be deleted from the database
 	 * @return true if the deletion was successful, false if not

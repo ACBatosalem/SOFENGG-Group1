@@ -274,6 +274,65 @@ public class SubmissionDetailsService {
 	}
 	
 	/**
+	 * This function is used to get the id of the SubmissionDetails object of specific submission identified by the date and time submitted.
+	 * @param dateSubmitted the date and time at which the submission was made
+	 * @return the id of the SubmissionDetails object of the submission with the dateSubmitted specified as the parameter
+	 */
+	public static int getSubmissionIDByDateSubmitted(String dateSubmitted) {
+		int id = 0;
+		
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT * " + 
+						"FROM " + SubmissionDetails.TABLE + " " + 
+						"WHERE " + SubmissionDetails.COL_DATE_SUBMITTED + " = ?";
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, dateSubmitted);
+			
+			set = statement.executeQuery();
+			
+			if (set.next()) {
+				id = set.getInt(SubmissionDetails.COL_ID);
+			}
+		
+			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return id;
+	}
+	
+	/**
 	 * This function is used to delete a SubmissionDetails object's data from the database.
 	 * @param id the id of the SubmissionDetails object to be deleted from the database
 	 * @return true if the deletion was successful, false if not

@@ -31,7 +31,9 @@ import com.google.api.services.sheets.v4.Sheets.Builder;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import cso.dlsu.service.CheckingDetailsService;
 import cso.dlsu.service.DocumentService;
+import cso.dlsu.service.SubmissionDetailsService;
 
 public class GSheetsConnection {
 	private static Sheets sheetsService;
@@ -175,7 +177,7 @@ public class GSheetsConnection {
 
 	private static void createSubmission(String[] attributes) {
 		// TODO Auto-generated method stub
-		int submissionID = SubmissionDetailsService.getSubmissionID(attributes[0]);
+		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(attributes[0]);
 		if(submissionID == 0){
 			//create submission details
 			
