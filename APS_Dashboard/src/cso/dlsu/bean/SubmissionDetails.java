@@ -16,6 +16,7 @@ public class SubmissionDetails {
 	private String submittedBy;
 	private String emailAddress;
 	private String contactNo;
+	private String sasType;
 	
 	public static final String TABLE = "submission_details";
 	public static final String COL_ID = "sub_id";
@@ -25,6 +26,7 @@ public class SubmissionDetails {
 	public static final String COL_SUBMITTED_BY = "submitted_by";
 	public static final String COL_EMAIL_ADDRESS = "email_address";
 	public static final String COL_CONTACT_NO = "contact_no";
+	public static final String COL_SAS_TYPE = "sas_type";
 	
 	/**
 	 * This function is used to get the id of the submission.
@@ -138,6 +140,22 @@ public class SubmissionDetails {
 		this.contactNo = contactNo;
 	}
 	
+	/**
+	 * This function is used to get the SAS Type of the submission.
+	 * @return the SAS Type of the submission.
+	 */
+	public String getSasType() {
+		return sasType;
+	}
+	
+	/**
+	 * This function is used to set the SAS Type of the submission.
+	 * @param sasType the SAS Type of the submission.
+	 */
+	public void setSasType(String sasType) {
+		this.sasType = sasType;
+	}
+
 	/**
 	 * @see java.lang.Object#toString()
 	 */

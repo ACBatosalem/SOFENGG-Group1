@@ -37,6 +37,7 @@ public class SubmissionDetailsService {
 		sub.setSubmittedBy(set.getString(SubmissionDetails.COL_SUBMITTED_BY));
 		sub.setEmailAddress(set.getString(SubmissionDetails.COL_EMAIL_ADDRESS));
 		sub.setContactNo(set.getString(SubmissionDetails.COL_CONTACT_NO));
+		sub.setSasType(set.getString(SubmissionDetails.COL_SAS_TYPE));
 		return sub;
 	}
 	
@@ -50,7 +51,7 @@ public class SubmissionDetailsService {
 		PreparedStatement statement = null;
 		boolean added = false;
 		String query = "INSERT INTO " + SubmissionDetails.TABLE + " " +
-						"VALUES (?, ?, ?, ?, ?, ?, ?);";
+						"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
 			connection.setAutoCommit(false);
@@ -63,6 +64,7 @@ public class SubmissionDetailsService {
 			statement.setString(5, sub.getSubmittedBy());
 			statement.setString(6, sub.getEmailAddress());
 			statement.setString(7, sub.getContactNo());
+			statement.setString(8, sub.getSasType());
 			
 			statement.executeUpdate();
 			added = true;

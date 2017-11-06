@@ -221,7 +221,7 @@ public class DocumentService {
 	 * @param id the id of the Document object being retrieved from the database
 	 * @return the Document object with its id equal to the id specified as the parameter
 	 */
-	public static Document getDocument(int id) {
+	public static Document getDocumentById(int id) {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
@@ -233,6 +233,65 @@ public class DocumentService {
 		try {
 			statement = connection.prepareStatement(query);
 			statement.setInt(1, id);
+			
+			set = statement.executeQuery();
+			
+			while (set.next()) {
+				document = toDocument(set);
+			}
+		
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Successful SELECT FROM " + Document.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return document;
+	}
+	
+	/**
+	 * This function is used to get the data of a single Document object with a specific title stored in the database.
+	 * @param title the title of the Document object being retrieved from the database
+	 * @return the Document object with its title equal to the title specified as the parameter
+	 */
+	public static Document getDocumentByTitle(String title) {
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT * " + 
+						"FROM " + Document.TABLE + " " + 
+						"WHERE " + Document.COL_TITLE + " = ?";
+		Document document = null;
+		
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, title);
 			
 			set = statement.executeQuery();
 			

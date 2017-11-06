@@ -122,7 +122,8 @@ public class APSConnection {
 		                + SubmissionDetails.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
 		                + SubmissionDetails.COL_SUBMITTED_BY 	+ 	" text NOT NULL,"
 		                + SubmissionDetails.COL_EMAIL_ADDRESS 	+ 	" text NOT NULL,"
-		                + SubmissionDetails.COL_CONTACT_NO 		+ 	" text NOT NULL"
+		                + SubmissionDetails.COL_CONTACT_NO 		+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_SAS_TYPE 		+ 	" text NOT NULL"
 		                + ");"; 
 				executeCreateTables(connection, query, SubmissionDetails.TABLE);
 			}

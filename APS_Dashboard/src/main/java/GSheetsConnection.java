@@ -1,4 +1,5 @@
 package main.java;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -6,6 +7,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +30,8 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.Sheets.Builder;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
+
+import cso.dlsu.service.DocumentService;
 
 public class GSheetsConnection {
 	private static Sheets sheetsService;
@@ -97,7 +104,9 @@ public class GSheetsConnection {
 			System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Credentials file not found!");
 		}
     	
-    	while (!stop) {
+    	processData();
+    	
+    	/*while (!stop) {
     		for (int i = 0; i < times.size(); i++) {
     			if(times.get(i).equals(LocalTime.now()) || times.get(i).isBefore(LocalTime.now())) {
     	    		try {
@@ -113,10 +122,77 @@ public class GSheetsConnection {
     	    		}
     			}
     		}
-    	}	
+    	}	*/
     }
     
-    public static synchronized List <Object> toData (ValueRange response) {
+    private static void processData() {
+		// TODO Auto-generated method stub
+    	Path pathToFile = Paths.get("C:/dlsu-cso/table.csv");
+    	System.out.println(pathToFile);
+    	try (BufferedReader br = Files.newBufferedReader(pathToFile,
+                StandardCharsets.US_ASCII)) {
+
+            // read the first line from the text file
+            String line = br.readLine();
+
+            // loop until all lines are read
+            while (line != null) {
+
+                // use string.split to load a string array with the values from
+                // each line of
+                // the file, using a comma as the delimiter
+                String[] attributes = line.split("<>");
+                //TODO check if db is empty
+                for(int i = 0; i < attributes.length; i++)
+                	System.out.println(i+" "+ attributes[i]);
+                if (DocumentService.getAllDocuments().size() == 0)
+                	createDocument(attributes);
+                //else
+                	
+
+                // read next line before looping
+                // if end of file reached, line would be null
+                line = br.readLine();
+            }
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+	}
+
+	private static void createDocument(String[] attributes) {
+		// TODO Auto-generated method stub
+		if(DocumentService.getDocumentByTitle(attributes[5]) == null
+				 || attributes[19].equals("In Case of Change")
+				 || attributes[19].equals("Activity Not in GOSM")) {
+			//create document
+		} else {
+			createSubmission(attributes);
+		}
+		
+	}
+
+	private static void createSubmission(String[] attributes) {
+		// TODO Auto-generated method stub
+		int submissionID = SubmissionDetailsService.getSubmissionID(attributes[0]);
+		if(submissionID == 0){
+			//create submission details
+			
+		} else {
+			createCheckingDetails(attributes, submissionID);
+		}
+	
+	}
+	private static void createCheckingDetails(String[] attributes, int submissionID) {
+		// TODO Auto-generated method stub
+		if(!CheckingDetailsService.findSubmissionByID(submissionID) 
+				&& !attributes[20].equals("")) {
+			//create checking details
+		}
+	}
+
+	public static synchronized List <Object> toData (ValueRange response) {
     	// TODO make the response and get the value, make it an object/objects
     	// TODO if data is incomplete, throw incomplete data exception and keep the data
     	
@@ -140,7 +216,7 @@ public class GSheetsConnection {
 				  	if(j == row.size()-1)
 				  		data += row.get(j);
 				  	else 
-				  		data += row.get(j) + ", ";
+				  		data += row.get(j) + "<> ";
 				}
 				
 				data += "\n";
@@ -152,7 +228,7 @@ public class GSheetsConnection {
     }
     
     public static final boolean generateFile (String fileName, String message) {
-    	File file = new File ("gen/" + fileName);
+    	File file = new File ("C:/dlsu-cso/" + fileName);
 
 		
 		try {
@@ -165,6 +241,8 @@ public class GSheetsConnection {
 			return false;
 		}
 	}
+    
+    
     
     // Run test cases here
     public static void main(String[] args) throws IOException {

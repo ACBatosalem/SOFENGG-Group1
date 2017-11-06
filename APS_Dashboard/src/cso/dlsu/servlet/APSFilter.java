@@ -1,5 +1,9 @@
 package cso.dlsu.servlet;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.time.LocalTime;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -12,12 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.bean.Organization;
+import main.java.GSheetsConnection;
+import main.java.NoInternetException;
 
 /**
  * Servlet Filter implementation class FilterPage
  */
 @WebFilter("/*")
 public class APSFilter implements Filter {
+	public static int dataGathered = 0;
 	public APSFilter() {
     	
     }
@@ -30,21 +37,24 @@ public class APSFilter implements Filter {
 		HttpServletRequest httpRequest = ((HttpServletRequest)request);
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 
-//        String spreadsheetId = "1zKv-LbZydzzL8YoZIHrDUZQYn12_ctCeqFzmuxFt8uM";
-//        String range = "Sheet1";
-//        
-//        List <LocalTime> times = new ArrayList <LocalTime> ();
-//        
-//        times.add(LocalTime.of(8, 0));
-//        times.add(LocalTime.of(12, 0));
-//        times.add(LocalTime.of(15,5));
-//        times.add(LocalTime.of(16, 0));
-//        
-//        try {
-//			GSheetsConnection.start(spreadsheetId, range, times);
-//		} catch (NoInternetException e) {
-//			e.reconnect();
-//		}
+		if(dataGathered == 0) {
+	        String spreadsheetId = "1zKv-LbZydzzL8YoZIHrDUZQYn12_ctCeqFzmuxFt8uM";
+	        String range = "Sheet1";
+	        
+	        List <LocalTime> times = new ArrayList <LocalTime> ();
+	        
+	        times.add(LocalTime.of(8, 0));
+	        times.add(LocalTime.of(12, 0));
+	        times.add(LocalTime.of(15,5));
+	        times.add(LocalTime.of(16, 0));
+	        
+	        try {
+				GSheetsConnection.start(spreadsheetId, range, times);
+				dataGathered = 1;
+			} catch (NoInternetException e) {
+				e.reconnect();
+			}
+		}
 		String path = ((HttpServletRequest)request).getServletPath();
 		
 		Organization user = (Organization)((HttpServletRequest)request).getSession().getAttribute("user");
