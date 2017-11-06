@@ -56,8 +56,11 @@ $(document).ready(function(){
 				url         : 'updatePassword',		
 				data        : {old_pw:oldPass, new_pw:newPass, retype_pw:cNewPass},
 				dataType    : 'html',		
-		 		success     : function(data) {		
-		            success();
+		 		success     : function(data) {	
+		 			if(data == "Password successfully changed!")
+		 				success();
+		 			else
+		 				$('#error_msg').text(data);
 				},		
 		 		error   : function(xhr,status,error){		
 					console.log(xhr);   		
