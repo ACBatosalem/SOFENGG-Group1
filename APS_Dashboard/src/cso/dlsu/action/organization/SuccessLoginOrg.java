@@ -15,7 +15,7 @@ public class SuccessLoginOrg implements ActionHandler{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData());
 		request.getSession().setAttribute("dashboard_data", 
-				DashboardService.getOrgDashboardData(((Organization)request.getSession().getAttribute("user")).getUserName()));
+				DashboardService.getOrgDashboardData(((Organization)request.getSession().getAttribute("user")).getUserName(), "none"));
 		request.getRequestDispatcher("homeORG/home_org.jsp").forward(request, response);
 	}
 }

@@ -10,7 +10,7 @@ package cso.dlsu.bean;
 public class SubmissionDetails {
 
 	private int id;
-	private int docuID;
+	private int actID;
 	private String dateSubmitted;
 	private String submissionType;
 	private String submittedBy;
@@ -20,9 +20,9 @@ public class SubmissionDetails {
 	
 	public static final String TABLE = "submission_details";
 	public static final String COL_ID = "sub_id";
-	public static final String COL_DOCU_ID = "docu_id";
+	public static final String COL_ACT_ID = "act_id";
 	public static final String COL_DATE_SUBMITTED = "date_submitted";
-	public static final String COL_SUBMISSION_TYPE = "submssion_type";
+	public static final String COL_SUBMISSION_TYPE = "submission_type";
 	public static final String COL_SUBMITTED_BY = "submitted_by";
 	public static final String COL_EMAIL_ADDRESS = "email_address";
 	public static final String COL_CONTACT_NO = "contact_no";
@@ -45,19 +45,19 @@ public class SubmissionDetails {
 	}
 	
 	/**
-	 * This function is used to get the id of the document the submission details are for.
-	 * @return the id of the document the submission details are for
+	 * This function is used to get the id of the activity details the submission details are for.
+	 * @return the id of the activty details the submission details are for
 	 */
-	public int getDocuID() {
-		return docuID;
+	public int getActID() {
+		return actID;
 	}
 	
 	/**
-	 * This function is used to set the id of the document the submission details are for.
-	 * @param docuID the id of the document the submission details are for
+	 * This function is used to set the id of the activity details the submission details are for.
+	 * @param docuID the id of the activity details the submission details are for
 	 */
-	public void setDocuID(int docuID) {
-		this.docuID = docuID;
+	public void setActID(int actID) {
+		this.actID = actID;
 	}
 	
 	/**
@@ -155,14 +155,14 @@ public class SubmissionDetails {
 	public void setSasType(String sasType) {
 		this.sasType = sasType;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "SubmissionDetails [id=" + id + ", docuID=" + docuID + ", dateSubmitted=" + dateSubmitted
+		return "SubmissionDetails [id=" + id + ", actID=" + actID + ", dateSubmitted=" + dateSubmitted
 				+ ", submissionType=" + submissionType + ", submittedBy=" + submittedBy + ", emailAddress="
-				+ emailAddress + ", contactNo=" + contactNo + "]";
+				+ emailAddress + ", contactNo=" + contactNo + ", sasType=" + sasType + "]";
 	}
 }

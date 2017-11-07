@@ -14,7 +14,7 @@ public class SuccessLoginAPS implements ActionHandler {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("orgs", OrganizationService.getAllOrgs());
-		request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData());
+		request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("none"));
 		request.getRequestDispatcher("homeAPS/home_aps.jsp").forward(request, response);
 	}
 }

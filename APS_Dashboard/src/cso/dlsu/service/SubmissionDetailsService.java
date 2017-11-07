@@ -31,7 +31,7 @@ public class SubmissionDetailsService {
 		SubmissionDetails sub = new SubmissionDetails();
 		
 		sub.setId(set.getInt(SubmissionDetails.COL_ID));
-		sub.setDocuID(set.getInt(SubmissionDetails.COL_DOCU_ID));
+		sub.setActID(set.getInt(SubmissionDetails.COL_ACT_ID));
 		sub.setDateSubmitted(set.getString(SubmissionDetails.COL_DATE_SUBMITTED));
 		sub.setSubmissionType(set.getString(SubmissionDetails.COL_SUBMISSION_TYPE));
 		sub.setSubmittedBy(set.getString(SubmissionDetails.COL_SUBMITTED_BY));
@@ -58,7 +58,7 @@ public class SubmissionDetailsService {
 			statement = connection.prepareStatement(query);
 			
 			statement.setNull(1, Types.NULL);
-			statement.setInt(2, sub.getDocuID());
+			statement.setInt(2, sub.getActID());
 			statement.setString(3, sub.getDateSubmitted());
 			statement.setString(4, sub.getSubmissionType());
 			statement.setString(5, sub.getSubmittedBy());
@@ -168,7 +168,7 @@ public class SubmissionDetailsService {
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
 						"FROM " + SubmissionDetails.TABLE + " " +
-						"WHERE " + SubmissionDetails.COL_DOCU_ID + " = ?";
+						"WHERE " + SubmissionDetails.COL_ACT_ID + " = ?";
 		List <SubmissionDetails> subs = new ArrayList <SubmissionDetails> ();
 		
 		try {

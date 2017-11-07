@@ -31,7 +31,11 @@ import com.google.api.services.sheets.v4.Sheets.Builder;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import cso.dlsu.bean.CheckingDetails;
+import cso.dlsu.bean.Document;
+import cso.dlsu.bean.SubmissionDetails;
 import cso.dlsu.service.CheckingDetailsService;
+import cso.dlsu.service.CreateData;
 import cso.dlsu.service.DocumentService;
 import cso.dlsu.service.SubmissionDetailsService;
 
@@ -135,6 +139,8 @@ public class GSheetsConnection {
                 StandardCharsets.US_ASCII)) {
 
             // read the first line from the text file
+    		br.readLine();
+    		br.readLine();
             String line = br.readLine();
 
             // loop until all lines are read
@@ -145,10 +151,10 @@ public class GSheetsConnection {
                 // the file, using a comma as the delimiter
                 String[] attributes = line.split("<>");
                 //TODO check if db is empty
-                for(int i = 0; i < attributes.length; i++)
-                	System.out.println(i+" "+ attributes[i]);
-                if (DocumentService.getAllDocuments().size() == 0)
-                	createDocument(attributes);
+                //for(int i = 0; i < attributes.length; i++)
+                //	System.out.println(i+" "+ attributes[i]);
+               // if (DocumentService.getAllDocuments().size() == 0)
+                	CreateData.createDocument(attributes);
                 //else
                 	
 
@@ -163,36 +169,7 @@ public class GSheetsConnection {
 
 	}
 
-	private static void createDocument(String[] attributes) {
-		// TODO Auto-generated method stub
-		if(DocumentService.getDocumentByTitle(attributes[5]) == null
-				 || attributes[19].equals("In Case of Change")
-				 || attributes[19].equals("Activity Not in GOSM")) {
-			//create document
-		} else {
-			createSubmission(attributes);
-		}
-		
-	}
-
-	private static void createSubmission(String[] attributes) {
-		// TODO Auto-generated method stub
-		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(attributes[0]);
-		if(submissionID == 0){
-			//create submission details
-			
-		} else {
-			createCheckingDetails(attributes, submissionID);
-		}
 	
-	}
-	private static void createCheckingDetails(String[] attributes, int submissionID) {
-		// TODO Auto-generated method stub
-		if(!CheckingDetailsService.findSubmissionByID(submissionID) 
-				&& !attributes[20].equals("")) {
-			//create checking details
-		}
-	}
 
 	public static synchronized List <Object> toData (ValueRange response) {
     	// TODO make the response and get the value, make it an object/objects
@@ -218,7 +195,7 @@ public class GSheetsConnection {
 				  	if(j == row.size()-1)
 				  		data += row.get(j);
 				  	else 
-				  		data += row.get(j) + "<> ";
+				  		data += row.get(j) + "<>";
 				}
 				
 				data += "\n";

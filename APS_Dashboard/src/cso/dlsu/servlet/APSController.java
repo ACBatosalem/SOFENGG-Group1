@@ -28,6 +28,8 @@ import cso.dlsu.action.organization.SuccessLoginOrg;
 							"/homeAPS/getOrg",
 							"/homeAPS/getStatistics",
 							"/homeORG/getStatistics",
+							"/homeAPS/filteredSubmissions",
+							"/homeORG/filteredSubmissions",
 							"/homeAPS/changePassword",
 							"/homeORG/changePassword",
 							"/homeAPS/updatePassword",

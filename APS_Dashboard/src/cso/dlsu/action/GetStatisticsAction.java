@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.bean.Organization;
-import cso.dlsu.service.DocumentService;
+import cso.dlsu.service.DashboardService;
 import cso.dlsu.service.OrganizationService;
+
 
 public class GetStatisticsAction implements ActionHandler {
 
@@ -18,12 +19,14 @@ public class GetStatisticsAction implements ActionHandler {
 		Organization user = OrganizationService.getOrg(id);
 		
 		if (user.getUserName().equals("APS")) {
-			request.getSession().setAttribute("academic", DocumentService.getCountByNature("Academic"));
-			request.getSession().setAttribute("nonacademic", DocumentService.getCountByNature("Non-academic"));
+			int acads = DashboardService.getAcademicCount();
+			request.getSession().setAttribute("academic", acads);
+			request.getSession().setAttribute("nonacademic", DashboardService.getTotalCount() - acads);
 			request.getRequestDispatcher("statistics.jsp").forward(request, response);
 		} else {
-			request.getSession().setAttribute("academic", DocumentService.getCountByNature("Academic"));
-			request.getSession().setAttribute("nonacademic", DocumentService.getCountByNature("Non-academic"));
+			int acads = DashboardService.getAcademicCount(user.getId());
+			request.getSession().setAttribute("academic", acads);
+			request.getSession().setAttribute("nonacademic", DashboardService.getTotalCount(user.getId()) - acads);
 			request.getRequestDispatcher("statistics.jsp").forward(request, response);
 		}
 	}

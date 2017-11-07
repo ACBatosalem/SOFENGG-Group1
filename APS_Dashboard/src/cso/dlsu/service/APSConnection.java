@@ -15,6 +15,7 @@ import cso.dlsu.bean.Organization;
 import cso.dlsu.bean.Document;
 import cso.dlsu.bean.SubmissionDetails;
 import cso.dlsu.bean.CheckingDetails;
+import cso.dlsu.bean.ActivityDetails;
 import cso.dlsu.bean.TieUp;
 
 /**
@@ -46,12 +47,13 @@ public class APSConnection {
 	private APSConnection () {
 		(new File(DIR)).mkdirs();
 		try {
+			dropTables();
 			createTables();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This function is used to return the Connection object connected to the database.
 	 * @return the connection to the database
@@ -76,6 +78,21 @@ public class APSConnection {
 		
 		return connection;
 	}
+	
+
+	private void dropTables() {
+		// TODO Auto-generated method stub
+		Connection connection = connect();
+		String[] tables = {Document.TABLE, SubmissionDetails.TABLE,
+				CheckingDetails.TABLE, TieUp.TABLE,
+				ActivityDetails.TABLE};
+		if (connection != null) {
+			for(String table: tables) {
+				String query = "DROP TABLE IF EXISTS " + table;
+				executeQueryForTables(connection, query, table);
+			}
+		}
+	}
 
 	/**
 	 * This function is used to create the tables in the database if they do not exist yet.
@@ -93,7 +110,7 @@ public class APSConnection {
 		                + Organization.COL_USERNAME + 	" text NOT NULL UNIQUE," 
 		                + Organization.COL_PASSWORD + 	" text"
 		                + ");"; 
-				executeCreateTables(connection, query, Organization.TABLE);
+				executeQueryForTables(connection, query, Organization.TABLE);
 				createAccountAPS(connection);
 			}
 			
@@ -103,29 +120,38 @@ public class APSConnection {
 		                + Document.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
 		                + Document.COL_ORG_ID + 	" integer NOT NULL,"
 		                + Document.COL_TITLE  + 	" text NOT NULL," 
-		                + Document.COL_TERM   + 	" integer NOT NULL,"
-		                + Document.COL_NATURE + 	" text,"
-		                + Document.COL_TYPE   + 	" text,"
-		                + Document.COL_VENUE  + 	" text,"
-		                + Document.COL_DATE	  +		" text,"
-		                + Document.COL_TIME	  +		" text"
+		                + Document.COL_TERM   + 	" integer NOT NULL"
 		                + ");"; 
-				executeCreateTables(connection, query, Document.TABLE);
+				executeQueryForTables(connection, query, Document.TABLE);
+			}
+			
+			//Create activity_details table
+			if(!checkTableExist(connection, ActivityDetails.TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + ActivityDetails.TABLE + "("
+		                + ActivityDetails.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + ActivityDetails.COL_DOCU_ID + 	" integer NOT NULL,"
+		                + ActivityDetails.COL_NATURE  + 	" text,"
+		                + ActivityDetails.COL_TYPE    + 	" text,"
+		                + ActivityDetails.COL_VENUE   + 	" text,"
+		                + ActivityDetails.COL_DATE	  +		" text,"
+		                + ActivityDetails.COL_TIME	  +		" text"
+		                + ");"; 
+				executeQueryForTables(connection, query, ActivityDetails.TABLE);
 			}
 			
 			//Create submission_details table
 			if(!checkTableExist(connection, SubmissionDetails.TABLE)) {
 				String query = "CREATE TABLE IF NOT EXISTS " + SubmissionDetails.TABLE + "("
 		                + SubmissionDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
-		                + SubmissionDetails.COL_DOCU_ID 	    + 	" integer NOT NULL,"
-		                + SubmissionDetails.COL_DATE_SUBMITTED  + 	" datetime NOT NULL,"
+		                + SubmissionDetails.COL_ACT_ID 	    + 	" integer NOT NULL,"
+		                + SubmissionDetails.COL_DATE_SUBMITTED  + 	" text NOT NULL,"
 		                + SubmissionDetails.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
 		                + SubmissionDetails.COL_SUBMITTED_BY 	+ 	" text NOT NULL,"
 		                + SubmissionDetails.COL_EMAIL_ADDRESS 	+ 	" text NOT NULL,"
 		                + SubmissionDetails.COL_CONTACT_NO 		+ 	" text NOT NULL,"
-		                + SubmissionDetails.COL_SAS_TYPE 		+ 	" text NOT NULL"
+		                + SubmissionDetails.COL_SAS_TYPE 		+ 	" text"
 		                + ");"; 
-				executeCreateTables(connection, query, SubmissionDetails.TABLE);
+				executeQueryForTables(connection, query, SubmissionDetails.TABLE);
 			}
 			
 			//Create checking_details table
@@ -136,9 +162,9 @@ public class APSConnection {
 		                + CheckingDetails.COL_STATUS_ID		+ 	" integer NOT NULL,"
 		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text NOT NULL,"
 		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text NOT NULL,"
-		                + CheckingDetails.COL_REMARKS		+ 	" text NOT NULL"
+		                + CheckingDetails.COL_REMARKS		+ 	" text"
 		                + ");"; 
-				executeCreateTables(connection, query, CheckingDetails.TABLE);
+				executeQueryForTables(connection, query, CheckingDetails.TABLE);
 			}
 			
 			//Create tie_ups table
@@ -149,7 +175,7 @@ public class APSConnection {
 		                + "PRIMARY KEY("  + TieUp.COL_DOCU_ID + ", "
 		                				  + TieUp.COL_ORG_ID + ")"
 		                + ");";
-				executeCreateTables(connection, query, TieUp.TABLE);
+				executeQueryForTables(connection, query, TieUp.TABLE);
 			}
 			try {
 				connection.close();
@@ -194,12 +220,12 @@ public class APSConnection {
 	}
 	
 	/**
-	 * This function is used to execute the creation of tables in the database.
+	 * This function is used to execute the creation or deletion of tables in the database.
 	 * @param con the Connection object connected to the database
 	 * @param query the query to create the specified table
 	 * @param tableName the name of the table to be created
 	 */
-	private void executeCreateTables(Connection con, String query, String tableName) {
+	private void executeQueryForTables(Connection con, String query, String tableName) {
 		PreparedStatement ps = null;
 		try {
 			ps = con.prepareStatement(query);

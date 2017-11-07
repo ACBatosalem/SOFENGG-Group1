@@ -23,6 +23,27 @@ $(document).ready(function() {
     
     $('#acad-box').prop('checked', true);
     $('#non-acad-box').prop('checked', true);
+    
+    $('#acad-box').change(function() {
+    	var filter = "";
+        if($(this).is(":checked") && $('#non-acad-box').is(":checked")) {
+        	fiter = "tt";
+        } else if(!($(this).is(":checked")) && $('#non-acad-box').is(":checked")) {
+        	filter = "ft";
+        } else if($(this).is(":checked") && !($('#non-acad-box').is(":checked"))) {
+        	filter = "tf";
+        }
+    	$.ajax({ 		
+			type        : 'POST', 		
+			url         : 'filteredSubmissions',		
+			data        : {filter:filter},		
+			dataType    : 'html',		
+	 		success     : function(data) { 
+	 			
+	 		}
+		}); 
+    });
+    
     $('#table_submissions tbody').on('click', 'tr', function() {
     	$('#modal-view').fadeIn();
     	

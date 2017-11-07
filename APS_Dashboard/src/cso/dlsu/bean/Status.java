@@ -10,7 +10,8 @@ package cso.dlsu.bean;
 public enum Status {
 	NONE(0),
 	PENDING(1),
-	EARLY_APPROVED(2);
+	EARLY_APPROVED(2),
+	LATE_APPROVED(3);
 	
 	private final int statusID;
 	
@@ -31,6 +32,7 @@ public enum Status {
 		switch (i) {
 			case 1 : return PENDING;
 			case 2 : return EARLY_APPROVED;
+			case 3 : return LATE_APPROVED;
 			default: return NONE;
 		}
 	}
@@ -43,10 +45,18 @@ public enum Status {
 		switch (statusID) {
 			case 1 : return "Pending";
 			case 2 : return "Early Approved";
+			case 3 : return "Late Approved";
 			default: return "-";
 		}
 	}
 	
-	
+	public static int getStatusByName(String s){
+		switch(s){
+			case "PENDING": return 1;
+			case "EARLY APPROVED": return 2;
+			case "LATE APPROVED": return 3;
+			default: return 0;
+		}
+	}
 		
 }
