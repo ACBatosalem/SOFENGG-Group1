@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Palanquin');
+
+:root {
+    --mintgreen: #E5EDF3;
+    --selected: #2C9D77;
+    --unselected: #B1C5BE;
+    --strong: #126B4D;
+}
+
+#main-bg {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    background-color: var --(mintgreen);
+    height:100%;
+    width:100%;
+    z-index: -1;
+}
+
+#main-overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height:100%;
+    width:100%;
+    z-index: -1;
+}
+
+#main {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0%;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+}
+
+/* GROUP BUTTONS */
+.group-button-container {
+    display: flex;
+    font-family: "Palanquin";
+    flex-direction: column;
+    color: #126B4D;
+}
+
+.main-group-container {
+    width: 95%;
+    height: 50px;
+    margin: 2.5%;
+    display: flex;
+    flex-direction: row;
+}
+
+.options-box {
+    margin: 5px;
+    font-size: 20px;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-right: 30px;
+    height: 25px;
+    width: 25px;
+    background-color: #ccc;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: var(--unselected);
+}
+
+.container input:checked ~ .checkmark {
+    background-color: var(--selected);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+ .namelabel {
+    line-height: 25px;
+     font-size: 20px;
+     padding: 10px;
+}
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.orgs-choicebox {
+    height: 40px;
+    max-width: 200px;
+    border-style: solid;
+    border-width: 2px;
+    color: #126B4D;
+    font-size: 20px;
+    border-color: #126B4D;
+    font-family: "Palanquin";
+    background-color: #E5EDF3;
+}
+
+
+/* TABS OPTION */
+.tab-main {
+    margin: 2.5%;
+    width: 95%;
+}
+
+.tab-option {    
+    margin: 0 0px 0 0;
+    float: left;
+    position: relative;
+    padding: 0 40px;
+    height: 0;
+    float: right;
+    font-size: 18px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: white;
+    border-left: 30px solid transparent;
+    border-bottom: 30px solid green;
+    border-bottom-color: #B1C5BE;
+    filter: alpha(opacity=30);
+    font-family: "Palanquin";
+    background: none;
+    cursor: pointer;
+    border-top: none;
+    border-right: none;
+    margin-left: -20px;
+}
+
+.tab-option:hover, .tab-option.selected {   
+    border-bottom-color: #126B4D;
+}
+
+.tab-option:hover {
+    z-index: 2;
+    border-bottom-color: #2C9D8A;
+}
+
+.tab-option.selected {
+    z-index: 1;
+}
+
+.tab-options {
+    border-bottom: solid;
+    height: 30px;
+    color: #126B4D;
+    width: 100%;
+}
+
+
+
+/* TABLE VIEW */
+
+table, th, tr {
+    text-align: center;
+    border-width: 2px;
+    font-family: "Palanquin";
+    border-style: solid; 
+    background-color: #E5EDF3;
+    padding: 20px;
+    border-color: #126B4D;
+    color: #126B4D;
+}
+
+td {
+    border-color: #126B4D;
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+table {   
+    width: 100%;
+    border-collapse: collapse; 
+    border-width: 3px;
+    min-width: 200px;
+}
+
+.header.timestamp {
+    width: 20%;
+}
+
+.header.org {
+    width: 20%;
+}
+
+.header.title {
+    width: 30%;
+}
+
+.header.date {
+    width: 15%;
+}
+
+.header.status {
+    width: 10%;
+}
+
+
+.header {
+    color: white;
+    background-color: #126B4D;
+    cursor: default;
+}
+
+.headers{
+	cursor: default;
+}
+
+.activities-option {
+    margin: auto;
+    left: 0px;
+    right: 0px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.activities-option-button {
+    background: none;
+    border-style: none;
+    font-size: 20px;
+    width: 70px;
+    height: 40px;
+    color: #E5EDF3;
+    background-color: #126B4D;
+    border-radius: 3em;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #126B4D;
+    text-align: center;
+    transition: 0.2s;
+    margin: 10px;
+}
+
+.activities-option-button:hover {
+    background-color: #E5EDF3;
+    color: #126B4D;
+}
+
+.activities-option-label {
+    font-family: 'Palanquin';
+    margin: 20px;
+    font-size: 20px;
+}
+
+button:focus {
+    outline: none;
+}
+
+#acads-tab {
+    display: none;
+    margin-top: 10px
+    width: 100%;
+    margin: 0 auto;
+    height: auto;
+    outline: none;
+    border-style: solid;
+    border-top-width: 40px;
+    border-color: #126B4D; 
+    min-width: 200px;  
+}
+
+tr {
+    cursor: pointer;
+}
+
+
+tr:hover {
+    color: var(--mintgreen);
+    background-color: var(--selected);
+}
+

@@ -153,26 +153,36 @@
                     <label class = "label filter main"> FILTER </label>
                     <!-- ACADEMIC CHECKBOX -->
                     <label class = "container">
-                        <input id = "acad-box" name="academic" type="checkbox"> 
+                    	<c:if test = "${filter == 'tt' || filter == 'tf'}">
+                        <input id = "acad-box" name="academic" type="checkbox" checked>
+                        </c:if>
+                        <c:if test = "${filter == 'ft'}">
+                        <input id = "acad-box" name="academic" type="checkbox">
+                        </c:if>
                         <span class = "checkmark"> </span>    
                         <label class = "label filter" for="academic"> ACADEMIC </label>
                     </label>
                     <!-- NON ACADEMIC CHECKBOX -->
                     <label class = "container">
+                    	<c:if test = "${filter == 'tt' || filter == 'ft'}">
+                        <input id = "non-acad-box" name="nonacademic" type="checkbox" checked>
+                        </c:if>
+                        <c:if test = "${filter == 'tf'}">
                         <input id = "non-acad-box" name="nonacademic" type="checkbox">
+                        </c:if>
                         <span class = "checkmark"> </span>    
                         <label class = "label filter" for="nonacademic"> NON-ACADEMIC </label>
                     </label>
                     <!-- ORGANIZATION CHOICEBOX -->
                     <div class = "filter-container">
-                        <select id = "org-pick" class = "filter_cb">
-                            <option data-orgid="0">
+                        <select id = "org-pick" class = "filter_cb" data-selectedOrg="${orgName}">
+                            <option value="All" data-orgid="0">
           		          		All
 	                        </option>
 	                        <c:forEach items="${orgs}" var="org">
 	                        	<!-- ORG START -->
 	                        	<c:if test = "${org.userName != 'APS'}">
-		                            <option data-orgid="${org.id}">
+		                            <option value="${org.userName}" data-orgid="${org.id}">
 		                                ${org.userName}
 		                            </option>
 		                        </c:if>
@@ -202,7 +212,7 @@
                             <!-- DATA: SUBMISSIONS -->    
                             <tbody>
                                 <c:forEach items="${dashboard_data}" var="data">
-	                            <tr> 
+	                            <tr data-dashdata = "${data}"> 
 	                                <td> ${data.timeStamp} </td>
 	                                <td> ${data.orgName} </td>
 	                                <td> ${data.title}  </td>

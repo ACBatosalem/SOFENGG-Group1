@@ -28,12 +28,12 @@ import cso.dlsu.action.organization.SuccessLoginOrg;
 							"/homeAPS/getOrg",
 							"/homeAPS/getStatistics",
 							"/homeORG/getStatistics",
-							"/homeAPS/filteredSubmissions",
-							"/homeORG/filteredSubmissions",
 							"/homeAPS/changePassword",
 							"/homeORG/changePassword",
 							"/homeAPS/updatePassword",
 							"/homeORG/updatePassword",
+							"/homeAPS/filtered",
+							"/homeORG/filtered",
 							"/homeAPS",
 							"/homeORG"})
 public class APSController extends HttpServlet {
@@ -56,7 +56,8 @@ public class APSController extends HttpServlet {
         actions.put("/homeAPS/changePassword", new ChangePasswordAction());
         actions.put("/homeAPS/updatePassword", new UpdatePasswordAction());
         actions.put("/homeAPS/getStatistics", new GetStatisticsAction());
-				
+		actions.put("/homeAPS/filtered", new FilteredSubmissionAction());
+		
         actions.put("/homeORG", new SuccessLoginOrg());
         actions.put("/homeORG/updatePassword", new UpdatePasswordAction());
         actions.put("/homeORG/changePassword", new ChangePasswordAction());

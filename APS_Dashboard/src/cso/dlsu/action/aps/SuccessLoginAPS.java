@@ -14,7 +14,40 @@ public class SuccessLoginAPS implements ActionHandler {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("orgs", OrganizationService.getAllOrgs());
-		request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("none"));
+		String f = request.getParameter("filter");
+		String org = request.getParameter("org");
+		if (org == null || org.equals("All")) {
+			request.setAttribute("orgName", "All");
+			if (f == null) {
+				request.setAttribute("filter", "tt");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("none"));
+			} else if (f.equals("tf")) {
+				request.setAttribute("filter", "tf");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("acads"));
+			} else if (f.equals("ft")) {
+				request.setAttribute("filter", "ft");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("non-acads"));
+			} else {
+				request.setAttribute("filter", "tt");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getAllDashboardData("none"));
+			}
+		} else {
+			request.setAttribute("orgName", org);
+			if (f == null) {
+				request.setAttribute("filter", "tt");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getOrgDashboardData(org, "none"));
+			} else if (f.equals("tf")) {
+				request.setAttribute("filter", "tf");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getOrgDashboardData(org, "acads"));
+			} else if (f.equals("ft")) {
+				request.setAttribute("filter", "ft");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getOrgDashboardData(org, "non-acads"));
+			} else {
+				request.setAttribute("filter", "tt");
+				request.getSession().setAttribute("dashboard_data", DashboardService.getOrgDashboardData(org, "none"));
+			}
+		}
+		
 		request.getRequestDispatcher("homeAPS/home_aps.jsp").forward(request, response);
 	}
 }

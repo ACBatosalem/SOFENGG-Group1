@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Palanquin');
+
+:root {
+    --mintgreen: #E5EDF3;
+    --selected: #2C9D77;
+    --unselected: #B1C5BE;
+    --strong: #126B4D;
+}
+
+body{
+    background-color: #E5EDF3;
+    
+}
+
+#logindiv{
+    text-align: center;
+}
+
+#logindiv{
+    width: 100% !important;
+    background-color: #E5EDF3 !important;
+}
+
+#logindiv .label{
+    color: black;
+}
+
+#logindiv #btn_login {
+    background-color: #126B4D;
+}
+    
+#logindiv #btn_login:hover {
+    background-color: #2C9D77;    
+}
+    
+#logingroup .dlsulogo {
+    margin: auto;
+    display: inherit !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    padding-bottom: 10px;
+}
+
+
+#logindiv{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #126B4D;
+    float: right;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logingroup{
+     max-width: 300px;
+     width: 80%;
+     margin: 0 auto;
+     resize: none;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+
+.label{
+    font-size: 20px;    
+    color: white;
+	font-family: "Open Sans";
+}
+
+#btn_login{
+    font-family: "Open Sans";
+    min-width: 69px;
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #B1C5BE;
+    border-radius: 5px;
+    border: 4px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#btn_login:hover, button#btn_login:hover{
+    background-color: #2C9D77;
+    cursor: pointer;
+    
+}
+
+#login_username{    
+    width: 90%;
+    padding: 5px 10px;
+    border-radius: 4px;
+    resize: none;
+	font-family: "Open Sans";
+}
+
+#login_password{
+    width: 90%;
+    padding: 5px 10px;
+    border-radius: 4px;
+    resize: none;
+	font-family: "Open Sans";
+}
+
+#login_msg{
+	color: black;
+	font-size: 15px;
+	font-family: "Open Sans";
+}
+
+#loading {
+    width: 30px;
+}
+
+.trim {
+    display: none;
+    overflow: hidden;
+    max-height: 30px;
+    max-width: 30px;
+}
+
+#login_start {
+    margin: 0px;
+    width: auto;
+    line-height: 30px;
+}
+
+#grp-btn {
+    display: flex;
+    margin: 0px auto;
+}
+
+#grp-btn-container {
+    display: table;
+    margin: 0 auto;
+}

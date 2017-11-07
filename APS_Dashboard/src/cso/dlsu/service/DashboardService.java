@@ -51,9 +51,9 @@ public class DashboardService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
-		String query = 	"SELECT "  + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
+		String query = 	"SELECT * "  /*+ SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
 								   + Document.COL_TITLE + ", " + ActivityDetails.COL_DATE + ", "
-								   + CheckingDetails.COL_STATUS_ID + " " +
+								   + CheckingDetails.COL_STATUS_ID + " "*/ +
 						"FROM (((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
 								   + " INNER JOIN " + ActivityDetails.TABLE + " A ON D." + Document.COL_ID + " = A." + ActivityDetails.COL_DOCU_ID + ") "
 								   + " INNER JOIN " + SubmissionDetails.TABLE + " S ON A." + ActivityDetails.COL_ID + " = S." + SubmissionDetails.COL_ACT_ID + ") "
