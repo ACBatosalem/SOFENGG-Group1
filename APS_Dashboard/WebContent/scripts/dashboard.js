@@ -1,4 +1,4 @@
-
+var check;
 $(document).ready(function() {
     var table= $('#table_submissions').DataTable( {
         "scrollCollapse": true,
@@ -78,10 +78,43 @@ $(document).ready(function() {
     });
     
     $('#table_submissions tbody').on('click', 'tr', function() {
-    	var data = $(this).attr('data-dashdata');
-    	console.log(data);
-    	$("#act-name").text(data.title);
-    	$("#org-name").text(data.userName);
+    	var docuID = $(this).attr('data-docuID');
+    	var orgID = $(this).attr('data-orgID');
+    	var actID = $(this).attr('data-actID');
+    	var subID = $(this).attr('data-subID');
+    	var checkID = $(this).attr('data-checkID');
+    	
+    	$.ajax({ 		
+			type        : 'POST', 		
+			url         : 'getModalData',		
+			data        : {docuID:docuID, orgID:orgID, actID:actID, subID:subID, checkID:checkID},		
+			dataType    : 'json',		
+	 		success     : function(data) {
+	 			console.log(data);
+	 			check = data;
+	 			$("#act-name").text(data.document.title);
+	 			$("#org-name").text(data.org.userName);
+	 			
+	 			$("#time").text("Time: " + data.act.time);
+	 			$("#venue").text("Venue: " + data.act.venue);
+	 			$("#nature").text("Nature of Activity: " + data.act.nature);
+	 			$("#type").text("Type of Activity: " + data.act.type);
+	 			$("#actDate").text("Activity Date/s: " + data.act.date);
+	 			$("#tieup").text("Tie-up: " );
+	 			
+	 			$("#submittedBy").text("Submitted by: " + data.sub.submittedBy);
+	 			$("#submitDate").text("Date Submitted: " + data.sub.dateSubmitted);
+	 			$("#typeSAS").text("Type of SAS Submission: " + data.sub.sasType);
+	 			
+	 			$("#checkedby").text("Checked by: " + data.check.checkerName);
+	 			$("#dateChecked").text("Date Checked: " + data.check.dateChecked);
+	 			$("#remarks").text("Remarks: " + data.check.remarks);
+			},
+			error   	: function(xhr,status,error){		
+				console.log(xhr);   		
+				alert(status);		
+			}
+    	});
     	
     	$('#modal-view').fadeIn();
     	
@@ -96,7 +129,26 @@ $(document).ready(function() {
     });
     
     $('#modal-close').click(function(){
-        $('#modal-view').fadeOut();
+        $('#modal-view').fadeOut(500, function(){
+        	$("#act-name").text("Activity Title");
+    		$("#org-name").text("Organization");
+    		
+    		$("#time").text("Time: ");
+    		$("#venue").text("Venue: ");
+    		$("#nature").text("Nature of Activity: ");
+    		$("#type").text("Type of Activity: ");
+    		$("#actDate").text("Activity Date/s: ");
+    		$("#tieup").text("Tie-up: " );
+    		
+    		$("#submittedBy").text("Submitted by: ");
+    		$("#submitDate").text("Date Submitted: ");
+    		$("#typeSAS").text("Type of SAS Submission: ");
+    		
+    		$("#checkedby").text("Checked by: ");
+    		$("#dateChecked").text("Date Checked: ");
+    		$("#remarks").text("Remarks: ");
+        });
+		
         $('body').css('overflow','auto');
     });
 });

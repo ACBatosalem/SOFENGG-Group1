@@ -153,7 +153,6 @@
                                     <th class = "header timestamp"> Timestamp </th>
                                     <th class = "header org"> Organization </th>
                                     <th class = "header title"> Title </th>
-                                    <th class = "header date"> Date </th>
                                     <th class = "header status"> Status </th>
                                 </tr>
                             </thead>
@@ -161,11 +160,11 @@
                             <!-- DATA: SUBMISSIONS -->    
                             <tbody>
                                 <c:forEach items="${dashboard_data}" var="data">
-	                            <tr> 
+	                            <tr data-docuID = "${data.docuID}" data-orgID = "${data.orgID}" data-actID = "${data.actID}"
+	                                data-subID = "${data.subID}" data-checkID = "${data.checkID}"> 
 	                                <td> ${data.timeStamp} </td>
 	                                <td> ${data.orgName} </td>
 	                                <td> ${data.title}  </td>
-	                                <td> ${data.date} </td>
 		                            <c:choose>
 		                                <c:when test = "${data.status eq 'EARLY APPROVED'}"> <td class = "early_approved"> ${data.status} </td> </c:when>
 		                                <c:when test = "${data.status eq 'LATE APPROVED'}"> <td class = "late_approved"> ${data.status} </td> </c:when>

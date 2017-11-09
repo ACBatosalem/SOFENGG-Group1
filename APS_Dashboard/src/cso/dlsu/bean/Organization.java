@@ -14,7 +14,7 @@ public class Organization {
 	private String password;
 	
 	public static final String TABLE = "orgs";
-	public static final String COL_ID = "id";
+	public static final String COL_ID = "org_id";
 	//public static final String COL_FULLNAME = "fullname";
 	public static final String COL_USERNAME = "username";
 	public static final String COL_PASSWORD = "password";

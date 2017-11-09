@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cso.dlsu.action.*;
 import cso.dlsu.action.aps.*;
-import cso.dlsu.action.organization.SuccessLoginOrg;
+import cso.dlsu.action.organization.*;
 
 /**
  * Servlet implementation class Controller
@@ -22,6 +22,7 @@ import cso.dlsu.action.organization.SuccessLoginOrg;
 @WebServlet(urlPatterns={	"/logout",
 							"/login",
 							"/home",
+							"/getModalData",
 							"/homeAPS/getAllOrgs",
 							"/homeAPS/addOrg",
 							"/homeAPS/deleteOrg",
@@ -47,6 +48,7 @@ public class APSController extends HttpServlet {
         actions.put("/home", new HomeAction());
         actions.put("/login", new LoginAction());
         actions.put("/logout", new LogoutAction());
+        actions.put("/getModalData", new GetModalDataAction());
 
         actions.put("/homeAPS", new SuccessLoginAPS());
         actions.put("/homeAPS/getAllOrgs", new GetAllOrganizationsAction());

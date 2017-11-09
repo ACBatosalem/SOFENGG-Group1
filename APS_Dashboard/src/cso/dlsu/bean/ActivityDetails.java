@@ -17,7 +17,7 @@ public class ActivityDetails {
 	private String time;
 	
 	public static final String TABLE = "activity_details";
-	public static final String COL_ID = "id";
+	public static final String COL_ID = "act_id";
 	public static final String COL_DOCU_ID = "docu_id";
 	public static final String COL_NATURE = "nature";
 	public static final String COL_TYPE = "type";

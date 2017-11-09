@@ -15,6 +15,11 @@ public class DashboardData {
 	private String title;
 	private String date;
 	private String status;
+	private int docuID;
+	private int orgID;
+	private int actID;
+	private int subID;
+	private int checkID;
 	
 	/**
 	 * This function is used to get the time that the document was submitted.
@@ -97,11 +102,93 @@ public class DashboardData {
 	}
 	
 	/**
+	 * This function is used to get the document id of the submitted document.
+	 * @return the document id of the submitted document
+	 */
+	public int getDocuID() {
+		return docuID;
+	}
+	
+	/**
+	 * This function is used to set the document id of the submitted document.
+	 * @param docuID the document id of the submitted document
+	 */
+	public void setDocuID(int docuID) {
+		this.docuID = docuID;
+	}
+
+	/**
+	 * This function is used to get the id of the organization that submitted the submitted document.
+	 * @return the id of the organization that submitted the submitted document
+	 */
+	public int getOrgID() {
+		return orgID;
+	}
+	
+	/**
+	 * This function is used to set the id of the organization that submitted the submitted document.
+	 * @param orgID the id of the organization that submitted the submitted document
+	 */
+	public void setOrgID(int orgID) {
+		this.orgID = orgID;
+	}
+
+	/**
+	 * This function is used to get the activity id of the submitted document.
+	 * @return the activity id of the submitted document
+	 */
+	public int getActID() {
+		return actID;
+	}
+
+	/**
+	 * This function is used to set the activity id of the submitted document.
+	 * @param actID the activity id of the submitted document
+	 */
+	public void setActID(int actID) {
+		this.actID = actID;
+	}
+	
+	/**
+	 * This function is used to get the submission id of the submitted document.
+	 * @return the submission id of the submitted document
+	 */
+	public int getSubID() {
+		return subID;
+	}
+
+	/**
+	 * This function is used to set the submission id of the submitted document.
+	 * @param subID the submission id of the submitted document
+	 */ 
+	public void setSubID(int subID) {
+		this.subID = subID;
+	}
+
+	/**
+	 * This function is used to get the checking details id of the submitted document.
+	 * @return the checking details id of the submitted document
+	 */
+	public int getCheckID() {
+		return checkID;
+	}
+	
+	/**
+	 * This function is used to set the checking details id of the submitted document.
+	 * @param checkID the checking details id of the submitted document
+	 */
+	public void setCheckID(int checkID) {
+		this.checkID = checkID;
+	}
+
+	/**
+	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "DashboardData [timeStamp=" + timeStamp + ", orgName=" + orgName + ", title=" + title + ", date=" + date
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", docuID=" + docuID + ", orgID=" + orgID + ", actID=" + actID + ", subID="
+				+ subID + ", checkID=" + checkID + "]";
 	}
 }

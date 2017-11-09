@@ -35,6 +35,11 @@ public class DashboardService {
 	private static DashboardData toDashboardData (ResultSet set) throws SQLException {
 		DashboardData data = new DashboardData();
 		
+		data.setDocuID(set.getInt(Document.COL_ID));
+		data.setOrgID(set.getInt(Organization.COL_ID));
+		data.setActID(set.getInt(ActivityDetails.COL_ID));
+		data.setSubID(set.getInt(SubmissionDetails.COL_ID));
+		data.setCheckID(set.getInt(CheckingDetails.COL_ID));
 		data.setTimeStamp(set.getString(SubmissionDetails.COL_DATE_SUBMITTED));
 		data.setOrgName(set.getString(Organization.COL_USERNAME));
 		data.setTitle(set.getString(Document.COL_TITLE));
@@ -51,9 +56,11 @@ public class DashboardService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
-		String query = 	"SELECT * "  /*+ SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
+		String query = 	"SELECT "  + "D." + Document.COL_ID + ", O." + Organization.COL_ID + ", A." + ActivityDetails.COL_ID
+								   + ", S." + SubmissionDetails.COL_ID + ", C." + CheckingDetails.COL_ID + ", "
+								   + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
 								   + Document.COL_TITLE + ", " + ActivityDetails.COL_DATE + ", "
-								   + CheckingDetails.COL_STATUS_ID + " "*/ +
+								   + CheckingDetails.COL_STATUS_ID + " " +
 						"FROM (((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
 								   + " INNER JOIN " + ActivityDetails.TABLE + " A ON D." + Document.COL_ID + " = A." + ActivityDetails.COL_DOCU_ID + ") "
 								   + " INNER JOIN " + SubmissionDetails.TABLE + " S ON A." + ActivityDetails.COL_ID + " = S." + SubmissionDetails.COL_ACT_ID + ") "
@@ -114,7 +121,9 @@ public class DashboardService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		ResultSet set = null;
-		String query = 	"SELECT "  + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
+		String query = 	"SELECT "  + "D." + Document.COL_ID + ", O." + Organization.COL_ID + ", A." + ActivityDetails.COL_ID
+				   				   + ", S." + SubmissionDetails.COL_ID + ", C." + CheckingDetails.COL_ID + ", "
+								   + SubmissionDetails.COL_DATE_SUBMITTED + ", " + Organization.COL_USERNAME + ", "
 								   + Document.COL_TITLE + ", " + ActivityDetails.COL_DATE + ", "
 								   + CheckingDetails.COL_STATUS_ID + " " +
 						"FROM (((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
@@ -235,7 +244,7 @@ public class DashboardService {
 				"WHERE " + ActivityDetails.COL_ID + " IN (SELECT MAX(" + ActivityDetails.COL_ID + ") " +
 														 "FROM " + ActivityDetails.TABLE + " " +
 														 "WHERE " + ActivityDetails.COL_NATURE + " = 'Academic' " +
-														 "GROUP BY A." + ActivityDetails.COL_DOCU_ID + ");";
+														 "GROUP BY " + ActivityDetails.COL_DOCU_ID + ");";
 		int count = -1;
 		try {
 			statement = connection.prepareStatement(query);
@@ -338,7 +347,7 @@ public class DashboardService {
 				"FROM " + ActivityDetails.TABLE + " " + 
 				"WHERE " + ActivityDetails.COL_ID + " IN (SELECT MAX(" + ActivityDetails.COL_ID + ") " +
 														 "FROM " + ActivityDetails.TABLE + " " +
-														 "GROUP BY A." + ActivityDetails.COL_DOCU_ID + ");";
+														 "GROUP BY " + ActivityDetails.COL_DOCU_ID + ");";
 		int count = -1;
 		try {
 			statement = connection.prepareStatement(query);

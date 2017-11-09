@@ -45,7 +45,7 @@ public class CreateData {
 	
 	private static void createSubmission(String[] attributes) {
 		// TODO Auto-generated method stub
-		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(attributes[0]);
+		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
 		int docuID = DocumentService.getDocumentByTitle(attributes[5]).getId();
 		if(submissionID == 0){
 			//create submission details
@@ -54,21 +54,35 @@ public class CreateData {
 			subDet.setSubmittedBy(attributes[16]);
 			subDet.setContactNo(attributes[17]);
 			subDet.setEmailAddress(attributes[18]);
-			subDet.setDateSubmitted(attributes[0]);
+			subDet.setDateSubmitted(toDateTime(attributes[0]));
 			subDet.setSubmissionType(attributes[4]);
 			
 			if(subDet.getSubmissionType().equalsIgnoreCase("Special Approval Slip"))
 				subDet.setSasType(attributes[19]);
-			
+			else subDet.setSasType("-");
 			SubmissionDetailsService.addSubmissionDetails(subDet);
-			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(attributes[0]);
+			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
 			createCheckingDetails(attributes, submissionID);
 		} else {
-			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(attributes[0]);
+			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
 			createCheckingDetails(attributes, submissionID);
 		}
 	
 	}
+	private static String toDateTime(String dateSubmitted) {
+		// TODO Auto-generated method stub
+		String[] extracted = dateSubmitted.split(" ");
+		
+		String[] date = extracted[0].split("/");
+		
+		if(date[0].length() == 1)
+			date[0] = "0" + date[0];
+		if(date[1].length() == 1)
+			date[1] = "0" + date[1];
+		
+		return date[2] + "-" + date[0] + "-" + date[1] + " " + extracted[1];
+	}
+
 	private static void createCheckingDetails(String[] attributes, int submissionID) {
 		// TODO Auto-generated method stub
 		if(!CheckingDetailsService.findSubmissionByID(submissionID) 
@@ -81,6 +95,7 @@ public class CreateData {
 			
 			if(attributes.length >= 24)
 				checkDet.setRemarks(attributes[23]);
+			else checkDet.setRemarks("N/A");
 			
 			checkDet.setStatusID(Status.getStatusByName(attributes[20].toUpperCase()));
 			checkDet.setSubID(submissionID);
