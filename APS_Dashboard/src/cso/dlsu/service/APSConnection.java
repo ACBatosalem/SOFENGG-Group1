@@ -17,6 +17,7 @@ import cso.dlsu.bean.SubmissionDetails;
 import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.ActivityDetails;
 import cso.dlsu.bean.TieUp;
+import main.java.GSheetsConnection;
 
 /**
  * @author Batosalem, Angelika
@@ -47,7 +48,8 @@ public class APSConnection {
 	private APSConnection () {
 		(new File(DIR)).mkdirs();
 		try {
-			dropTables();
+			if(GSheetsConnection.newFile == 1)
+				dropTables();
 			createTables();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,8 +67,8 @@ public class APSConnection {
 		try {
 			Class.forName(JDBC.class.getName());
 			connection = DriverManager.getConnection(url);
-			System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful connection to " + DIR + DB + "!");
+		//	System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful connection to " + DIR + DB + "!");
 		} catch (SQLException sqlEx) {
 			System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccessful connection to " + DIR + DB + ", Read sql message");
@@ -120,7 +122,7 @@ public class APSConnection {
 		                + Document.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
 		                + Document.COL_ORG_ID + 	" integer NOT NULL,"
 		                + Document.COL_TITLE  + 	" text NOT NULL," 
-		                + Document.COL_TERM   + 	" integer NOT NULL"
+		                + Document.COL_TERM   + 	" text NOT NULL"
 		                + ");"; 
 				executeQueryForTables(connection, query, Document.TABLE);
 			}
@@ -160,8 +162,8 @@ public class APSConnection {
 		                + CheckingDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
 		                + CheckingDetails.COL_SUB_ID	    + 	" integer NOT NULL,"
 		                + CheckingDetails.COL_STATUS_ID		+ 	" integer NOT NULL,"
-		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text NOT NULL,"
-		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text NOT NULL,"
+		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text, "
+		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text, "
 		                + CheckingDetails.COL_REMARKS		+ 	" text"
 		                + ");"; 
 				executeQueryForTables(connection, query, CheckingDetails.TABLE);
@@ -201,8 +203,8 @@ public class APSConnection {
 			statement.setString(2, "APS");
 			statement.setString(3, "password");
 			statement.executeUpdate();
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful INSERT INTO " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + Organization.TABLE + ", check SQL message");
@@ -230,8 +232,8 @@ public class APSConnection {
 		try {
 			ps = con.prepareStatement(query);
 			ps.execute();
-			System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]" + 
-					" Created " + tableName + "for " + DIR + DB + ".");
+		//	System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]" + 
+		//			" Created " + tableName + "for " + DIR + DB + ".");
 
 		} catch (SQLException sqlEx) {
 			System.out.println(sqlEx.getMessage());

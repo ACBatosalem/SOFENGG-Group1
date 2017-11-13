@@ -61,8 +61,8 @@ public class ActivityDetailsService {
 			
 			statement.executeUpdate();
 			added = true;
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful INSERT INTO " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + ActivityDetails.TABLE + ", check SQL message");
@@ -114,8 +114,8 @@ public class ActivityDetailsService {
 			while (set.next())
 				actDet.add(toActivityDetails(set));
 	
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -172,8 +172,8 @@ public class ActivityDetailsService {
 			while (set.next())
 				actDet.add(toActivityDetails(set));
 	
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -231,8 +231,8 @@ public class ActivityDetailsService {
 				actDet = toActivityDetails(set);
 			}
 		
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -286,8 +286,8 @@ public class ActivityDetailsService {
 				actDet = toActivityDetails(set);
 			}
 		
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -341,8 +341,8 @@ public class ActivityDetailsService {
 			
 			statement.executeUpdate();
 			deleted = true;
-			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful DELETE FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful DELETE FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + ActivityDetails.TABLE + ", check SQL message");

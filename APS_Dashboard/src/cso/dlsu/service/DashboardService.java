@@ -78,8 +78,8 @@ public class DashboardService {
 			while (set.next())
 				data.add(toDashboardData(set));
 	
-			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM multiple tables");
+		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM multiple tables");
 		} catch (SQLException e) {
 			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM multiple tables, check SQL message");
@@ -146,8 +146,8 @@ public class DashboardService {
 			while (set.next())
 				data.add(toDashboardData(set));
 	
-			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM multiple tables");
+		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM multiple tables");
 		} catch (SQLException e) {
 			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM multiple tables, check SQL message");
@@ -200,8 +200,8 @@ public class DashboardService {
 			
 			set = statement.executeQuery();
 			count = set.getInt(1);
-			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -251,8 +251,8 @@ public class DashboardService {
 			
 			set = statement.executeQuery();
 			count = set.getInt(1);
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -304,8 +304,8 @@ public class DashboardService {
 			
 			set = statement.executeQuery();
 			count = set.getInt(1);
-			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
@@ -354,8 +354,8 @@ public class DashboardService {
 			
 			set = statement.executeQuery();
 			count = set.getInt(1);
-			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + ActivityDetails.TABLE);
+		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");

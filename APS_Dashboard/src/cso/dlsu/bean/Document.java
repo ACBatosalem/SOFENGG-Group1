@@ -11,7 +11,7 @@ public class Document {
 	private int id;
 	private int orgID;
 	private String title;
-	private int term;
+	private String term;
 	
 	
 	public static final String TABLE = "documents";
@@ -72,7 +72,7 @@ public class Document {
 	 * This function is used to get the term which the activity will take place.
 	 * @return the term which the activity will take place
 	 */
-	public int getTerm() {
+	public String getTerm() {
 		return term;
 	}
 	
@@ -80,7 +80,7 @@ public class Document {
 	 * This function is used to set the term which the activity will take place.
 	 * @param term the term which the activity will take place
 	 */
-	public void setTerm(int term) {
+	public void setTerm(String term) {
 		this.term = term;
 	}
 	

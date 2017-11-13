@@ -64,8 +64,8 @@ public class CheckingDetailsService {
 			
 			statement.executeUpdate();
 			added = true;
-			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + CheckingDetails.TABLE);
+		//	System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful INSERT INTO " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + CheckingDetails.TABLE + ", check SQL message");
@@ -117,8 +117,8 @@ public class CheckingDetailsService {
 			while (set.next())
 				checks.add(toCheckingDetails(set));
 	
-			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + CheckingDetails.TABLE);
+		//	System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + CheckingDetails.TABLE + ", check SQL message");
@@ -176,8 +176,8 @@ public class CheckingDetailsService {
 				check = toCheckingDetails(set);
 			}
 		
-			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + CheckingDetails.TABLE);
+		//	System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + CheckingDetails.TABLE + ", check SQL message");
@@ -235,8 +235,8 @@ public class CheckingDetailsService {
 				check = toCheckingDetails(set);
 			}
 		
-			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + CheckingDetails.TABLE);
+		//	System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + CheckingDetails.TABLE + ", check SQL message");
@@ -301,8 +301,8 @@ public class CheckingDetailsService {
 			
 			statement.executeUpdate();
 			deleted = true;
-			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful DELETE FROM " + CheckingDetails.TABLE);
+		//	System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful DELETE FROM " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + CheckingDetails.TABLE + ", check SQL message");

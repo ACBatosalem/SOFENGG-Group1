@@ -33,7 +33,7 @@ public class DocumentService {
 		document.setId(set.getInt(Document.COL_ID));
 		document.setOrgID(set.getInt(Document.COL_ORG_ID));
 		document.setTitle(set.getString(Document.COL_TITLE));
-		document.setTerm(set.getInt(Document.COL_TERM));
+		document.setTerm(set.getString(Document.COL_TERM));
 		return document;
 	}
 	
@@ -56,12 +56,12 @@ public class DocumentService {
 			statement.setNull(1, Types.NULL);
 			statement.setInt(2, document.getOrgID());
 			statement.setString(3, document.getTitle());
-			statement.setInt(4, document.getTerm());
+			statement.setString(4, document.getTerm());
 			
 			statement.executeUpdate();
 			added = true;
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful INSERT INTO " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + Document.TABLE + ", check SQL message");
@@ -113,8 +113,8 @@ public class DocumentService {
 			while (set.next())
 				documents.add(toDocument(set));
 	
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
@@ -171,8 +171,8 @@ public class DocumentService {
 			while (set.next())
 				documents.add(toDocument(set));
 	
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
@@ -230,8 +230,8 @@ public class DocumentService {
 				document = toDocument(set);
 			}
 		
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
@@ -289,8 +289,8 @@ public class DocumentService {
 				document = toDocument(set);
 			}
 		
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
@@ -344,8 +344,8 @@ public class DocumentService {
 			
 			statement.executeUpdate();
 			deleted = true;
-			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful DELETE FROM " + Document.TABLE);
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful DELETE FROM " + Document.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + Document.TABLE + ", check SQL message");

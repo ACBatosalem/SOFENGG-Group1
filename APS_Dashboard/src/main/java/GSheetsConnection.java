@@ -48,6 +48,7 @@ public class GSheetsConnection {
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 	private static HttpTransport HTTP_TRANSPORT;
 	private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
+	public static int newFile = 0;
 	static {
 	    try {
 	        HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -103,14 +104,21 @@ public class GSheetsConnection {
     	
     	try {
     		// TODO Once implemented use toData (response)
-    		generateFile("table.csv", getDataInString(spreadsheetId, range));
+    		String data = getDataInString(spreadsheetId, range);
+    		if(data != null){
+    			generateFile("table.csv", data);
+    			processData();
+    			newFile = 1;
+    			System.out.println("new file");
+    		} else System.out.println("old file");
 		} catch (UnknownHostException u) {
 			throw new NoInternetException();
 		} catch (IOException e) {
+            e.printStackTrace();
 			System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Credentials file not found!");
 		}
     	
-    	processData();
+    	
     	
     	/*while (!stop) {
     		for (int i = 0; i < times.size(); i++) {
@@ -135,13 +143,16 @@ public class GSheetsConnection {
 		// TODO Auto-generated method stub
     	Path pathToFile = Paths.get("C:/dlsu-cso/table.csv");
     	System.out.println(pathToFile);
+    	String[] attributes = null;
+    	int i = 1;
     	try (BufferedReader br = Files.newBufferedReader(pathToFile,
-                StandardCharsets.US_ASCII)) {
+                StandardCharsets.ISO_8859_1)) {
 
             // read the first line from the text file
-    		br.readLine();
+    		//br.readLine();
     		br.readLine();
             String line = br.readLine();
+            
 
             // loop until all lines are read
             while (line != null) {
@@ -149,12 +160,13 @@ public class GSheetsConnection {
                 // use string.split to load a string array with the values from
                 // each line of
                 // the file, using a comma as the delimiter
-                String[] attributes = line.split("<>");
+                attributes = line.split(">>");
                 //TODO check if db is empty
-                //for(int i = 0; i < attributes.length; i++)
-                //	System.out.println(i+" "+ attributes[i]);
+               // for(String att:attributes)
+                //	System.out.println(att);
                // if (DocumentService.getAllDocuments().size() == 0)
                 	CreateData.createDocument(attributes);
+                	i++;
                 //else
                 	
 
@@ -163,7 +175,10 @@ public class GSheetsConnection {
                 line = br.readLine();
             }
 
-        } catch (IOException ioe) {
+        } catch (Exception ioe) {
+        	System.out.println(i);
+            for(String att:attributes)
+               	System.out.println(att);
             ioe.printStackTrace();
         }
 
@@ -195,14 +210,14 @@ public class GSheetsConnection {
 				  	if(j == row.size()-1)
 				  		data += row.get(j);
 				  	else 
-				  		data += row.get(j) + "<>";
+				  		data += row.get(j) + ">>";
 				}
 				
 				data += "\n";
 			}
     	}
     	
-    	System.out.println(data);
+    	//System.out.println(data);
     	return data;
     }
     

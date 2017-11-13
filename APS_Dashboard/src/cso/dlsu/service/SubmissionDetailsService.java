@@ -68,8 +68,8 @@ public class SubmissionDetailsService {
 			
 			statement.executeUpdate();
 			added = true;
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful INSERT INTO " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + SubmissionDetails.TABLE + ", check SQL message");
@@ -121,8 +121,8 @@ public class SubmissionDetailsService {
 			while (set.next())
 				subs.add(toSubmissionDetails(set));
 	
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
@@ -179,8 +179,8 @@ public class SubmissionDetailsService {
 			while (set.next())
 				subs.add(toSubmissionDetails(set));
 	
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
@@ -238,8 +238,8 @@ public class SubmissionDetailsService {
 				sub = toSubmissionDetails(set);
 			}
 		
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
@@ -297,8 +297,8 @@ public class SubmissionDetailsService {
 				id = set.getInt(SubmissionDetails.COL_ID);
 			}
 		
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
@@ -352,8 +352,8 @@ public class SubmissionDetailsService {
 			
 			statement.executeUpdate();
 			deleted = true;
-			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful DELETE FROM " + SubmissionDetails.TABLE);
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful DELETE FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + SubmissionDetails.TABLE + ", check SQL message");

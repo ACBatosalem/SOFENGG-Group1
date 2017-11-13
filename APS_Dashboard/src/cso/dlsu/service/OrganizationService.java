@@ -1,3 +1,4 @@
+
 package cso.dlsu.service;
 
 import java.sql.Connection;
@@ -60,8 +61,8 @@ public class OrganizationService {
 			
 			statement.executeUpdate();
 			added = true;
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful INSERT INTO " + Organization.TABLE);
+			//System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+			//		+ " Successful INSERT INTO " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful INSERT INTO " + Organization.TABLE + ", check SQL message");
@@ -118,8 +119,8 @@ public class OrganizationService {
 			while (set.next())
 				organization = toOrganization(set);
 		
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Organization.TABLE + ", check SQL message");
@@ -230,8 +231,8 @@ public class OrganizationService {
 			while (set.next())
 				organizations.add(toOrganization(set));
 	
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Organization.TABLE + ", check SQL message");
@@ -285,8 +286,8 @@ public class OrganizationService {
 			
 			statement.executeUpdate();
 			deleted = true;
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful DELETE FROM " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful DELETE FROM " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful DELETE FROM " + Organization.TABLE + ", check SQL message");
@@ -344,8 +345,8 @@ public class OrganizationService {
 				organization = toOrganization(set);
 			}
 		
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful SELECT FROM " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful SELECT FROM " + Organization.TABLE + ", check SQL message");
@@ -406,8 +407,8 @@ public class OrganizationService {
 			
 			statement.executeUpdate();
 			updated = true;
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful UPDATE IN " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful UPDATE IN " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful UPDATE IN " + Organization.TABLE + ", check SQL message");
@@ -464,8 +465,8 @@ public class OrganizationService {
 			
 			statement.executeUpdate();
 			updated = true;
-			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Successful UPDATE IN " + Organization.TABLE);
+		//	System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful UPDATE IN " + Organization.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + OrganizationService.class.getName() + " | " + LocalDateTime.now() + "]"
 					+ " Unsuccesful UPDATE IN " + Organization.TABLE + ", check SQL message");

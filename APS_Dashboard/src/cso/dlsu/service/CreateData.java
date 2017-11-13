@@ -9,19 +9,23 @@ import cso.dlsu.bean.SubmissionDetails;
 public class CreateData {
 	public static void createDocument(String[] attributes) {
 		// TODO Auto-generated method stub
+		attributes[2] = attributes[2].toUpperCase();
 		if(DocumentService.getDocumentByTitle(attributes[5]) == null) {
 			//create document
 			Document document = new Document();
-			System.out.println(attributes[2]);
+			//System.out.println(attributes[2]);
+			
 			document.setOrgID(OrganizationService.getOrgByUsername(attributes[2]).getId());
 			document.setTitle(attributes[5]);
-			document.setTerm(Integer.parseInt(attributes[1].split(" ")[1]));
+			document.setTerm(attributes[1]);
 			
 			DocumentService.addDocument(document);
 			createActivity(attributes);
-		} else if (attributes[19].equals("In Case of Change")
+		} else if(attributes.length >= 20) {
+			if (attributes[19].equals("In Case of Change")
 				   || attributes[19].equals("Activity Not in GOSM")) {
 			createActivity(attributes);
+			}
 		} else {
 			createSubmission(attributes);
 		}
@@ -29,16 +33,18 @@ public class CreateData {
 	}
 	
 	private static void createActivity(String[] attributes) {
-		ActivityDetails actDet = new ActivityDetails();
-		
-		actDet.setDocuID(DocumentService.getDocumentByTitle(attributes[5]).getId());
-		actDet.setNature(attributes[12]);
-		actDet.setType(attributes[13]);
-		actDet.setVenue(attributes[15]);
-		actDet.setDate(attributes[11]);
-		actDet.setTime(attributes[14]);
-		
-		ActivityDetailsService.addActivityDetails(actDet);
+		//if(!attributes[4].equals("Pended")) {
+			ActivityDetails actDet = new ActivityDetails();
+			
+			actDet.setDocuID(DocumentService.getDocumentByTitle(attributes[5]).getId());
+			actDet.setNature(attributes[12]);
+			actDet.setType(attributes[13]);
+			actDet.setVenue(attributes[15]);
+			actDet.setDate(attributes[11]);
+			actDet.setTime(attributes[14]);
+			
+			ActivityDetailsService.addActivityDetails(actDet);
+		//}
 		
 		createSubmission(attributes);
 	}
@@ -61,11 +67,15 @@ public class CreateData {
 				subDet.setSasType(attributes[19]);
 			else subDet.setSasType("-");
 			SubmissionDetailsService.addSubmissionDetails(subDet);
-			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
-			createCheckingDetails(attributes, submissionID);
+			if(attributes.length >= 21) {
+				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
+				createCheckingDetails(attributes, submissionID);
+			}
 		} else {
-			submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
-			createCheckingDetails(attributes, submissionID);
+			if(attributes.length >= 21) {
+				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
+				createCheckingDetails(attributes, submissionID);
+			}
 		}
 	
 	}
@@ -88,10 +98,19 @@ public class CreateData {
 		if(!CheckingDetailsService.findSubmissionByID(submissionID) 
 				&& !attributes[20].equals("")) {
 			//create checking details
-			System.out.println(submissionID+"");
+			//System.out.println(submissionID+"");
 			CheckingDetails checkDet = new CheckingDetails();
-			checkDet.setCheckerName(attributes[21]);
-			checkDet.setDateChecked(attributes[22]);
+			try{
+				checkDet.setCheckerName(attributes[21]);
+			} catch(Exception e){
+				checkDet.setCheckerName("N/A");
+			}
+
+			try{
+				checkDet.setCheckerName(attributes[22]);
+			} catch(Exception e){
+				checkDet.setCheckerName("N/A");
+			}
 			
 			if(attributes.length >= 24)
 				checkDet.setRemarks(attributes[23]);

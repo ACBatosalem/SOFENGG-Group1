@@ -130,7 +130,7 @@ $(document).ready(function() {
     
     $('#username').on('focus', function(){
         if(flag) {
-            queryPrompt("Username should contain 5 - 40 characters and should contain only contain capital letters.");
+            queryPrompt("Username should contain 2 - 20 characters and should contain only contain capital letters and two spaces.");
             $('#add-prompt-message').fadeIn();
             error = false;
         }
@@ -145,13 +145,13 @@ $(document).ready(function() {
     $('#username').on('blur', function(){
         if(error) {
             $('#add-prompt-message').fadeOut(function(){
-                queryPrompt("Username should contain 5 - 40 characters and should contain only contain capital letters.");
+                queryPrompt("Username should contain 2 - 20 characters and should contain only contain capital letters and two spaces.");
             });
         }
     });
     
 
-    var usernameregex = /^([A-Z]{2,20}$)/;
+    var usernameregex = /^([A-Z]{2,}( )?[A-Z]*( )?[A-Z]*$)/;
     //var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
     /*function checkfullname (check) {
@@ -170,7 +170,7 @@ $(document).ready(function() {
     	else if(check.length > 20)
     		return "\nUsername must be 20 characters or less.";
     	else if (!usernameregex.test(check))
-    		return "\nUsername must only contain capital letters."
+    		return "\nUsername must only contain capital letters and two spaces."
     	else
     		return "";
     }

@@ -38,8 +38,8 @@ public class APSFilter implements Filter {
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 
 		if(dataGathered == 0) {
-	        String spreadsheetId = "1zKv-LbZydzzL8YoZIHrDUZQYn12_ctCeqFzmuxFt8uM";
-	        String range = "Sheet1";
+	        String spreadsheetId = "1ksvxm8IB0PXlR4C09GFDsb3I3o1qFDXLmDTcmMIrLlY";
+	        String range = "'CSO:APS'";
 	        
 	        List <LocalTime> times = new ArrayList <LocalTime> ();
 	        
