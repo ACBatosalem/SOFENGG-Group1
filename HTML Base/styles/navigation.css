@@ -1,0 +1,168 @@
+/* NAVIGATION */
+#nav{
+    display: table-cell;
+    min-height: 600px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+    width: 250px;
+    background-color: #35865C;
+}
+
+#nav_container{
+    width: 250px;
+    height: 1px;
+    display: inline-flex;
+    flex-grow: 1;
+}
+
+.nav-item {
+    line-height: 50px;
+    height: 50px;
+    width: 100%;
+    color: white;
+    font-family: "Palanquin";
+    font-size: 20px;
+}
+
+
+
+.nav-button {
+    position: relative;
+    border-top-style: none;
+    border-bottom-style: solid;
+    border-color: white;
+    border-left-style: none;
+    border-right-style: none;
+    background: none;
+    font-size: 18px;
+    border-width: 1px;
+    font-family: "Palanquin";
+}
+
+.nav-button:first-of-type {
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: white;
+}
+
+.nav-button:hover{
+    background-color: #4F9A63;
+    cursor: pointer;
+}
+
+.nav-button:hover > .triangle {
+    display: block;
+}
+
+.nav.label {
+    margin: 0px;
+    margin-bottom: 20px;
+    font-size: 30px;    
+    color: white;
+	font-family: "Palanquin";
+    text-align: center;
+}
+
+.label {
+    color: #35865C;
+    font-size: 20px;    
+    font-family: "Palanquin";
+    text-align: center;
+}
+
+.nav-button.selected {
+    background-color: #4F9A63;
+}
+
+.nav-button:not(.selected) > .triangle {
+    display: none;
+}
+
+#bottom_div{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding-bottom: 20px;
+}
+
+
+
+/* NAV HEADER */
+.label-header {    
+    width: 250px;
+    height: 100px;
+    background-color: white;
+    background-image: url(../resources/overlayed.png);
+    background-size: 400px;
+    border-radius: 3px 3px 0px 0px;
+    margin: 0px;
+    background-position: center -50px;
+}
+
+.label-header-overlay {
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    background-color: white;
+    opacity: 0.5;
+}
+
+.icon-holder-overlay {
+    width: 250px;
+    height: 50px;
+    background: white;
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    opacity: 0.5;
+    clip-path: circle(25% at 50% 0%);
+}
+
+#dlsu-logo {
+    position: absolute;
+    margin: 0 auto;
+    top: -30px;
+    z-index: 5;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+    width: 60px;
+}
+
+.icon-holder {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    background-image: url(../resources/overlayed.png);
+    background-size: 400px;
+    background-position: center -149px;
+    clip-path: circle(25% at 50% 0);
+}
+
+
+#header {
+    position: relative;
+    width: 250px;
+    height: 50px;
+}
+
+.triangle {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    right: -1px;
+    background: white;
+    -webkit-clip-path: polygon(90% 50%, 100% 100%, 100% 0);
+    clip-path: polygon(90% 50%, 100% 100%, 100% 0);
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+}

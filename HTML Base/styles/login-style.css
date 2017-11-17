@@ -1,0 +1,202 @@
+@import url('palanquin.css');
+
+/* BACKGROUNDS AND OVERLAY */
+#main_bg{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    background-size: 100% 100%;
+    background-image: url(../resources/DLSUBG.jpg);
+    z-index: -1;
+}
+
+#main_overlay{
+    position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height:100%;
+    width:100%;
+    z-index: -1;
+}
+
+
+/* LOGIN CONTAINERS */
+#login_container{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.login-main {     
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 480px;
+    box-shadow: 0px 1px 10px 2px #124B2E;
+}
+
+#login_content{
+    position: relative;
+    background-color: #35865C;   
+    margin: 0px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 5px;
+}
+
+/* HEADER */
+.label-header {    
+    width: 300px;
+    height: 120px;
+    background-color: white;
+    background-image: url(../resources/overlayed.png);
+    background-size: 300px;
+    border-radius: 3px 3px 0px 0px;
+    margin: 0px;
+}
+
+.label-header-overlay {
+    position: absolute;
+    width: 300px;
+    height: 120px;
+    background-color: white;
+    opacity: 0.5;
+}
+
+.icon-holder-overlay {
+    width: 300px;
+    height: 50px;
+    background: white;
+    position: absolute;
+    top: 0px;
+    z-index: 2;
+    opacity: 0.5;
+    clip-path: circle(20% at 50% 0%);
+}
+
+#dlsu-logo {
+    position: absolute;
+    margin: 0 auto;
+    top: -40px;
+    z-index: 5;
+    left: 0px;
+    right: 0px;
+    height: 75px;
+    width: 75px;
+}
+
+.icon-holder {
+    width: 300px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    background-image: url(../resources/overlayed.png);
+    background-size: cover;
+    background-position: center bottom;
+    clip-path: circle(20% at 50% 0);
+}
+
+/* LOGIN CONTENTS */
+.login {    
+    width: 80%;
+    resourcesize: none;
+	font-family: "Palanquin";
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.label {
+    padding-top: 5px;
+    margin: 0px;
+    margin-top: 0px;
+    font-size: 15px;    
+    color: white;
+	font-family: "Palanquin";
+}
+
+.label.header{
+    margin: 0px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#btn_login{
+    margin-top: 0px;
+    font-family: "Palanquin";
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #124B2E;
+    border: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 auto 0 auto;
+}
+
+
+
+
+#btn_login:hover, button#btn_login:hover{
+    background-color: #1F804E;
+    cursor: pointer;  
+}
+
+#login_msg {
+    font-weight: bolder;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#forgot_msg {
+    text-decoration: none;
+    width: 100%;
+    margin-top: 5px;
+}
+
+#forgot_msg:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+#forgotpassword {
+    height: 270px;
+    display: none;
+}
+
+button.btn {
+    margin-top: 5px;
+    font-family: "Palanquin";
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #124B2E;
+    border: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px auto 0 auto;
+}
+
+.btn:hover, button.btn:hover{
+    background-color: #1F804E;
+    cursor: pointer;  
+}

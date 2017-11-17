@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <style>
+            #green {
+                width: 300px;
+                height: 120px;
+                background-color: white;
+                background-image: url(overlayed.png);
+                background-size: 300px;
+            }
+            
+            #white {
+                width: 300px;
+                height: 250px;
+                background-color: green;
+            }
+            
+            #white-hole {
+                width: 300px;
+                height: 50px;
+                background-image: url(overlayed.png);
+                background-size: cover;
+                background-position: center bottom;
+                clip-path: circle(20% at 50% 0);
+            }
+            
+            #green-hole {
+                width: 300px;
+                height: 120px;
+                background: white;
+                position: absolute;
+                z-index: 5;
+                opacity: 0.5;
+                clip-path: circle(19% at 50% 0%);
+            }
+            
+            #white-overlay {
+                position: absolute;
+                width: 300px;
+                height: 120px;
+                background-color: white;
+                opacity: 0.5;
+            }
+            
+            #login {
+                 margin: auto; 
+            }
+            
+            body {
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id = "login"> 
+            <div id = "white-overlay"> </div>
+            <div id = "green">
+
+            </div>
+
+            <div id = "white">
+                <div id = "green-hole">
+
+                </div>
+                <div id = "white-hole">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

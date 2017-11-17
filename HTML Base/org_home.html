@@ -1,0 +1,314 @@
+<html>
+    <head>
+        <!-- librariesRARIES -->
+        <script src="libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
+        <script src="libraries/datatables/datatables.min.js" type="application/javascript"> </script>
+        <link type="text/css" href="libraries/datatables/datatables.css" rel="stylesheet">
+        <script src="libraries/jquery/jquery.dataTables.min.js" type="application/javascript"> </script>
+        <link type="text/css" href="libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        
+        <!-- SCRIPTS -->
+        <script src="scripts/dashboard.js" type="application/javascript"> </script>
+        <script src="scripts/notifications.js" type="application/javascript"> </script>
+        <script src="scripts/logout.js" type="application/javascript"> </script>
+        
+        
+        <!-- STYLES -->
+        <link type="text/css" href="styles/content.css" rel="stylesheet">
+        <link type="text/css" href="styles/navigation.css" rel="stylesheet">
+        <link type="text/css" href="styles/table-styles.css" rel ="stylesheet">
+        <link type="text/css" href="styles/dashboard-style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- BACKGROUNDS AND OVERLAYS -->
+        <div id="main-bg"></div>
+        <div id="main_overlay"></div>
+        
+        <!-- MODAL VIEW START -->
+        <div id="modal-view">
+            <!-- MODAL BACKGROUND -->
+            <div id = "modal-bg"> </div>
+            <!-- MODAL CONTENT START -->
+            <div id = "modal-container-outer">
+                <button id = "modal-close"> </button>
+                <label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
+                <label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
+
+                <div id = "modal-container">
+                    <div id = "modal-content">
+                        <section id = "details">
+                            <label class = "modal-label modal-division"> Details </label> <br>
+                            <label id = "time" class = "modal-label">Time: </label> <br>
+                            <label id = "venue" class = "modal-label"> Venue: </label> <br>
+                            <label id = "nature" class = "modal-label"> Nature of Activity: </label> <br>
+                            <label id = "type" class = "modal-label"> Type of Activity: </label> <br>
+                            <label id = "actDate" class = "modal-label"> Activity Date/s: </label> <br>
+                            <label id = "tieup" class = "modal-label"> Tie-up: </label>
+                        </section>
+
+                        <div class = "modal-group"> 
+                            <section id = "submission">
+                                <label class = "modal-label modal-division"> Submission </label> <br> 
+                                <label id = "submittedBy" class = "modal-label"> Submitted by: </label> <br> 
+                                <label id = "submitDate" class = "modal-label"> Date Submitted: </label> <br>
+                                <label id = "typeSAS" class = "modal-label"> Type of SAS Submission: </label> <br>
+                            </section>
+
+                            <section id = "checker">
+                                <label class = "modal-label modal-division"> Checker </label> <br>
+                                <label id = "checkedby" class = "modal-label"> Checked by: </label> <br>
+                                <label id = "dateChecked" class = "modal-label"> Date Checked </label> <br>
+                                <label id = "remarks" class = "modal-label"> Remarks: </label> <br>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL CONTENT END -->
+        </div>
+        <!-- MODAL VIEW END -->
+        <!-- MAIN VIEW START -->
+        <div id="main">
+            <!-- SIDE BAR NAVIGATION START -->
+            <nav id="nav">
+                <!-- TOP ITEMS -->
+                <div id="top_div">
+                    <!-- HEADER OVERLAY -->
+                    <div class = "label-header-overlay"> </div>
+                    <!-- HEADER IMAGE -->
+                    <div class = "label-header"> </div>
+                
+                    <!-- HEADER CONTENT START -->
+                    <div id="header">
+                        <!-- LOGIN ICON HOLDER -->
+                        <div class = "icon-holder"> </div>
+                        <!-- DLSU LOGO -->
+                        <img id = "dlsu-logo" src="resources/logo.png">
+                        <!-- ICON HOLDER OVERLAY -->
+                        <div class = "icon-holder-overlay"> </div>
+                    </div>
+                    
+                    <!-- WELCOME MESSAGE -->
+                    <p class="nav label"> Welcome Org </p>
+                    <!-- SUBMISSIONS BUTTON LINK START -->
+                    <button id="submissions" class="nav-item nav-button selected"> 
+                        <a class = "nav-link" href="getSubmissions"> 
+                            Submissions
+                        </a>
+                        <div class = "triangle"> </div>
+                    </button>
+                    <!-- SUBMISSIONS BUTTON LINK END -->
+                    <!-- STATISTICS BUTTON LINK START -->
+                    <button class = "nav-item nav-button"> 
+                        <a class = "nav-link" href="getStatistics"> 
+                            Statistics
+                        </a>
+                        <div class = "triangle"> </div>
+                    </button>
+                    <!-- STATISTICS BUTTON LINK END -->
+                </div>
+                <!-- BOTTOM ITEMS START -->
+                <div id="bottom_div">
+                    <!-- CHANGE PASSWORD BUTTON -->
+                    <button id="change_pw" class="nav-item nav-button"> 
+                        <a class = "nav-link" href="changePassword">
+                            Account Settings                       </a> 
+                        <div class = "triangle"> </div>
+                    </button>
+                    <!-- SIGN OUT BUTTON -->
+                    <button id="signout" class="nav-item nav-button">   
+                        <a class = "nav-link" href="changePassword">
+                            Logout
+                        </a> 
+                    </button>
+                </div>
+                <!-- BOTTOM ITEMS END -->
+            </nav>
+            <!-- SIDE BAR NAVIGATION END -->
+            
+            <!-- MAIN CONTENT START -->
+            <div id="main_content">
+                <!-- MAIN HEADER START -->
+                <div id="main_header">
+                    <!-- MAIN HEADER TITLE -->
+                    <h1 class="body_label head"> Submissions </h1>
+                </div>
+                <!-- MAIN BODY START -->
+                <div id="main_body">
+                    <div id = "table-container">
+                        <!-- TABLE SUBMISSIONS START -->
+                        <table id="table_submissions">
+                            <thead>
+                                <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                <tr class = "header"> 
+                                    <th class = "header timestamp"> Timestamp </th>
+                                    <th class = "header org"> Organization </th>
+                                    <th class = "header title"> Title </th>
+                                    <th class = "header status"> Status </th>
+                                </tr>
+                            </thead>
+
+                            <!-- DATA: SUBMISSIONS -->    
+                            <tbody>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>  
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>                       
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>                       
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>                       
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>                       
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>
+                                <tr>
+                                    <td> 12:00am</td>
+                                    <td> LSCS </td>
+                                    <td> ARW </td>
+                                    
+                                    <td class = "early_approved"> EARLY APPROVED </td>
+                                </tr>   
+                            </tbody>
+                            <tfoot>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- TABLE SUBMISSION LIST -->
+                </div>
+                <!-- MAIN BODY END -->
+            </div>
+            <!-- MAIN CONTENT END -->
+            
+            <!-- NOTIFICATIONS START -->
+            <div id = "notifications">
+                <div id = "notif-btn">
+                    <i class = "fa fa-bell-o notif_icon"> </i>
+                    <div class = "badge1" data-badge="10" id = "notif-count"> </div>
+                    <div class = "notif-label"> NOTIFICATIONS </div>                    
+                </div>
+                <ol id = "notifs-list">
+                    <li class = "unread">
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                    <li>
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                    <li>
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                    <li>
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                    <li>
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                    <li>
+                        <div class = "act-title"> Hovered Activity </div> 
+                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
+                        <div class = "act-timelapsed"> x minutes ago </div>
+                    </li>
+                </ol>
+            </div>
+            <!-- NOTIFICATIONS END -->
+        </div>
+        <!-- MAIN VIEW END -->
+    </body>
+</html>
