@@ -21,9 +21,8 @@
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
         
         <!-- SCRIPTS -->
-        <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
-        
+        <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
         <!-- STYLES -->
         <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
@@ -110,7 +109,7 @@
 	        </div>
 	        
 	        <div id = "main_body">
-	            <canvas id = "acads-non"> </canvas>
+	            <div id = "chart"> </div>
 	            <div class = "count-main">
 	                <div id = "acad" class = "count-container">
 	                    <label class = "label value"> ${academic} </label> <br>
