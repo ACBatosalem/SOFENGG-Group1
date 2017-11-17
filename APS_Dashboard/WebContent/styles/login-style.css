@@ -189,3 +189,29 @@ html, body {
     right: 10px;
     display: none;
 }
+
+
+#forgotpassword {
+    height: 270px;
+    display: none;
+}
+
+button.btn {
+    margin-top: 5px;
+    font-family: "Palanquin";
+    width: 50%;
+    font-size: 15px;
+    color: white;
+    background-color: #124B2E;
+    border: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 5px auto 0 auto;
+}
+
+.btn:hover, button.btn:hover{
+    background-color: #1F804E;
+    cursor: pointer;  
+}

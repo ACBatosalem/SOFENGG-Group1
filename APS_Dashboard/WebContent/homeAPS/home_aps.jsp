@@ -5,11 +5,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title> APS | Dashboard </title>
 		
+		<title> APS | Submissions </title>
+		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
+               
 		<!-- LIBRARIES -->
-		 <script> var context = "${pageContext.request.contextPath}"; </script>
-        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
+		<script> var context = "${pageContext.request.contextPath}"; </script>
+        <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
       
@@ -88,7 +90,7 @@
                         <!-- LOGIN ICON HOLDER -->
                         <div class = "icon-holder"> </div>
                         <!-- DLSU LOGO -->
-                        <img id = "dlsu-logo" src="resources/logo.png">
+                        <img id = "dlsu-logo" src="${pageContext.request.contextPath}/resources/logo.png">
                         <!-- ICON HOLDER OVERLAY -->
                         <div class = "icon-holder-overlay"> </div>
                     </div>
@@ -122,10 +124,10 @@
                 </div>
                 <!-- BOTTOM ITEMS START -->
                 <div id="bottom_div">
-                    <!-- CHANGE PASSWORD BUTTON -->
-                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/changePassword">
+                    <!-- ACCOUNT SETTINGS BUTTON -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
 	                    <button id="change_pw" class="nav-item nav-button"> 
-	                            Change Password
+	                            Account Settings
 	                        <div class = "triangle"> </div>
 	                    </button>
                     </a>
@@ -203,8 +205,7 @@
                                 <tr class = "header"> 
                                     <th class = "header timestamp"> Timestamp </th>
                                     <th class = "header org"> Organization </th>
-                                    <th class = "header title"> Title </th>
-                                	<!--<th class = "header date"> Date </th> -->    
+                                    <th class = "header title"> Title </th>   
                                     <th class = "header status"> Status </th>
                                 </tr>
                             </thead>

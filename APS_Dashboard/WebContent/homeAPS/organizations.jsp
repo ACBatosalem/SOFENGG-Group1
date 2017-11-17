@@ -5,11 +5,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title> APS | Dashboard </title>
 		
+		<title> APS | Dashboard </title>
+		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
+        
 		<!-- LIBRARIES -->
         <script> var context = "${pageContext.request.contextPath}"; </script>
-        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
@@ -31,6 +33,8 @@
         <div id="main_overlay"></div>
         
         <!-- MAIN VIEW START -->
+        <div id="main">
+                    <!-- MAIN VIEW START -->
         <div id="main">
             <!-- SIDE BAR NAVIGATION START -->
             <nav id="nav">
@@ -80,10 +84,10 @@
                 </div>
                 <!-- BOTTOM ITEMS START -->
                 <div id="bottom_div">
-                    <!-- CHANGE PASSWORD BUTTON -->
-                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/changePassword">
+                    <!-- ACCOUNT SETTINGS BUTTON -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
 	                    <button id="change_pw" class="nav-item nav-button"> 
-	                            Change Password
+	                            Account Settings
 	                        <div class = "triangle"> </div>
 	                    </button>
                     </a>

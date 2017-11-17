@@ -5,11 +5,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title> APS | Dashboard </title>
-		
+		<title> APS | Account Settings </title>
+		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
+        
 		<!-- LIBRARIES -->
-		 <script> var context = "${pageContext.request.contextPath}"; </script>
-        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
+		<script> var context = "${pageContext.request.contextPath}"; </script>
+        <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
       
@@ -29,8 +30,8 @@
     <div id = "main-bg"> </div>
     <div id = "main-overlay"> </div>
     
-<div id = "main">
-        <!-- SIDE BAR NAVIGATION START -->
+	<div id = "main">
+	<!-- SIDE BAR NAVIGATION START -->
         <nav id="nav">
             <!-- TOP ITEMS -->
             <div id="top_div">
@@ -60,7 +61,7 @@
                 </a>
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
                 	<button class = "nav-item nav-button"> 
                         Statistics
                     <div class = "triangle"> </div>
@@ -70,10 +71,10 @@
             </div>
             <!-- BOTTOM ITEMS START -->
             <div id="bottom_div">
-                <!-- CHANGE PASSWORD BUTTON -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/changePassword">
+                <!-- ACCOUNT SETTINGS BUTTON -->
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
                  <button id="change_pw" class="nav-item nav-button selected"> 
-                         Change Password
+                         Account Settings
                      <div class = "triangle"> </div>
                  </button>
                 </a>

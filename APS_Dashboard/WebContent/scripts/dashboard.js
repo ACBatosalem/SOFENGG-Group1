@@ -42,7 +42,7 @@ $(document).ready(function() {
         
         var org = $("#org-pick").val();
         
-        window.location = window.location.origin + "/APS_Dashboard/homeAPS?filter=" + f + "&org=" + org;
+        window.location = context + "/homeAPS?filter=" + f + "&org=" + org;
     });
     
     $('#non-acad-box').change(function() {
@@ -74,7 +74,7 @@ $(document).ready(function() {
         	f = "tf";
         }
     	
-    	window.location = window.location.origin + "/APS_Dashboard/homeAPS?filter=" + f + "&org=" + org;
+    	window.location = context + "/homeAPS?filter=" + f + "&org=" + org;
     });
     
     $('#table_submissions tbody').on('click', 'tr', function() {

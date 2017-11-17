@@ -4,15 +4,18 @@
 <html>
 	<head>
 		<title> Login </title>
+        <link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
         
         <!-- LIBRARIES -->
-        <script src="libraries/jquery-3.2.1.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
-        <link type="text/css" href="styles/login-style.css" rel="stylesheet"/>
+    	<link type="text/css" href="${pageContext.request.contextPath}/styles/login-style.css" rel="stylesheet"/>
+    	<link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet"/>
     	
     	<!-- SCRIPTS -->
-    	<script src="scripts/login.js" type = "application/javascript"> </script>
+    	<script src="${pageContext.request.contextPath}/scripts/modal.js" type = "application/javascript"> </script>
+    	<script src="${pageContext.request.contextPath}/scripts/login.js" type = "application/javascript"> </script>
     </head>
     <body>
         <!-- MAIN BG -->
@@ -60,7 +63,25 @@
                         </button>
                         <br/>
                         <!-- CHANGE PASSWORD LINK -->
-                        <a href = "forgotPassword" class="label" id="forgot_msg"> Forgot Password </a>
+                        <a class="label" id="forgot_msg"> Forgot Password </a>
+                    </form>
+                    <!-- FORM LOGIN END -->
+                    
+                    <!-- FORM LOGIN START -->
+                    <form id="forgotpassword" action="forgotPassword" method="post">
+                        <!-- LABEL HEADER -->
+                        <p class="label header"> Forgot password? </p>
+                        
+                        <!-- EMAIL -->
+                        <p class="label"> Please enter the email used by your organization in case of forgotten password. </p>
+                        <input id = "email" class="login password" type="email" name="email"/>
+                        
+                        <!-- ERROR MESSAGE -->
+                        <p class="label" id="forgot_msg_error"> </p>
+                        
+                        <!-- LOGIN MESSAGE -->
+                        <button class = "btn" id="btn_forgot" type="submit"> Submit </button>
+                        <button class = "btn" id="btn_back"> Cancel </button>
                     </form>
                     <!-- FORM LOGIN END -->
                 </div>

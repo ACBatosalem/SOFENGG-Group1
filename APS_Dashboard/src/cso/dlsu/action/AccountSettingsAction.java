@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author Ticug, Jonal Ray 
  * @version 1.0 
  */
-public class ChangePasswordAction implements ActionHandler {
+public class AccountSettingsAction implements ActionHandler {
 
 	/**
 	 * This function checks for a sessionID attribute in the session and redirects
-	 * the page to the change_password.jsp and forwards the needed request and response. 
+	 * the page to the account_settings.jsp and forwards the needed request and response. 
 	 * If the sessionID does not exist, it redirects to the home page.
 	 * @param request 	a HTTPServletRequest object which is being used by this 
 	 * 					handler which provides information for HTTP requests.    
@@ -32,7 +32,7 @@ public class ChangePasswordAction implements ActionHandler {
 		/* Checks the sessionID */
 		if ((Integer)request.getSession().getAttribute("sessionID") != null) {
 			/* Redirect to change password page */
-			request.getRequestDispatcher("change_password.jsp").forward(request, response);
+			request.getRequestDispatcher("account_settings.jsp").forward(request, response);
 		} else {
 			/* Redirects to the home page */
 			response.sendRedirect(request.getContextPath() + "/home");

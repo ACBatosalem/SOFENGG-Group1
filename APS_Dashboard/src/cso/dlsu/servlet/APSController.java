@@ -9,9 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cso.dlsu.action.*;
-import cso.dlsu.action.aps.*;
-import cso.dlsu.action.organization.*;
+import cso.dlsu.action.AccountSettingsAction;
+import cso.dlsu.action.ActionHandler;
+import cso.dlsu.action.FilteredSubmissionAction;
+import cso.dlsu.action.GetModalDataAction;
+import cso.dlsu.action.GetStatisticsAction;
+import cso.dlsu.action.HomeAction;
+import cso.dlsu.action.LoginAction;
+import cso.dlsu.action.LogoutAction;
+import cso.dlsu.action.UpdatePasswordAction;
+import cso.dlsu.action.aps.AddOrganizationAction;
+import cso.dlsu.action.aps.DeleteOrganizationAction;
+import cso.dlsu.action.aps.GetAllOrganizationsAction;
+import cso.dlsu.action.aps.GetOrganizationAction;
+import cso.dlsu.action.aps.SuccessLoginAPS;
+import cso.dlsu.action.organization.SuccessLoginOrg;
 
 /**
  * Servlet implementation class Controller
@@ -29,8 +41,8 @@ import cso.dlsu.action.organization.*;
 							"/homeAPS/getOrg",
 							"/homeAPS/getStatistics",
 							"/homeORG/getStatistics",
-							"/homeAPS/changePassword",
-							"/homeORG/changePassword",
+							"/homeAPS/accountSettings",
+							"/homeORG/accountSettings",
 							"/homeAPS/updatePassword",
 							"/homeORG/updatePassword",
 							"/homeAPS/filtered",
@@ -55,14 +67,14 @@ public class APSController extends HttpServlet {
         actions.put("/homeAPS/addOrg", new AddOrganizationAction());
         actions.put("/homeAPS/deleteOrg", new DeleteOrganizationAction());
         actions.put("/homeAPS/getOrg", new GetOrganizationAction());
-        actions.put("/homeAPS/changePassword", new ChangePasswordAction());
+        actions.put("/homeAPS/accountSettings", new AccountSettingsAction());
         actions.put("/homeAPS/updatePassword", new UpdatePasswordAction());
         actions.put("/homeAPS/getStatistics", new GetStatisticsAction());
 		actions.put("/homeAPS/filtered", new FilteredSubmissionAction());
 		
         actions.put("/homeORG", new SuccessLoginOrg());
         actions.put("/homeORG/updatePassword", new UpdatePasswordAction());
-        actions.put("/homeORG/changePassword", new ChangePasswordAction());
+        actions.put("/homeORG/accountSettings", new AccountSettingsAction());
 		actions.put("/homeORG/getStatistics", new GetStatisticsAction());
     }
 

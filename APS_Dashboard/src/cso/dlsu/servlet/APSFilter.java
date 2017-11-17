@@ -38,6 +38,7 @@ public class APSFilter implements Filter {
 		HttpServletResponse httpResponse = ((HttpServletResponse)response);
 
 		if(dataGathered == 0) {
+			/*
 	        String spreadsheetId = "1ksvxm8IB0PXlR4C09GFDsb3I3o1qFDXLmDTcmMIrLlY";
 	        String range = "'CSO:APS'";
 	        
@@ -54,6 +55,7 @@ public class APSFilter implements Filter {
 			} catch (NoInternetException e) {
 				e.reconnect();
 			}
+			*/
 		}
 		String path = ((HttpServletRequest)request).getServletPath();
 		

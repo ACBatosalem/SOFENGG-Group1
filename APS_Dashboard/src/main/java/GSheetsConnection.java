@@ -31,13 +31,7 @@ import com.google.api.services.sheets.v4.Sheets.Builder;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
-import cso.dlsu.bean.CheckingDetails;
-import cso.dlsu.bean.Document;
-import cso.dlsu.bean.SubmissionDetails;
-import cso.dlsu.service.CheckingDetailsService;
 import cso.dlsu.service.CreateData;
-import cso.dlsu.service.DocumentService;
-import cso.dlsu.service.SubmissionDetailsService;
 
 public class GSheetsConnection {
 	private static Sheets sheetsService;

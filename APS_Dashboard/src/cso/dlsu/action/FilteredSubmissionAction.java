@@ -6,9 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cso.dlsu.bean.Organization;
 import cso.dlsu.service.DashboardService;
-import cso.dlsu.service.OrganizationService;
 
 public class FilteredSubmissionAction implements ActionHandler{
 

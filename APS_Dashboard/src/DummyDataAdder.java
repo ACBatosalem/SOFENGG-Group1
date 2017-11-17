@@ -1,19 +1,3 @@
-import java.util.Random;
-import java.util.Date;
-import java.util.List;
-
-import cso.dlsu.bean.CheckingDetails;
-import cso.dlsu.bean.DashboardData;
-import cso.dlsu.bean.Document;
-import cso.dlsu.bean.Organization;
-import cso.dlsu.bean.TieUp;
-import cso.dlsu.bean.SubmissionDetails;
-import cso.dlsu.service.CheckingDetailsService;
-import cso.dlsu.service.DashboardService;
-import cso.dlsu.service.DocumentService;
-import cso.dlsu.service.OrganizationService;
-import cso.dlsu.service.SubmissionDetailsService;
-
 public class DummyDataAdder {
 	public static void main(String[] args) {
 		

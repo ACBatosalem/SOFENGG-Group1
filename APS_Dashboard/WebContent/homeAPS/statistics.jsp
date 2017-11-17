@@ -6,31 +6,28 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title> APS | Dashboard </title>
+		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
 		
-		<!-- LIBRARIES -->
-		 <script> var context = "${pageContext.request.contextPath}"; </script>
-        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
-        <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
-        <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
-      	<script src="${pageContext.request.contextPath}/libraries/Chart.js" type="application/javascript"> </script>
+        <script> 
+        	var context = "${pageContext.request.contextPath}";
+        	var acad = "${academic}";
+        	var nonacad = "${nonacademic}";
+        </script>
+        
+        <!-- LIBRARIES -->
+        <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/libraries/chartlist/chartlist.min.js" type="application/javascript"> </script>
+        
+        <link type="text/css" href="${pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
         
         <!-- SCRIPTS -->
-         <script> 
-         	var context = "${pageContext.request.contextPath}"; 
-         	var acad = "${academic}";
-         	var nonacad = "${nonacademic}";
-         </script>
-        <script src="${pageContext.request.contextPath}/scripts/dashboard.js" type="application/javascript"> </script>
-        <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/table-styles.css" rel ="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
-		
 </head>
 <body>
     <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
@@ -38,71 +35,71 @@
     <div id = "main-overlay"> </div>
     
 	<div id = "main">
-        <!-- SIDE BAR NAVIGATION START -->
-        <nav id="nav">
-            <!-- TOP ITEMS -->
-            <div id="top_div">
-                <!-- HEADER OVERLAY -->
-                <div class = "label-header-overlay"> </div>
-                <!-- HEADER IMAGE -->
-                <div class = "label-header"> </div>
-            
-                <!-- HEADER CONTENT START -->
-                <div id="header">
-                    <!-- LOGIN ICON HOLDER -->
-                    <div class = "icon-holder"> </div>
-                    <!-- DLSU LOGO -->
-                    <img id = "dlsu-logo" src="${pageContext.request.contextPath}/resources/logo.png">
-                    <!-- ICON HOLDER OVERLAY -->
-                    <div class = "icon-holder-overlay"> </div>
-                </div>
+            <!-- SIDE BAR NAVIGATION START -->
+            <nav id="nav">
+                <!-- TOP ITEMS -->
+                <div id="top_div">
+                    <!-- HEADER OVERLAY -->
+                    <div class = "label-header-overlay"> </div>
+                    <!-- HEADER IMAGE -->
+                    <div class = "label-header"> </div>
                 
-                <!-- WELCOME MESSAGE -->
-                <p class="nav label"> Welcome ${user.userName} </p>
-                <!-- SUBMISSIONS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}"> 
-                 <button id="submissions" class="nav-item nav-button"> 
-                         Submissions
-                		<div class = "triangle"> </div>
-                 </button>
-                </a>
-                <!-- SUBMISSIONS BUTTON LINK END -->
-                <!-- STATISTICS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
-                	<button class = "nav-item nav-button selected"> 
-                        Statistics
-                    <div class = "triangle"> </div>
-                	</button>
-                </a>
-                <!-- STATISTICS BUTTON LINK END -->
-                <!-- ORGANIZATIONS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getAllOrgs"> 
-                 <button id="orgs" class="nav-item nav-button"> 
-                         Organizations
-                     <div class = "triangle"> </div>
-                 </button>
-                </a>
-                <!-- ORGANIZATIONS BUTTON LINK END -->
-            </div>
-            <!-- BOTTOM ITEMS START -->
-            <div id="bottom_div">
-                <!-- CHANGE PASSWORD BUTTON -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/changePassword">
-                 <button id="change_pw" class="nav-item nav-button"> 
-                         Change Password
-                     <div class = "triangle"> </div>
-                 </button>
-                </a>
-                <!-- SIGN OUT BUTTON -->
-                <a class = "nav-link">
-                 <button id="signout" class="nav-item nav-button">   
-                         Logout	                       
-                 </button>
-                </a>
-            </div>
-            <!-- BOTTOM ITEMS END -->
-        </nav>
-        <!-- SIDE BAR NAVIGATION END -->
+                    <!-- HEADER CONTENT START -->
+                    <div id="header">
+                        <!-- LOGIN ICON HOLDER -->
+                        <div class = "icon-holder"> </div>
+                        <!-- DLSU LOGO -->
+                        <img id = "dlsu-logo" src="${pageContext.request.contextPath}/resources/logo.png">
+                        <!-- ICON HOLDER OVERLAY -->
+                        <div class = "icon-holder-overlay"> </div>
+                    </div>
+                    
+                    <!-- WELCOME MESSAGE -->
+                    <p class="nav label"> Welcome ${user.userName} </p>
+                    <!-- SUBMISSIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}"> 
+	                    <button id="submissions" class="nav-item nav-button"> 
+	                            Submissions
+                    		<div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SUBMISSIONS BUTTON LINK END -->
+                    <!-- STATISTICS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
+	                   	<button class = "nav-item nav-button selected"> 
+	                           Statistics
+	                       <div class = "triangle"> </div>
+	                   	</button>
+                    </a>
+                    <!-- STATISTICS BUTTON LINK END -->
+                    <!-- ORGANIZATIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getAllOrgs"> 
+	                    <button id="orgs" class="nav-item nav-button"> 
+	                            Organizations
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- ORGANIZATIONS BUTTON LINK END -->
+                </div>
+                <!-- BOTTOM ITEMS START -->
+                <div id="bottom_div">
+                    <!-- ACCOUNT SETTINGS BUTTON -->
+                    <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
+	                    <button id="change_pw" class="nav-item nav-button"> 
+	                            Account Settings
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SIGN OUT BUTTON -->
+                    <a class = "nav-link">
+	                    <button id="signout" class="nav-item nav-button">   
+	                            Logout	                       
+	                    </button>
+                    </a>
+                </div>
+                <!-- BOTTOM ITEMS END -->
+            </nav>
+            <!-- SIDE BAR NAVIGATION END -->
 
 		<!-- MAIN CONTENT START -->
 	    <div id="main_content">

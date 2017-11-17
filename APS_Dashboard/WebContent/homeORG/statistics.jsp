@@ -5,32 +5,28 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title> APS | Dashboard </title>
-		
-		<!-- LIBRARIES -->
-		 <script> var context = "${pageContext.request.contextPath}"; </script>
-        <script src="${pageContext.request.contextPath}/libraries/jquery-3.2.1.js" type="application/javascript"> </script>
-        <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
-        <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
-      	<script src="${pageContext.request.contextPath}/libraries/Chart.js" type="application/javascript"> </script>
+		<title> APS | Statistics </title>
+		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
         
-        <!-- SCRIPTS -->
-         <script> 
+		<script> 
          	var context = "${pageContext.request.contextPath}"; 
          	var acad = "${academic}";
          	var nonacad = "${nonacademic}";
-         </script>
-        <script src="${pageContext.request.contextPath}/scripts/dashboard.js" type="application/javascript"> </script>
-        <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
-        <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
+        </script>
+        <!-- LIBRARIES -->
+       	<script src="{pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
+        <script src="{pageContext.request.contextPath}/libraries/chartlist/chartlist.min.js" type="application/javascript"> </script>
+        <link type="text/css" href="{pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        
+        <!-- SCRIPTS -->
+        <script src="{pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
+        <script src="{pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/table-styles.css" rel ="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
-		
+        <link type="text/css" href="{pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
+        <link type="text/css" href="{pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
+        <link type="text/css" href="{pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
+        
 </head>
 <body>
     <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
@@ -38,7 +34,7 @@
     <div id = "main-overlay"> </div>
     
 	<div id = "main">
-        <!-- SIDE BAR NAVIGATION START -->
+       	<!-- SIDE BAR NAVIGATION START -->
         <nav id="nav">
             <!-- TOP ITEMS -->
             <div id="top_div">
@@ -68,8 +64,8 @@
                 </a>
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
-                	<button class = "nav-item nav-button selected"> 
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
+                	<button class = "nav-item nav-button"> 
                         Statistics
                     <div class = "triangle"> </div>
                 	</button>
@@ -78,10 +74,10 @@
             </div>
             <!-- BOTTOM ITEMS START -->
             <div id="bottom_div">
-                <!-- CHANGE PASSWORD BUTTON -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/changePassword">
-                 <button id="change_pw" class="nav-item nav-button"> 
-                         Change Password
+                <!-- ACCOUNT SETTINGS BUTTON -->
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
+                 <button id="change_pw" class="nav-item nav-button selected"> 
+                         Account Settings
                      <div class = "triangle"> </div>
                  </button>
                 </a>

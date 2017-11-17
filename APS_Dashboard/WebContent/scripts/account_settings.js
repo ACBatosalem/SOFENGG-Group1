@@ -1,4 +1,30 @@
 $(document).ready(function(){
+    $('.edit-btn').click(function() {
+        if($('#' + $(this).attr('data-input')).is(':disabled')) {
+            $('#' + $(this).attr('data-button')).removeClass('fa-pencil');
+            $('#' + $(this).attr('data-button')).addClass('fa-save');
+        } else {
+            var text = $('#' + $(this).attr('data-input')).text();
+            $('#' + $(this).attr('data-button')).removeClass('fa-save');
+            $('#' + $(this).attr('data-button')).addClass('fa-pencil');
+            var fn = window[$('#' + $(this).attr('data-function'))];
+
+            if (typeof fn === "function") 
+                fn.apply(null, [text]);
+        }
+        
+        $('#' + $(this).attr('data-input')).prop('disabled', !$('#' + $(this).attr('data-input')).is(':disabled'));
+        console.log($(this).attr('data-input'));
+        
+        function saveSheets (text) {
+            
+        }
+        
+        function saveEmail (text) {
+            
+        }
+    });
+    
 	$("#changePasswordForm").submit(function(e){
 		e.preventDefault();
 		
