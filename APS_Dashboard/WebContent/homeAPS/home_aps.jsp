@@ -37,11 +37,12 @@
             <!-- MODAL CONTENT START -->
             <div id = "modal-container-outer">
                 <button id = "modal-close"> </button>
-                <label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
-                <label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
-
+                
                 <div id = "modal-container">
                     <div id = "modal-content">
+                    	<label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
+                		<label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
+                    	
                         <section id = "details">
                             <label class = "modal-label modal-division"> Details </label> <br>
                             <label id = "time" class = "modal-label">Time: </label> <br>

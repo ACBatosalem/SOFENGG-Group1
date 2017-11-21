@@ -4,11 +4,12 @@
     position: relative;
     padding-left: 20px;
     padding-right: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     cursor: pointer;
     font-size: 20px;
     user-select: none;
 }
+
 
 .container input {
   position: absolute;
@@ -308,16 +309,18 @@ section#details {
     background: white;
     right: 0;
     box-shadow: 0px 0px 5px 1px gray;
-    height: 85%;
+    height: 95%;
     bottom: 0;
-    right: -35%;
     width: 35%;
+    right: -35%;
 }
 
-#notif-btn {
-    cursor: hand;
+.notif-container {
     box-shadow: 0px -2px 10px 0px gray;
-    z-index: 10;
+    z-index: 4;
+    min-height: 50px;
+    max-height: 50px;
+    height: 50px;
     background: #35865C;
     width: calc(100% + 50px);
     border-radius: 5px 0px 0px 5px;
@@ -336,7 +339,7 @@ section#details {
     font-size: 30px;
     opacity: 0.895;
     transition: 0.2s;
-    cursor: hand;
+    cursor: pointer;
     padding: 10px;
 }
 
@@ -349,8 +352,8 @@ section#details {
     padding: 0px;
     left: 0px;
     list-style: none;
-    overflow-y: scroll;
-    height: 100%;
+    overflow-y: auto;
+    height: calc(100% - 50px);
 }
 
 #notifs-list::-webkit-scrollbar-track {
@@ -375,6 +378,7 @@ section#details {
     margin: 0px 0px;
     padding: 0px 10px;
     color: #35865C;
+    position: relative;
     border-bottom: 1px #35865C solid;
     cursor: pointer;
     transition: 0.2s;
@@ -453,10 +457,13 @@ section#details {
     top: 0px;
     height: 100%;
     left: 0px;
+    width: calc(100% - 100px);
+    z-index: 0;
     line-height: 50px;
     color: white;
     text-align: center;
-    width: 100%;
+    margin: 0 auto;
+    right: 0px;
 }
 
 #modal-action {
@@ -536,3 +543,20 @@ section#details {
     background: #B3BCC2;
     cursor: pointer;
 }
+#notif-btn {
+    cursor: pointer;
+    opacity: 0.8;
+    width: 50px;
+    cursor: pointer;
+}
+
+#notif-btn:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+
+#notif-clear {
+    
+}
+
+

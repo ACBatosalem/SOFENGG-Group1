@@ -17,14 +17,6 @@ $(document).ready(function() {
             "info": ""
         }
     }).columns.adjust().draw();
-
-    $(document).resize(function() {
-        table.columns.adjust().draw();
-    });
-    
-    $(window).resize(function() {
-        table.columns.adjust().draw();
-    });
     
     var addclose = "#add-close";
     $(addclose).on('click', function(){
@@ -39,6 +31,8 @@ $(document).ready(function() {
             $("#add-message").animate({width:'toggle'}, 420, function(){
                 $("#add-organization").animate({width:'toggle'}, 420);
             });
+            
+            $('#add-prompt-message').fadeOut();
         }
     });
     
@@ -115,8 +109,8 @@ $(document).ready(function() {
     
     $('.delete-org').on('click', function(){
         var orgID = $(this).attr('data-id');
-        alert("DELETED " + orgID);
         deleteOrg(orgID);
+        modalMessage("Are you sure you want to delete this?")
     });
     
     $('#undo-toast').on('click', function(){
@@ -124,4 +118,43 @@ $(document).ready(function() {
         alert("DELETED " + orgID);
         deleteOrg(orgID);
     });
+    
+    function modalMessage (message, neg, negact, pos, posact) {
+        var modalAct = document.createElement('div');
+        var modalBg = document.createElement('div');
+        var modalCon = document.createElement('div');
+        var modalTit = document.createElement('div');
+        var buttonYes = document.createElement('button');
+        var buttonNo = document.createElement('button');
+
+        $(modalAct).attr('id', 'modal-action');
+        $(modalBg).attr('id', 'modal-action-bg');
+        $(modalCon).attr('id', 'modal-action-content');
+        $(modalTit).attr('id', 'modal-action-label');
+        $(modalTit).text(message);
+
+        $(modalCon).append(modalTit);
+        
+    
+        if(neg != null) {       
+            $(buttonNo).addClass('modal-action-neg');
+            $(buttonNo).text(neg);
+            $(buttonNo).click(negact);
+            $(modalCon).append(buttonNo);
+        }
+
+        if(pos != null) {  
+            $(buttonYes).addClass('modal-action-pos');
+            $(buttonYes).text(pos);
+            $(buttonYes).click(posact);
+            $(modalCon).append(buttonYes);
+        }
+
+        $(modalAct).append(modalBg);
+        $(modalAct).append(modalCon);
+
+        $('body').append(modalAct);
+        $(buttonYes).focus();
+        $(buttonNo).focus();
+    }
 });

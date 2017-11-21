@@ -8,7 +8,6 @@ $(document).ready(function() {
         "lengthChange": true,
         "searching": true,
         "pageLength": 15,
-        "sScrollX": "100%",
         "scrollX": "100%",
         "autoWidth": false,
         "pageLength": 10,
@@ -17,10 +16,6 @@ $(document).ready(function() {
             "lergthMenu": "Display _MENU_ records"
         }
     }).columns.adjust().draw();
-    
-    $(window).resize(function(){
-        table.columns.adjust().draw();
-    });
     
     /*$('#acad-box').prop('checked', true);
     $('#non-acad-box').prop('checked', true);*/

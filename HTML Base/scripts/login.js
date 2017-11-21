@@ -18,14 +18,14 @@ $(document).ready(function(){
     $('#btn_forgot').on('click', function(e){
         e.preventDefault();
         modalMessage("An email has been sent to sample@email.com. ", 
-                        null, 
-                        null, 
-                        "OK",
-                        function(){
-                            $('#forgotpassword').fadeOut(function() {
-                                $('#loginform').fadeIn(); 
-                                $('#modal-action').fadeOut();
-                            });
-                        });
+            null, 
+            null, 
+            "OK",
+            function(){
+                $('#forgotpassword').fadeOut(function() {
+                    $('#loginform').fadeIn(); 
+                    $('#modal-action').fadeOut();
+                });
+            });
     });
 });

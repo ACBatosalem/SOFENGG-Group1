@@ -56,6 +56,7 @@ public class APSFilter implements Filter {
 				e.reconnect();
 			}
 			dataGathered = 1;
+
 			
 		}
 		String path = ((HttpServletRequest)request).getServletPath();

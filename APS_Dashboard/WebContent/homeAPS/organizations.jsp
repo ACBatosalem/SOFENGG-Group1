@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
-		<title> APS | Dashboard </title>
+		<title> APS | Organizations </title>
 		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
         
 		<!-- LIBRARIES -->

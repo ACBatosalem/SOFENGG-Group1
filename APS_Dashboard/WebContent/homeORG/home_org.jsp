@@ -40,11 +40,12 @@
 	            <!-- MODAL CONTENT START -->
 	            <div id = "modal-container-outer">
 	                <button id = "modal-close"> </button>
-	                <label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
-	                <label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
-	
+	                
 	                <div id = "modal-container">
 	                    <div id = "modal-content">
+	                    	<label id = "act-name" class = "modal-label modal-title"> Activity Title </label> <br>
+	                		<label id = "org-name" class = "modal-label modal-title"> Organization Name </label> <br>
+	
 	                        <section id = "details">
 	                            <label class = "modal-label modal-division"> Details </label> <br>
 	                            <label id = "time" class = "modal-label">Time: </label> <br>
@@ -100,7 +101,7 @@
 	                <p class="nav label"> Welcome ${user.userName} </p>
 	                <!-- SUBMISSIONS BUTTON LINK START -->
 	                <a class = "nav-link" href="${pageContext.request.contextPath}"> 
-	                 <button id="submissions" class="nav-item nav-button"> 
+	                 <button id="submissions selected" class="nav-item nav-button"> 
 	                         Submissions
 	                		<div class = "triangle"> </div>
 	                 </button>
@@ -119,7 +120,7 @@
 	            <div id="bottom_div">
 	                <!-- ACCOUNT SETTINGS BUTTON -->
 	                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
-	                 <button id="change_pw" class="nav-item nav-button selected"> 
+	                 <button id="change_pw" class="nav-item nav-button"> 
 	                         Account Settings
 	                     <div class = "triangle"> </div>
 	                 </button>

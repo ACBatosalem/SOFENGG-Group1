@@ -43,6 +43,7 @@ $(document).ready(function() {
             $("#add-message").animate({width:'toggle'}, 420, function(){
                 $("#add-organization").animate({width:'toggle'}, 420);
             });
+            $('#add-prompt-message').fadeOut();
         }
     });
     
@@ -130,7 +131,7 @@ $(document).ready(function() {
     
     $('#username').on('focus', function(){
         if(flag) {
-            queryPrompt("Username should contain 2 - 20 characters and should contain only contain capital letters and two spaces.");
+            queryPrompt("Username should contain 2 - 20 characters and should only contain capital letters and up to two non-successive spaces.");
             $('#add-prompt-message').fadeIn();
             error = false;
         }
@@ -145,7 +146,7 @@ $(document).ready(function() {
     $('#username').on('blur', function(){
         if(error) {
             $('#add-prompt-message').fadeOut(function(){
-                queryPrompt("Username should contain 2 - 20 characters and should contain only contain capital letters and two spaces.");
+            	queryPrompt("Username should contain 2 - 20 characters and should only contain capital letters and up to two non-successive spaces.");
             });
         }
     });
@@ -221,8 +222,18 @@ $(document).ready(function() {
     });
 	
     $('.delete-org').on('click', function(){
-        var orgID = $(this).attr('data-orgID');
-        deleteOrg(orgID, $(this).parent().parent());
+    	var deletedRow = this;
+    	modalMessage("Are you sure you want to delete this?",
+    			"No",
+    			function(){
+    				$("#modal-action").remove();
+    			},
+    			"Yes",
+    			function(){
+    		        var orgID = $(deletedRow).attr('data-orgID');
+    		        deleteOrg(orgID, $('.delete-org[data-orgID="' + orgID + '"]').parent().parent());
+    		        $("#modal-action").remove();
+    			});
     });
     
     $('#undo-toast').on('click', function(){
@@ -230,4 +241,43 @@ $(document).ready(function() {
         deleteOrg(orgID, $('.delete-org[data-orgID="' + orgID + '"]').parent().parent());
         $('#add-notif').slideUp();
     });
+    
+    function modalMessage (message, neg, negact, pos, posact) {
+        var modalAct = document.createElement('div');
+        var modalBg = document.createElement('div');
+        var modalCon = document.createElement('div');
+        var modalTit = document.createElement('div');
+        var buttonYes = document.createElement('button');
+        var buttonNo = document.createElement('button');
+
+        $(modalAct).attr('id', 'modal-action');
+        $(modalBg).attr('id', 'modal-action-bg');
+        $(modalCon).attr('id', 'modal-action-content');
+        $(modalTit).attr('id', 'modal-action-label');
+        $(modalTit).text(message);
+
+        $(modalCon).append(modalTit);
+        
+    
+        if(neg != null) {       
+            $(buttonNo).addClass('modal-action-neg');
+            $(buttonNo).text(neg);
+            $(buttonNo).click(negact);
+            $(modalCon).append(buttonNo);
+        }
+
+        if(pos != null) {  
+            $(buttonYes).addClass('modal-action-pos');
+            $(buttonYes).text(pos);
+            $(buttonYes).click(posact);
+            $(modalCon).append(buttonYes);
+        }
+
+        $(modalAct).append(modalBg);
+        $(modalAct).append(modalCon);
+
+        $('body').append(modalAct);
+        $(buttonYes).focus();
+        $(buttonNo).focus();
+    }
 });
