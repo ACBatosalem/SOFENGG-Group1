@@ -35,6 +35,7 @@ public class OrganizationService {
 		//org.setName(set.getString(Organization.COL_FULLNAME));
 		org.setUserName(set.getString(Organization.COL_USERNAME));
 		org.setPassword(set.getString(Organization.COL_PASSWORD));
+		org.setEmail(set.getString(Organization.COL_EMAIL));
 		return org;
 	}
 	
@@ -48,7 +49,7 @@ public class OrganizationService {
 		boolean added = false;
 		PreparedStatement statement = null;
 		String query = "INSERT INTO " + Organization.TABLE + " " +
-						"VALUES (?, ?, ?);";
+						"VALUES (?, ?, ?, ?);";
 		
 		try {
 			connection.setAutoCommit(false);
@@ -58,6 +59,7 @@ public class OrganizationService {
 			//statement.setString(2, org.getName());
 			statement.setString(2, org.getUserName());
 			statement.setString(3, org.getPassword());
+			statement.setString(4, org.getEmail());
 			
 			statement.executeUpdate();
 			added = true;
@@ -393,7 +395,8 @@ public class OrganizationService {
 		String query = "UPDATE " + Organization.TABLE + " " +
 						"SET " + //Organization.COL_FULLNAME + " = ?, " +
 						Organization.COL_USERNAME + " = ?, " +
-						Organization.COL_PASSWORD + " = ? " + 
+						Organization.COL_PASSWORD + " = ?, " +
+						Organization.COL_EMAIL 	  + " = ?  " + 
 						"WHERE " + Organization.COL_ID + " = ?";
 		
 		try {
@@ -403,7 +406,8 @@ public class OrganizationService {
 			//statement.setString(1, newinfo.getName());
 			statement.setString(1, newinfo.getUserName());
 			statement.setString(2, newinfo.getPassword());
-			statement.setInt(3, id);
+			statement.setString(3, newinfo.getEmail());
+			statement.setInt(4, id);
 			
 			statement.executeUpdate();
 			updated = true;

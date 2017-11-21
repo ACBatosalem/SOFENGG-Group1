@@ -12,12 +12,14 @@ public class Organization {
 	private int id;
 	private String userName;
 	private String password;
+	private String email;
 	
 	public static final String TABLE = "orgs";
 	public static final String COL_ID = "org_id";
 	//public static final String COL_FULLNAME = "fullname";
 	public static final String COL_USERNAME = "username";
 	public static final String COL_PASSWORD = "password";
+	public static final String COL_EMAIL = "email";
 	
 	/**
 	 * This function is used to get the id of the organization.
@@ -74,14 +76,32 @@ public class Organization {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	/**
+	 * This function is used to get the email of the organization.
+	 * @return the email of the organization
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * This function is used to set the email of the organization.
+	 * @param email the email of the organization
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Organization [id=" + id + ", userName=" + userName + ", password=" + password + "]";
+		return "Organization [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email + "]";
 	}
+
+
 
 	/*@Override
 	public String toString() {

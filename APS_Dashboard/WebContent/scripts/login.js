@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("#loginform").submit(function(e){
 		e.preventDefault();
-		var username = $("#login_username").val().trim();		
+		var username = $("#login_username").val();		
 		var pw = $("#login_password").val();		
 		if (username == "" || pw == "") {		
 			$("#login_msg").text("Please fill out all fields.");

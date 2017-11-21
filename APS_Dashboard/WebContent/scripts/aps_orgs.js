@@ -152,7 +152,7 @@ $(document).ready(function() {
     });
     
 
-    var usernameregex = /^([A-Z]{2,}( )?[A-Z]*( )?[A-Z]*$)/;
+    var usernameregex = /^(([A-Z]{1,}?(\s{1}[A-Z]{1,})?(\s{1}[A-Z]{1,})?))$/;
     //var fullnameregex = /^([A-Za-z]{2,2})([A-Za-z\s]{5,80}$)/;
 
     /*function checkfullname (check) {
@@ -171,7 +171,7 @@ $(document).ready(function() {
     	else if(check.length > 20)
     		return "\nUsername must be 20 characters or less.";
     	else if (!usernameregex.test(check))
-    		return "\nUsername must only contain capital letters and two spaces."
+    		return "\nUsername must only contain capital letters and two non-successive spaces."
     	else
     		return "";
     }

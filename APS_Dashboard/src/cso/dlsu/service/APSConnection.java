@@ -111,7 +111,8 @@ public class APSConnection {
 		                + Organization.COL_ID 		+ 	" integer PRIMARY KEY AUTOINCREMENT,"
 		                //+ Organization.COL_FULLNAME + 	" text NOT NULL UNIQUE,"
 		                + Organization.COL_USERNAME + 	" text NOT NULL UNIQUE," 
-		                + Organization.COL_PASSWORD + 	" text"
+		                + Organization.COL_PASSWORD + 	" text,"
+		                + Organization.COL_EMAIL 	+ 	" text"
 		                + ");"; 
 				executeQueryForTables(connection, query, Organization.TABLE);
 				createAccountAPS(connection);
