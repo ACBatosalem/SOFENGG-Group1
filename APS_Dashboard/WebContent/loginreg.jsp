@@ -67,20 +67,16 @@
                     </form>
                     <!-- FORM LOGIN END -->
                     
-                    <!-- FORM LOGIN START -->
+					<!-- FORM LOGIN START -->
                     <form id="forgotpassword" action="forgotPassword" method="post">
                         <!-- LABEL HEADER -->
                         <p class="label header"> Forgot password? </p>
                         
                         <!-- EMAIL -->
-                        <p class="label"> Please enter the email used by your organization in case of forgotten password. </p>
-                        <input id = "email" class="login password" type="email" name="email"/>
-                        
-                        <!-- ERROR MESSAGE -->
-                        <p class="label" id="forgot_msg_error"> </p>
+                        <p class="label"> Do you want to send an email to sample@dlsu.edu.ph? </p>
                         
                         <!-- LOGIN MESSAGE -->
-                        <button class = "btn" id="btn_forgot" type="submit"> Submit </button>
+                        <button class = "btn" id="btn_forgot" type="submit"> Yes </button>
                         <button class = "btn" id="btn_back"> Cancel </button>
                     </form>
                     <!-- FORM LOGIN END -->
