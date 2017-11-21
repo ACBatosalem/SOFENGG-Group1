@@ -14,9 +14,13 @@ public class NoInternetException extends Exception {
 	
 	public void reconnect () throws IOException {
 		Sheets sheetsService = null;
+		int tries = 0;
 		
 		do {
 			sheetsService = GSheetsConnection.getSheetsService();
-		} while (sheetsService == null);
+			tries++;
+		} while (sheetsService == null && tries < 3);
+		System.out.println("WALA NA SAWA NA AKO");
+		//GSheetsConnection.processData();
 	}
 }

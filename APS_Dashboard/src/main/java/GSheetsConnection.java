@@ -101,12 +101,18 @@ public class GSheetsConnection {
     		String data = getDataInString(spreadsheetId, range);
     		if(data != null){
     			generateFile("table.csv", data);
+                newFile = 1;
     			processData();
-    			newFile = 1;
+    			
     			System.out.println("new file");
-    		} else System.out.println("old file");
+    		} else {
+               
+                //processData();
+                System.out.println("old file");
+            }
 		} catch (UnknownHostException u) {
 			throw new NoInternetException();
+
 		} catch (IOException e) {
             e.printStackTrace();
 			System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Credentials file not found!");
@@ -133,7 +139,7 @@ public class GSheetsConnection {
     	}	*/
     }
     
-    private static void processData() {
+    public static void processData() {
 		// TODO Auto-generated method stub
     	Path pathToFile = Paths.get("C:/dlsu-cso/table.csv");
     	System.out.println(pathToFile);
@@ -150,17 +156,18 @@ public class GSheetsConnection {
 
             // loop until all lines are read
             while (line != null) {
-
+               // System.out.println(i);
+               // i++;
                 // use string.split to load a string array with the values from
                 // each line of
                 // the file, using a comma as the delimiter
                 attributes = line.split(">>");
                 //TODO check if db is empty
-               // for(String att:attributes)
-                //	System.out.println(att);
+                //for(int ctr = 0; ctr < attributes.length; ctr++)
+                //	System.out.println(ctr + " " + attributes[ctr]);
                // if (DocumentService.getAllDocuments().size() == 0)
                 	CreateData.createDocument(attributes);
-                	i++;
+                
                 //else
                 	
 

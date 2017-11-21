@@ -39,22 +39,24 @@ public class APSFilter implements Filter {
 
 		if(dataGathered == 0) {
 			
-//	        String spreadsheetId = "1ksvxm8IB0PXlR4C09GFDsb3I3o1qFDXLmDTcmMIrLlY";
-//	        String range = "'CSO:APS'";
-//	        
-//	        List <LocalTime> times = new ArrayList <LocalTime> ();
-//	        
-//	        times.add(LocalTime.of(8, 0));
-//	        times.add(LocalTime.of(12, 0));
-//	        times.add(LocalTime.of(15,5));
-//	        times.add(LocalTime.of(16, 0));
-//	        
-//	        try {
-//				GSheetsConnection.start(spreadsheetId, range, times);
-//				dataGathered = 1;
-//			} catch (NoInternetException e) {
-//				e.reconnect();
-//			}
+	        String spreadsheetId = "1ksvxm8IB0PXlR4C09GFDsb3I3o1qFDXLmDTcmMIrLlY";
+	        String range = "'CSO:APS'";
+	        
+	        List <LocalTime> times = new ArrayList <LocalTime> ();
+	        
+	        times.add(LocalTime.of(8, 0));
+	        times.add(LocalTime.of(12, 0));
+	        times.add(LocalTime.of(15,5));
+	        times.add(LocalTime.of(16, 0));
+	        
+	        try {
+				GSheetsConnection.start(spreadsheetId, range, times);
+				
+			} catch (NoInternetException e) {
+				e.reconnect();
+			}
+			dataGathered = 1;
+
 			
 		}
 		String path = ((HttpServletRequest)request).getServletPath();
