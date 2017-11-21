@@ -14,18 +14,18 @@
          	var nonacad = "${nonacademic}";
         </script>
         <!-- LIBRARIES -->
-       	<script src="{pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
-        <script src="{pageContext.request.contextPath}/libraries/chartlist/chartlist.min.js" type="application/javascript"> </script>
-        <link type="text/css" href="{pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+       	<script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/libraries/chartlist/chartlist.min.js" type="application/javascript"> </script>
+        <link type="text/css" href="${pageContext.request.contextPath}/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
         
         <!-- SCRIPTS -->
-        <script src="{pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
-        <script src="{pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/scripts/statistics.js" type="application/javascript"> </script>
+        <script src="${pageContext.request.contextPath}/scripts/logout.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
-        <link type="text/css" href="{pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
-        <link type="text/css" href="{pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
-        <link type="text/css" href="{pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/statistics.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/content.css" rel="stylesheet">
+        <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
         
 </head>
 <body>
@@ -64,8 +64,8 @@
                 </a>
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
-                	<button class = "nav-item nav-button"> 
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
+                	<button class = "nav-item nav-button selected"> 
                         Statistics
                     <div class = "triangle"> </div>
                 	</button>
@@ -75,8 +75,8 @@
             <!-- BOTTOM ITEMS START -->
             <div id="bottom_div">
                 <!-- ACCOUNT SETTINGS BUTTON -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
-                 <button id="change_pw" class="nav-item nav-button selected"> 
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/accountSettings">
+                 <button id="change_pw" class="nav-item nav-button"> 
                          Account Settings
                      <div class = "triangle"> </div>
                  </button>
@@ -101,7 +101,7 @@
 	        </div>
 	        
 	        <div id = "main_body">
-	            <canvas id = "acads-non"> </canvas>
+	            <div id = "chart"> </div>
 	            <div class = "count-main">
 	                <div id = "acad" class = "count-container">
 	                    <label class = "label value"> ${academic} </label> <br>

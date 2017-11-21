@@ -23,7 +23,8 @@
         <link type="text/css" href="${pageContext.request.contextPath}/styles/navigation.css" rel="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/table-styles.css" rel ="stylesheet">
         <link type="text/css" href="${pageContext.request.contextPath}/styles/dashboard-style.css" rel="stylesheet">
-        <link type="text/css" href="${pageContext.request.contextPath}/styles/change_pass.css" rel="stylesheet">
+         <link type="text/css" href="${pageContext.request.contextPath}/styles/account_settings.css" rel="stylesheet">
+       
 </head>
 <body>
     <!-- WEB PAGE BACKGROUND AND OVERLAYS -->
@@ -61,7 +62,7 @@
                 </a>
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
                 	<button class = "nav-item nav-button"> 
                         Statistics
                     <div class = "triangle"> </div>
@@ -72,7 +73,7 @@
             <!-- BOTTOM ITEMS START -->
             <div id="bottom_div">
                 <!-- ACCOUNT SETTINGS BUTTON -->
-                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
+                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/accountSettings">
                  <button id="change_pw" class="nav-item nav-button selected"> 
                          Account Settings
                      <div class = "triangle"> </div>

@@ -156,10 +156,14 @@ table.dataTable.no-footer {
 
 #table-container {
     width: 90%;
-    margin: 0 auto;
+    margin: 20 auto;
     overflow: auto;
 }
 
 
 
 
+
+#table_submissions {
+    margin: 10px;
+}

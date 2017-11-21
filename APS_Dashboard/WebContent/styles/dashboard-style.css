@@ -139,10 +139,8 @@
 }
 
 #modal-container {
-    position: relative;
-    height: 70%;
-    padding: 0px 50px;
-    overflow:hidden;
+    margin: 50px 20px 20px 20px;
+    height: calc(100% - 70px);
 }
 
 #modal-content {
@@ -175,11 +173,19 @@
 
 .modal-title#act-name {
     font-size: 40px;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    line-height: 1;
     font-weight: bolder;
 }
 
 .modal-title#org-name {
     font-size: 25px;
+    width: 100%;
+    margin: 0px;
+    height: 10%;
+    padding: 0px;
+    flex-grow: 1;
     font-weight: bolder;
 }
 
@@ -198,6 +204,7 @@
 }
 
 .modal-label {
+    width: 20%;
     margin-left: 10px;
     font-size: 18px;
 }
@@ -289,17 +296,16 @@ section#details {
 #modal-container-outer {
     background-color: white;
     position: absolute;
-    width: 70%;
-    min-width: 70%;
     color: #35865C;
     height: 90%;
+    width: 70%;
     margin: 0 auto;
     border-radius: 10px;
     text-align: center;
     z-index: 5;
-    display: inline-block;
     top: 50%;
     left: 50%;
+    flex-direction: column;
     transform: translate(-50%, -50%);
 }
 

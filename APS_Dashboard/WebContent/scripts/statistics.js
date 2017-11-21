@@ -13,7 +13,10 @@ $(document).ready(function() {
 
         new Chartist.Pie('#chart', data, { 
             labelInterpolationFnc: function(value) {
-                return Math.round(parseFloat(value) / (parseFloat(acad)+parseFloat(nonacad)) * 100) + '%';
+            	if(Math.round(parseFloat(value) / (parseFloat(acad)+parseFloat(nonacad)) * 100) != 0)
+                	return Math.round(parseFloat(value) / (parseFloat(acad)+parseFloat(nonacad)) * 100) + '%';
+            	else 
+            		return "";
             }
         });
 

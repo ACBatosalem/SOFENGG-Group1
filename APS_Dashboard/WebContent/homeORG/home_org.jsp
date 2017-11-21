@@ -101,14 +101,14 @@
 	                <p class="nav label"> Welcome ${user.userName} </p>
 	                <!-- SUBMISSIONS BUTTON LINK START -->
 	                <a class = "nav-link" href="${pageContext.request.contextPath}"> 
-	                 <button id="submissions selected" class="nav-item nav-button"> 
+	                 <button id="submissions" class="nav-item nav-button selected"> 
 	                         Submissions
 	                		<div class = "triangle"> </div>
 	                 </button>
 	                </a>
 	                <!-- SUBMISSIONS BUTTON LINK END -->
 	                <!-- STATISTICS BUTTON LINK START -->
-	                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/getStatistics"> 
+	                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/getStatistics"> 
 	                	<button class = "nav-item nav-button"> 
 	                        Statistics
 	                    <div class = "triangle"> </div>
@@ -119,7 +119,7 @@
 	            <!-- BOTTOM ITEMS START -->
 	            <div id="bottom_div">
 	                <!-- ACCOUNT SETTINGS BUTTON -->
-	                <a class = "nav-link" href="${pageContext.request.contextPath}/homeAPS/accountSettings">
+	                <a class = "nav-link" href="${pageContext.request.contextPath}/homeORG/accountSettings">
 	                 <button id="change_pw" class="nav-item nav-button"> 
 	                         Account Settings
 	                     <div class = "triangle"> </div>

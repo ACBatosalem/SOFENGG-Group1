@@ -11,6 +11,7 @@ $(document).ready(function() {
         "scrollX": "100%",
         "autoWidth": false,
         "pageLength": 10,
+        "order": [[ 0, "desc" ]],
         "language": {
             "info": "Showing page _PAGE_ of _PAGES_",
             "lergthMenu": "Display _MENU_ records"
