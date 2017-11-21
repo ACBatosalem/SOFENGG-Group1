@@ -46,7 +46,7 @@ public enum Status {
 			case 1 : return "Pending";
 			case 2 : return "Early Approved";
 			case 3 : return "Late Approved";
-			default: return "-";
+			default: return "No Status Yet";
 		}
 	}
 	

@@ -278,7 +278,7 @@ public class SubmissionDetailsService {
 	 * @param dateSubmitted the date and time at which the submission was made
 	 * @return the id of the SubmissionDetails object of the submission with the dateSubmitted specified as the parameter
 	 */
-	public static int getSubmissionIDByDateSubmitted(String dateSubmitted) {
+	public static int getSubmissionIDByDateSubmittedAndActID(String dateSubmitted, int actID) {
 		int id = 0;
 		
 		Connection connection = db.connect();
@@ -286,10 +286,11 @@ public class SubmissionDetailsService {
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
 						"FROM " + SubmissionDetails.TABLE + " " + 
-						"WHERE " + SubmissionDetails.COL_DATE_SUBMITTED + " = ?";
+						"WHERE " + SubmissionDetails.COL_DATE_SUBMITTED + " = ? AND " + SubmissionDetails.COL_ACT_ID + " = ?";
 		try {
 			statement = connection.prepareStatement(query);
 			statement.setString(1, dateSubmitted);
+			statement.setInt(2, actID);
 			
 			set = statement.executeQuery();
 			

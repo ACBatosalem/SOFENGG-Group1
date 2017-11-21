@@ -45,6 +45,8 @@ public class DashboardService {
 		data.setTitle(set.getString(Document.COL_TITLE));
 		data.setDate(set.getString(ActivityDetails.COL_DATE));
 		data.setStatus(Status.toStatus(set.getInt(CheckingDetails.COL_STATUS_ID)).getStatus());
+
+		System.out.println(data.getSubID() + "\t" + data.getDocuID() + "\t" + data.getOrgID() + "\t" + data.getOrgName() + "\t" + data.getTimeStamp() + "\t"  + data.getTitle());
 		return data;
 	}
 	
@@ -64,7 +66,8 @@ public class DashboardService {
 						"FROM (((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
 								   + " INNER JOIN " + ActivityDetails.TABLE + " A ON D." + Document.COL_ID + " = A." + ActivityDetails.COL_DOCU_ID + ") "
 								   + " INNER JOIN " + SubmissionDetails.TABLE + " S ON A." + ActivityDetails.COL_ID + " = S." + SubmissionDetails.COL_ACT_ID + ") "
-								   + " INNER JOIN " + CheckingDetails.TABLE + " C ON S." + SubmissionDetails.COL_ID + " = C." + CheckingDetails.COL_SUB_ID;
+								   + " LEFT JOIN " + CheckingDetails.TABLE + " C ON S." + SubmissionDetails.COL_ID + " = C." + CheckingDetails.COL_SUB_ID;
+								   //+ " ORDER BY S." + SubmissionDetails.COL_DATE_SUBMITTED + " DESC";
 		if(filter.equalsIgnoreCase("acads")){
 			query += " WHERE " + ActivityDetails.COL_NATURE + " = 'Academic'"; 
 		}else if(filter.equalsIgnoreCase("non-acads")){
@@ -75,8 +78,9 @@ public class DashboardService {
 		try {
 			statement = connection.prepareStatement(query);
 			set = statement.executeQuery();
-			while (set.next())
+			while (set.next()) {
 				data.add(toDashboardData(set));
+			}
 	
 		//	System.out.println("[" + DashboardService.class.getName() + " | " + LocalDateTime.now() + "]"
 		//			+ " Successful SELECT FROM multiple tables");
@@ -129,8 +133,9 @@ public class DashboardService {
 						"FROM (((" + Document.TABLE + " D INNER JOIN " + Organization.TABLE + " O ON D." + Document.COL_ORG_ID + " = O." + Organization.COL_ID + ") "
 								   + " INNER JOIN " + ActivityDetails.TABLE + " A ON D." + Document.COL_ID + " = A." + ActivityDetails.COL_DOCU_ID + ") "
 								   + " INNER JOIN " + SubmissionDetails.TABLE + " S ON A." + ActivityDetails.COL_ID + " = S." + SubmissionDetails.COL_ACT_ID + ") "
-								   + " INNER JOIN " + CheckingDetails.TABLE + " C ON S." + SubmissionDetails.COL_ID + " = C." + CheckingDetails.COL_SUB_ID + " " + 
+								   + " LEFT JOIN " + CheckingDetails.TABLE + " C ON S." + SubmissionDetails.COL_ID + " = C." + CheckingDetails.COL_SUB_ID + " " + 
 						"WHERE "   + Organization.COL_USERNAME + " = ?";
+						//+ " ORDER BY S." + SubmissionDetails.COL_DATE_SUBMITTED + " DESC";
 		
 		if(filter.equalsIgnoreCase("acads")){
 			query += " AND " + ActivityDetails.COL_NATURE + " = 'Academic'"; 

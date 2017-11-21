@@ -85,12 +85,13 @@ public class APSConnection {
 	private void dropTables() {
 		// TODO Auto-generated method stub
 		Connection connection = connect();
-		String[] tables = {Document.TABLE, SubmissionDetails.TABLE,
+		String[] tables = {SubmissionDetails.TABLE,
 				CheckingDetails.TABLE, TieUp.TABLE,
 				ActivityDetails.TABLE};
 		if (connection != null) {
 			for(String table: tables) {
 				String query = "DROP TABLE IF EXISTS " + table;
+				System.out.println("DROP" + table);
 				executeQueryForTables(connection, query, table);
 			}
 		}

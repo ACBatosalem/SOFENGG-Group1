@@ -10,33 +10,44 @@ public class CreateData {
 	public static void createDocument(String[] attributes) {
 		// TODO Auto-generated method stub
 		attributes[2] = attributes[2].toUpperCase();
-		if(DocumentService.getDocumentByTitle(attributes[5]) == null) {
+		int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
+		//System.out.println(orgID);
+		if(DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID) == null) {
 			//create document
 			Document document = new Document();
 			//System.out.println(attributes[2]);
 			
-			document.setOrgID(OrganizationService.getOrgByUsername(attributes[2]).getId());
+			document.setOrgID(orgID);
 			document.setTitle(attributes[5]);
 			document.setTerm(attributes[1]);
 			
 			DocumentService.addDocument(document);
-			createActivity(attributes);
-		} else if(attributes.length >= 20) {
+
+
+
+			
+
+
+		} 
+		createActivity(attributes);
+		/*else if(attributes.length >= 20) {
 			if (attributes[19].equals("In Case of Change")
 				   || attributes[19].equals("Activity Not in GOSM")) {
-			createActivity(attributes);
+				createActivity(attributes);
+			} else {
+				createSubmission(attributes);
 			}
 		} else {
 			createSubmission(attributes);
-		}
+		}*/
 		
 	}
 	
 	private static void createActivity(String[] attributes) {
 		//if(!attributes[4].equals("Pended")) {
 			ActivityDetails actDet = new ActivityDetails();
-			
-			actDet.setDocuID(DocumentService.getDocumentByTitle(attributes[5]).getId());
+			int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
+			actDet.setDocuID(DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID).getId());
 			actDet.setNature(attributes[12]);
 			actDet.setType(attributes[13]);
 			actDet.setVenue(attributes[15]);
@@ -51,12 +62,15 @@ public class CreateData {
 	
 	private static void createSubmission(String[] attributes) {
 		// TODO Auto-generated method stub
-		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
-		int docuID = DocumentService.getDocumentByTitle(attributes[5]).getId();
+		int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
+		int docuID = DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID).getId();
+		int actID = ActivityDetailsService.getActivityDetailsByDocuID(docuID).getId();
+		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmittedAndActID(toDateTime(attributes[0]), actID);
+		//System.out.println("docuID: " + docuID);
 		if(submissionID == 0){
 			//create submission details
 			SubmissionDetails subDet = new SubmissionDetails();
-			subDet.setActID(ActivityDetailsService.getActivityDetailsByDocuID(docuID).getId());
+			subDet.setActID(actID);
 			subDet.setSubmittedBy(attributes[16]);
 			subDet.setContactNo(attributes[17]);
 			subDet.setEmailAddress(attributes[18]);
@@ -68,12 +82,12 @@ public class CreateData {
 			else subDet.setSasType("-");
 			SubmissionDetailsService.addSubmissionDetails(subDet);
 			if(attributes.length >= 21) {
-				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
+				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmittedAndActID(toDateTime(attributes[0]), actID);
 				createCheckingDetails(attributes, submissionID);
 			}
 		} else {
 			if(attributes.length >= 21) {
-				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmitted(toDateTime(attributes[0]));
+				submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmittedAndActID(toDateTime(attributes[0]), actID);
 				createCheckingDetails(attributes, submissionID);
 			}
 		}
@@ -107,9 +121,9 @@ public class CreateData {
 			}
 
 			try{
-				checkDet.setCheckerName(attributes[22]);
+				checkDet.setDateChecked(attributes[22]);
 			} catch(Exception e){
-				checkDet.setCheckerName("N/A");
+				checkDet.setDateChecked("N/A");
 			}
 			
 			if(attributes.length >= 24)

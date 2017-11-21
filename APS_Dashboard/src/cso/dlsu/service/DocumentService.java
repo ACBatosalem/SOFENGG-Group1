@@ -325,6 +325,68 @@ public class DocumentService {
 	}
 	
 	/**
+	 * This function is used to get the data of a single Document object, with a specific title
+	 * and submitted by a specific organization, stored in the database.
+	 * @param title the title of the Document object being retrieved from the database
+	 * @param orgID the orgID of the Document object being retrieved from the database
+	 * @return the Document object with its title and orgID equal to the ones specified as parameters
+	 */
+	public static Document getDocumentByTitleAndOrg(String title, int orgID) {
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT * " + 
+						"FROM " + Document.TABLE + " " + 
+						"WHERE " + Document.COL_TITLE + " = ? AND " + Document.COL_ORG_ID + " = ?";
+		Document document = null;
+		
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, title);
+			statement.setInt(2, orgID);
+			
+			set = statement.executeQuery();
+			
+			while (set.next()) {
+				document = toDocument(set);
+			}
+		
+		//	System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + Document.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + DocumentService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + Document.TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return document;
+	}
+	
+	/**
 	 * This function is used to delete a Document object's data from the database.
 	 * @param id the id of the Document object to be deleted from the database
 	 * @return true if the deletion was successful, false if not
