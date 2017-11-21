@@ -59,6 +59,10 @@ table.dataTable#table_submissions tr:nth-child(even):hover {
     
 }
 
+table.dataTable .dataTables_empty:hover {
+    font-weight: none;
+}
+
 table.dataTable tr:nth-child(even) {
     background-color: #D2FFD2;
     font-weight: normal;
@@ -119,6 +123,8 @@ table.dataTable.no-footer {
     color: #35865C;
     padding-bottom: 100px;
 }
+
+
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     color: #FFF;

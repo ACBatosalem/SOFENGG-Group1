@@ -156,9 +156,9 @@ div#orgs-table-container {
     background-color: #3CD164;
     color: white;
     z-index: 20;
-    height: 60px;
+    height: 40px;
     width: 300px;
-    font-size: 16px;
+    font-size: 14px;
     padding: 20px 20px 20px 70px;
     left: -70px;
     white-space: normal;

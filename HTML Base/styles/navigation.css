@@ -85,11 +85,9 @@
 #bottom_div{
     position: absolute;
     width: 100%;
-    bottom: 0;
+    bottom: 0px;
     padding-bottom: 20px;
 }
-
-
 
 /* NAV HEADER */
 .label-header {    
@@ -162,7 +160,156 @@
     clip-path: polygon(90% 50%, 100% 100%, 100% 0);
 }
 
+
 .nav-link {
     color: white;
     text-decoration: none;
 }
+
+#notif-clear .fa{
+    color: white;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+    height: 100%;
+    font-size: 25px;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+#notif-clear .fa:hover{
+    color: white;
+    position: absolute;
+    right: 0px;
+    opacity: 0.9;
+    top: 0px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
+    height: 100%;
+    font-size: 25px;
+    transition: 0.2s;
+}
+
+@media only screen and (max-height: 600px) {
+    .label-header-overlay {
+        display: none;   
+    }
+    #header {
+        position: relative;
+        width: 100px;
+    }
+    
+    #dlsu-logo {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        z-index: 5;
+        top: 30px;
+    }
+    
+    .icon-holder-overlay {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0px;
+        background-size: 400px;
+        background-position: center;
+        clip-path: circle(30% at 50% 50%);
+    }
+    
+    .label-header {
+        display: none;
+    }
+    
+    .label-header-overlay {
+        display: none;
+    }
+    
+    #bottom_div {
+        bottom: auto;
+    }
+    
+    #bottom_div .nav-button:first-of-type {
+        border-top: none;
+    }
+    
+    .nav-button {   
+        height: 40px;
+        line-height: 40px;
+    }
+    
+    #nav {
+        width: 100px;
+    }
+    
+    .icon-holder {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 0px;
+        background-image: url(../resources/overlayed.png);
+        background-size: 400px;
+        background-position: center;
+        clip-path: circle(30% at 50% 50%);
+    }
+
+    .nav-item {
+        font-size: 12px;
+    }
+    
+    .triangle {
+        display: none;
+    }   
+    
+    .nav-button:hover > .triangle {
+        display: none;
+    }
+    
+    .filter-options {
+        margin: 2% 5% 2% 5%;
+        display: inline-flex;
+        line-height: 40px;
+    }
+    
+    .nav.label {
+        margin: 0px;
+        margin-top: 60px;
+        margin-bottom: 0px;
+        font-size: 20px;    
+        color: white;
+        font-family: "Palanquin";
+        text-align: center;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .nav.label {
+        margin: 0px 10px;
+        margin-top: 0px;
+        font-size: 16px;
+    }
+    
+    .icon-holder {
+        display: none;
+    }
+    
+    .icon-holder-overlay {
+        display: none;
+    }
+    
+    #dlsu-logo {
+        display: none;
+    }
+    
+    
+    #header {
+        display: none;
+    }
+}
+
+
