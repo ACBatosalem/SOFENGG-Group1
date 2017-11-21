@@ -110,4 +110,6 @@ function modalMessage (message, neg, negact, pos, posact) {
     $(modalAct).append(modalCon);
 
     $('body').append(modalAct);
+    $(buttonYes).focus();
+    $(buttonNo).focus();
 }
