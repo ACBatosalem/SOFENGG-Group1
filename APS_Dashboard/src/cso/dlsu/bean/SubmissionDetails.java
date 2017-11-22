@@ -19,6 +19,7 @@ public class SubmissionDetails {
 	private String sasType;
 	
 	public static final String TABLE = "submission_details";
+	public static final String TEMP_TABLE = "submission_details_temp";
 	public static final String COL_ID = "sub_id";
 	public static final String COL_ACT_ID = "act_id";
 	public static final String COL_DATE_SUBMITTED = "date_submitted";

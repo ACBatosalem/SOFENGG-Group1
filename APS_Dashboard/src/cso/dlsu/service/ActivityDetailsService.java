@@ -44,7 +44,7 @@ public class ActivityDetailsService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		boolean added = false;
-		String query = "INSERT INTO " + ActivityDetails.TABLE + " " +
+		String query = "INSERT INTO " + ActivityDetails.TEMP_TABLE + " " +
 						"VALUES (?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
@@ -65,7 +65,7 @@ public class ActivityDetailsService {
 		//			+ " Successful INSERT INTO " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Unsuccesful INSERT INTO " + ActivityDetails.TABLE + ", check SQL message");
+					+ " Unsuccesful INSERT INTO " + ActivityDetails.TEMP_TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
 			try {
 				connection.rollback();
@@ -272,7 +272,7 @@ public class ActivityDetailsService {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
-						"FROM " + ActivityDetails.TABLE + " " + 
+						"FROM " + ActivityDetails.TEMP_TABLE + " " + 
 						"WHERE " + ActivityDetails.COL_DOCU_ID + " = ?";
 		ActivityDetails actDet = null;
 		
@@ -290,7 +290,7 @@ public class ActivityDetailsService {
 		//			+ " Successful SELECT FROM " + ActivityDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + ActivityDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Unsuccesful SELECT FROM " + ActivityDetails.TABLE + ", check SQL message");
+					+ " Unsuccesful SELECT FROM " + ActivityDetails.TEMP_TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
 		} finally {
 			if (statement != null) {

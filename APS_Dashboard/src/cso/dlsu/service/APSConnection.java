@@ -48,8 +48,6 @@ public class APSConnection {
 	private APSConnection () {
 		(new File(DIR)).mkdirs();
 		try {
-			if(GSheetsConnection.newFile == 1)
-				dropTables();
 			createTables();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -80,9 +78,20 @@ public class APSConnection {
 		
 		return connection;
 	}
+
+	public void postProcess() {
+        dropTables();
+        try {
+			createTables();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        insertToTables();
+	}
 	
 
-	private void dropTables() {
+	public void dropTables() {
 		// TODO Auto-generated method stub
 		Connection connection = connect();
 		String[] tables = {SubmissionDetails.TABLE,
@@ -97,11 +106,31 @@ public class APSConnection {
 		}
 	}
 
+	public void insertToTables() {
+		Connection connection = connect();
+		String[] tables = {SubmissionDetails.TABLE,
+				CheckingDetails.TABLE, 
+				ActivityDetails.TABLE};
+		String[] temp_tables = {SubmissionDetails.TEMP_TABLE,
+				CheckingDetails.TEMP_TABLE, 
+				ActivityDetails.TEMP_TABLE};
+		if (connection != null) {
+			for(int i = 0; i < tables.length; i++) {
+				String query = "INSERT INTO " + tables[i] + " SELECT * FROM "+ temp_tables[i];
+				executeQueryForTables(connection, query, tables[i]);
+
+				String queryDrop = "DROP TABLE IF EXISTS " + temp_tables[i];
+				System.out.println("DROP" + temp_tables[i]);
+				executeQueryForTables(connection, queryDrop, temp_tables[i]);
+			}
+		}
+	}
+
 	/**
 	 * This function is used to create the tables in the database if they do not exist yet.
 	 * @throws SQLException
 	 */
-	private void createTables () throws SQLException {
+	public void createTables () throws SQLException {
 		Connection connection = connect();
 		
 		if (connection != null) {
@@ -189,6 +218,65 @@ public class APSConnection {
 		} 
 		
 	}
+
+	/**
+	 * This function is used to create the temp tables in the database if they do not exist yet.
+	 * @throws SQLException
+	 */
+	public void createTempTables() throws SQLException {
+		Connection connection = connect();
+		
+		if (connection != null) {
+			
+			//Create activity_details table
+			if(!checkTableExist(connection, ActivityDetails.TEMP_TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + ActivityDetails.TEMP_TABLE + "("
+		                + ActivityDetails.COL_ID 	  + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + ActivityDetails.COL_DOCU_ID + 	" integer NOT NULL,"
+		                + ActivityDetails.COL_NATURE  + 	" text,"
+		                + ActivityDetails.COL_TYPE    + 	" text,"
+		                + ActivityDetails.COL_VENUE   + 	" text,"
+		                + ActivityDetails.COL_DATE	  +		" text,"
+		                + ActivityDetails.COL_TIME	  +		" text"
+		                + ");"; 
+				executeQueryForTables(connection, query, ActivityDetails.TEMP_TABLE);
+			}
+			
+			//Create submission_details table
+			if(!checkTableExist(connection, SubmissionDetails.TEMP_TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + SubmissionDetails.TEMP_TABLE + "("
+		                + SubmissionDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + SubmissionDetails.COL_ACT_ID 	    + 	" integer NOT NULL,"
+		                + SubmissionDetails.COL_DATE_SUBMITTED  + 	" text NOT NULL,"
+		                + SubmissionDetails.COL_SUBMISSION_TYPE + 	" text NOT NULL,"
+		                + SubmissionDetails.COL_SUBMITTED_BY 	+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_EMAIL_ADDRESS 	+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_CONTACT_NO 		+ 	" text NOT NULL,"
+		                + SubmissionDetails.COL_SAS_TYPE 		+ 	" text"
+		                + ");"; 
+				executeQueryForTables(connection, query, SubmissionDetails.TEMP_TABLE);
+			}
+			
+			//Create checking_details table
+			if(!checkTableExist(connection, CheckingDetails.TEMP_TABLE)) {
+				String query = "CREATE TABLE IF NOT EXISTS " + CheckingDetails.TEMP_TABLE + "("
+		                + CheckingDetails.COL_ID  	  	    + 	" integer PRIMARY KEY AUTOINCREMENT,"
+		                + CheckingDetails.COL_SUB_ID	    + 	" integer NOT NULL,"
+		                + CheckingDetails.COL_STATUS_ID		+ 	" integer NOT NULL,"
+		                + CheckingDetails.COL_CHECKER_NAME	+ 	" text, "
+		                + CheckingDetails.COL_DATE_CHECKED	+ 	" text, "
+		                + CheckingDetails.COL_REMARKS		+ 	" text"
+		                + ");"; 
+				executeQueryForTables(connection, query, CheckingDetails.TEMP_TABLE);
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} 
+		
+	}
 	
 	/**
 	 * This function is used to create and add the APS account in the database if it does not exist yet.
@@ -234,8 +322,8 @@ public class APSConnection {
 		try {
 			ps = con.prepareStatement(query);
 			ps.execute();
-		//	System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]" + 
-		//			" Created " + tableName + "for " + DIR + DB + ".");
+			System.out.println("[" + getClass().getName() + " | " + LocalDateTime.now() + "]" + 
+					" Created " + tableName + "for " + DIR + DB + ".");
 
 		} catch (SQLException sqlEx) {
 			System.out.println(sqlEx.getMessage());

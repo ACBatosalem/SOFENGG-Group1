@@ -17,6 +17,7 @@ public class CheckingDetails {
 	private String remarks;
 	
 	public static final String TABLE = "checking_details";
+	public static final String TEMP_TABLE = "checking_details_temp";
 	public static final String COL_ID = "chk_id";
 	public static final String COL_SUB_ID = "sub_id";
 	public static final String COL_STATUS_ID = "status_id";

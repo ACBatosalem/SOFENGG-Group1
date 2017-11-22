@@ -31,6 +31,7 @@ import com.google.api.services.sheets.v4.Sheets.Builder;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import cso.dlsu.service.APSConnection;
 import cso.dlsu.service.CreateData;
 
 public class GSheetsConnection {
@@ -43,6 +44,7 @@ public class GSheetsConnection {
 	private static HttpTransport HTTP_TRANSPORT;
 	private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
 	public static int newFile = 0;
+    public static final APSConnection db = APSConnection.getInstance();
 	static {
 	    try {
 	        HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -99,8 +101,10 @@ public class GSheetsConnection {
     	try {
     		// TODO Once implemented use toData (response)
     		String data = getDataInString(spreadsheetId, range);
-    		if(data != null){
+    		//System.out.println(data);
+    		if(!data.equals("No data")){
     			generateFile("table.csv", data);
+    			System.out.println("processing");
                 newFile = 1;
     			processData();
     			
@@ -112,31 +116,11 @@ public class GSheetsConnection {
             }
 		} catch (UnknownHostException u) {
 			throw new NoInternetException();
-
 		} catch (IOException e) {
             e.printStackTrace();
 			System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Credentials file not found!");
 		}
     	
-    	
-    	
-    	/*while (!stop) {
-    		for (int i = 0; i < times.size(); i++) {
-    			if(times.get(i).equals(LocalTime.now()) || times.get(i).isBefore(LocalTime.now())) {
-    	    		try {
-        	    		// TODO Once implemented use toData (response)
-        	    		generateFile("table.csv", getDataInString(spreadsheetId, range));
-        				times.remove(i);
-        	    		i--;
-    	    		} catch (UnknownHostException u) {
-    	    			throw new NoInternetException();
-    	    		} catch (IOException io) {
-    	    			io.printStackTrace();
-    	    			System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Credentials file not found!");
-    	    		}
-    			}
-    		}
-    	}	*/
     }
     
     public static void processData() {
@@ -147,7 +131,7 @@ public class GSheetsConnection {
     	int i = 1;
     	try (BufferedReader br = Files.newBufferedReader(pathToFile,
                 StandardCharsets.ISO_8859_1)) {
-
+    		db.createTempTables();
             // read the first line from the text file
     		//br.readLine();
     		br.readLine();
@@ -168,13 +152,9 @@ public class GSheetsConnection {
                // if (DocumentService.getAllDocuments().size() == 0)
                 	CreateData.createDocument(attributes);
                 
-                //else
-                	
-
-                // read next line before looping
-                // if end of file reached, line would be null
                 line = br.readLine();
             }
+            db.postProcess();
 
         } catch (Exception ioe) {
         	System.out.println(i);
@@ -204,6 +184,7 @@ public class GSheetsConnection {
     	System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Retrieving Data ...");
     	if(values == null || values.size() == 0) {
     		System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] No Data Found!");
+    		data = "No data";
     	} else {
             for (int i = 0; i < values.size(); i++) {
             	List<Object> row = values.get(i);

@@ -54,6 +54,7 @@ public class APSFilter implements Filter {
 				
 			} catch (NoInternetException e) {
 				e.reconnect();
+				//GSheetsConnection.processData();
 			}
 			dataGathered = 1;
 

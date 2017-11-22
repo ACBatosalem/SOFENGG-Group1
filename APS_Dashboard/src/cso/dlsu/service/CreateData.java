@@ -1,8 +1,11 @@
 package cso.dlsu.service;
 
+import java.time.LocalTime;
+
 import cso.dlsu.bean.ActivityDetails;
 import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.Document;
+import cso.dlsu.bean.Notification;
 import cso.dlsu.bean.Status;
 import cso.dlsu.bean.SubmissionDetails;
 
@@ -11,25 +14,26 @@ public class CreateData {
 		// TODO Auto-generated method stub
 		attributes[2] = attributes[2].toUpperCase();
 		int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
-		//System.out.println(orgID);
-		if(DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID) == null) {
-			//create document
-			Document document = new Document();
-			//System.out.println(attributes[2]);
+		try {
 			
-			document.setOrgID(orgID);
-			document.setTitle(attributes[5]);
-			document.setTerm(attributes[1]);
-			
-			DocumentService.addDocument(document);
+			Document docu = DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID);
+			//System.out.println(orgID);
+			if(docu == null) {
+				//create document
+				Document document = new Document();
+				//System.out.println(attributes[2]);
+				
+				document.setOrgID(orgID);
+				document.setTitle(attributes[5]);
+				document.setTerm(attributes[1]);
+				
+				DocumentService.addDocument(document);
 
-
-
-			
-
-
-		} 
-		createActivity(attributes);
+			} 
+			createActivity(attributes, docu.getId(), orgID);
+		} catch(Exception e){
+			System.out.println("Error");
+		}
 		/*else if(attributes.length >= 20) {
 			if (attributes[19].equals("In Case of Change")
 				   || attributes[19].equals("Activity Not in GOSM")) {
@@ -43,27 +47,34 @@ public class CreateData {
 		
 	}
 	
-	private static void createActivity(String[] attributes) {
+	private static void createActivity(String[] attributes, int docuID, int orgID) {
 		//if(!attributes[4].equals("Pended")) {
-			ActivityDetails actDet = new ActivityDetails();
-			int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
-			actDet.setDocuID(DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID).getId());
+		ActivityDetails actDet = new ActivityDetails();
+		if(attributes[6].equals("One-day Activity") || attributes[6].equals("Multiple Dates")) {
+			actDet.setDocuID(docuID);
 			actDet.setNature(attributes[12]);
 			actDet.setType(attributes[13]);
 			actDet.setVenue(attributes[15]);
 			actDet.setDate(attributes[11]);
 			actDet.setTime(attributes[14]);
+		} else {
+
+			actDet.setDocuID(docuID);
+			actDet.setNature(attributes[7]);
+			actDet.setType(attributes[8]);
+			actDet.setVenue(attributes[10]);
+			actDet.setDate(attributes[6]);
+			actDet.setTime(attributes[9]);
+		}
 			
 			ActivityDetailsService.addActivityDetails(actDet);
 		//}
 		
-		createSubmission(attributes);
+		createSubmission(attributes, docuID, orgID);
 	}
 	
-	private static void createSubmission(String[] attributes) {
+	private static void createSubmission(String[] attributes, int docuID, int orgID) {
 		// TODO Auto-generated method stub
-		int orgID = OrganizationService.getOrgByUsername(attributes[2]).getId();
-		int docuID = DocumentService.getDocumentByTitleAndOrg(attributes[5], orgID).getId();
 		int actID = ActivityDetailsService.getActivityDetailsByDocuID(docuID).getId();
 		int submissionID = SubmissionDetailsService.getSubmissionIDByDateSubmittedAndActID(toDateTime(attributes[0]), actID);
 		//System.out.println("docuID: " + docuID);
@@ -126,15 +137,32 @@ public class CreateData {
 				checkDet.setDateChecked("N/A");
 			}
 			
-			if(attributes.length >= 24)
+			String remark = "";
+			
+			if(attributes.length >= 24){
 				checkDet.setRemarks(attributes[23]);
-			else checkDet.setRemarks("N/A");
+				remark = attributes[23];
+			}
+			else {
+				checkDet.setRemarks("N/A");
+				remark = "N/A";
+			}
 			
 			checkDet.setStatusID(Status.getStatusByName(attributes[20].toUpperCase()));
 			checkDet.setSubID(submissionID);
 			
 			CheckingDetailsService.addCheckingDetails(checkDet);
-		
+			int subID = SubmissionDetailsService.getSubmissionIDByDateSubmittedAndSubmittedBy(toDateTime(attributes[0]), 
+					attributes[16]);
+			CheckingDetails cd = CheckingDetailsService.getCheckingDetailsOfSubmission(subID);
+			if(cd == null || 
+					(Status.getStatusByName(attributes[20].toUpperCase()) != cd.getStatusID()) ||
+					!cd.getRemarks().equals(remark)) {
+				Notification n = new Notification(attributes[2], 
+						LocalTime.now(), 
+						attributes[5] + " - " + attributes[20].toUpperCase());
+				NotificationService.notify(n);
+			} 
 		}
 	}
 }

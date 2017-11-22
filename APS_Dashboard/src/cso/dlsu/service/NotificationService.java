@@ -3,6 +3,8 @@ package cso.dlsu.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import cso.dlsu.bean.Notification;
+
 public class NotificationService {
 	private static List <Notification> notifications = new ArrayList<>();
 	

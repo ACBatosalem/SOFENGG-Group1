@@ -52,13 +52,13 @@
 	                            <label id = "venue" class = "modal-label"> Venue: </label> <br>
 	                            <label id = "nature" class = "modal-label"> Nature of Activity: </label> <br>
 	                            <label id = "type" class = "modal-label"> Type of Activity: </label> <br>
-	                            <label id = "actDate" class = "modal-label"> Activity Date/s: </label> <br>
-	                            <label id = "tieup" class = "modal-label"> Tie-up: </label>
+	                            <label id = "actDate" class = "modal-label"> Activity Date/s: </label>
 	                        </section>
 	
 	                        <div class = "modal-group"> 
 	                            <section id = "submission">
 	                                <label class = "modal-label modal-division"> Submission </label> <br> 
+                                    <label id = "submissionType" class = "modal-label"> Submission Type: </label> <br>
 	                                <label id = "submittedBy" class = "modal-label"> Submitted by: </label> <br> 
 	                                <label id = "submitDate" class = "modal-label"> Date Submitted: </label> <br>
 	                                <label id = "typeSAS" class = "modal-label"> Type of SAS Submission: </label> <br>

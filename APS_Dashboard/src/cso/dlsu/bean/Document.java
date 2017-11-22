@@ -15,6 +15,7 @@ public class Document {
 	
 	
 	public static final String TABLE = "documents";
+	public static final String TEMP_TABLE = "documents_temp";
 	public static final String COL_ID = "docu_id";
 	public static final String COL_ORG_ID = "org_id";
 	public static final String COL_TITLE = "title";

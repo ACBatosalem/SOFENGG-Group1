@@ -1,18 +1,28 @@
-package cso.dlsu.service;
+package cso.dlsu.bean;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Notification {
 	private int id;
 	private String userName;
-	private LocalDateTime time;
+	private LocalTime time;
 	private String message;
 	private boolean read;
+	
+	
 	
 	public Notification () {
 		read = false;
 	}
 	
+	public Notification(String userName, LocalTime localTime, String message) {
+		super();
+		this.userName = userName;
+		this.time = localTime;
+		this.message = message;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -21,11 +31,11 @@ public class Notification {
 		this.id = id;
 	}
 
-	public LocalDateTime getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(LocalDateTime time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 

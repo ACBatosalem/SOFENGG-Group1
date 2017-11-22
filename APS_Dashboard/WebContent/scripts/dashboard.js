@@ -96,8 +96,8 @@ $(document).ready(function() {
 	 			$("#nature").text("Nature of Activity: " + data.act.nature);
 	 			$("#type").text("Type of Activity: " + data.act.type);
 	 			$("#actDate").text("Activity Date/s: " + data.act.date);
-	 			$("#tieup").text("Tie-up: " );
 	 			
+                $("#submissionType").text("Submission Type: " + data.sub.submissionType);
 	 			$("#submittedBy").text("Submitted by: " + data.sub.submittedBy);
 	 			$("#submitDate").text("Date Submitted: " + data.sub.dateSubmitted);
 	 			$("#typeSAS").text("Type of SAS Submission: " + data.sub.sasType);
@@ -134,8 +134,8 @@ $(document).ready(function() {
     		$("#nature").text("Nature of Activity: ");
     		$("#type").text("Type of Activity: ");
     		$("#actDate").text("Activity Date/s: ");
-    		$("#tieup").text("Tie-up: " );
     		
+            $("#submissionType").text("Submission Type: ");
     		$("#submittedBy").text("Submitted by: ");
     		$("#submitDate").text("Date Submitted: ");
     		$("#typeSAS").text("Type of SAS Submission: ");

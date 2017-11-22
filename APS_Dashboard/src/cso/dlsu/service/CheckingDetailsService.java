@@ -48,7 +48,7 @@ public class CheckingDetailsService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		boolean added = false;
-		String query = "INSERT INTO " + CheckingDetails.TABLE + " " +
+		String query = "INSERT INTO " + CheckingDetails.TEMP_TABLE + " " +
 						"VALUES (?, ?, ?, ?, ?, ?);";
 		
 		try {
@@ -221,7 +221,7 @@ public class CheckingDetailsService {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
-						"FROM " + CheckingDetails.TABLE + " " + 
+						"FROM " + CheckingDetails.TEMP_TABLE + " " + 
 						"WHERE " + CheckingDetails.COL_SUB_ID + " = ?";
 		CheckingDetails check = null;
 		
@@ -239,7 +239,7 @@ public class CheckingDetailsService {
 		//			+ " Successful SELECT FROM " + CheckingDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + CheckingDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Unsuccesful SELECT FROM " + CheckingDetails.TABLE + ", check SQL message");
+					+ " Unsuccesful SELECT FROM " + CheckingDetails.TEMP_TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
 		} finally {
 			if (statement != null) {

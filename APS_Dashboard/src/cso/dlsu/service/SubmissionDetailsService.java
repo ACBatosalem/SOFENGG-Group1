@@ -50,7 +50,7 @@ public class SubmissionDetailsService {
 		Connection connection = db.connect();
 		PreparedStatement statement = null;
 		boolean added = false;
-		String query = "INSERT INTO " + SubmissionDetails.TABLE + " " +
+		String query = "INSERT INTO " + SubmissionDetails.TEMP_TABLE + " " +
 						"VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		
 		try {
@@ -72,7 +72,7 @@ public class SubmissionDetailsService {
 		//			+ " Successful INSERT INTO " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Unsuccesful INSERT INTO " + SubmissionDetails.TABLE + ", check SQL message");
+					+ " Unsuccesful INSERT INTO " + SubmissionDetails.TEMP_TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
 			try {
 				connection.rollback();
@@ -285,7 +285,7 @@ public class SubmissionDetailsService {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		String query = 	"SELECT * " + 
-						"FROM " + SubmissionDetails.TABLE + " " + 
+						"FROM " + SubmissionDetails.TEMP_TABLE + " " + 
 						"WHERE " + SubmissionDetails.COL_DATE_SUBMITTED + " = ? AND " + SubmissionDetails.COL_ACT_ID + " = ?";
 		try {
 			statement = connection.prepareStatement(query);
@@ -302,7 +302,67 @@ public class SubmissionDetailsService {
 		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
 		} catch (SQLException e) {
 			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
-					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TABLE + ", check SQL message");
+					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TEMP_TABLE + ", check SQL message");
+			System.out.println(e.getMessage());
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (set != null) {
+				try {
+					set.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+		
+		return id;
+	}
+	
+	/**
+	 * This function is used to get the id of the SubmissionDetails object of specific submission identified by the date and time submitted.
+	 * @param dateSubmitted the date and time at which the submission was made
+	 * @return the id of the SubmissionDetails object of the submission with the dateSubmitted specified as the parameter
+	 */
+	public static int getSubmissionIDByDateSubmittedAndSubmittedBy(String dateSubmitted, String user) {
+		int id = 0;
+		
+		Connection connection = db.connect();
+		PreparedStatement statement = null;
+		ResultSet set = null;
+		String query = 	"SELECT * " + 
+						"FROM " + SubmissionDetails.TABLE + " " + 
+						"WHERE " + SubmissionDetails.COL_DATE_SUBMITTED + " = ? AND " + SubmissionDetails.COL_SUBMITTED_BY + " = ?";
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, dateSubmitted);
+			statement.setString(2, user);
+			
+			set = statement.executeQuery();
+			
+			if (set.next()) {
+				id = set.getInt(SubmissionDetails.COL_ID);
+			}
+		
+		//	System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+		//			+ " Successful SELECT FROM " + SubmissionDetails.TABLE);
+		} catch (SQLException e) {
+			System.out.println("[" + SubmissionDetailsService.class.getName() + " | " + LocalDateTime.now() + "]"
+					+ " Unsuccesful SELECT FROM " + SubmissionDetails.TEMP_TABLE + ", check SQL message");
 			System.out.println(e.getMessage());
 		} finally {
 			if (statement != null) {
