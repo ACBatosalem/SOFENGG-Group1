@@ -247,9 +247,12 @@ public class DashboardService {
 		String query = 	"SELECT COUNT(*) " + 
 				"FROM " + ActivityDetails.TABLE + " " + 
 				"WHERE " + ActivityDetails.COL_ID + " IN (SELECT MAX(" + ActivityDetails.COL_ID + ") " +
-														 "FROM " + ActivityDetails.TABLE + " " +
+														 "FROM (" + ActivityDetails.TABLE + " A INNER JOIN " + Document.TABLE + 
+														        " D  ON A." + ActivityDetails.COL_DOCU_ID + " = D." + Document.COL_ID +
+														        ") INNER JOIN " + Organization.TABLE + " O ON O." + Organization.COL_ID +
+														        " = D." + Document.COL_ORG_ID + " " +
 														 "WHERE " + ActivityDetails.COL_NATURE + " = 'Academic' " +
-														 "GROUP BY " + ActivityDetails.COL_DOCU_ID + ");";
+														 "GROUP BY A." + ActivityDetails.COL_DOCU_ID + ");";
 		int count = -1;
 		try {
 			statement = connection.prepareStatement(query);
@@ -349,10 +352,13 @@ public class DashboardService {
 		PreparedStatement statement = null;
 		ResultSet set = null;
 		String query = 	"SELECT COUNT(*) " + 
-				"FROM " + ActivityDetails.TABLE + " " + 
-				"WHERE " + ActivityDetails.COL_ID + " IN (SELECT MAX(" + ActivityDetails.COL_ID + ") " +
-														 "FROM " + ActivityDetails.TABLE + " " +
-														 "GROUP BY " + ActivityDetails.COL_DOCU_ID + ");";
+						"FROM " + ActivityDetails.TABLE + " " + 
+						"WHERE " + ActivityDetails.COL_ID + " IN (SELECT MAX(" + ActivityDetails.COL_ID + ") " +
+														"FROM (" + ActivityDetails.TABLE + " A INNER JOIN " + Document.TABLE + 
+												        " D  ON A." + ActivityDetails.COL_DOCU_ID + " = D." + Document.COL_ID +
+												        ") INNER JOIN " + Organization.TABLE + " O ON O." + Organization.COL_ID +
+												        " = D." + Document.COL_ORG_ID + " " +
+														 "GROUP BY A." + ActivityDetails.COL_DOCU_ID + ");";
 		int count = -1;
 		try {
 			statement = connection.prepareStatement(query);
