@@ -9,7 +9,10 @@
 		<link rel="icon" type="image/gif" href="${pageContext.request.contextPath}/resources/logo.png" />
         
 		<!-- LIBRARIES -->
-		<script> var context = "${pageContext.request.contextPath}"; </script>
+		<script> 
+			var username = "${user.userName}";
+			var context = "${pageContext.request.contextPath}"; 
+		</script>
         <script src="${pageContext.request.contextPath}/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="${pageContext.request.contextPath}/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="${pageContext.request.contextPath}/libraries/datatables/datatables.css" rel="stylesheet">
@@ -188,24 +191,21 @@
             </div>
             <!-- MAIN CONTENT END -->
             
-             <!-- NOTIFICATIONS START -->
+			<!-- NOTIFICATIONS START -->
             <div id = "notifications">
-                <div id = "notif-btn">
-                    <i class = "fa fa-bell-o notif_icon"> </i>
-                    <div class = "badge1" data-badge="10" id = "notif-count"> </div>
-                    <div class = "notif-label"> NOTIFICATIONS </div>                    
+                <div class = "notif-container">
+                    <div id = "notif-btn">
+                        <i class = "fa fa-bell-o notif_icon"> </i>
+                    </div>
+                    <div class = "badge1" data-badge="15" id = "notif-count"> </div>
+                    <div class = "notif-label"> NOTIFICATIONS </div>  
+                    <div id = "notif-clear">
+                        
+                        <i class = "fa fa-inbox"> </i>
+                    </div>
                 </div>
                 <ol id = "notifs-list">
-                    <li class = "unread">
-                        <div class = "act-title"> Unread Activity </div> 
-                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
-                        <div class = "act-timelapsed"> x minutes ago </div>
-                    </li>
-                    <li>
-                        <div class = "act-title"> Read Activity </div> 
-                        <div class = "act-details"> Details have been updated. A long notification this is. </div>
-                        <div class = "act-timelapsed"> x minutes ago </div>
-                    </li>
+
                 </ol>
             </div>
             <!-- NOTIFICATIONS END -->

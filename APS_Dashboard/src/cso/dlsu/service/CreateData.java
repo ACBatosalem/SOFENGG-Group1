@@ -1,7 +1,5 @@
 package cso.dlsu.service;
 
-import java.time.LocalTime;
-
 import cso.dlsu.bean.ActivityDetails;
 import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.Document;
@@ -159,7 +157,7 @@ public class CreateData {
 					(Status.getStatusByName(attributes[20].toUpperCase()) != cd.getStatusID()) ||
 					!cd.getRemarks().equals(remark)) {
 				Notification n = new Notification(attributes[2], 
-						LocalTime.now(), 
+						System.currentTimeMillis(), 
 						attributes[5] + " - " + attributes[20].toUpperCase());
 				NotificationService.notify(n);
 			} 

@@ -1,22 +1,17 @@
 package cso.dlsu.bean;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 public class Notification {
 	private int id;
 	private String userName;
-	private LocalTime time;
+	private long time;
 	private String message;
 	private boolean read;
-	
-	
 	
 	public Notification () {
 		read = false;
 	}
 	
-	public Notification(String userName, LocalTime localTime, String message) {
+	public Notification(String userName, long localTime, String message) {
 		super();
 		this.userName = userName;
 		this.time = localTime;
@@ -31,11 +26,11 @@ public class Notification {
 		this.id = id;
 	}
 
-	public LocalTime getTime() {
+	public long getTime() {
 		return time;
 	}
 
-	public void setTime(LocalTime time) {
+	public void setTime(long time) {
 		this.time = time;
 	}
 

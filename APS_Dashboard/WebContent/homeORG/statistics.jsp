@@ -57,10 +57,10 @@
                 <p class="nav label"> Welcome ${user.userName} </p>
                 <!-- SUBMISSIONS BUTTON LINK START -->
                 <a class = "nav-link" href="${pageContext.request.contextPath}"> 
-                 <button id="submissions" class="nav-item nav-button"> 
-                         Submissions
-                		<div class = "triangle"> </div>
-                 </button>
+	                <button id="submissions" class="nav-item nav-button"> 
+	                	Submissions
+	                	<div class = "triangle"> </div>
+                 	</button>
                 </a>
                 <!-- SUBMISSIONS BUTTON LINK END -->
                 <!-- STATISTICS BUTTON LINK START -->

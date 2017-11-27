@@ -23,6 +23,7 @@ import cso.dlsu.action.aps.DeleteOrganizationAction;
 import cso.dlsu.action.aps.GetAllOrganizationsAction;
 import cso.dlsu.action.aps.GetOrganizationAction;
 import cso.dlsu.action.aps.SuccessLoginAPS;
+import cso.dlsu.action.organization.GetNotifications;
 import cso.dlsu.action.organization.SuccessLoginOrg;
 
 /**
@@ -43,6 +44,7 @@ import cso.dlsu.action.organization.SuccessLoginOrg;
 							"/homeORG/getStatistics",
 							"/homeAPS/accountSettings",
 							"/homeORG/accountSettings",
+							"/homeORG/getNotifications",
 							"/homeAPS/updatePassword",
 							"/homeORG/updatePassword",
 							"/homeAPS/filtered",
@@ -71,11 +73,12 @@ public class APSController extends HttpServlet {
         actions.put("/homeAPS/updatePassword", new UpdatePasswordAction());
         actions.put("/homeAPS/getStatistics", new GetStatisticsAction());
 		actions.put("/homeAPS/filtered", new FilteredSubmissionAction());
+		actions.put("/homeORG", new SuccessLoginOrg());
 		
-        actions.put("/homeORG", new SuccessLoginOrg());
         actions.put("/homeORG/updatePassword", new UpdatePasswordAction());
         actions.put("/homeORG/accountSettings", new AccountSettingsAction());
 		actions.put("/homeORG/getStatistics", new GetStatisticsAction());
+		actions.put("/homeORG/getNotifications", new GetNotifications());
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

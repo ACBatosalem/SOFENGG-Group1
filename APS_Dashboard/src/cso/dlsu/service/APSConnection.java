@@ -11,13 +11,12 @@ import java.time.LocalDateTime;
 
 import org.sqlite.JDBC;
 
-import cso.dlsu.bean.Organization;
-import cso.dlsu.bean.Document;
-import cso.dlsu.bean.SubmissionDetails;
-import cso.dlsu.bean.CheckingDetails;
 import cso.dlsu.bean.ActivityDetails;
+import cso.dlsu.bean.CheckingDetails;
+import cso.dlsu.bean.Document;
+import cso.dlsu.bean.Organization;
+import cso.dlsu.bean.SubmissionDetails;
 import cso.dlsu.bean.TieUp;
-import main.java.GSheetsConnection;
 
 /**
  * @author Batosalem, Angelika

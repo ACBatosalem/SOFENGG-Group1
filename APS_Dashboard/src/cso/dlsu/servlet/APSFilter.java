@@ -51,17 +51,14 @@ public class APSFilter implements Filter {
 	        
 	        try {
 				GSheetsConnection.start(spreadsheetId, range, times);
-				
 			} catch (NoInternetException e) {
 				e.reconnect();
-				//GSheetsConnection.processData();
 			}
+	        
 			dataGathered = 1;
-
-			
 		}
-		String path = ((HttpServletRequest)request).getServletPath();
 		
+		String path = ((HttpServletRequest)request).getServletPath();
 		Organization user = (Organization)((HttpServletRequest)request).getSession().getAttribute("user");
 		
 		if(path.endsWith(".jsp"))

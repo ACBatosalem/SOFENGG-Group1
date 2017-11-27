@@ -17,7 +17,6 @@ public class NotificationService {
 	}
 	
 	public static List <Notification> getNotifications (String username) {
-		
 		List <Notification> notifs = new ArrayList <Notification> ();
 		for (int i = 0; i < notifications.size(); i++) {
 			if(notifications.get(i).getUserName().equals(username)) {

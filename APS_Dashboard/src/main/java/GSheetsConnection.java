@@ -94,9 +94,8 @@ public class GSheetsConnection {
     }
     
     public static synchronized void start (String spreadsheetId, String range, List <LocalTime> times) 
-    		throws NoInternetException, UnknownHostException {
-    	
-    	boolean stop = false;
+    		throws NoInternetException, UnknownHostException {   	
+    	//boolean stop = false;
     	
     	try {
     		// TODO Once implemented use toData (response)
@@ -107,10 +106,8 @@ public class GSheetsConnection {
     			System.out.println("processing");
                 newFile = 1;
     			processData();
-    			
     			System.out.println("new file");
     		} else {
-               
                 //processData();
                 System.out.println("old file");
             }
@@ -140,20 +137,21 @@ public class GSheetsConnection {
 
             // loop until all lines are read
             while (line != null) {
-               // System.out.println(i);
-               // i++;
-                // use string.split to load a string array with the values from
-                // each line of
-                // the file, using a comma as the delimiter
-                attributes = line.split(">>");
+				// System.out.println(i);
+				// i++;
+				// use string.split to load a string array with the values from
+				// each line of
+				// the file, using a comma as the delimiter
+				attributes = line.split(">>");
                 //TODO check if db is empty
                 //for(int ctr = 0; ctr < attributes.length; ctr++)
                 //	System.out.println(ctr + " " + attributes[ctr]);
-               // if (DocumentService.getAllDocuments().size() == 0)
-                	CreateData.createDocument(attributes);
+				// if (DocumentService.getAllDocuments().size() == 0)
+                CreateData.createDocument(attributes);
                 
                 line = br.readLine();
             }
+            
             db.postProcess();
 
         } catch (Exception ioe) {
@@ -165,20 +163,10 @@ public class GSheetsConnection {
 
 	}
 
-	
-
-	public static synchronized List <Object> toData (ValueRange response) {
-    	// TODO make the response and get the value, make it an object/objects
-    	// TODO if data is incomplete, throw incomplete data exception and keep the data
-    	
-    	return null;
-    }
-    
-    // 
     public static synchronized String getDataInString (String spreadsheetID, String range) throws IOException {
     	String data = "";
     	sheetsService = getSheetsService();
-		ValueRange response = sheetsService.spreadsheets().values().get(spreadsheetID, range).execute();
+    	ValueRange response = sheetsService.spreadsheets().values().get(spreadsheetID, range).execute();
     	List<List<Object>> values = response.getValues();
     	
     	System.out.println("[ " + GSheetsConnection.class.getName() + " | " + LocalTime.now() + " ] Retrieving Data ...");
@@ -216,9 +204,7 @@ public class GSheetsConnection {
 			io.printStackTrace();
 			return false;
 		}
-	}
-    
-    
+	} 
     
     // Run test cases here
     public static void main(String[] args) throws IOException {
