@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title> Posts </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+       
+        <script type="application/javascript" src="scripts/script.js"> </script>
+        <link rel="stylesheet" href="styles/styles.css"> 
+    </head>
+    <body>
+        NUMBER OF POSTS:
+        <span id = "count">  </span>
+        <div id = "postForm">
+            <label class = "label" for = "username"> @user </label>
+            <input name = "username" class = "field" id = "inputUser" type = "text"> <br> 
+            <label class = "label" for = "post"> post </label> <br>
+            <textarea name = "post" class = "field" id = "inputSend" type = "text"> </textarea> <br>
+            <button class = "btn" onclick="addPostToDB()" id = "btnSend"> SEND </button>
+        </div>
+        <ul id = "post-lists">
+
+        </ul>
+    </body>
+</html>
