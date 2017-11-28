@@ -1,5 +1,5 @@
 var fbModules    = require('./firebase');
-var utils       = require('./../utils');
+var utils       = require('./../utils/utils');
 
 var database    = fbModules.firebase.database();
 var firebase    = fbModules.firebase;

@@ -6,8 +6,8 @@ var path        = require("path");
 var ejs         = require('ejs');
 
 // PERSONAL MODULES
-var handlers = require('./handlers');
-var utils = require('./utils');
+var handlers = require('./actions/handlers');
+var utils = require('./utils/utils');
 
 // VARIABLES
 var app     = express();
@@ -16,7 +16,7 @@ var context = "/APS_Dashboard";
 
 // APP CONFIGURATIONS
 app.set('view engine', 'ejs');
-app.use(context, express.static(path.join(__dirname, "WebContent")));
+app.use(context, express.static(path.join(__dirname, "web")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({resave:false, saveUninitialized: false, secret:"secret_key"}));
