@@ -1,15 +1,19 @@
 <html>
 	<head>
+        <!-- CONFIGURATION -->
         <title> APS | Login </title>
+        <link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
+        
         <!-- LIBRARIES -->
-        <script src="libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
+        <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
 
         <!-- STYLES -->
-        <link type="text/css" href="styles/login.css" rel="stylesheet"/>
+        <link type="text/css" href="<%=context%>/styles/login.css" rel="stylesheet"/>
     	
     	<!-- SCRIPTS -->
-    	<script src="scripts/modal.js" type = "application/javascript"> </script>
-    	<script src="scripts/login.js" type = "application/javascript"> </script>
+        <script> var context = "<%=context%>" </script>
+    	<script src="<%=context%>/scripts/modal.js" type = "application/javascript"> </script>
+    	<script src="<%=context%>/scripts/login.js" type = "application/javascript"> </script>
     </head>
     <body>
         <!-- MAIN BG -->
@@ -31,7 +35,7 @@
                     <!-- LOGIN ICON HOLDER -->
                     <div class = "icon-holder"> </div>
                     <!-- DLSU LOGO -->
-                    <img id = "dlsu-logo" src="resources/logo.png"/>
+                    <img id = "dlsu-logo" src="<%=context%>/resources/logo.png"/>
                     <!-- ICON HOLDER OVERLAY -->
                     <div class = "icon-holder-overlay"> </div>
                     <!-- FORM LOGIN START -->

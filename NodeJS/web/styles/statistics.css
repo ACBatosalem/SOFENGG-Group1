@@ -1,0 +1,59 @@
+
+#canvas-id {
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    right: 0px;
+    left: 0px;
+    text-align: center;
+}
+
+.value {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.count-container {
+    padding: 50px;
+}
+
+.count-main {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    justify-content: center;
+    display: inline-flex;
+}
+
+#acad label.acad {
+    color: #64865C;
+}
+
+#acads-non-chart {
+    position: relative;
+    max-height: 400px;
+}
+
+.acad {
+    stroke: #64865C;
+    fill: #64865C;
+    
+}
+
+.non-acad {
+    stroke: #4F9A63;
+    fill: #4F9A63;
+}
+
+.ct-label {
+    fill: white;
+}
+
+
+
+#chart {
+    width: 100%;
+    height: 300px;
+    margin: 0 auto;
+    text-align: center;
+}

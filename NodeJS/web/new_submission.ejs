@@ -1,0 +1,171 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		
+		<title> <%=user.org.username%> | Organizations </title>
+		<link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
+        
+		<!-- LIBRARIES -->
+        <script> var context = "<%=context%>"; </script>
+        <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
+        <script src="<%=context%>/libraries/datatables/datatables.js" type="application/javascript"> </script>
+        <link type="text/css" href="<%=context%>/libraries/datatables/datatables.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        
+        <!-- SCRIPTS -->
+        <script src="<%=context%>/scripts/aps_orgs.js" type="application/javascript"> </script>
+        <script src="<%=context%>/scripts/logout.js" type="application/javascript"> </script>
+        <script src="<%=context%>/scripts/new_submission.js" type="application/javascript"> </script>
+        
+        <!-- STYLES -->
+        <link type="text/css" href="<%=context%>/styles/content.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/navigation.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/table-styles.css" rel ="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/dashboard-style.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/aps_orgs.css" rel="stylesheet">
+	</head>
+    <body>
+        <!-- BACKGROUNDS AND OVERLAYS -->
+        <div id="main-bg"></div>
+        <div id="main_overlay"></div>
+        
+        <!-- MAIN VIEW START -->
+        <div id="main">
+                    <!-- MAIN VIEW START -->
+        <div id="main">
+            <!-- SIDE BAR NAVIGATION START -->
+            <nav id="nav">
+                <!-- TOP ITEMS -->
+                <div id="top_div">
+                    <!-- HEADER OVERLAY -->
+                    <div class = "label-header-overlay"> </div>
+                    <!-- HEADER IMAGE -->
+                    <div class = "label-header"> </div>
+                
+                    <!-- HEADER CONTENT START -->
+                    <div id="header">
+                        <!-- LOGIN ICON HOLDER -->
+                        <div class = "icon-holder"> </div>
+                        <!-- DLSU LOGO -->
+                        <img id = "dlsu-logo" src="<%=context%>/resources/logo.png">
+                        <!-- ICON HOLDER OVERLAY -->
+                        <div class = "icon-holder-overlay"> </div>
+                    </div>
+                    
+                    <!-- WELCOME MESSAGE -->
+                    <p class="nav label"> Welcome <%=user.name%> </p>
+                    <!-- SUBMISSIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="<%=context%>"> 
+	                    <button id="submissions" class="nav-item nav-button"> 
+	                            Submissions
+                    		<div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SUBMISSIONS BUTTON LINK END -->
+                    <!-- STATISTICS BUTTON LINK START -->
+                    <a class = "nav-link" href="<%=context%>/aps/statistics"> 
+	                   	<button class = "nav-item nav-button"> 
+	                           Statistics
+	                       <div class = "triangle"> </div>
+	                   	</button>
+                    </a>
+                    <!-- STATISTICS BUTTON LINK END -->
+                    <!-- ORGANIZATIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="<%=context%>/aps/organizations"> 
+	                    <button id="orgs" class="nav-item nav-button selected"> 
+	                            Organizations
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- ORGANIZATIONS BUTTON LINK END -->
+                </div>
+                <!-- BOTTOM ITEMS START -->
+                <div id="bottom_div">
+                    <!-- ACCOUNT SETTINGS BUTTON -->
+                    <a class = "nav-link" href="<%=context%>/aps/profiles">
+	                    <button id="change_pw" class="nav-item nav-button"> 
+	                            Account Settings
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SIGN OUT BUTTON -->
+                    <a class = "nav-link">
+	                    <button id="signout" class="nav-item nav-button">   
+	                            Logout	                       
+	                    </button>
+                    </a>
+                </div>
+                <!-- BOTTOM ITEMS END -->
+            </nav>
+            <!-- SIDE BAR NAVIGATION END -->
+            
+           <!-- MAIN CONTENT START -->
+            <div id="main_content">
+                <!-- MESSAGE TOAST START -->
+                <div id = "add-notif" class = "toast"> 
+                    <b id = "username-toast"> Username </b> with password <b id = "password-toast"> password </b> has been added.
+                    <button id = "undo-toast">
+                        UNDO
+                    </button>
+                    <button id = "ok-toast"> 
+                        OKAY
+                    </button>
+                </div>
+                <!-- MESSAGE TOAST END -->
+                <!-- MAIN HEADER START -->
+                <div id="main_header">
+                    <!-- MAIN HEADER TITLE -->
+                    <h1 class="body_label head"> New Submission </h1>
+                </div>
+                <!-- MAIN HEADER END -->
+                <!-- MAIN BODY START -->
+                <div id="main_body">
+                    <form action="newSub" method="POST">
+                        Term: 
+                        <select id="term" name="term">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select> <br>
+                        Type of Submission: 
+                        <select id="sub_type" name="type_sub">
+                            <option value="Initial Submission">Initial Submission</option>
+                            <option value="Special Approval Slip">Special Approval Slip</option>
+                        </select> <br>
+                        <div id="type_sas" style="display:none">
+                            <span id="type_sas">Type of SAS Submission: </span>
+                            <select id="type_sas" name="type_sas">
+                                <option value="Late Submission">Late Submission</option>
+                                <option value="In Case of Change">In Case of Change</option>
+                                <option value="Cancellation of Activity">Cancellation of Activity</option>
+                                <option value="Activity Not in GOSM">Activity Not in GOSM</option>
+                                <option value="Without Term-End Requirements">Without Term-End Requirements</option>
+                                <option value="Lost A-form">Lost A-form</option>
+                            </select> <br>
+                        </div>
+                        Activity Title: <input id="act_title" type="text" name="act_title"> <br>
+                        <div id="act_details">
+                            Activity Nature: 
+                            <select id="act_nature" name="act_nature">
+                                <option value="Academic">Academic</option>
+                                <option value="Non-academic">Non-academic</option>
+                            </select> <br>
+                            Activity Type: <input id="act_type" type="text" name="act_type"> <br>
+                            Activity Date: <input id="act_date" type="text" name="act_date"> <br>
+                            Activity Time: <input id="act_time" type="text" name="act_time"> <br>
+                            Activity Venue: <input id="act_venue" type="text" name="act_venue"> <br>
+                        </div>
+                        <div id="sub_details">
+                            Submitter: <!-- submitter --> <br>
+                        </div>
+                        <button id="btn_submit" type="submit" value="newSub"> Submit </button>
+                    </form>
+                    
+                </div>
+                <!-- MAIN BODY END -->
+            </div>
+            <!-- MAIN CONTENT END -->
+        </div>
+        <!-- MAIN VIEW END -->
+    </body>
+</html>

@@ -13,8 +13,9 @@ $(document).ready(function(){
 				data        : {username:username, password:password},		
 				dataType    : 'html',		
 		 		success     : function(data) {		
-					if (data == "aps" || data == "org")		
+					if (data == "aps" || data == "org") {
 						window.location = data;		
+					}
 					else {		
 						$("#login_msg").text(data);		
 					}		

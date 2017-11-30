@@ -16,7 +16,8 @@ var context = "/APS_Dashboard";
 
 // APP CONFIGURATIONS
 app.set('view engine', 'ejs');
-app.use(context, express.static(path.join(__dirname, "web")));
+app.use(context, express.static(path.join(__dirname, "/web")));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({resave:false, saveUninitialized: false, secret:"secret_key"}));
@@ -27,11 +28,10 @@ app.use(function(request, response, next) {
 
 // MAIN CONTROLLER
 app.use ('*', function  (request, response) {
+    console.log("[" + utils.toUTC(new Date()) + "] " + request.originalUrl);
     if(handlers.execute[request.originalUrl] != null) {
-        console.log("[" + utils.toUTC(new Date()) + "] " + request.originalUrl);
         handlers.execute[request.originalUrl](request, response);
     } else {
-        console.log("[" + utils.toUTC(new Date()) + "] Redirected to " + context + "/home");
         response.redirect(context+'/home');
     }
 });                                                                                                                                                                                                                                                     
