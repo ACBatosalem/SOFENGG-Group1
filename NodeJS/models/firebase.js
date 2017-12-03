@@ -68,6 +68,34 @@ function getUserWithOrganization (userid) {
     return user;
 }
 
+exports.service.getAllUsersWithOrganizations = getAllUsersWithOrganizations;
+
+function getAllUsersWithOrganizations () {
+    var usersT = users;
+    
+    for (key in usersT)
+        usersT[key] = getUserWithOrganization(key);
+    
+    return usersT;
+}
+
+exports.service.getAllOrganizationsWithUsers = getAllOrganizationsWithUsers;
+
+function getAllOrganizationsWithUsers () {
+    var orgsT = orgs;
+    
+    for (key in orgsT)
+        orgsT[key] = getOrganizationsWithUsers(key);
+    
+    return orgsT;
+}
+
+exports.service.getAllUsers = getAllUsers;
+
+function getAllUsers () {
+    return users;
+}
+
 exports.service.getUser = getUser;
 
 function getUser (userid) {
@@ -119,14 +147,16 @@ exports.service.getOrganizationsWithUsers = getOrganizationsWithUsers;
 
 function getOrganizationsWithUsers(orgid) {
     var org = orgs[orgid];
-
+    var count = 0;
+    
     for (key in users) {
         if(users[key].org_id == orgid) {
             var user = users[key];
-            user.org_id = null;
-            org.users.key = user;
+            count ++;
         }
     }
+    
+    org.user_count = count
 
     return org;
 }
@@ -193,13 +223,18 @@ function countNonacademic (orgID) {
 
 exports.service.addOrganization = addOrganization;
 
-function addOrganization(orgKey, orgDetails, userKey, userDetails) {
+function addOrganization(orgKey, orgDetails) {
     database.ref("orgs").child(orgKey).set({
         name: orgDetails.name,
         username: orgDetails.username,
         status: orgDetails.status,
         privilege: orgDetails.privilege
       });
+}
+
+exports.service.addUser = addUser;
+
+function addUser (userKey, userDetails) {
     database.ref("users").child(userKey).set({
         name: userDetails.name,
         username: userDetails.username,
@@ -207,7 +242,7 @@ function addOrganization(orgKey, orgDetails, userKey, userDetails) {
         contact: userDetails.contact,
         org_id: userDetails.org_id,
         password: userDetails.password
-      });
+    });
 }
 
 exports.service.countOrgs = countOrgs;

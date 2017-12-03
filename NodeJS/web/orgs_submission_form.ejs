@@ -1,0 +1,324 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		
+		<title> | New Submission </title>
+		<link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
+        
+		<!-- LIBRARIES -->
+        <script> var context = "<%=context%>"; </script>
+        <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
+        <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        
+        <!-- SCRIPTS -->
+        <script src="<%=context%>/scripts/logout.js" type="application/javascript"> </script>
+        <script src="<%=context%>/scripts/modal.js" type="application/javascript"> </script>
+        <script src="<%=context%>/scripts/submission_form.js" type="application/javascript"> </script>
+        
+        <!-- STYLES -->
+        <link type="text/css" href="<%=context%>/styles/modal.css" rel=stylesheet>
+        <link type="text/css" href="<%=context%>/styles/submissions.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/content.css" rel="stylesheet">
+        <link type="text/css" href="<%=context%>/styles/navigation.css" rel="stylesheet">
+	</head>
+    <body>
+        <!-- BACKGROUNDS AND OVERLAYS -->
+        <div id="main-bg"></div>
+        <div id="main_overlay"></div>
+        
+        <!-- MAIN VIEW START -->
+        <div id="main">
+            <!-- SIDE BAR NAVIGATION START -->
+            <nav id="nav">
+                <!-- TOP ITEMS -->
+                <div id="top_div">
+                    <!-- HEADER OVERLAY -->
+                    <div class = "label-header-overlay"> </div>
+                    <!-- HEADER IMAGE -->
+                    <div class = "label-header"> </div>
+                
+                    <!-- HEADER CONTENT START -->
+                    <div id="header">
+                        <!-- LOGIN ICON HOLDER -->
+                        <div class = "icon-holder"> </div>
+                        <!-- DLSU LOGO -->
+                        <img id = "dlsu-logo" src="<%=context%>/resources/logo.png">
+                        <!-- ICON HOLDER OVERLAY -->
+                        <div class = "icon-holder-overlay"> </div>
+                    </div>
+                    
+                    <!-- WELCOME MESSAGE -->
+                    <p class="nav label"> Welcome <%=user.name%> </p>
+                    <!-- SUBMISSIONS BUTTON LINK START -->
+                    <a class = "nav-link" href="<%=context%>/<%=context%>"> 
+	                    <button id="submissions" class="nav-item nav-button selected"> 
+	                            Submissions
+                    		<div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SUBMISSIONS BUTTON LINK END -->
+                    <!-- STATISTICS BUTTON LINK START -->
+                    <a class = "nav-link" href="<%=context%>/org/statistics"> 
+	                   	<button class = "nav-item nav-button"> 
+	                           Statistics
+	                       <div class = "triangle"> </div>
+	                   	</button>
+                    </a>
+                    <!-- STATISTICS BUTTON LINK END -->
+                </div>
+                <!-- BOTTOM ITEMS START -->
+                <div id="bottom_div">
+                    <!-- ACCOUNT SETTINGS BUTTON -->
+                    <a class = "nav-link" href="<%=context%>/org/profiles">
+	                    <button id="change_pw" class="nav-item nav-button"> 
+	                            Account Settings
+	                        <div class = "triangle"> </div>
+	                    </button>
+                    </a>
+                    <!-- SIGN OUT BUTTON -->
+                    <a class = "nav-link">
+	                    <button id="signout" class="nav-item nav-button">   
+	                            Logout	                       
+	                    </button>
+                    </a>
+                </div>
+                <!-- BOTTOM ITEMS END -->
+            </nav>
+            <!-- SIDE BAR NAVIGATION END -->
+            
+           <!-- MAIN CONTENT START -->
+            <div id="main_content">
+                <!-- MAIN HEADER START -->
+                <div id="main_header">
+                    <!-- MAIN HEADER TITLE -->                    
+                    <h1 class="body_label head"> Submission </h1>
+                </div>
+                <!-- MAIN HEADER END -->
+                
+                <!-- MAIN BODY START -->
+                <div id="main_body">
+                    <p id = "form-message"> 
+                        <a class = "btn" href = "<%=context%>/org"> Back to Submissions </a>
+                    </p>
+                    <!-- SUBMISSION FORM MESSAGE START -->
+                    <p id = "form-message"> 
+                        Kindly make sure you have submitted all necessary requirements to avoid being pended. <br>
+                        Please be cautious while logging in, make sure there are no typos and all information logged are consistent with your PPR. <br>
+                        Processing time is 3-5 working days. <br>
+                        <br>
+                        For any concerns/queries please contact: <br> 
+                        <i class="fa fa-user"> </i>
+                        Rica Culata - 09164330003 <br>
+                        <i class="fa fa-user"> </i>
+                        Victor Lacson - 09157797417 <br>             
+                    </p>
+                    <!-- SUBMISSION FORM MESSAGE END -->
+                    
+                    <!-- SUBMISSION START -->
+                    <form id = "submission-form">
+                        <div class = "form-row">
+                            <label id = "term-label"> 
+                                Term
+                            </label>
+                            <select id = "term"> 
+                                <option disabled selected value> Choose </option>
+                                <option value = "1"> Term 1 </option>
+                                <option value = "2"> Term 2 </option>
+                                <option value = "3"> Term 3 </option>
+                                <option value = "4"> Yearlong </option>
+                                
+                            </select>
+                        </div>
+                        
+                        <div class = "form-row">
+                            <label id = "act-title-label"> Activity Title </label>
+                            <input type="text" id = "act-title">
+                        </div>
+                        
+                        <div class = "form-row">
+                            <label id = "act-date-label"> Activity Date </label>
+                            <div class = "form-subrow">
+                                <label class = "act-date-type-label"> Type </label>
+                                <select id = "act-date-type">
+                                <option disabled selected value> Choose </option>
+                                    <option value = "Yearlong"> Yearlong </option>
+                                    <option value = "Termlong"> Termlong </option>
+                                    <option value = "Multiple Dates"> Multiple Dates </option>
+                                    <option value = "One-day Activity"> One-day Activity </option>
+                                </select>
+                            </div>
+                            
+                            <div id = "act-date-container" class = "form-subrow-rev">
+                                <div class = "calendar-table">
+                                    <div class = "cal-options">
+                                        <input id = "date-text" type="text" placeholder="mm/dd/yyyy"> 
+                                        <button id = "add-date">
+                                            Add 
+                                            <i class = "fa fa-plus"> </i>
+                                        </button>
+                                    </div>
+                                    <div class = "cal-options">
+                                        <button id = "prev">
+                                            <i class = "fa fa-angle-double-left"> </i> 
+                                        </button>
+                                        <select id = "month">
+                                            <option value = 1> January </option>
+                                            <option value = 2> February </option>
+                                            <option value = 3> March </option>
+                                            <option value = 4> April </option>
+                                            <option value = 5> May </option>
+                                            <option value = 6> June </option>
+                                            <option value = 7> July </option>
+                                            <option value = 8> August </option>
+                                            <option value = 9> September </option>
+                                            <option value = 10> October </option>
+                                            <option value = 11> November </option>
+                                            <option value = 12> December </option>
+                                        </select>
+                                        <input id = "year" type="number">
+                                        <button id = "next">
+                                            <i class = "fa fa-angle-double-right"> </i>
+                                        </button>
+                                    </div>
+                                    <table class = "cal">
+                                        <thead>
+                                            <tr>
+                                                <th> S </th>
+                                                <th> M </th>
+                                                <th> T </th>
+                                                <th> W </th>
+                                                <th> H </th>
+                                                <th> F </th>
+                                                <th> S </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>   </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                            <tr>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                                <td> 1 </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <label> Selected Date/s: </label>
+                                    <div class ="selected-dates">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "form-subrow">
+                                <label id = "act-time-label"> Time </label>
+                                <input type="time" id = "act-time">
+                            </div>
+                        </div>
+                        
+                        <div class = "form-row">
+                            <label id = "act-nature-label"> Activity Nature </label>
+                            <select id = "act-nature">
+                                <option disabled selected value> Choose </option>
+                                <option value = "Academic"> Academic </option>
+                                <option value = "Special Interest"> Special Interest </option>
+                                <option value = "Departmental Initiative"> Departmental Initiative </option>
+                                <option value = "Fundraising"> Fundraising </option>
+                                <option value = "Community Development"> Community Development </option>
+                                <option value = "Organizational Development"> Organizational Development </option>
+                                <option value = "Issue Advocacy"> Issue Advocacy </option>
+                                <option value = "Lasallian Formation/Spiritual Growth"> Lasallian Formation/Spiritual Growth </option>
+                                <option value = "Outreach"> Outreach </option>
+                            </select>
+                        </div>
+                        
+                        <div class = "form-row">
+                            <label id = "act-type-label"> Activity Type </label>
+                            <select id = "act-type">
+                                <option disabled selected value> Choose </option>
+                                <option value = "Distribution"> Distribution </option>
+                                <option value = "Academic Contest"> Academic Contest </option>
+                                <option value = "General Assembly / Recognition"> General Assembly / Recognition </option>
+                                <option value = "Seminar / Workshops"> Seminar / Workshops </option>
+                                <option value = "Awareness Campaign"> Awareness Campaign </option>
+                                <option value = "Meetings"> Meetings </option>
+                                <option value = "Spiritual Activity"> Spiritual Activity </option>
+                                <option value = "Recruitment / Audition"> Recruitment / Audition </option>
+                                <option value = "Recreation"> Recreation </option>
+                                <option value = "Assistance"> Assistance </option>
+                                <option value = "Focus Group Discussion / Survey"> Focus Group Discussion / Survey </option>
+                            </select>
+                             
+                            <div class = "form-subrow">
+                                <div class = "checkbox"> 
+                                    <i class = "fa fa-check"> </i>
+                                </div>
+                                <label id = "act-others-label"> Others: </label>
+                                <input id = "act-type-others" type="text">
+                            </div>
+                        </div>
+                        
+                        <div class = "form-row">
+                            <label id = "act-venue-label"> Activity Venue </label>
+                            <input type="text" id = "act-venue">
+                        </div>
+                        
+                        <button id = "submit-document"> 
+                            SUBMIT 
+                            <i class = "fa fa-file"> </i>
+                        </button>
+                    </form>
+                    <!-- SUBMISSION END --> 
+                </div>
+                <!-- MAIN BODY END -->
+            </div>
+            <!-- MAIN CONTENT END -->
+        </div>
+        <!-- MAIN VIEW END -->
+    </body>
+</html>

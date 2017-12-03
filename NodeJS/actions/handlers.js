@@ -24,37 +24,22 @@ execute[context+"/org"] = home_org;
 execute[context+"/org/profile"] = profileOrg;
 execute[context+"/org/statistics"] = statisticsOrg;
 execute[context+"/org/newSubmission"] = newSubmission;
-execute[context+"/org/newSub"] = newSub;
+execute[context+"/org/submitSubmission"] = submitSubmission;
 
 execute[context+"/aps"] = home_aps;
 execute[context+"/aps/profile"] = profileAPS;
 execute[context+"/aps/profile/"] = profileAPS;
 execute[context+"/aps/statistics"] = statisticsAPS;
-execute[context+"/aps/organizations"] = organizationsAPS;
-execute[context+"/aps/addOrg"] = addOrg;
-execute[context+"/aps/goToAddOrg"] = goToAddOrg;
-execute[context+"/aps/changeStatusOrg"] = changeStatusOrg;
-execute[context+"/aps/newSubmission"] = newSubmission;
-execute[context+"/org/newSub"] = newSub;
+execute[context+"/aps/accounts"] = accountsAPS;
+execute[context+"/aps/addUser"] = addUser;
+execute[context+"/aps/addOrganization"] = addOrganization;
+execute[context+"/aps/changeStatus"] = changeStatus;
 
 //execute[context+"/addOrg"] = addOrg;
 
 firebase.initialize();
 
-function goToAddOrg (request, response) {
-    if(request.session.uid == null) {
-        response.redirect(context+'/home');
-    } else {
-        var user = service.getUserWithOrganization(request.session.uid);
-        response.render(path.join(__dirname, "./../web/add.ejs"), {
-            user:user,
-            context:context,
-            status: "welcome"
-        });
-    }
-}
-
-function organizationsAPS (request, response) {
+function accountsAPS (request, response) {
     if(request.session.uid == null) {
         response.redirect(context+'/home');
     } else {
@@ -62,7 +47,8 @@ function organizationsAPS (request, response) {
         response.render(path.join(__dirname, "./../web/aps_organizations.ejs"), {
             user:user,
             context:context,
-            organizations: service.getAllOrganizations()
+            organizations: service.getAllOrganizationsWithUsers(),
+            users: service.getAllUsersWithOrganizations()
         });
     }
 }
@@ -204,70 +190,68 @@ function modalData(request, response) {
     response.send(service.getCompleteSubmission(key));
 }
 
-function addOrg(request,response) {
+function addUser (request, response) {
     if(request.session.uid != null) { 
-        var org_name = request.body.org_name;  
-        var org_username = request.body.org_username;
         var user_name = request.body.user_name;
         var user_username = request.body.user_username;
         var user_email = request.body.user_email;
         var user_contact = request.body.user_contact;
-
-        if(org_username == "" || org_username == undefined || 
-            org_name == "" || org_name == undefined ||
-            user_username == "" || user_username == undefined ||
+        var user_org = request.body.user_org;
+        
+        if( user_username == "" || user_username == undefined ||
             user_name == "" || user_name == undefined ||
             user_email == "" || user_email == undefined ||
-            user_contact == "" || user_contact == undefined) {
-            var user = service.getUserWithOrganization(request.session.uid);
-                response.render(path.join(__dirname, "./../web/add.ejs"), {
-                    user:user,
-                    context:context,
-                    status: "not added"
-                });
+            user_contact == "" || user_contact == undefined ||
+            user_org == "" || user_org == undefined  ) {
+            
+            var userKey = 'user_'+user_org+'_1';
+            var userDetails = 
+            {   name: user_name,
+                username: user_username,
+                email: user_email,
+                contact: user_contact,
+                org_id: user_org,
+                password: "password"
+            };
+            service.addUser(userKey, userDetails);
+            response.redirect(context+ '/aps/accounts');
+        } else 
+            response.redirect(context+ '/aps/accounts');
+    }
+}
+function addOrganization(request,response) {
+    if(request.session.uid != null) { 
+        var org_name = request.body.org_name;  
+        var org_username = request.body.org_username;
 
+        if(org_username == "" || org_username == undefined || 
+            org_name == "" || org_name == undefined) {
+            response.redirect(context+ '/aps/organizations');
         } else {
             numOrgs = service.countOrgs() + 1;
             var orgKey = 'org_'+numOrgs;
-            var orgDetails = { name: org_name,
+            var orgDetails = { 
+                name: org_name,
                 username: org_username,
                 status: "active",
                 privilege: "org"
             };
-            var userKey = 'user_'+org_username+'_1';
-            var userDetails = { name: user_name,
-                username: user_username,
-                email: user_email,
-                contact: user_contact,
-                org_id: 'org_'+numOrgs,
-                password: "password"
-            };
-            service.addOrganization(orgKey, orgDetails, userKey, userDetails);
-              var user = service.getUserWithOrganization(request.session.uid);
-              response.render(path.join(__dirname, "./../web/aps_submissions.ejs"), {
-                    user: user,
-                    context: context,
-                    orgs: service.getAllOrganizations(), 
-                    submissions: service.getAllCompleteSubmissions()
-                });
+            
+            service.addOrganization(orgKey, orgDetails);
+            response.redirect(context+ '/aps/accounts');
         }
     } else {
-        response.redirect(context+ '/home');
+        response.redirect(context+ '/aps/accounts');
     }
 }
 
-function changeStatusOrg(request,response) {
+function changeStatus(request,response) {
     var status = null;
     if(request.session.uid != null) {
         //TODO replace child with id of org from request
         status = service.changeOrgStatus(request.body.id, request.body.status);
         var user = service.getUserWithOrganization(request.session.uid);
-        response.render(path.join(__dirname, "./../web/aps_submissions.ejs"), {
-              user: user,
-              context: context,
-              orgs: service.getAllOrganizations(), 
-              submissions: service.getAllCompleteSubmissions()
-          });
+        response.redirect(context+ '/home');
     } else {
         response.redirect(context+ '/home');
     }
@@ -276,20 +260,17 @@ function changeStatusOrg(request,response) {
 
 function newSubmission(request, response) {
     if(request.session.uid != null) {
-        //TODO replace child with id of org from request
         var user = service.getUserWithOrganization(request.session.uid);
-        response.render(path.join(__dirname, "./../web/new_submission.ejs"), {
+        response.render(path.join(__dirname, "./../web/orgs_submission_form.ejs"), {
               user: user,
-              context: context,
-              status: "not added",
-              orgs: service.getAllOrganizations()
-          });
+              context: context
+        });
     } else {
         response.redirect(context+ '/home');
     }
 }
 
-function newSub(request, response) {
+function submitSubmission(request, response) {
     if(request.session.uid != null) {
         var term = request.body.term;
         var type_sub = request.body.type_sub;
@@ -309,12 +290,7 @@ function newSub(request, response) {
             act_date == "" || act_date == undefined ||
             act_time == "" || act_time == undefined ||
             act_venue == "" || act_venue == undefined) {
-                var user = service.getUserWithOrganization(request.session.uid);
-                response.render(path.join(__dirname, "./../web/new_submissions.ejs"), {
-                    user:user,
-                    context:context,
-                    status: "not added"
-                });
+                response.redirect(context+'/org/newSubmission');
         } else {
             numSub = service.countSubs() + 1;
             var subKey = 'sub_'+numSub;
@@ -330,8 +306,7 @@ function newSub(request, response) {
                 type_sas: type_sas,
                 user_id_org: request.session.uid
             };
-            service.addSubmission(subKey, subDetails);
-            var user = service.getUserWithOrganization(request.session.uid);
+            
             response.redirect(context+'/home');
         }
     } else {

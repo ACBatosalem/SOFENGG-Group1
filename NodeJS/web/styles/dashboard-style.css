@@ -113,6 +113,7 @@
     display: none;
 }
 
+
 #modal-content-container {
     position: absolute;
     width: 100%;
@@ -132,35 +133,31 @@
     opacity: 0.6;
     width: 100%;
     height: 100%;
-    
     z-index: 2;
     top: 0;
     left: 0;
 }
 
 #modal-container {
-    margin: 50px 20px 20px 20px;
-    height: calc(100% - 70px);
+    margin: 20px 20px;
 }
 
 #modal-content {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
+    display: flex;
 }
 
-#modal-content::-webkit-scrollbar-track {
+.half::-webkit-scrollbar-track {
 	box-shadow: inset 0 0 1px gray;
     border-radius: 10px 10px 10px 10px;
 }
 
-#modal-content::-webkit-scrollbar {
+.half::-webkit-scrollbar {
 	width: 10px;
 	background-color: white;
     border-radius: 10px
 }
 
-#modal-content::-webkit-scrollbar-thumb {
+.half::-webkit-scrollbar-thumb {
 	background-color: #35865C;
     border-radius: 10px;
 }
@@ -172,7 +169,7 @@
 }
 
 .modal-title#act-name {
-    font-size: 40px;
+    font-size: 25px;
     width: 100%;
     margin: 0px 0px 0px 0px;
     line-height: 1;
@@ -180,7 +177,7 @@
 }
 
 .modal-title#org-name {
-    font-size: 25px;
+    font-size: 20px;
     width: 100%;
     margin: 0px;
     height: 10%;
@@ -197,14 +194,31 @@
 }
 
 .modal-label.modal-division {
-    margin: 0px;
-    margin-left: 0px;
-    font-size: 22px;
+    font-size: 20px;
+    width: 100%;
     font-weight: bolder;
 }
 
+.modal-division button.selected {
+    color: white;
+    background-color: #35865C;
+}
+
+.modal-division button:hover {
+    color: white;
+    background-color: #35865C;    
+}
+.modal-division button {
+    font-family: "Palanquin";
+    color: #35865C;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+
 .modal-label {
-    width: 20%;
+    width: 50%;
     margin-left: 10px;
     font-size: 18px;
 }
@@ -297,13 +311,13 @@ section#details {
     background-color: white;
     position: absolute;
     color: #35865C;
-    height: 90%;
-    width: 70%;
+    overflow: hidden;
     margin: 0 auto;
     border-radius: 10px;
     text-align: center;
     z-index: 5;
     top: 50%;
+    height: 95%;
     left: 50%;
     flex-direction: column;
     transform: translate(-50%, -50%);
@@ -472,83 +486,6 @@ section#details {
     right: 0px;
 }
 
-#modal-action {
-    z-index: 20;
-    font-family: "Palanquin";
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-}
-
-#modal-action-bg {
-    background-color:  #35865C;
-    opacity: 0.75;
-    z-index: 10;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-}
-
-#modal-action-content {
-    min-width: 60%;
-    max-width: 60%;
-    max-height: 50%;
-    position: absolute;
-    background-color: white;
-    z-index: 19;
-    left: 50%;
-    top: 50%;
-    text-align: center;
-    margin: 10px;
-    padding: 10px;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    overflow: auto;
-}
-
-#modal-action-label {
-    color:  #35865C;
-    font-size: 20px;
-    padding: 20px;
-}
-
-.modal-action-pos {
-    font-family: "Palanquin";
-    font-size: 15px;
-    color: white;
-    background-color: #124B2E;
-    border: 4px;
-    padding: 5px 30px;
-    transition: 0.2s;
-    border-radius: 2px;
-}
-
-.modal-action-pos:hover {
-    background-color: #1F804E;
-    cursor: pointer;  
-}
-
-.modal-action-neg {
-    font-family: "Palanquin";
-    background: #95989A;
-    color: white;
-    font-size: 15px;
-    margin: 5px;
-    transition: 0.2s;
-    border: 4px;
-    padding: 5px 30px;
-    transition: 0.2s;
-    border-radius: 2px;
-}
-
-.modal-action-neg:hover {
-    background: #B3BCC2;
-    cursor: pointer;
-}
 #notif-btn {
     cursor: pointer;
     opacity: 0.8;
@@ -565,4 +502,83 @@ section#details {
     
 }
 
+.btn {
+    text-decoration: none;
+    color: white;
+    background-color: #35865C;
+    border: none;
+    font-family: "Palanquin";
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.btn:hover {
+    color: white;
+    background-color: #35865CBB;
+    border: none;
+    font-family: "Palanquin";
+}
+
+
+.submit {
+    padding: 0px 30px;
+    font-size: 20px;
+    margin: 20px 0px 0px 20px;
+}
+
+.field {    
+    width: 60%;
+    resize: none;
+    font-size: 18px;
+    flex-grow: 2;
+    padding: 0px 5px;
+    color: #35865C;
+    border: 1px solid #35865C;
+	font-family: "Palanquin";
+    margin: 2px 10px 2px 10px
+}
+
+div.option .field {
+    flex-grow: 0;
+}
+.modal-row {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-row textarea {
+    width: 50%:
+}
+
+.modal-row label {
+    padding: 5px;
+}
+
+.half {
+    width: 100%;
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+.otherhalf {
+    width: 40%;
+}
+
+button.check-resubmit-edit {
+    float: right;
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 0px 20px;
+}
+
+#submission {
+    display: none;
+}

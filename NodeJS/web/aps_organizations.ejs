@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		
-		<title> <%=user.org.username%> | Organizations </title>
+		<title> <%=user.org.username%>  | Organizations </title>
 		<link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
         
 		<!-- LIBRARIES -->
@@ -13,24 +13,93 @@
         <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
         
         <!-- SCRIPTS -->
+        <script src="<%=context%>/scripts/modal.js" type="application/javascript"> </script>
         <script src="<%=context%>/scripts/aps_orgs.js" type="application/javascript"> </script>
         <script src="<%=context%>/scripts/logout.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
+        <link type="text/css" href="<%=context%>/styles/modal.css" rel=stylesheet>
         <link type="text/css" href="<%=context%>/styles/content.css" rel="stylesheet">
         <link type="text/css" href="<%=context%>/styles/navigation.css" rel="stylesheet">
         <link type="text/css" href="<%=context%>/styles/table-styles.css" rel ="stylesheet">
-        <link type="text/css" href="<%=context%>/styles/dashboard-style.css" rel="stylesheet">
         <link type="text/css" href="<%=context%>/styles/aps_orgs.css" rel="stylesheet">
 	</head>
     <body>
         <!-- BACKGROUNDS AND OVERLAYS -->
         <div id="main-bg"></div>
         <div id="main_overlay"></div>
-        
+        <!-- MODAL VIEW START -->
+        <div id = "modal-view" tabindex="1">
+            <!-- MODAL BACKGROUND -->
+            <div id = "modal-bg"> </div>
+            <!-- MODAL CONTENT START -->
+            <div id = "modal-container-outer">
+                <button id = "modal-close"> </button>
+                
+                <div id = "modal-container">
+                    <div id = "modal-content">
+                        <form id = "add-org-form" action = "addOrganization" method="POST">
+                            <label class = "modal-title"> Add Organization </label> 
+                            <div class="modal-row">
+                                <label class = "modal-label"> Name </label>
+                                <input class = "modal-field">
+                            </div>
+                            <div class = "modal-row">
+                                <label class = "modal-label"> Username </label>
+                                <input class = "modal-field">
+                            </div>
+                            <div class = "modal-row">
+                                <button class = "addBtn" type="submit"> 
+                                    <i class = "fa fa-plus"> </i>
+                                    Add
+                                </button>
+                            </div>
+                        </form> 
+                        <form id = "add-user-form" action = "addOrganization" method="POST">
+                            <label class = "modal-title"> Add/Edit User </label>
+                            <div class="modal-row">
+                                <label class = "modal-label"> Name </label>
+                                <input class = "modal-field" type="text">
+                            </div>
+                            <div class = "modal-row">
+                                <label class = "modal-label"> Username </label>
+                                <input class = "modal-field" type="text">
+                            </div>
+                            <div class = "modal-row">
+                                <label class = "modal-label"> Email </label>
+                                <input class = "modal-field" type="email">
+                            </div>
+                            <div class = "modal-row">
+                                <label class = "modal-label"> Contact </label>
+                                <input class = "modal-field" type="tel">
+                            </div>
+                            <div class = "modal-row">
+                                <label class = "modal-label"> Organization  </label>
+                                <select class = "modal-field"> 
+                                    <% for (key in organizations) { %>     
+                                    <option> <%= organizations[key].name %> </option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            
+                            <div class = "modal-row">
+                                <button class = "modal-add addBtn" type="submit"> 
+                                    <i class = "fa fa-plus"> </i>
+                                    Add
+                                </button>
+                                <button class = "modal-save addBtn" type="submit"> 
+                                    <i class = "fa fa-save"> </i>
+                                    Save
+                                </button>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+            <!-- MODAL CONTENT END -->
+        </div>
+        <!-- MODAL VIEW END -->
         <!-- MAIN VIEW START -->
-        <div id="main">
-                    <!-- MAIN VIEW START -->
         <div id="main">
             <!-- SIDE BAR NAVIGATION START -->
             <nav id="nav">
@@ -70,9 +139,9 @@
                     </a>
                     <!-- STATISTICS BUTTON LINK END -->
                     <!-- ORGANIZATIONS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>/aps/organizations"> 
+                    <a class = "nav-link" href="<%=context%>/aps/accounts"> 
 	                    <button id="orgs" class="nav-item nav-button selected"> 
-	                            Organizations
+	                            Manage Accounts 
 	                        <div class = "triangle"> </div>
 	                    </button>
                     </a>
@@ -114,41 +183,31 @@
                 <!-- MAIN HEADER START -->
                 <div id="main_header">
                     <!-- MAIN HEADER TITLE -->
-                    <h1 class="body_label head"> Organizations </h1>
+                    <h1 class="body_label head"> Manage Accounts </h1>
                 </div>
                 <!-- MAIN HEADER END -->
+                
                 <!-- MAIN BODY START -->
                 <div id="main_body">
-                    <!-- ADD ORG START -->
-                    <div id = "add-org-container">
-                        <!-- ADD CLOSE BUTTON -->
-                        <a class = "nav-link" href="<%=context%>/aps/goToAddOrg"> 
-                        <div id = "add-close">
-                            <i class = "fa fa-close close-icon"> </i>
-                        </div>
-                        </a>
-                        <!-- MESSAGE ADD -->
-                        <div id = "add-message" class ="label add-label"> 
-                            <span>
-                                Add Organization
-                            </span> 
-                        </div>
-                        <!-- ADD ORG WITH USER AND BUTTON -->
-                        <div id = "add-organization">
-                            <input type="text" placeholder = "Username" id = "username">
-                            
-                            <button id ="add-org-btn" class = "btn"> Add Organization </button>
-                            <div id = "add-prompt-message">
-                                <i class = "fa fa-question icon-query"> </i>
-                                <i class = "fa fa-close close-prompt"> </i>
-                                <label> </label>
-                                <div id = "add-message-triangle"> </div>
-                            </div>
-                        </div>
+                    <div id = "orgs-tab" class = "table-container">
+                        <button id = "manage-org" class="tab selected">
+                            <i class="fa fa-users"> </i>
+                            Organizations
+                        </button>
+
+                        <button id = "manage-user" class="tab">
+                            <i class="fa fa-user"> </i>
+                            Users
+                        </button>
                     </div>
-                    <!-- ADD ORG END -->
+                    
+                    
                     <!-- ORG TABLES CONTAINER START -->
-                    <div id = "orgs-table-container">
+                    <div id="orgs-table" class = "table-container">
+                        <button id = "add-org" class="addBtn">
+                            <i class="fa fa-plus"> </i>
+                            Add Organization
+                        </button>
                         <!-- TABLE ORGANIZATIONS LIST START -->
                         <table id="organizations">
                             <!-- THEAD START -->
@@ -156,33 +215,73 @@
                                 <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
                                 <tr class = "header"> 
                                 	<th class = "header org"> Organization </th>
-                                    <th class = "header pass no-sort"> Name </th>
-                                    <th class = "header delete no-sort"> Delete </th>
+                                    <th class = "header delete no-sort"> Users </th>
+                                    <th class = "header delete no-sort"> Status </th>
+                                    <th class = "header delete no-sort"> Action </th>
                                 </tr>
                             </thead>
                             <!-- THEAD END -->
                             <!-- TBODY START -->   
-                             
                             <tbody id = 'organizations-body'>  
                                 <% for (key in organizations) { %>     
                                 <tr>
-                                	<td> <%= organizations[key].name %> </td>
-									<td> <%= organizations[key].username %> </td>
-									<td>
+                                	<td> <%= organizations[key].name %> (<%= organizations[key].username %>) </td>
+									<td> <%= organizations[key].user_count %> </td>
+                                    <td> 
+                                        <% if (organizations[key].status == "active") { %>
+                                            <i class ="fa fa-check"> </i>
+                                        <% } else {%>
+                                            <i class ="fa fa-times"> </i>
+                                        <% } %>
+                                        <%= organizations[key].status %> 
+                                    </td>
+                                    <td>
 										<% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
-										     <button class="delete-org" data-orgID="<%=key%>"> 
-                                                <% if (organizations[key].status == "active") { %>
-                                                    deactivate
-                                                <% } else {%>
-                                                    activate
-                                                <% } %>
-										        <!-- <i class="fa fa-trash icon"></i> -->
-										     </button>
+										     <% if (organizations[key].status == "active") { %>
+                                                <i class ="iconBtn archive fa fa-archive"> </i>
+                                            <% } else {%>
+                                                <i class ="iconBtn unarchive fa fa-inbox"> </i>
+                                            <% } %>
                                         <% } %>
 									</td>
                                 </tr>
                                 <% } %>
-                                </c:forEach>
+                            </tbody>
+                            <!-- TBODY END -->
+                        </table>
+                        <!-- TABLE ORGANIZATIONS LIST END -->
+                    </div>
+                    <!-- ORG TABLES CONTAINER END -->
+                    <!-- ORG TABLES CONTAINER START -->
+                    <div id="users-table" class = "table-container">
+                        <button id = "add-user" class="addBtn">
+                            <i class="fa fa-plus"> </i>
+                            Add User
+                        </button>
+                        <!-- TABLE ORGANIZATIONS LIST START -->
+                        <table id="users">
+                            <!-- THEAD START -->
+                            <thead>
+                                <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
+                                <tr class = "header"> 
+                                	<th class = "header user"> User </th>
+                                    <th class = "header delete no-sort"> Organizations </th>
+                                    <th class = "header delete no-sort"> Action </th>
+                                </tr>
+                            </thead>
+                            <!-- THEAD END -->
+                            <!-- TBODY START -->   
+                            <tbody id = 'users-body'> 
+                                <% for (key in users) { %>     
+                                <tr>
+                                	<td> <%= users[key].name %> (<%= users[key].username %>) </td>
+									<td> <%= users[key].org.name %> </td>
+                                    <td> 
+                                        <i class = "iconBtn delete fa fa-trash"> </i>
+                                        <i class = "iconBtn edit fa fa-pencil"> </i>
+                                    </td>
+                                </tr>
+                                <% } %>
                             </tbody>
                             <!-- TBODY END -->
                         </table>

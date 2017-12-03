@@ -1,4 +1,37 @@
 $(document).ready(function(){
+    $('#forgot_msg').click(function(e){
+        $('#loginform').fadeOut(function(){
+            $('#forgotpassword').fadeIn();
+        });
+    });
+    
+    $('#btn_back').click(function(e){
+        e.preventDefault();
+        $('#forgotpassword').fadeOut(function(){
+            $('#loginform').fadeIn();
+            $('#email').val('');
+            $('#forgot_msg_error').text('');
+        });
+    });
+    
+    $('#forgotpassword').submit(function(e){
+        e.preventDefault();
+        var email = $('#email').val();
+        
+        // SEND EMAIL
+        
+        $('#forgot_msg_error').text('Error test message ' + email);
+        
+        //SET TEXT IF ERROR: 
+        $('body').css('overflow', 'none');
+        modalMessage("Successfully sent an email to " + email, null, null, "Okay", function(){
+            $('#modal-action').remove();
+            $('body').css('overflow', 'auto');
+            $('#btn_back').click();
+        });
+    });
+    
+    
     $("#loginform").submit(function(e){
 		e.preventDefault();
 		var username = $("#login_username").val();		

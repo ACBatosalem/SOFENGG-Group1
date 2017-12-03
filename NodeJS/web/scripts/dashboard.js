@@ -21,86 +21,117 @@ $(document).ready(function() {
     /*$('#acad-box').prop('checked', true);
     $('#non-acad-box').prop('checked', true);*/
     
+    $('.modal-division button').on('click', function(){
+        $('.modal-division button').each(function(){
+            $(this).removeClass('selected');
+            $('#' + $(this).attr('data-form')).hide();
+        });
+        
+        $(this).addClass('selected');
+        $('#' + $(this).attr('data-form')).show();
+    });
     $("#org-pick").val($("#org-pick").attr('data-selectedOrg'));
     
-    $('#acad-box').change(function() {
-    	var f = "";
-        if($("#acad-box").is(":checked") && $('#non-acad-box').is(":checked")) {
-        	f = "tt";
-        } else if(!($("#acad-box").is(":checked")) && $('#non-acad-box').is(":checked")) {
-        	f = "ft";
-        } else if($("#acad-box").is(":checked") && !($('#non-acad-box').is(":checked"))) {
-        	f = "tf";
-        } else if (!($("#acad-box").is(":checked")) && !$('#non-acad-box').is(":checked")) {
-        	$('#non-acad-box').prop('checked', true);
-        	f = "ft";
-        }
+    $('button#resubmit').on('click', function(event){
+        event.stopPropagation();
         
-        var org = $("#org-pick").val();
-        
-        window.location = "/homeAPS?filter=" + f + "&org=" + org;
+        var docuID = $(this).attr('data-docuID');      
+        $('body').css('overflow', 'none');
+        modalMessage("Are you sure you want to resubmit the document for " + $('#act-name').val() + "?",
+                     "No",
+                     function(){
+                        $('body').css('overflow', 'auto');
+                        $('#modal-action').remove();
+                    },
+                     "Yes",
+                     function(){
+            
+                    },
+                     false);
+                     
+
     });
     
     $('#non-acad-box').change(function() {
-    	var f = "";
-        if($("#acad-box").is(":checked") && $('#non-acad-box').is(":checked")) {
-        	f = "tt";
-        } else if(!($("#acad-box").is(":checked")) && $('#non-acad-box').is(":checked")) {
-        	f = "ft";
-        } else if($("#acad-box").is(":checked") && !($('#non-acad-box').is(":checked"))) {
-        	f = "tf";
-        } else if (!($("#acad-box").is(":checked")) && !$('#non-acad-box').is(":checked")) {
-        	$('#acad-box').prop('checked', true);
-        	f = "tf";
-        }
-        
-        var org = $("#org-pick").val();
-        
-    	window.location = window.location.origin + "/APS_Dashboard/homeAPS?filter=" + f + "&org=" + org;
+    	// TO DO FILTER
+    });
+    
+    
+    $('#acad-box').change(function() {
+    	// TO DO FILTER
     });
     
     $("#org-pick").change(function() {
-    	var org = this.value;
-    	
-    	if($("#acad-box").is(":checked") && $('#non-acad-box').is(":checked")) {
-        	f = "tt";
-        } else if(!($("#acad-box").is(":checked")) && $('#non-acad-box').is(":checked")) {
-        	f = "ft";
-        } else if($("#acad-box").is(":checked") && !($('#non-acad-box').is(":checked"))) {
-        	f = "tf";
-        }
-    	
-    	window.location = context + "/homeAPS?filter=" + f + "&org=" + org;
+    	// TO DO FILTER
+    });
+    
+    $('.half input').prop('disabled', true);
+    $('.half textarea').prop('disabled', true);
+    
+    $('#check').on('click', function(){
+        
     });
     
     $('#table_submissions tbody').on('click', 'tr', function() {
     	var docuID = $(this).attr('data-docuID');
+        $('#modal-content input').val('');
+        $('#modal-content textarea').val("");
+        $('#modal-content select').val('');
     	
-    	$.ajax({ 		
+        $.ajax({ 		
 			type        : 'POST', 		
 			url         : 'modalData',		
 			data        : {docuID:docuID},		
 			dataType    : 'json',		
 	 		success     : function(data) {
-	 			console.log(data);
-	 			check = data;
-	 			$("#act-name").text(data.title);
-	 			$("#org-name").text(data.submittedBy.org.name);
+	 			$("#act-name").val(data.title);
+	 			$("#org-name").val(data.submittedBy.org.name);
 	 			
-	 			$("#time").text("Time: " + data.act_time);
-	 			$("#venue").text("Venue: " + data.act_venue);
-	 			$("#nature").text("Nature of Activity: " + data.act_nature);
-	 			$("#type").text("Type of Activity: " + data.act_type);
-	 			$("#actDate").text("Activity Date/s: " + data.act_date);
+	 			$("#time").val(data.act_time);
+	 			$("#venue").val(data.act_venue);
+	 			$("#nature").val(data.act_nature);
+	 			$("#type").val(data.act_type);
+	 			$("#actDate").val(data.act_date);
 	 			
-                $("#submissionType").text("Submission Type: " + data.sub_type);
-	 			$("#submittedBy").text("Submitted by: " + data.submittedBy.name);
-	 			$("#submitDate").text("Date Submitted: " + data.timestamp);
-	 			$("#typeSAS").text("Type of SAS Submission: " + data.type_sas);
+                $("#submissionType").val(data.sub_type);
+	 			$("#submittedBy").val(data.submittedBy.name);
+	 			$("#submitDate").val(data.timestamp);
+	 			$("#typeSAS").val(data.type_sas);
 	 			
-	 			$("#checkedby").text("Checked by: " + data.checker.name);
-	 			$("#dateChecked").text("Date Checked: " + data.datetime_checked);
-	 			$("#remarks").text("Remarks: " + data.remarks);
+                if(data.status == 'PENDING') {
+                    $('#resubmit').show();
+                } else {
+                    $('#resubmit').hide();
+                }
+                
+                if(data.status == '' || data.status == null || data.status == '-') {
+                    $('#check').show();
+                    $('#recheck').hide();
+                } else {
+                    $('#recheck').show();
+                    $('#check').hide();
+                }
+
+                $('#checker input').prop('disabled', true);
+                $('#checker textarea').prop('disabled', true);
+                $('#checker select').prop('disabled', true);
+                
+                if(data.checker != null) {            
+                    $("#checkedBy").val(data.checker.name);
+                    $("#dateChecked").val(data.datetime_checked);
+                    $('#status').val(data.status.toUpperCase());
+                    
+                    
+                } else {
+                    $("#checkedBy").val('');
+                    $("#dateChecked").val('');
+                    $('#status').val('-'); 
+                }
+                
+                if(data.remarks != null)
+                    $("#remarks").val(data.remarks);
+                else
+                    $("#remarks").val('');
 			},
 			error   	: function(xhr,status,error){		
 				console.log(xhr);   		
@@ -109,7 +140,56 @@ $(document).ready(function() {
     	});
     	
     	$('#modal-view').fadeIn();
-    	
+        
+        var check = true;
+        $('#check').click(function(){
+            if(check) {
+                $('#checker input').prop('disabled', false);
+                $('#checker textarea').prop('disabled', false);
+                $('#checker select').prop('disabled', false);
+                $(this).html('<i class = "fa fa-save"> </i> SUBMIT');
+            } else {
+                 modalMessage('Are you sure you want to change the checking details?',
+                "No",
+                function(){
+                    
+                },
+                "Yes",
+                function(){
+                    $('#checker input').prop('disabled', true);
+                    $('#checker textarea').prop('disabled', true);
+                    $('#checker select').prop('disabled', true);
+                    $('#check').html('<i class = "fa fa-check"> </i> RECHECK');
+                    $('#modal-action').remove();
+                }, true);
+            }
+            check = !check;
+        });
+        
+        var recheck = true;
+        $('#recheck').click(function(){
+            if(recheck) {
+                $('#checker input').prop('disabled', false);
+                $('#checker textarea').prop('disabled', false);
+                $('#checker select').prop('disabled', false);
+                $(this).html('<i class = "fa fa-save"> </i> SUBMIT');
+            } else {
+                modalMessage('Are you sure you want to change the checking details?',
+                "No",
+                function(){
+                    
+                },
+                "Yes",
+                function(){
+                    $('#checker input').prop('disabled', true);
+                    $('#checker textarea').prop('disabled', true);
+                    $('#checker select').prop('disabled', true);
+                    $('#recheck').html('<i class = "fa fa-check"> </i> RECHECK');
+                    $('#modal-action').remove();
+                }, true);
+            }
+            recheck = !recheck;
+        });
         $('body').css('overflow','hidden');
     });
     

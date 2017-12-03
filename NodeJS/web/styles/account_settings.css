@@ -21,6 +21,7 @@
 .field {    
     width: 250px;
     resize: none;
+    color: #35865C;
 	font-family: "Palanquin";
     padding-left: 5px;
     padding-right: 5px;
@@ -136,4 +137,33 @@ label#emailtitle {
     font-size: 20px;
     font-family: 'Palanquin';
     outline: none;
+}
+
+.subopt {
+    justify-content: center;
+    display: flex;
+}
+
+.subopt > #editsave {
+    padding: 0px 10px;
+    background-color: #35865C;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-family: "Palanquin";
+    cursor: pointer;
+}
+
+.subopt > #editsave:hover {
+    background-color: #35865CCC;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-family: "Palanquin";
+    cursor: pointer;
+}
+
+
+.subopt label {
+    width: 100px;
 }

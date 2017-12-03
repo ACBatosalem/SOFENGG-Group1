@@ -64,6 +64,7 @@ body {
 }
 
 #main_body {
+    margin: 10px auto;
     position: absolute;
     display: block;
     width: 100%;
@@ -85,3 +86,5 @@ body {
     width: calc(100% - 20px);
     margin: 20px 10px;
 }
+
+
