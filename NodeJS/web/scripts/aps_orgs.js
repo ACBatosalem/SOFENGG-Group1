@@ -35,18 +35,6 @@ $(document).ready(function() {
         });
     });
     
-    $('#add-org-form').on('submit', function(e){
-        e.preventDefault();
-        //ADD ORG;
-    });
-    
-    
-    $('#add-user-form').on('submit', function(e){
-        e.preventDefault();
-        //ADD USER;
-    });
-    
-    
     $('.edit').on('click', function(){     
         $('#add-user-form .modal-title').text('Edit User');
         $('#add-user-form .modal-add').hide();
@@ -65,6 +53,7 @@ $(document).ready(function() {
     });
     
     $('.delete').on('click', function(){
+        var orgRow = this;
         modalMessage("Are you sure you want to delete this user?",
             "No",
             function(){
@@ -72,37 +61,70 @@ $(document).ready(function() {
             },
             "Yes",
             function(){
-                // DELETE USER
+                var orgID = $(orgRow).attr('data-orgID');
+                $.ajax({
+                    type        : 'POST', 
+                    url         : 'deleteUser',
+                    data        : {id:orgID},
+                    dataType    : 'html',
+                    success     : function(data) {
+                        console.log(data);
+                        window.location = context + "/aps/accounts";
+                    },
+                    error   : function(xhr,status,error){
+                        console.log(xhr.responsetext);
+                        alert(status);
+                        alert(error);
+                    }
+                });
             }, false
         )
     });
     
 
-    $('.archive').on('click', function(){
-       modalMessage("Are you sure you want to archive this organization?",
+    $('.changeStatus').on('click', function(){
+        var orgRow = this;
+        
+        var text = $(orgRow).attr('value');
+        var msg;
+        if(text == "active")
+            msg = "Are you sure you want to archive this organization?";
+        else  msg = "Are you sure you want to unarchive this organization?";
+       modalMessage(msg,
             "No",
             function(){
                 $('#modal-action').remove();
             },
             "Yes",
             function(){
-                //ARCHIVE
+                var orgID = $(orgRow).attr('data-orgID');
+                var text = $(orgRow).attr('value');
+                console.log(orgID);
+                console.log(text);
+                changeStatusOrg(orgID,text);
+                $("#modal-action").remove();
+                window.location = context + "/aps/accounts";
             }, false
         ) 
     });
     
-    $('.unarchive').on('click', function(){
-       modalMessage("Are you sure you want to unarchive this organization?",
-            "No",
-            function(){
-                $('#modal-action').remove();
+
+    function changeStatusOrg (orgID, status) {
+		$.ajax({
+			type        : 'POST', 
+            url         : 'changeStatus',
+            data        : {id:orgID, status:status},
+            dataType    : 'html',
+            success     : function(data) {
+                console.log(data);
             },
-            "Yes",
-            function(){
-                //UNARCHIVE
-            }, false
-        ) 
-    });
+            error   : function(xhr,status,error){
+                console.log(xhr.responsetext);
+                alert(status);
+                alert(error);
+            }
+		});
+    }
     
 
     var usernameregex = /^(([A-Z]{1,}?(\s{1}[A-Z]{1,})?(\s{1}[A-Z]{1,})?))$/;

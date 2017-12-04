@@ -148,21 +148,28 @@
                     <div class = "option">
                         <div class = "subopt">
                             <label class = "label"> Name </label>
-                            <input disabled id = "name" type = "text" class = "profile field" value ="<%=user.name%>">
+                            <input disabled id = "name" type = "text" class = "name profile field" name="name" value ="<%=user.name%>">
+                        </div>
+
+                        <div class = "subopt">
+                            <label class = "label"> Username </label>
+                            <input disabled id = "name" type = "text" class = "username profile field" name="username" value = "<%=user.username%>">
                         </div>
                         
                         <div class = "subopt">
                             <label class = "label"> Email </label>
-                            <input disabled id = "name" type = "email" class = "profile field" value = "<%=user.email%>">
+                            <input disabled id = "name" type = "email" class = "email profile field" name="email" value = "<%=user.email%>">
                         </div>
                         
                         <div class = "subopt">
                             <label class = "label"> Contact </label>
-                            <input disabled id = "name" type = "number" class = "profile field" value = "<%=user.contact%>">
+                            <input disabled id = "name" type = "number" class = "contact profile field" name="contact" value = "<%=user.contact%>">
                         </div>
                         
+                        <!-- please make dagdag div for message in case of error. salamat po -->
+
                         <div class = "subopt">
-                            <button id = "editsave"> 
+                            <button id = "editsave" class="editAPS"> 
                                 Edit
                                 <i class = "fa fa-pencil"> </i>
                             </button>

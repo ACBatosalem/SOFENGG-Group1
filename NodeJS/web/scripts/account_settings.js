@@ -1,14 +1,44 @@
 $(document).ready(function(){
-    var edit = false;
-    $('#editsave').click(function() {
-        edit = !edit;
-        $('.profile').prop('disabled', !edit);
+    var edit = true;
+	
+	$('#editsave').click(function() {
         if(edit) {
-            $(this).html('Save <i class = "fa fa-save"> </i>');
+			edit = false;
+			$(this).html('Save <i class = "fa fa-save"> </i>');
+			$('.profile').prop('disabled', false);
         } else {
-            $(this).html('Edit <i class = "fa fa-pencil"> </i>');
+			$(this).html('Edit <i class = "fa fa-pencil"> </i>');
+			
+			var name = $(".name").val();
+			var username = $(".username").val();
+			var email = $(".email").val();
+			var contact = $(".contact").val();
+
+			$.ajax({ 		
+				type        : 'POST', 		
+				url         : 'editUser',		
+				data        : {name:name, username:username, email:email, contact:contact},
+				dataType    : 'html',		
+		 		success     : function(data) {
+						 console.log(data);
+						 //show message if meron error like missing fields
+						 if (data != "true") {
+							$('.profile').prop('disabled', false);
+							$("#editsave").html('Save <i class = "fa fa-save"> </i>');
+							edit = true;
+						 } else {
+							$('.profile').prop('disabled', true);
+							edit = false;
+						 }
+						 
+				},		
+		 		error   : function(xhr,status,error){		
+					console.log(xhr);   		
+					alert(status);		
+				}		
+			});
         }
-    });
+	});
     
 	$("#changePasswordForm").submit(function(e){
 		e.preventDefault();

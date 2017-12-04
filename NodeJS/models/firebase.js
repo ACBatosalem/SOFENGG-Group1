@@ -12,6 +12,7 @@ var orgsTS = null;
 var orgsNum;
 var users = null;
 var usersTS = null;
+var usersNum;
 var submissions = null;
 var subsNum;
 var subsTS = null;
@@ -40,6 +41,7 @@ function initialize () {
             console.log("[" + utils.toUTC(new Date()) + "] Updated the users.");
             users = snapshot.val();
             usersTS = utils.toUTC(new Date());
+            usersNum = snapshot.numChildren();
         } else {
             console.log("[" + utils.toUTC(new Date()) + "] Users Access Error. " +
             usersTS==undefined||usersTS==null?"No data will be loaded.":"Accessing data last " + usersTS);
@@ -234,8 +236,9 @@ function addOrganization(orgKey, orgDetails) {
 
 exports.service.addUser = addUser;
 
-function addUser (userKey, userDetails) {
-    database.ref("users").child(userKey).set({
+function addUser (userDetails) {
+    console.log("here");
+    database.ref("users").child("user_"+(usersNum+1)).set({
         name: userDetails.name,
         username: userDetails.username,
         email: userDetails.email,
@@ -243,6 +246,24 @@ function addUser (userKey, userDetails) {
         org_id: userDetails.org_id,
         password: userDetails.password
     });
+}
+
+exports.service.editUser = editUser;
+
+function editUser (userID, userDetails) {
+    database.ref("users").child(userID).update({
+        name: userDetails.name,
+        username: userDetails.username,
+        email: userDetails.email,
+        contact: userDetails.contact
+    });
+}
+
+exports.service.deleteUser = deleteUser;
+
+function deleteUser (userID) {
+    console.log("here delete");
+    database.ref("users").child(userID).remove();
 }
 
 exports.service.countOrgs = countOrgs;
@@ -268,7 +289,6 @@ function changeOrgStatus(orgID, status) {
     database.ref("orgs").child(orgID).update({
         status: newStatus
     });
-    return newStatus;
 }
 
 exports.service.addSubmission = addSubmission;

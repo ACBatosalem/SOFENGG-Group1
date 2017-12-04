@@ -42,11 +42,11 @@
                             <label class = "modal-title"> Add Organization </label> 
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
-                                <input class = "modal-field">
+                                <input name = "name" class = "modal-field">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Username </label>
-                                <input class = "modal-field">
+                                <input name = "username" class = "modal-field">
                             </div>
                             <div class = "modal-row">
                                 <button class = "addBtn" type="submit"> 
@@ -55,29 +55,29 @@
                                 </button>
                             </div>
                         </form> 
-                        <form id = "add-user-form" action = "addOrganization" method="POST">
+                        <form id = "add-user-form" action = "addUser" method="POST">
                             <label class = "modal-title"> Add/Edit User </label>
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
-                                <input class = "modal-field" type="text">
+                                <input name = "name" class = "modal-field" type="text">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Username </label>
-                                <input class = "modal-field" type="text">
+                                <input name = "username" class = "modal-field" type="text">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Email </label>
-                                <input class = "modal-field" type="email">
+                                <input name = "email" class = "modal-field" type="email">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Contact </label>
-                                <input class = "modal-field" type="tel">
+                                <input name = "contact" class = "modal-field" type="tel">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Organization  </label>
-                                <select class = "modal-field"> 
+                                <select name = "org" class = "modal-field"> 
                                     <% for (key in organizations) { %>     
-                                    <option> <%= organizations[key].name %> </option>
+                                    <option value = "<%=key%>"> <%= organizations[key].name %> </option>
                                     <% } %>
                                 </select>
                             </div>
@@ -238,9 +238,9 @@
                                     <td>
 										<% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
 										     <% if (organizations[key].status == "active") { %>
-                                                <i class ="iconBtn archive fa fa-archive"> </i>
+                                                <i class ="iconBtn archive changeStatus fa fa-archive" value = "active" data-orgID="<%=key%>"> </i>
                                             <% } else {%>
-                                                <i class ="iconBtn unarchive fa fa-inbox"> </i>
+                                                <i class ="iconBtn unarchive changeStatus fa fa-inbox" value = "inactive" data-orgID="<%=key%>"> </i>
                                             <% } %>
                                         <% } %>
 									</td>
@@ -277,8 +277,7 @@
                                 	<td> <%= users[key].name %> (<%= users[key].username %>) </td>
 									<td> <%= users[key].org.name %> </td>
                                     <td> 
-                                        <i class = "iconBtn delete fa fa-trash"> </i>
-                                        <i class = "iconBtn edit fa fa-pencil"> </i>
+                                        <i class = "iconBtn delete fa fa-trash" data-orgID="<%=key%>"> </i>
                                     </td>
                                 </tr>
                                 <% } %>

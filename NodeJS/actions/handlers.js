@@ -25,6 +25,7 @@ execute[context+"/org/profile"] = profileOrg;
 execute[context+"/org/statistics"] = statisticsOrg;
 execute[context+"/org/newSubmission"] = newSubmission;
 execute[context+"/org/submitSubmission"] = submitSubmission;
+execute[context+"/org/editUser"] = editUser;
 
 execute[context+"/aps"] = home_aps;
 execute[context+"/aps/profile"] = profileAPS;
@@ -32,8 +33,10 @@ execute[context+"/aps/profile/"] = profileAPS;
 execute[context+"/aps/statistics"] = statisticsAPS;
 execute[context+"/aps/accounts"] = accountsAPS;
 execute[context+"/aps/addUser"] = addUser;
+execute[context+"/aps/deleteUser"] = deleteUser;
 execute[context+"/aps/addOrganization"] = addOrganization;
 execute[context+"/aps/changeStatus"] = changeStatus;
+execute[context+"/aps/editUser"] = editUser;
 
 //execute[context+"/addOrg"] = addOrg;
 
@@ -192,19 +195,19 @@ function modalData(request, response) {
 
 function addUser (request, response) {
     if(request.session.uid != null) { 
-        var user_name = request.body.user_name;
-        var user_username = request.body.user_username;
-        var user_email = request.body.user_email;
-        var user_contact = request.body.user_contact;
-        var user_org = request.body.user_org;
+        var user_name = request.body.name;
+        var user_username = request.body.username;
+        var user_email = request.body.email;
+        var user_contact = request.body.contact;
+        var user_org = request.body.org;
         
-        if( user_username == "" || user_username == undefined ||
+        if(user_username == "" || user_username == undefined ||
             user_name == "" || user_name == undefined ||
             user_email == "" || user_email == undefined ||
             user_contact == "" || user_contact == undefined ||
             user_org == "" || user_org == undefined  ) {
-            
-            var userKey = 'user_'+user_org+'_1';
+            response.redirect(context+ '/aps/accounts');
+        } else {
             var userDetails = 
             {   name: user_name,
                 username: user_username,
@@ -213,20 +216,19 @@ function addUser (request, response) {
                 org_id: user_org,
                 password: "password"
             };
-            service.addUser(userKey, userDetails);
+            service.addUser(userDetails);
             response.redirect(context+ '/aps/accounts');
-        } else 
-            response.redirect(context+ '/aps/accounts');
+        }
     }
 }
 function addOrganization(request,response) {
     if(request.session.uid != null) { 
-        var org_name = request.body.org_name;  
-        var org_username = request.body.org_username;
+        var org_name = request.body.name;  
+        var org_username = request.body.username;
 
         if(org_username == "" || org_username == undefined || 
             org_name == "" || org_name == undefined) {
-            response.redirect(context+ '/aps/organizations');
+            response.redirect(context+ '/aps/accounts');
         } else {
             numOrgs = service.countOrgs() + 1;
             var orgKey = 'org_'+numOrgs;
@@ -246,16 +248,26 @@ function addOrganization(request,response) {
 }
 
 function changeStatus(request,response) {
-    var status = null;
+
     if(request.session.uid != null) {
         //TODO replace child with id of org from request
-        status = service.changeOrgStatus(request.body.id, request.body.status);
+        service.changeOrgStatus(request.body.id, request.body.status);
         var user = service.getUserWithOrganization(request.session.uid);
-        response.redirect(context+ '/home');
+        response.send('true');
     } else {
-        response.redirect(context+ '/home');
+        response.send('false');
     }
-    return status;
+}
+
+function deleteUser(request,response) {
+    if(request.session.uid != null) {
+        //TODO replace child with id of org from request
+        service.deleteUser(request.body.id);
+        var user = service.getUserWithOrganization(request.session.uid);
+        response.send('true');
+    } else {
+        response.send('false');
+    }
 }
 
 function newSubmission(request, response) {
@@ -311,6 +323,36 @@ function submitSubmission(request, response) {
         }
     } else {
         response.redirect(context+ '/home');
+    }
+}
+
+function editUser(request, response) {
+    if(request.session.uid != null) {
+        var name = request.body.name;
+        var email = request.body.email;
+        var contact = request.body.contact;
+        var username = request.body.username;
+
+        if(username == "" || username == undefined ||
+            name == "" || name == undefined ||
+            email == "" || email == undefined ||
+            contact == "" || contact == undefined) {
+            response.send('Please fill out all fields');
+        } else {
+            var userDetails = {
+                name: name,
+                email: email,
+                contact: contact,
+                username: username
+            };
+
+            service.editUser(request.session.uid, userDetails);
+            response.send('true');
+        }
+        
+    } else {
+        response.redirect(context+ '/home');
+        response.send('false');
     }
 }
 
