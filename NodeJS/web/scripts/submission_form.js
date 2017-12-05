@@ -254,11 +254,13 @@ function submitDocument () {
     var term = $('#term').val();
     var actTitle = $('#act-title').val();
     var dateType = $('#act-date-type').val();
+    var dates;
     var actTime = $('#act-time').val();
     var actNature = $('#act-nature').val();
     var actType = $('#act-type').val();
     var actTypeOthers = $('.checkbox').find('i').is(':visible');
     var actTypeOthersText = $('#act-type-others').val();
+    var typeAct;
     var actVenue = $('#act-venue').val();
     var errorMessage = "";
     
@@ -284,8 +286,10 @@ function submitDocument () {
             break;
         case "Multiple Dates":
         case "One-day Activity":
-            if(selectedDates.length == 0)
+            if(selectedDates.length == 0) {
                 errorMessage += "Activity Date/s <br>";
+                dates = $(".date").val();
+            }
             break;
     }
     
@@ -302,6 +306,7 @@ function submitDocument () {
             errorMessage += "Activity Type <br>";
             $('#act-type-label').addClass('error');
         } else {
+            typeAct = $("#act-type-others").val();
             $('#act-type-label').removeClass('error');
         }
     } else {
@@ -309,6 +314,7 @@ function submitDocument () {
             errorMessage += "Activity Type <br>";
             $('#act-type-label').addClass('error');
         } else {
+            typeAct = $("#act-type").val();
             $('#act-type-label').removeClass('error');
         }
     }
@@ -334,12 +340,15 @@ function submitDocument () {
                     null,
                     false);
     } else {
+        var dates = selectedDates.join(', ');
         $.ajax({ 		
 			type        : 'POST', 		
-			url         : 'newSubmission',		
-			data        : {},		
+			url         : 'submitSubmission',		
+            data        : {term:term, act_title:actTitle, act_date:dates, act_time:actTime, act_nature:actNature,
+                           act_type:actType, act_venue:actVenue, type_sub:"Initial Submission", type_sas:"None"},
 			dataType    : 'json',		
 	 		success     : function(data) {
+                console.log(data);
                 $('body').css('overflow', 'hidden');
                 modalMessage("Successfully sent a submission! Your submission will be checked within 3 - 5 working days.",
                             null,

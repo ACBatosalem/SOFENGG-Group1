@@ -163,6 +163,33 @@ function getOrganizationsWithUsers(orgid) {
     return org;
 }
 
+exports.service.findOrg = findOrg;
+
+function findOrg(orgName, orgUsername) {
+    
+    for (key in orgs) {
+        if(orgs[key].name == orgName || orgs[key].username == orgUsername) {
+            return true;
+        }
+    }
+    return false;
+}
+
+exports.service.findUser = findUser;
+
+function findUser(userName, userUsername, userContact, userEmail) {
+    
+    for (key in users) {
+        if(users[key].name == userName || 
+            users[key].username == userUsername ||
+            users[key].contact == userContact ||
+            users[key].email == userEmail) {
+            return true;
+        }
+    }
+    return false;
+}
+
 exports.service.getAllOrganizations = getAllOrganizations;
 
 function getAllOrganizations() {
@@ -256,6 +283,14 @@ function editUser (userID, userDetails) {
         username: userDetails.username,
         email: userDetails.email,
         contact: userDetails.contact
+    });
+}
+
+exports.service.changePassword = changePassword;
+
+function changePassword(userID, newPassword) {
+    database.ref("users").child(userID).update({
+        password: newPassword
     });
 }
 

@@ -178,17 +178,17 @@
                     
                     
                     <div class = "option">
-                        <form name = "change-pass" class = "option" id="change-pass-form" action="changePassword" method="POST">
+                        <!-- <form name = "change-pass" class = "option" id="change-pass-form" method="POST"> -->
                             <label class = "title"> Change Password </label>
                             <p class="label"> Old Password </p>
-                            <input class="field" type="password" name="oldpass">
+                            <input class="field" id="oldpass" type="password" name="oldpass">
                             <p class="label"> New Password </p>
-                            <input class="field" type="password" name="newpass">
+                            <input class="field" id="newpass" type="password" name="newpass">
                             <p class="label"> Confirm New Password </p>
-                            <input class="field" type="password" name="cnewpass">
-                            <p class="label" id="error_msg"> </p>
-                            <button id="change_pass" type="submit"> Change Password </button>
-                        </form>
+                            <input class="field" id="cnewpass" type="password" name="cnewpass">
+                            <p class="label" id="error_msg"></p>
+                            <button id="change_pass"> Change Password </button>
+                        <!-- </form> -->
                     </div>
                 </div>
                 <!-- MAIN BODY END -->

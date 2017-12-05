@@ -12,7 +12,7 @@ var context     = "/APS_Dashboard";
 
 var numOrgs = 0;
 var numSub = 0;
-var service    = firebase.service;
+var service = firebase.service;
 
 // ACTION HANDLER MAP
 execute[context+"/home"] = home;
@@ -26,6 +26,7 @@ execute[context+"/org/statistics"] = statisticsOrg;
 execute[context+"/org/newSubmission"] = newSubmission;
 execute[context+"/org/submitSubmission"] = submitSubmission;
 execute[context+"/org/editUser"] = editUser;
+execute[context+"/org/changePassword"] = changePassword;
 
 execute[context+"/aps"] = home_aps;
 execute[context+"/aps/profile"] = profileAPS;
@@ -36,7 +37,7 @@ execute[context+"/aps/addUser"] = addUser;
 execute[context+"/aps/deleteUser"] = deleteUser;
 execute[context+"/aps/addOrganization"] = addOrganization;
 execute[context+"/aps/changeStatus"] = changeStatus;
-execute[context+"/aps/editUser"] = editUser;
+execute[context+"/aps/changePassword"] = changePassword;
 
 //execute[context+"/addOrg"] = addOrg;
 
@@ -51,7 +52,8 @@ function accountsAPS (request, response) {
             user:user,
             context:context,
             organizations: service.getAllOrganizationsWithUsers(),
-            users: service.getAllUsersWithOrganizations()
+            users: service.getAllUsersWithOrganizations(),
+            message: ""
         });
     }
 }
@@ -201,12 +203,8 @@ function addUser (request, response) {
         var user_contact = request.body.contact;
         var user_org = request.body.org;
         
-        if(user_username == "" || user_username == undefined ||
-            user_name == "" || user_name == undefined ||
-            user_email == "" || user_email == undefined ||
-            user_contact == "" || user_contact == undefined ||
-            user_org == "" || user_org == undefined  ) {
-            response.redirect(context+ '/aps/accounts');
+        if(service.findUser(user_name,user_username,user_contact,user_email)) {
+            response.send("Name, username, contact number, or email already in use.");
         } else {
             var userDetails = 
             {   name: user_name,
@@ -217,18 +215,19 @@ function addUser (request, response) {
                 password: "password"
             };
             service.addUser(userDetails);
-            response.redirect(context+ '/aps/accounts');
+            response.send("true");
+            }
+        } else {
+            response.send("false");
         }
-    }
 }
 function addOrganization(request,response) {
     if(request.session.uid != null) { 
         var org_name = request.body.name;  
         var org_username = request.body.username;
 
-        if(org_username == "" || org_username == undefined || 
-            org_name == "" || org_name == undefined) {
-            response.redirect(context+ '/aps/accounts');
+        if(service.findOrg(org_name,org_username)) {
+            response.send("Organization name or username already in use.");
         } else {
             numOrgs = service.countOrgs() + 1;
             var orgKey = 'org_'+numOrgs;
@@ -240,10 +239,11 @@ function addOrganization(request,response) {
             };
             
             service.addOrganization(orgKey, orgDetails);
-            response.redirect(context+ '/aps/accounts');
+            response.send("true");
         }
+        
     } else {
-        response.redirect(context+ '/aps/accounts');
+        response.send("false");
     }
 }
 
@@ -294,7 +294,7 @@ function submitSubmission(request, response) {
         var act_time = request.body.act_time;
         var act_venue = request.body.act_venue;
         var submitter;
-        
+       
         if (term == "" || term == undefined ||
             act_title == "" || act_title == undefined ||
             act_nature == "" || act_nature == undefined ||
@@ -302,11 +302,12 @@ function submitSubmission(request, response) {
             act_date == "" || act_date == undefined ||
             act_time == "" || act_time == undefined ||
             act_venue == "" || act_venue == undefined) {
-                response.redirect(context+'/org/newSubmission');
+                response.send({message:false,error:"missing"});
         } else {
             numSub = service.countSubs() + 1;
             var subKey = 'sub_'+numSub;
-            var subDetails = { act_date: act_date,
+            var subDetails = { 
+                act_date: act_date,
                 act_nature: act_nature,
                 act_time: act_time,
                 act_type: act_type,
@@ -316,13 +317,17 @@ function submitSubmission(request, response) {
                 timestamp: utils.toUTC(new Date()),
                 act_title: act_title,
                 type_sas: type_sas,
-                user_id_org: request.session.uid
+                user_id_org: request.session.uid,
+                user_id_checker: "-",
+                datetimechecked: "-",
+                status: "-"
             };
             
-            response.redirect(context+'/home');
+            service.addSubmission(subKey, subDetails);
+            response.send({msg:true});
         }
     } else {
-        response.redirect(context+ '/home');
+        response.send({msg:false});
     }
 }
 
@@ -351,7 +356,29 @@ function editUser(request, response) {
         }
         
     } else {
-        response.redirect(context+ '/home');
+        response.send('false');
+    }
+}
+
+function changePassword(request, response) {
+    if(request.session.uid != null) {
+        var oldPass = request.body.oldpass;
+        var newPass = request.body.newpass;
+        var cNewPass = request.body.cnewpass;
+
+        console.log("HELLO??");
+
+        var user = service.getUser(request.session.uid);
+
+        if (oldPass != user.password) {
+            console.log("Incorrect input for current password.");
+            response.send("Incorrect input for current password.");
+        } else {
+            service.changePassword(request.session.uid, newPass);
+            console.log("Password successfully changed!");
+            response.send("Password successfully changed!");
+        }
+    } else {
         response.send('false');
     }
 }

@@ -1,6 +1,10 @@
 @import url('palanquin.css');
 
-
+.error {
+    color: firebrick;
+    font-size: 14px;
+    font-family: "Palanquin";
+}
 /*MODAL VIEW */
 #modal-view {
     position: fixed;

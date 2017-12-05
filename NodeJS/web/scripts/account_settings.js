@@ -39,8 +39,41 @@ $(document).ready(function(){
 			});
         }
 	});
-    
-	$("#changePasswordForm").submit(function(e){
+
+	$("#change_pass").click(function(){
+		var oldPass = $("#oldpass").val();
+		var newPass = $("#newpass").val();
+		var cNewPass = $("#cnewpass").val();
+		if (oldPass == "" || oldPass == undefined ||
+		newPass == "" || newPass == undefined ||
+		cNewPass == "" || cNewPass == undefined) {
+			$("#error_msg").text("Please fill out all fields.");	
+		} else if (cNewPass != newPass) {
+			$("#error_msg").text("Passwords do not match!");	
+        } else if(checkpassword(newPass) == ""){
+			$.ajax({ 		
+				type        : 'POST', 		
+				url         : 'changePassword',		
+				data        : {oldpass:oldPass, newpass:newPass, cnewpass:cNewPass},
+				dataType    : 'html',		
+				success     : function(data) {
+					if (data == "false")
+						window.location = context + "/home";
+					else 
+						$("#error_msg").text(data);		
+				},		
+				error   : function(xhr,status,error){		
+					console.log(xhr);   		
+					alert(status);		
+				}		
+			});
+		} else $("#error_msg").text(checkpassword(newPass));	
+		$("#oldpass").val("");
+		$("#newpass").val("");
+		$("#cnewpass").val("");
+	});
+});
+	/*$("#changePasswordForm").submit(function(e){
 		e.preventDefault();
 		
 		var oldPW = $("#old_pw").val(); 
@@ -75,7 +108,7 @@ $(document).ready(function(){
 		}
 		
 	});
-});
+});*/
 
 
 var passwordregex = /^([A-Za-z0-9]{6,25}$)/;

@@ -38,52 +38,59 @@
                 
                 <div id = "modal-container">
                     <div id = "modal-content">
-                        <form id = "add-org-form" action = "addOrganization" method="POST">
+                        <div id = "add-org-form">
+                        <!--<form id = "add-org-form" action = "addOrganization" method="POST">-->
                             <label class = "modal-title"> Add Organization </label> 
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
-                                <input name = "name" class = "modal-field">
+                                <input name = "name" id = "orgName" class = "modal-field">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Username </label>
-                                <input name = "username" class = "modal-field">
+                                <input name = "username"id = "orgUsername" class = "modal-field">
                             </div>
+                            <label id = "org-username-error" class = "error"></label>
                             <div class = "modal-row">
-                                <button class = "addBtn" type="submit"> 
+                                <button class = "addBtn" id = "addOrgButton"> 
                                     <i class = "fa fa-plus"> </i>
                                     Add
                                 </button>
                             </div>
-                        </form> 
-                        <form id = "add-user-form" action = "addUser" method="POST">
+                        <!--</form> -->
+                        </div>
+                        <div id = "add-user-form">
+                        <!--<form  action = "addUser" method="POST">-->
                             <label class = "modal-title"> Add/Edit User </label>
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
-                                <input name = "name" class = "modal-field" type="text">
-                            </div>
+                                <input name = "name" class = "modal-field" id = "userName" type="text">
+                            </div>     
                             <div class = "modal-row">
                                 <label class = "modal-label"> Username </label>
-                                <input name = "username" class = "modal-field" type="text">
+                                <input name = "username" class = "modal-field" id = "userUsername"type="text">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Email </label>
-                                <input name = "email" class = "modal-field" type="email">
+                                <input name = "email" class = "modal-field" id = "userEmail"type="email">
                             </div>
                             <div class = "modal-row">
                                 <label class = "modal-label"> Contact </label>
-                                <input name = "contact" class = "modal-field" type="tel">
-                            </div>
+                                <input name = "contact" class = "modal-field" id = "userContact"type="tel">
+                            </div>                            
+                            
                             <div class = "modal-row">
                                 <label class = "modal-label"> Organization  </label>
-                                <select name = "org" class = "modal-field"> 
+                                <select name = "org" class = "modal-field" id = "userOrg"> 
                                     <% for (key in organizations) { %>     
                                     <option value = "<%=key%>"> <%= organizations[key].name %> </option>
                                     <% } %>
                                 </select>
                             </div>
+
+                            <label id = "user-error" class = "error"></label>
                             
                             <div class = "modal-row">
-                                <button class = "modal-add addBtn" type="submit"> 
+                                <button class = "modal-add addBtn" id = "addUserButton" type="submit"> 
                                     <i class = "fa fa-plus"> </i>
                                     Add
                                 </button>
@@ -92,7 +99,8 @@
                                     Save
                                 </button>
                             </div>
-                        </form> 
+                        <!--</form>-->
+                        </div> 
                     </div>
                 </div>
             </div>
@@ -121,7 +129,7 @@
                     </div>
                     
                     <!-- WELCOME MESSAGE -->
-                    <p class="nav label"> Welcome <%=user.name%> </p>
+                    <p class="nav label"> Welcome, <%=user.name%>! </p>
                     <!-- SUBMISSIONS BUTTON LINK START -->
                     <a class = "nav-link" href="<%=context%>"> 
 	                    <button id="submissions" class="nav-item nav-button"> 
