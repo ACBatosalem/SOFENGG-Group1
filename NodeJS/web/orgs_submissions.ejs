@@ -239,7 +239,7 @@
                             </thead>
 
                             <!-- DATA: SUBMISSIONS -->    
-                            <tbody>
+                            <tbody id="tbody">
                             <% for (key in submissions) { %> 
                                 <tr data-docuID = "<%=key%>" >
 	                                <td> <%= submissions[key].timestamp %> </td>
@@ -263,7 +263,7 @@
                                             case "-":
                                             case "":
                                             case null: %>
-                                            <td> TO BE CHECKED </td>
+                                            <td> No Checkers Yet </td>
                                         <%  break;
                                             default: %>
                                             <td> <%=submissions[key].status%> </td>

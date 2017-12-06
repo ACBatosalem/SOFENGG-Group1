@@ -235,13 +235,13 @@
                     <!-- ORGANIZATION CHOICEBOX -->
                     <div class = "filter-container">
                         <select id = "org-pick" class = "filter_cb">
-                            <option value="All" data-orgid="0">
-          		          		All
-	                        </option>
+                            <option value selected data-orgid="0">
+                                All
+                            </option>
                             <% for (key in orgs) { %> 
 	                        	<!-- ORGS START -->
                                 <% if (orgs[key].privilege.toUpperCase() != "ADMIN") { %>
-                                    <option value= "<%orgs[key].username%>" data-orgid= "<%=key%>">
+                                    <option value= "<%=orgs[key].username%>" data-orgid= "<%=key%>">
                                         <%= orgs[key].name %>
                                     </option>
                                 <% } %>
@@ -268,7 +268,7 @@
                             </thead>
 
                             <!-- DATA: SUBMISSIONS -->    
-                            <tbody>
+                            <tbody id="tbody">
                             <% for (key in submissions) { %> 
                                 <tr data-docuID = "<%=key%>" >
 	                                <td> <%= submissions[key].timestamp %> </td>
@@ -292,7 +292,7 @@
                                             case '-':
                                             case '':
                                             case null: %>
-                                            <td> FOR CHECKING </td>
+                                            <td> No Checkers Yet </td>
                                         <%  break;
                                             default: %>
                                             <td> <%=submissions[key].status%> </td>

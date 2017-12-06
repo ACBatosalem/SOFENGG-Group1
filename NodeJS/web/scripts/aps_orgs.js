@@ -140,7 +140,11 @@ $(document).ready(function() {
             console.log("Please fill out all fields");
             $('#org-username-error').text("Please fill out all fields");
         } else if(nameRegexTest != "" || usernameRegexTest != "") {
-            $('#org-username-error').html(nameRegexTest + "<br>" + usernameRegexTest);
+            var msg = nameRegexTest;
+			if(msg != "" && usernameRegexTest != "")
+				msg += "<br>";
+			msg += usernameRegexTest;
+            $('#org-username-error').html(msg);
         } else {
             $.ajax({
                 type        : 'POST', 
@@ -183,8 +187,17 @@ $(document).ready(function() {
             $('#user-error').text("Please fill out all fields");
         } else if(nameRegexTest != "" || usernameRegexTest != ""
                 || emailRegexTest != "" || contactRegexTest != "") {
-            $('#user-error').html(nameRegexTest + "<br>" + usernameRegexTest
-            + "<br>" + emailRegexTest + "<br>" + contactRegexTest);
+            var msg = nameRegexTest;
+			if(msg != "" && usernameRegexTest != "")
+				msg += "<br>";
+			msg += usernameRegexTest;
+			if(msg != "" && emailRegexTest != "")
+				msg += "<br>";
+			msg += emailRegexTest;
+			if(msg != "" && contactRegexTest != "")
+				msg += "<br>";
+			msg += contactRegexTest;
+            $('#user-error').html(msg);
         } else {
             $.ajax({
                 type        : 'POST', 
@@ -194,7 +207,7 @@ $(document).ready(function() {
                 success     : function(data) {
                     if(data == "Name, username, contact number, or email already in use.")
                         $('#user-error').text(data);
-                    window.location = context + "/aps/accounts";
+                    else window.location = context + "/aps/accounts";
                 },
                 error   : function(xhr,status,error){
                     console.log(xhr.responsetext);
@@ -253,7 +266,7 @@ $(document).ready(function() {
     	else if(check.length > 20)
     		return "\nUsername must be 20 characters or less.";
     	else if (!orgusernameregex.test(check))
-    		return "\nUsername must only contain capital letters and two non-successive spaces."
+    		return "\nUsername must only contain capital letters and up to two non-successive spaces."
     	else
     		return "";
     }

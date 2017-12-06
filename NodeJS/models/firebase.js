@@ -190,6 +190,21 @@ function findUser(userName, userUsername, userContact, userEmail) {
     return false;
 }
 
+exports.service.findUserExist = findUserExist;
+
+function findUserExist(userName, userUsername, userContact, userEmail, userKey) {
+    
+    for (key in users) {
+        if((users[key].name == userName || 
+            users[key].username == userUsername ||
+            users[key].contact == userContact ||
+            users[key].email == userEmail) && key != userKey) {
+            return true;
+        }
+    }
+    return false;
+}
+
 exports.service.getAllOrganizations = getAllOrganizations;
 
 function getAllOrganizations() {

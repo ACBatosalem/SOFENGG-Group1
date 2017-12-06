@@ -29,11 +29,13 @@ execute[context+"/org/editUser"] = editUser;
 execute[context+"/org/changePassword"] = changePassword;
 
 execute[context+"/aps"] = home_aps;
+execute[context+"/aps/filterSubmissions"] = filterSubmissions;
 execute[context+"/aps/profile"] = profileAPS;
 execute[context+"/aps/profile/"] = profileAPS;
 execute[context+"/aps/statistics"] = statisticsAPS;
 execute[context+"/aps/accounts"] = accountsAPS;
 execute[context+"/aps/addUser"] = addUser;
+execute[context+"/aps/editUser"] = editUser;
 execute[context+"/aps/deleteUser"] = deleteUser;
 execute[context+"/aps/addOrganization"] = addOrganization;
 execute[context+"/aps/changeStatus"] = changeStatus;
@@ -338,11 +340,8 @@ function editUser(request, response) {
         var contact = request.body.contact;
         var username = request.body.username;
 
-        if(username == "" || username == undefined ||
-            name == "" || name == undefined ||
-            email == "" || email == undefined ||
-            contact == "" || contact == undefined) {
-            response.send('Please fill out all fields');
+        if(service.findUserExist(user_name,user_username,user_contact,user_email, request.session.uid)) {
+            response.send("Name, username, contact number, or email already in use.");
         } else {
             var userDetails = {
                 name: name,
@@ -382,5 +381,46 @@ function changePassword(request, response) {
         response.send('false');
     }
 }
+
+function filterSubmissions(request, response) {
+    if (request.session.uid != null) {
+        var filter = request.body.filter;
+        var orgID = request.body.orgID;
+        
+        console.log("I made pasok tho.");
+        console.log("filter: " + filter);
+        console.log("orgID: " + orgID);
+
+        var all = service.getAllCompleteSubmissions();
+        var subs = [];
+        /*for (var sub in all) {
+            if ((orgID == "0" || all[sub].org_id == orgID) && 
+                ) {
+                subs.push(all[sub]);
+            }
+        }*/
+
+        //response.send(JSON.stringify(subs));
+        response.send(JSON.stringify(all));
+
+    } else {
+        response.send({subs:'false'});
+    }
+}
+
+/*function getAcademic (orgID) {
+    var orgID = orgID;
+    var subs = {}
+    for (key in submissions) {
+        if(orgID == getUserWithOrganization(submissions[key].user_id_org).org_id) {
+            if(submissions[key].act_nature.toUpperCase() == "ACADEMIC") {
+                var sub = getCompleteSubmission(key);
+                subs[key] = sub;
+            }
+        }
+    }
+
+    return subs;
+}*/
 
 exports.execute = execute;

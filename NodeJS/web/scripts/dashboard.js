@@ -1,5 +1,8 @@
 var check;
 $(document).ready(function() {
+
+    $("#org-pick").val('YAYCLUB');
+
     var table= $('#table_submissions').DataTable( {
         "scrollCollapse": true,
         "ordering": true,
@@ -17,9 +20,6 @@ $(document).ready(function() {
             "lergthMenu": "Display _MENU_ records"
         }
     }).columns.adjust().draw();
-    
-    /*$('#acad-box').prop('checked', true);
-    $('#non-acad-box').prop('checked', true);*/
     
     $('.modal-division button').on('click', function(){
         $('.modal-division button').each(function(){
@@ -53,16 +53,61 @@ $(document).ready(function() {
     });
     
     $('#non-acad-box').change(function() {
-    	// TO DO FILTER
+        var orgID = $("#org-pick option:selected").attr('data-orgid');
+        var filter;
+    	if ($(this).is(':checked') && $("#acad-box").is(':checked')) {
+            filter = "all";
+        } else if ($(this).is(':checked')) {
+            filter = "non-acad";
+        } else if ($("#acad-box").is(':checked')) {
+            filter = "acad";
+        } else {
+            $("#acad-box").prop('checked', true);
+            filter = "acad";
+        }
+
+        console.log(filter);
+        console.log(orgID);
+
+        filterSubmissions(filter, orgID);
     });
     
     
     $('#acad-box').change(function() {
-    	// TO DO FILTER
+    	var orgID = $("#org-pick option:selected").attr('data-orgid');
+        var filter;
+    	if ($(this).is(':checked') && $("#non-acad-box").is(':checked')) {
+            filter = "all";
+        } else if ($(this).is(':checked')) {
+            filter = "acad";
+        } else if ($("#non-acad-box").is(':checked')) {
+            filter = "non-acad";
+        } else {
+            $("#non-acad-box").prop('checked', true);
+            filter = "non-acad";
+        }
+
+        console.log(filter);
+        console.log(orgID);
+
+        filterSubmissions(filter, orgID);
     });
     
     $("#org-pick").change(function() {
-    	// TO DO FILTER
+    	var orgID = $("#org-pick option:selected").attr('data-orgid');
+        var filter;
+    	if ($("#non-acad-box").is(':checked') && $("#acad-box").is(':checked')) {
+            filter = "all";
+        } else if ($("#non-acad-box").is(':checked')) {
+            filter = "non-acad";
+        } else if ($("#acad-box").is(':checked')) {
+            filter = "acad";
+        }
+
+        console.log(filter);
+        console.log(orgID);
+
+        filterSubmissions(filter, orgID);
     });
     
     $('.half input').prop('disabled', true);
@@ -224,3 +269,60 @@ $(document).ready(function() {
         $('body').css('overflow','auto');
     });
 });
+
+function addRow(key, sub) {
+    var tr = document.createElement("tr");
+    var time = document.createElement("td");
+    var subBy = document.createElement("td");
+    var title = document.createElement("td");
+    var status = document.createElement("td");
+
+    $(tr).attr('data-docuID', key);
+    $(time).text(sub.timestamp);
+    $(subBy).text(sub.submittedBy.org.name);
+    $(title).text(sub.title);
+    $(status).text(sub.status);
+
+    switch (sub.status) {
+        case "EARLY APPROVED" : $(status).addClass("early_approved");
+            break;
+        case "LATE APPROVED" : $(status).addClass("late_approved");
+            break;
+        case "PENDING" : $(status).addClass("pending");
+            break;
+        case "DENIED" : $(status).addClass("denied");
+            break;
+        default : $(status).text("No Checkers Yet");
+    }
+
+    $(tr).append(time);
+    $(tr).append(subBy);
+    $(tr).append(title);
+    $(tr).append(status);
+    $("#tbody").append(tr);
+}
+
+function filterSubmissions(filter, orgID) {
+    $.ajax({
+        type        : 'POST', 
+        url         : 'filterSubmissions',
+        data        : {filter:filter, orgID:orgID},
+        dataType    : 'json',
+        success     : function(subs) {
+            console.log(subs);
+            if (subs != "false") {
+                $('#tbody tr').empty();
+                for (var key in subs) {
+                    addRow(key, subs[key]);
+                } 
+            } else {
+                window.location = context + '/home';
+            }
+        },
+        error   : function(xhr,status,error){
+            console.log("error: " + xhr.responsetext);
+            alert(status);
+            alert(error);
+        }
+    });
+}
