@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<HTA:APPLICATION SCROLL="no" SYSMENU="yes" >
+
+<TITLE> DLSU CSO APS Server </TITLE>
+<SCRIPT language="JavaScript">
+window.resizeTo(374,200);
+var started = false;
+var hosted = false;
+
+function start () {
+	if(!started) {
+		var shell = new ActiveXObject('WScript.Shell');
+		shell.Run("server.bat", 1, false);
+		started = false;
+		document.getElementById('start').innerHTML = "Stop Server";
+	}
+}
+
+function host () {
+	if(!hosted) {
+		var shell = new ActiveXObject('WScript.Shell')
+		shell.Run("tunnel.bat", 1, false);
+		started = false;
+		document.getElementById('host').innerHTML = "Stop Host";
+	}
+}
+
+</SCRIPT>
+<STYLE>
+	p {
+		font-family: sans-serif;
+		font-size: 14px;
+	}
+</STYLE>
+</HEAD>
+<BODY>
+   <button id = "start" onclick = "start()"> Start Server </button>
+   <button id = "host" onclick = "host()"> Start Host </button>
+   <p > Localhost Website: http://localhost:8081/APS_Dashboard/home </p>
+   <p> Hosted Website: https://csoaps.localtunnel.me/APS_Dashboard/home </p>
+   
+
+</BODY>
+</HTML>
