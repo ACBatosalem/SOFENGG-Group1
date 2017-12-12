@@ -1,6 +1,9 @@
 {
   "name": "aps-dashboard",
   "version": "1.0.1",
+  "scripts": {
+	"start": "node main.js"
+  },
   "description": "A dashboard for the DLSU CSO-APS Team and the organizations documentation officers.",
   "main": "main.js",
   "dependencies": {
