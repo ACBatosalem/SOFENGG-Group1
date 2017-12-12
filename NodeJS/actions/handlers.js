@@ -1,6 +1,9 @@
 // USED MODULES
 var path        = require("path");
 var session     = require("express-session");
+var nodemailer = require('nodemailer');
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 // PERSONAL MODULES
 var firebase    = require("./../models/firebase");
@@ -10,6 +13,14 @@ var utils       = require("./../utils/utils");
 var execute     = { };
 var context     = "/APS_Dashboard";
 
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'jonal_ticug@dlsu.edu.ph',
+        pass: 'Ayo5Get5??'
+    }
+});
+
 var numOrgs = 0;
 var numSub = 0;
 var service = firebase.service;
@@ -18,6 +29,7 @@ var service = firebase.service;
 execute[context+"/home"] = home;
 execute[context+"/login"] = login;
 execute[context+"/logout"] = logout;
+execute[context+"/forgotPassword"] = forgotPassword;
 execute[context+"/modalData"] = modalData;
 
 execute[context+"/org"] = home_org;
@@ -408,6 +420,29 @@ function filterSubmissions(request, response) {
 
     } else {
         response.send({subs:'false'});
+    }
+}
+
+function forgotPassword(request, response){
+    var user = service.findUserByEmail(request.body.email);
+
+    if(user != false) {
+        var mailOptions = {
+            from: 'jonal_ticug@dlsu.edu.ph',
+            to: request.body.email,
+            subject: '[APS Dashboard] Forgot password',
+            text: 'Wag mo kasi kalimutan :)\n Your password is: ' + user.password
+        };
+        
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                response.send("Email not sent");
+            } else {
+                response.send('Email sent!');
+            }
+        });
+    } else {
+        response.send("Invalid Email");
     }
 }
 

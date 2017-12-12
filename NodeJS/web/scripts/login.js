@@ -17,18 +17,44 @@ $(document).ready(function(){
     $('#forgotpassword').submit(function(e){
         e.preventDefault();
         var email = $('#email').val();
-        
-        // SEND EMAIL
-        
-        $('#forgot_msg_error').text('Error test message ' + email);
-        
+        var test = checkemail(email);
+		// SEND EMAIL
+		if(test != "") {
+			$('#forgot_msg_error').text(test);
+			$('body').css('overflow', 'none');
+		}
+        else {
+			$.ajax({ 		
+				type        : 'POST', 		
+				url         : 'forgotPassword',		
+				data        : {email:email},		
+				dataType    : 'html',		
+		 		success     : function(data) {
+					$('body').css('overflow', 'none');
+					modalMessage(data, null, null, "Okay", function(){
+						$('#modal-action').remove();
+						$('body').css('overflow', 'auto');
+						$('#btn_back').click();
+					});
+				 },	
+				 beforeSend	: function (xhr) {
+					 $('#btn_forgot').prop('disabled', true);
+					 $('#btn_back').prop('disabled', true);
+					 $('#loader-ajax').show();
+				 },
+				  error   	: function(xhr,status,error){		
+					 console.log(xhr);   		
+					 alert(status);		
+				 },	
+				 complete	: function (xhr,status) {
+					 $('#btn_forgot').prop('disabled', false);
+					 $('#btn_back').prop('disabled', true);
+					 $('#loader-ajax').hide();
+				 }
+				});
         //SET TEXT IF ERROR: 
-        $('body').css('overflow', 'none');
-        modalMessage("Successfully sent an email to " + email, null, null, "Okay", function(){
-            $('#modal-action').remove();
-            $('body').css('overflow', 'auto');
-            $('#btn_back').click();
-        });
+			
+		}
     });
     
     
@@ -68,4 +94,12 @@ $(document).ready(function(){
 			});
 			return true;
 	}); 
+
+	var emailregex = /^[a-z0-9](\.?[a-z0-9_-]){0,}@[a-z0-9-]+\.([a-z]{1,6}\.)?[a-z]{2,6}$/;
+	function checkemail(check) {
+		if (!emailregex.test(check))
+			return "\nPlease enter a valid email."
+		else
+			return "";
+	}
 });

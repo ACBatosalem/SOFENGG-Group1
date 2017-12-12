@@ -12,7 +12,8 @@
     "express-session": "^1.15.6",
     "firebase": "^4.6.2",
     "googleapis": "^23.0.0",
-    "mongodb": "^2.2.33"
+    "mongodb": "^2.2.33",
+    "nodemailer": "^4.4.1"
   },
   "devDependencies": {
     "eslint-config-google": "^0.9.1"

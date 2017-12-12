@@ -191,6 +191,18 @@ function findUser(userName, userUsername, userContact, userEmail) {
     return false;
 }
 
+exports.service.findUserByEmail = findUserByEmail;
+
+function findUserByEmail(email) {
+    
+    for (key in users) {
+        if(users[key].email == email) {
+            return users[key];
+        }
+    }
+    return false;
+}
+
 exports.service.findUserExist = findUserExist;
 
 function findUserExist(userName, userUsername, userContact, userEmail, userKey) {
