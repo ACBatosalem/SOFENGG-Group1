@@ -243,7 +243,7 @@
                             <% for (key in submissions) { %> 
                                 <tr data-docuID = "<%=key%>" >
 	                                <td> <%= submissions[key].timestamp %> </td>
-                                    <td> <%= submissions[key].submittedBy.org.name%> </td>
+                                    <td> <%= submissions[key].org.name%> </td>
 	                                <td> <%= submissions[key].title %>  </td>
                                     
 		                            <% switch (submissions[key].status) { 

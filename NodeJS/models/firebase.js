@@ -118,6 +118,7 @@ function getCompleteSubmission (docuID) {
     var submission = submissions[docuID];
     submission.submittedBy = getUserWithOrganization(submission.user_id_org); 
     submission.checker = getUser(submission.user_id_checker); 
+    submission.org = getOrganization(submission.org_id);
     return submission;
 }
 
@@ -215,6 +216,7 @@ exports.service.getOrganization = getOrganization;
 
 function getOrganization (orgid) {
     var org = orgs[orgid];
+    org.org_id = orgid;
     return org;
 }
 
@@ -357,6 +359,7 @@ function addSubmission(subKey, subDetails) {
         timestamp: subDetails.timestamp,
         title: subDetails.act_title,
         type_sas: subDetails.type_sas,
+        org_id: subDetails.org_id,
         user_id_checker: "-",
         user_id_org: subDetails.user_id_org
       });

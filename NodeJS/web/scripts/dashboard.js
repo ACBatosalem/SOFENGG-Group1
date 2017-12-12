@@ -1,9 +1,10 @@
 var check;
+var table;
 $(document).ready(function() {
 
     $("#org-pick").val('YAYCLUB');
 
-    var table= $('#table_submissions').DataTable( {
+    table= $('#table_submissions').DataTable( {
         "scrollCollapse": true,
         "ordering": true,
         "sScrollX": false,
@@ -130,7 +131,7 @@ $(document).ready(function() {
 			dataType    : 'json',		
 	 		success     : function(data) {
 	 			$("#act-name").val(data.title);
-	 			$("#org-name").val(data.submittedBy.org.name);
+	 			$("#org-name").val(data.org.name);
 	 			
 	 			$("#time").val(data.act_time);
 	 			$("#venue").val(data.act_venue);
@@ -270,7 +271,7 @@ $(document).ready(function() {
     });
 });
 
-function addRow(key, sub) {
+function saddRow(key, sub) {
     var tr = document.createElement("tr");
     var time = document.createElement("td");
     var subBy = document.createElement("td");
@@ -302,19 +303,46 @@ function addRow(key, sub) {
     $("#tbody").append(tr);
 }
 
+function addRow(key, sub) {
+    var classs;
+
+    switch (sub.status) {
+        case "EARLY APPROVED" : classs = "early_approved";
+        break;
+    case "LATE APPROVED" : classs = "late_approved";
+        break;
+    case "PENDING" : classs = "pending";
+        break;
+    case "DENIED" : classs = "denied";
+        break;
+    default : sub.status = "No Checkers Yet";
+    }
+
+    var rowNode = table.row.add([
+        sub.timestamp,
+        sub.submittedBy.org.name,
+        sub.title,
+        sub.status
+    ]).node();
+
+    $(rowNode).find("td:nth-child(4)").addClass(classs);
+}
+
 function filterSubmissions(filter, orgID) {
+    //alert(filter + " " + orgID);
     $.ajax({
         type        : 'POST', 
-        url         : 'filterSubmissions',
+        url         : 'aps/filterSubmissions',
         data        : {filter:filter, orgID:orgID},
         dataType    : 'json',
         success     : function(subs) {
             console.log(subs);
             if (subs != "false") {
-                $('#tbody tr').empty();
+                table.clear();
                 for (var key in subs) {
                     addRow(key, subs[key]);
                 } 
+                table.draw();
             } else {
                 window.location = context + '/home';
             }

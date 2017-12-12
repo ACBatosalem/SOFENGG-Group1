@@ -143,6 +143,7 @@ function login (request, response) {
                 response.send("Password incorrect!");
             } else if (loginDetails.test == true && loginDetails.user != null) {
                 request.session.uid = loginDetails.user.user_id;
+                request.session.org_id = loginDetails.user.org.org_id;
                 if(loginDetails.user.org.privilege.toUpperCase() == "ADMIN") {
                     response.send("aps");
                 } else {
@@ -296,7 +297,10 @@ function submitSubmission(request, response) {
         var act_time = request.body.act_time;
         var act_venue = request.body.act_venue;
         var submitter;
-       
+        
+        if (request.session.org_id != "org_1")
+            submitter = request.session.org_id;
+
         if (term == "" || term == undefined ||
             act_title == "" || act_title == undefined ||
             act_nature == "" || act_nature == undefined ||
@@ -320,6 +324,7 @@ function submitSubmission(request, response) {
                 act_title: act_title,
                 type_sas: type_sas,
                 user_id_org: request.session.uid,
+                org_id: submitter,
                 user_id_checker: "-",
                 datetimechecked: "-",
                 status: "-"
@@ -383,25 +388,23 @@ function changePassword(request, response) {
 }
 
 function filterSubmissions(request, response) {
+
     if (request.session.uid != null) {
         var filter = request.body.filter;
         var orgID = request.body.orgID;
-        
-        console.log("I made pasok tho.");
-        console.log("filter: " + filter);
-        console.log("orgID: " + orgID);
 
         var all = service.getAllCompleteSubmissions();
         var subs = [];
-        /*for (var sub in all) {
+        for (var sub in all) {
             if ((orgID == "0" || all[sub].org_id == orgID) && 
-                ) {
+                (filter == "all" ||
+                filter == "acad" && all[sub].act_nature == "Academic"  ||
+                filter == "non-acad" && all[sub].act_nature != "Academic")) {
                 subs.push(all[sub]);
             }
-        }*/
+        }
 
-        //response.send(JSON.stringify(subs));
-        response.send(JSON.stringify(all));
+        response.send(JSON.stringify(subs));
 
     } else {
         response.send({subs:'false'});
