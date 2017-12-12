@@ -1,7 +1,6 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		
 		<title> <%=user.org.username%>  | Organizations </title>
 		<link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
         
@@ -36,10 +35,12 @@
             <div id = "modal-container-outer">
                 <button id = "modal-close"> </button>
                 
+                <!-- MODAL CONTAINER START -->
                 <div id = "modal-container">
+                    <!-- MODAL CONTENT START -->
                     <div id = "modal-content">
+                        <!-- ADD ORGANIZATION START -->
                         <div id = "add-org-form">
-                        <!--<form id = "add-org-form" action = "addOrganization" method="POST">-->
                             <label class = "modal-title"> Add Organization </label> 
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
@@ -56,10 +57,11 @@
                                     Add
                                 </button>
                             </div>
-                        <!--</form> -->
                         </div>
+                        <!-- ADD ORGANIZATiON END -->
+
+                        <!-- ADD USER START -->
                         <div id = "add-user-form">
-                        <!--<form  action = "addUser" method="POST">-->
                             <label class = "modal-title"> Add/Edit User </label>
                             <div class="modal-row">
                                 <label class = "modal-label"> Name </label>
@@ -99,14 +101,17 @@
                                     Save
                                 </button>
                             </div>
-                        <!--</form>-->
                         </div> 
+                        <!-- ADD USER END -->
                     </div>
+                    <!-- MODAL CONTENT END -->
                 </div>
+                <!-- MODAL CONTENT CONTAINER END -->
             </div>
             <!-- MODAL CONTENT END -->
         </div>
         <!-- MODAL VIEW END -->
+
         <!-- MAIN VIEW START -->
         <div id="main">
             <!-- SIDE BAR NAVIGATION START -->
@@ -179,6 +184,7 @@
             <div id="main_content">
                 <!-- MESSAGE TOAST START -->
                 <div id = "add-notif" class = "toast"> 
+                    <!--  -->
                     <b id = "username-toast"> Username </b> with password <b id = "password-toast"> password </b> has been added.
                     <button id = "undo-toast">
                         UNDO
