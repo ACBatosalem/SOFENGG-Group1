@@ -1,6 +1,9 @@
 {
   "name": "aps-dashboard",
   "version": "1.0.1",
+  "scripts": {
+	"start": "node main.js"
+  },
   "description": "A dashboard for the DLSU CSO-APS Team and the organizations documentation officers.",
   "main": "main.js",
   "dependencies": {
@@ -14,6 +17,10 @@
     "googleapis": "^23.0.0",
     "mongodb": "^2.2.33",
     "nodemailer": "^4.4.1"
+  },
+  "engines": {
+    "node": ">= 8.9.2",
+    "npm": ">= 5.5.1"
   },
   "devDependencies": {
     "eslint-config-google": "^0.9.1"
