@@ -357,7 +357,7 @@ function editUser(request, response) {
         var contact = request.body.contact;
         var username = request.body.username;
 
-        if(service.findUserExist(user_name,user_username,user_contact,user_email, request.session.uid)) {
+        if(service.findUserExist(name,username,contact,email,request.session.uid)) {
             response.send("Name, username, contact number, or email already in use.");
         } else {
             var userDetails = {
