@@ -251,6 +251,8 @@ function includes (arr, current) {
 }
 
 function submitDocument () {
+    var typeSub = $('#typeOfSub').val();
+    var typeSASSub = $('#typeOfSASSub').val();
     var term = $('#term').val();
     var actTitle = $('#act-title').val();
     var dateType = $('#act-date-type').val();
@@ -263,6 +265,33 @@ function submitDocument () {
     var typeAct;
     var actVenue = $('#act-venue').val();
     var errorMessage = "";
+    var sasReq = false;
+    var allReq = false;
+
+    if(typeSub == null || typeSub.trim() == '') {
+        errorMessage += "Type of Submission <br>";
+        $('#typeSub-label').addClass('error');
+    } else {
+        $('#typeSub-label').removeClass('error');
+        console.log(typeSub);
+        if(typeSub == 'Initial Submission') {
+            console.log("here");
+            allReq = true;
+            typeSASSub = "None"
+        }
+        else sasReq = true;
+    }
+    if(sasReq) {
+        if(typeSASSub == null || typeSASSub.trim() == '') {
+            errorMessage += "Type of SAS Submission <br>";
+            $('#type-SAS-label').addClass('error');
+        } else {
+            $('#type-SAS-label').removeClass('error');
+            if(typeSASSub.trim() == 'In Case of Change' 
+                || typeSASSub.trim() == 'Activity Not in GOSM')
+                allReq = true;
+        }
+    }
     
     if(term == null || term.trim() == '' ) {
         errorMessage += "Term <br>";
@@ -277,53 +306,62 @@ function submitDocument () {
     } else {
         $('#act-title-label').removeClass('error');
     }
-    
-    switch(dateType) {
-        case null:
-            errorMessage += "Activity Date Type <br>";
-            $('#act-date-type-label').addClass('error');
-            $('#act-date-label').addClass('error');
-            break;
-        case "Multiple Dates":
-        case "One-day Activity":
-            if(selectedDates.length == 0) {
-                errorMessage += "Activity Date/s <br>";
-                dates = $(".date").val();
-            }
-            break;
-    }
-    
-    if(actNature == null || actNature.trim() == '') {
-        errorMessage += "Activity Nature <br> ";
-        $('#act-nature-label').addClass('error')
-    } else {
-        $('#act-nature-label').removeClass('error')
+    console.log(allReq);
+    if(allReq) {
+        switch(dateType) {
+            case null:
+                errorMessage += "Activity Date Type <br>";
+                $('#act-date-type-label').addClass('error');
+                $('#act-date-label').addClass('error');
+                break;
+            case "Multiple Dates":
+            case "One-day Activity":
+                if(selectedDates.length == 0) {
+                    errorMessage += "Activity Date/s <br>";
+                    dates = $(".date").val();
+                }
+                break;
+        }
         
-    }
-    
-    if(actTypeOthers) {
-        if (actTypeOthers.trim() == '' || actTypeOthers == null) {
-            errorMessage += "Activity Type <br>";
-            $('#act-type-label').addClass('error');
+        if(actNature == null || actNature.trim() == '') {
+            errorMessage += "Activity Nature <br> ";
+            $('#act-nature-label').addClass('error');
         } else {
-            typeAct = $("#act-type-others").val();
-            $('#act-type-label').removeClass('error');
+            $('#act-nature-label').removeClass('error');
+            
+        }
+        
+        if(actTypeOthers) {
+            if (actTypeOthers.trim() == '' || actTypeOthers == null) {
+                errorMessage += "Activity Type <br>";
+                $('#act-type-label').addClass('error');
+            } else {
+                typeAct = $("#act-type-others").val();
+                $('#act-type-label').removeClass('error');
+            }
+        } else {
+            if (actType == '' || actType == null) {
+                errorMessage += "Activity Type <br>";
+                $('#act-type-label').addClass('error');
+            } else {
+                typeAct = $("#act-type").val();
+                $('#act-type-label').removeClass('error');
+            }
+        }
+        
+        if(actVenue == null || actVenue.trim() == '')  {
+            errorMessage += "Activity Venue <br>";
+            $('#act-venue-label').addClass('error');
+        } else {
+            $('#act-venue-label').removeClass('error');
         }
     } else {
-        if (actType == '' || actType == null) {
-            errorMessage += "Activity Type <br>";
-            $('#act-type-label').addClass('error');
-        } else {
-            typeAct = $("#act-type").val();
-            $('#act-type-label').removeClass('error');
-        }
-    }
-    
-    if(actVenue == null || actVenue.trim() == '')  {
-        errorMessage += "Activity Venue <br>";
-        $('#act-venue-label').addClass('error');
-    } else {
+        $('#act-date-type-label').removeClass('error');
+        $('#act-date-label').removeClass('error');
+        $('#act-type-label').removeClass('error');
+        $('#act-type-label').removeClass('error');
         $('#act-venue-label').removeClass('error');
+        $('#act-nature-label').removeClass('error')
     }
     
     
@@ -345,7 +383,7 @@ function submitDocument () {
 			type        : 'POST', 		
 			url         : 'submitSubmission',		
             data        : {term:term, act_title:actTitle, act_date:dates, act_time:actTime, act_nature:actNature,
-                           act_type:actType, act_venue:actVenue, type_sub:"Initial Submission", type_sas:"None"},
+                           act_type:actType, act_venue:actVenue, type_sub:typeSub, type_sas:typeSASSub},
 			dataType    : 'json',		
 	 		success     : function(data) {
                 console.log(data);
