@@ -1,4 +1,5 @@
 var check;
+var recheck;
 var table;
 $(document).ready(function() {
 
@@ -95,7 +96,8 @@ $(document).ready(function() {
     $('.half textarea').prop('disabled', true);
     
     $('#table_submissions tbody').on('click', '.clickable', function() {
-    	var docuID = $(this).attr('data-docuID');
+        var docuID = $(this).attr('data-docuID');
+        console.log(docuID)
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
         $('#modal-content select').val('');
@@ -106,42 +108,56 @@ $(document).ready(function() {
 			data        : {docuID:docuID},		
 			dataType    : 'json',		
 	 		success     : function(data) {
-	 			$("#act-name").val(data.title);
-	 			$("#org-name").val(data.org.name);
+	 			$("#act-name").val(data.sub.title);
+	 			$("#org-name").val(data.sub.org.name);
 	 			
-	 			$("#time").val(data.act_time);
-	 			$("#venue").val(data.act_venue);
-	 			$("#nature").val(data.act_nature);
-	 			$("#type").val(data.act_type);
-	 			$("#actDate").val(data.act_date);
+	 			$("#time").val(data.sub.act_time);
+	 			$("#venue").val(data.sub.act_venue);
+	 			$("#nature").val(data.sub.act_nature);
+	 			$("#type").val(data.sub.act_type);
+	 			$("#actDate").val(data.sub.act_date);
 	 			
-                $("#submissionType").val(data.sub_type);
-	 			$("#submittedBy").val(data.submittedBy.name);
-	 			$("#submitDate").val(data.timestamp);
-	 			$("#typeSAS").val(data.type_sas);
-	 			
-                if(data.status == 'PENDING') {
-                    $('#resubmit').show();
-                } else {
+                $("#submissionType").val(data.sub.sub_type);
+	 			$("#submittedBy").val(data.sub.submittedBy.name);
+	 			$("#submitDate").val(data.sub.timestamp);
+	 			$("#typeSAS").val(data.sub.type_sas);
+                
+                if(data.org_id == "org_1") {
                     $('#resubmit').hide();
+                    if(data.sub.status == '' || data.sub.status == null || data.sub.status == '-') {
+                        check = true;
+                        recheck = false;
+                        $('#check').html('<i class = "fa fa-check"> </i> CHECK');
+                        $('#check').show();
+                        $('#recheck').hide();
+                    } else {
+                        recheck = true;
+                        check = false;
+                        $('#recheck').html('<i class = "fa fa-check-circle"> </i> RECHECK');
+                        $('#recheck').show();
+                        $('#check').hide();
+                    }
+                }
+                else {
+                    $('#check').hide();
+                    $('#recheck').hide();
+                    if(data.sub.status == 'PENDING') {
+                        $('#resubmit').show();
+                    } else {
+                        $('#resubmit').hide();
+                    }
                 }
                 
-                if(data.status == '' || data.status == null || data.status == '-') {
-                    $('#check').show();
-                    $('#recheck').hide();
-                } else {
-                    $('#recheck').show();
-                    $('#check').hide();
-                }
+                
 
                 $('#checker input').prop('disabled', true);
                 $('#checker textarea').prop('disabled', true);
                 $('#checker select').prop('disabled', true);
                 
-                if(data.checker != null) {            
-                    $("#checkedBy").val(data.checker.name);
-                    $("#dateChecked").val(data.datetime_checked);
-                    $('#status').val(data.status.toUpperCase());
+                if(data.sub.checker != null) {            
+                    $("#checkedBy").val(data.sub.checker.name);
+                    $("#dateChecked").val(data.sub.datetime_checked);
+                    $('#status').val(data.sub.status.toUpperCase());
                     
                     
                 } else {
@@ -150,8 +166,8 @@ $(document).ready(function() {
                     $('#status').val('-'); 
                 }
                 
-                if(data.remarks != null)
-                    $("#remarks").val(data.remarks);
+                if(data.sub.remarks != null)
+                    $("#remarks").val(data.sub.remarks);
                 else
                     $("#remarks").val('');
 			},
@@ -165,10 +181,9 @@ $(document).ready(function() {
         $('body').css('overflow','hidden');
     });
     
-    var check = true;
         $('#check').click(function(){
             if(check) {
-                $('#checker input').prop('disabled', false);
+               // $('#checker input').prop('disabled', false);
                 $('#checker textarea').prop('disabled', false);
                 $('#checker select').prop('disabled', false);
                 $(this).html('<i class = "fa fa-save"> </i> SUBMIT');
@@ -180,20 +195,37 @@ $(document).ready(function() {
                 },
                 "Yes",
                 function(){
-                    $('#checker input').prop('disabled', true);
-                    $('#checker textarea').prop('disabled', true);
-                    $('#checker select').prop('disabled', true);
-                    $('#check').html('<i class = "fa fa-check"> </i> RECHECK');
-                    $('#modal-action').remove();
+
+                    var remarks = $('#checker textarea').val();
+                    var status = $('#checker select').val();
+
+                    $.ajax({ 		
+                        type        : 'POST', 		
+                        url         : 'checkSubmission',		
+                        data        : {remarks:remarks, status:status},		
+                        dataType    : 'json',		
+                        success     : function(data) {
+                            if (msg == 'true') {
+                                $('#checker input').prop('disabled', true);
+                                $('#checker textarea').prop('disabled', true);
+                                $('#checker select').prop('disabled', true);
+                                $('#recheck').show();
+                                $('#check').hide();
+                                $('#check').html('<i class = "fa fa-check"> </i> CHECK');
+                                $('#modal-action').remove();
+                            } else {
+                                console.log("Failed to check the submission!");
+                            }
+                        }
+                    });
                 }, true);
             }
             check = !check;
         });
         
-        var recheck = true;
         $('#recheck').click(function(){
             if(recheck) {
-                $('#checker input').prop('disabled', false);
+                //$('#checker input').prop('disabled', false);
                 $('#checker textarea').prop('disabled', false);
                 $('#checker select').prop('disabled', false);
                 $(this).html('<i class = "fa fa-save"> </i> SAVE');
@@ -205,11 +237,29 @@ $(document).ready(function() {
                 },
                 "Yes",
                 function(){
-                    $('#checker input').prop('disabled', true);
-                    $('#checker textarea').prop('disabled', true);
-                    $('#checker select').prop('disabled', true);
-                    $('#recheck').html('<i class = "fa fa-check"> </i> RECHECK');
-                    $('#modal-action').remove();
+                    
+                    var remarks = $('#checker textarea').val();
+                    var status = $('#checker select').val();
+
+                    $.ajax({ 		
+                        type        : 'POST', 		
+                        url         : 'checkSubmission',		
+                        data        : {remarks:remarks, status:status},		
+                        dataType    : 'json',		
+                        success     : function(data) {
+                            if (msg == 'true') {
+                                $('#checker input').prop('disabled', true);
+                                $('#checker textarea').prop('disabled', true);
+                                $('#checker select').prop('disabled', true);
+                                $('#recheck').html('<i class = "fa fa-check-circle"> </i> RECHECK');
+                                $('#modal-action').remove();
+                            } else {
+                                console.log("Failed to recheck the submission!");
+                            }
+                        }
+                    });
+
+                    
                 }, true);
             }
             recheck = !recheck;

@@ -54,6 +54,7 @@ execute[context+"/aps/changeStatus"] = changeStatus;
 execute[context+"/aps/changePassword"] = changePassword;
 execute[context+"/aps/newSubmission"] = apsNewSubmission;
 execute[context+"/aps/submitSubmission"] = submitSubmission;
+execute[context+"/aps/checkSubmission"] = checkSubmission;
 
 //execute[context+"/addOrg"] = addOrg;
 
@@ -208,8 +209,10 @@ function home_org (request, response) {
 
 function modalData(request, response) {
     var key = request.body.docuID;
+    var orgID = request.session.org_id;
     response.setHeader('Content-Type', 'application/json');
-    response.send(service.getCompleteSubmission(key));
+    response.send({sub: service.getCompleteSubmission(key), 
+                   org_id: orgID});
 }
 
 function addUser (request, response) {
@@ -466,6 +469,20 @@ function forgotPassword(request, response){
         });
     } else {
         response.send("Invalid Email");
+    }
+}
+
+function checkSubmission(request, response) {
+    if (request.session.uid != null) {
+        var checkDetails = {
+            checker: request.session.uid,
+            remarks: request.body.remarks,
+            status: request.body.status
+        };
+        service.checkSubmission(request.body.subKey, checkDetails);
+        response.send({msg: 'true'});
+    } else {
+        response.send({msg: 'false'});
     }
 }
 

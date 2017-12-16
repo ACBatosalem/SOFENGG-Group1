@@ -378,3 +378,14 @@ function addSubmission(subKey, subDetails) {
       });
 
 }
+
+exports.service.checkSubmission = checkSubmission;
+
+function checkSubmission(subKey, checkDetails) {
+    database.ref("submissions").child(subKey).update({
+        user_id_checker: checkDetails.checker,
+        datetime_checked: utils.toUTC(new Date()),
+        remarks: checkDetails.remarks,
+        status: checkDetails.status
+    });
+}
