@@ -18,6 +18,33 @@ $(document).ready(function() {
         setDate(calendar);
     });
     
+    $('#typeOfSub').on('change', function(){
+        var opt = $(this).val();
+        switch (opt) {
+            case "Initial Submission":
+                $('#target').slideDown();
+                $('#target-sas').slideUp();
+                break;
+            case "Special Approval Slip":
+                $('#target').slideUp();
+                $('#target-sas').slideDown();
+                break;
+        }
+    });
+    
+    $('#typeOfSASSub').on('change', function(){
+        var opt = $(this).val();
+        switch(opt) {
+            case "In Case of Change":
+            case "Activity Not in GOSM":
+                $('#target').slideDown();
+                break;
+            default: 
+                $('#target').slideUp();
+                break;
+        }
+    });
+    
     $('select#month').on('change', function(){
         calendar.setMonth($('select#month').val()-1);
         setDate(calendar);

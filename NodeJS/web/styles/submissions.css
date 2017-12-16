@@ -246,5 +246,13 @@ button#add-date {
 }
 
 #form-message a:hover {
-    text-decoration: underline;
+    border-bottom: 1px #35865C solid;
+}
+
+#target {
+    display: none;
+}
+
+#target-sas {
+    display: none;
 }

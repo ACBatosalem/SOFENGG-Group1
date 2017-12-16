@@ -9,20 +9,6 @@
 			var username = "<%=user.username%>";
 			var context = "<%=context%>"; 
 		</script>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-        <script>
-            var config = {
-                apiKey: "AIzaSyBL3mFq5IA-6wlKsvxJCmeRvEuCrC8tp-k",
-                authDomain: "labfirebase-f292b.firebaseapp.com",
-                databaseURL: "https://labfirebase-f292b.firebaseio.com",
-                projectId: "labfirebase-f292b",
-                storageBucket: "labfirebase-f292b.appspot.com",
-                messagingSenderId: "783008488555"
-            };
-            firebase.initializeApp(config);
-        </script>
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="<%=context%>/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="<%=context%>/libraries/datatables/datatables.css" rel="stylesheet">
@@ -46,6 +32,7 @@
         <div id="main-bg"></div>
         <div id="main_overlay"></div>
 	        
+        <% include sections/modal_submission.ejs %>
         <!-- MAIN VIEW START -->
         <div id="main">
             <% var menu = 1 %>
@@ -83,7 +70,7 @@
                             <!-- DATA: SUBMISSIONS -->    
                             <tbody id="tbody">
                             <% for (key in submissions) { %> 
-                                <tr data-docuID = "<%=key%>" >
+                                <tr data-docuID = "<%=key%>"  class = "clickable" >
 	                                <td> <%= submissions[key].timestamp %> </td>
                                     <td> <%= submissions[key].org.name%> </td>
 	                                <td> <%= submissions[key].title %>  </td>

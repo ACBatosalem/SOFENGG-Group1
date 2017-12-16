@@ -43,25 +43,30 @@
                 <!-- MAIN BODY START -->
                 <div id="main_body">
                     <p id = "form-message"> 
-                        <a class = "btn" href = "<%=context%>/org"> 
+                        <a class = "btn" href = "<%=context%>/aps"> 
                             <i class = "fa fa-arrow-left"> </i>
                             Back to Submissions 
                         </a>
                     </p>
-                    <!-- SUBMISSION FORM MESSAGE START -->
-                    <p id = "form-message"> 
-                        Kindly make sure you have submitted all necessary requirements to avoid being pended. <br>
-                        Please be cautious while logging in, make sure there are no typos and all information logged are consistent with your PPR. <br>
-                        Processing time is 3-5 working days. <br>
-                        <br>
-                        For any concerns/queries please contact: <br> 
-                        <i class="fa fa-user"> </i>
-                        Rica Culata - 09164330003 <br>
-                        <i class="fa fa-user"> </i>
-                        Victor Lacson - 09157797417 <br>             
-                    </p>
-                    <!-- SUBMISSION FORM MESSAGE END -->
                     
+                    
+                    <div class = "form-row">
+                        <label id = "org-label"> 
+                            Organization
+                        </label>
+                        <select id = "org"> 
+                            <% for (key in organizations) { %> 
+	                        	<!-- ORGS START -->
+                                <% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
+                                    <option value= "<%=organizations[key].username%>" data-orgid= "<%=key%>">
+                                        <%= organizations[key].name %>
+                                    </option>
+                                <% } %>
+                                <!-- ORGS END -->
+                            <% } %>
+                        </select>
+                    </div>
+
                     <!-- SUBMISSION START -->
                     <form id = "submission-form">
 
@@ -104,7 +109,6 @@
                                 <option value = "2"> Term 2 </option>
                                 <option value = "3"> Term 3 </option>
                                 <option value = "4"> Yearlong </option>
-                                
                             </select>
                         </div>
                         
