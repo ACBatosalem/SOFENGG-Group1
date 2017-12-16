@@ -52,6 +52,8 @@ execute[context+"/aps/deleteUser"] = deleteUser;
 execute[context+"/aps/addOrganization"] = addOrganization;
 execute[context+"/aps/changeStatus"] = changeStatus;
 execute[context+"/aps/changePassword"] = changePassword;
+execute[context+"/aps/newSubmission"] = apsNewSubmission;
+execute[context+"/aps/submitSubmission"] = submitSubmission;
 
 //execute[context+"/addOrg"] = addOrg;
 
@@ -297,22 +299,43 @@ function newSubmission(request, response) {
     }
 }
 
+function apsNewSubmission(request, response) {
+    if(request.session.uid != null) {
+        var user = service.getUserWithOrganization(request.session.uid);
+        response.render(path.join(__dirname, "./../web/aps_submission_form.ejs"), {
+              user: user,
+              context: context,
+              organizations: service.getAllOrganizations()
+        });
+    } else {
+        response.redirect(context+ '/home');
+    }
+}
+
 function submitSubmission(request, response) {
     if(request.session.uid != null) {
+        console.log("im here na");
         var term = request.body.term;
         var type_sub = request.body.type_sub;
         var type_sas = request.body.type_sas;
         var act_title = request.body.act_title;
         var act_nature = request.body.act_nature;
         var act_type = request.body.act_type;
-        var act_date = request.body.act_date
+        var act_date = request.body.act_date;
         var act_time = request.body.act_time;
         var act_venue = request.body.act_venue;
         var submitter;
         
         if (request.session.org_id != "org_1")
             submitter = request.session.org_id;
+        else {
+            console.log(request.body.org);
+            submitter = request.body.org;
+        }
 
+        console.log(term + " "+type_sub+" " + " " + type_sas + " "+act_title);
+        console.log(act_nature +" "+ act_type + " " + act_date + " "+act_venue);
+        console.log(submitter);
         if (term == "" || term == undefined ||
             act_title == "" || act_title == undefined ||
             act_nature == "" || act_nature == undefined ||
@@ -320,7 +343,7 @@ function submitSubmission(request, response) {
             act_date == "" || act_date == undefined ||
             act_time == "" || act_time == undefined ||
             act_venue == "" || act_venue == undefined) {
-                response.send({message:false,error:"missing"});
+                response.send({msg:false,error:"missing"});
         } else {
             numSub = service.countSubs() + 1;
             var subKey = 'sub_'+numSub;

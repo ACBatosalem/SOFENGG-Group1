@@ -50,25 +50,27 @@
                     </p>
                     
                     
-                    <div class = "form-row">
-                        <label id = "org-label"> 
-                            Organization
-                        </label>
-                        <select id = "org"> 
-                            <% for (key in organizations) { %> 
-	                        	<!-- ORGS START -->
-                                <% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
-                                    <option value= "<%=organizations[key].username%>" data-orgid= "<%=key%>">
-                                        <%= organizations[key].name %>
-                                    </option>
-                                <% } %>
-                                <!-- ORGS END -->
-                            <% } %>
-                        </select>
-                    </div>
+                    
 
                     <!-- SUBMISSION START -->
                     <form id = "submission-form">
+
+                        <div class = "form-row">
+                            <label id = "org-label"> 
+                                Organization
+                            </label>
+                            <select id = "org"> 
+                                <% for (key in organizations) { %> 
+                                    <!-- ORGS START -->
+                                    <% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
+                                        <option value= "<%=key%>">
+                                            <%= organizations[key].name %>
+                                        </option>
+                                    <% } %>
+                                    <!-- ORGS END -->
+                                <% } %>
+                            </select>
+                        </div>
 
                         <div class = "form-row">
                             <label id = "typeSub-label"> 

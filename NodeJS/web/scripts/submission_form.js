@@ -294,6 +294,7 @@ function submitDocument () {
     var errorMessage = "";
     var sasReq = false;
     var allReq = false;
+    var submitter = $("#org").val();
 
     if(typeSub == null || typeSub.trim() == '') {
         errorMessage += "Type of Submission <br>";
@@ -304,7 +305,7 @@ function submitDocument () {
         if(typeSub == 'Initial Submission') {
             console.log("here");
             allReq = true;
-            typeSASSub = "None"
+            typeSASSub = "N/A"
         }
         else sasReq = true;
     }
@@ -333,7 +334,7 @@ function submitDocument () {
     } else {
         $('#act-title-label').removeClass('error');
     }
-    console.log(allReq);
+    
     if(allReq) {
         switch(dateType) {
             case null:
@@ -346,8 +347,9 @@ function submitDocument () {
                 if(selectedDates.length == 0) {
                     errorMessage += "Activity Date/s <br>";
                     dates = $(".date").val();
-                }
+                } else dates = selectedDates.join(', ');
                 break;
+            default: dates = dateType;
         }
         
         if(actNature == null || actNature.trim() == '') {
@@ -388,9 +390,14 @@ function submitDocument () {
         $('#act-type-label').removeClass('error');
         $('#act-type-label').removeClass('error');
         $('#act-venue-label').removeClass('error');
-        $('#act-nature-label').removeClass('error')
+        $('#act-nature-label').removeClass('error');
+        dates = "N/A";
+        actTime = "N/A";
+        actNature = "N/A";
+        actType = "N/A";
+        actVenue = "N/A";
     }
-    
+   
     
     if(errorMessage != '') {
         $('body').css('overflow', 'hidden');
@@ -405,17 +412,24 @@ function submitDocument () {
                     null,
                     false);
     } else {
-        var dates = selectedDates.join(', ');
+        
+        
         $.ajax({ 		
 			type        : 'POST', 		
 			url         : 'submitSubmission',		
             data        : {term:term, act_title:actTitle, act_date:dates, act_time:actTime, act_nature:actNature,
-                           act_type:actType, act_venue:actVenue, type_sub:typeSub, type_sas:typeSASSub},
+                           act_type:actType, act_venue:actVenue, type_sub:typeSub, type_sas:typeSASSub, org:submitter},
 			dataType    : 'json',		
 	 		success     : function(data) {
-                console.log(data);
+                console.log(data.msg);
+                var message = "";
+
+                if(data.msg)
+                    message = "Successfully sent a submission! Your submission will be checked within 3 - 5 working days.";
+                else message = "Submission not added.";
+
                 $('body').css('overflow', 'hidden');
-                modalMessage("Successfully sent a submission! Your submission will be checked within 3 - 5 working days.",
+                modalMessage(message,
                             null,
                             null,
                             "Okay",
@@ -426,7 +440,8 @@ function submitDocument () {
                             false);
             },
             error   	: function(xhr,status,error){		
-					console.log(xhr);   		
+                    console.log(xhr.responseText);
+                    console.log(error);   		
 					alert(status);		
             }
         });
