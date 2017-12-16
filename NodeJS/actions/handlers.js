@@ -31,12 +31,14 @@ execute[context+"/login"] = login;
 execute[context+"/logout"] = logout;
 execute[context+"/forgotPassword"] = forgotPassword;
 execute[context+"/modalData"] = modalData;
+execute[context+"/checkSubmission"] = checkSubmission;
 
 execute[context+"/org"] = home_org;
 execute[context+"/org/profile"] = profileOrg;
 execute[context+"/org/statistics"] = statisticsOrg;
 execute[context+"/org/newSubmission"] = newSubmission;
 execute[context+"/org/submitSubmission"] = submitSubmission;
+execute[context+"/resubmitSubmission"] = resubmitSubmission;
 execute[context+"/org/editUser"] = editUser;
 execute[context+"/org/changePassword"] = changePassword;
 
@@ -54,7 +56,6 @@ execute[context+"/aps/changeStatus"] = changeStatus;
 execute[context+"/aps/changePassword"] = changePassword;
 execute[context+"/aps/newSubmission"] = apsNewSubmission;
 execute[context+"/aps/submitSubmission"] = submitSubmission;
-execute[context+"/aps/checkSubmission"] = checkSubmission;
 
 //execute[context+"/addOrg"] = addOrg;
 
@@ -210,9 +211,12 @@ function home_org (request, response) {
 function modalData(request, response) {
     var key = request.body.docuID;
     var orgID = request.session.org_id;
+    var checker = service.getUser(request.session.uid).name;
+    var date = new Date();
+    var datetimeNow = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substring(0,19);
     response.setHeader('Content-Type', 'application/json');
     response.send({sub: service.getCompleteSubmission(key), 
-                   org_id: orgID});
+                   org_id: orgID, checkerName: checker, now: datetimeNow});
 }
 
 function addUser (request, response) {
@@ -350,6 +354,8 @@ function submitSubmission(request, response) {
         } else {
             numSub = service.countSubs() + 1;
             var subKey = 'sub_'+numSub;
+            var date = new Date();
+            var d = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split('T');
             var subDetails = { 
                 act_date: act_date,
                 act_nature: act_nature,
@@ -358,7 +364,65 @@ function submitSubmission(request, response) {
                 act_venue: act_venue,
                 sub_type: type_sub,
                 term: term,
-                timestamp: utils.toUTC(new Date()),
+                timestamp: d[0] + ' ' + d[1].substring(0,8),
+                act_title: act_title,
+                type_sas: type_sas,
+                user_id_org: request.session.uid,
+                org_id: submitter,
+                user_id_checker: "-",
+                datetimechecked: "-",
+                status: "-"
+            };
+            
+            service.addSubmission(subKey, subDetails);
+            response.send({msg:true});
+        }
+    } else {
+        response.send({msg:false});
+    }
+}
+
+function resubmitSubmission(request, response) {
+    if(request.session.uid != null) {
+        console.log("im here na");
+        var term = request.body.term;
+        var type_sub = request.body.type_sub;
+        var type_sas = request.body.type_sas;
+        var act_title = request.body.act_title;
+        var act_nature = request.body.act_nature;
+        var act_type = request.body.act_type;
+        var act_date = request.body.act_date;
+        var act_time = request.body.act_time;
+        var act_venue = request.body.act_venue;
+        var submitter = service.findOrgByName(request.body.org).org_id;
+        
+        
+
+        console.log(term + " "+type_sub+" " + " " + type_sas + " "+act_title);
+        console.log(act_nature +" "+ act_type + " " + act_date + " "+act_venue);
+        console.log(submitter);
+        if (term == "" || term == undefined ||
+            act_title == "" || act_title == undefined ||
+            act_nature == "" || act_nature == undefined ||
+            act_type == "" || act_type == undefined ||
+            act_date == "" || act_date == undefined ||
+            act_time == "" || act_time == undefined ||
+            act_venue == "" || act_venue == undefined) {
+                response.send({msg:false,error:"missing"});
+        } else {
+            numSub = service.countSubs() + 1;
+            var subKey = 'sub_'+numSub;
+            var date = new Date();
+            var d = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split('T');
+            var subDetails = { 
+                act_date: act_date,
+                act_nature: act_nature,
+                act_time: act_time,
+                act_type: act_type,
+                act_venue: act_venue,
+                sub_type: type_sub,
+                term: term,
+                timestamp: d[0] + ' ' + d[1].substring(0,8),
                 act_title: act_title,
                 type_sas: type_sas,
                 user_id_org: request.session.uid,

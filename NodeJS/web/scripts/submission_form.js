@@ -347,7 +347,11 @@ function submitDocument () {
                 if(selectedDates.length == 0) {
                     errorMessage += "Activity Date/s <br>";
                     dates = $(".date").val();
-                } else dates = selectedDates.join(', ');
+                } else {
+                    //toISOString chcuhu
+
+                    dates = selectedDates.join(', ');
+                } 
                 break;
             default: dates = dateType;
         }

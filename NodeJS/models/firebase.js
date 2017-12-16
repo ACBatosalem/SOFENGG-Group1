@@ -204,6 +204,18 @@ function findUserByEmail(email) {
     return false;
 }
 
+exports.service.findOrgByName = findOrgByName;
+
+function findOrgByName(name) {
+    
+    for (key in orgs) {
+        if(orgs[key].name == name) {
+            return orgs[key];
+        }
+    }
+    return false;
+}
+
 exports.service.findUserExist = findUserExist;
 
 function findUserExist(userName, userUsername, userContact, userEmail, userKey) {
@@ -382,9 +394,11 @@ function addSubmission(subKey, subDetails) {
 exports.service.checkSubmission = checkSubmission;
 
 function checkSubmission(subKey, checkDetails) {
+    var date = new Date();
+    var d = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substring(0,19);
     database.ref("submissions").child(subKey).update({
         user_id_checker: checkDetails.checker,
-        datetime_checked: utils.toUTC(new Date()),
+        datetime_checked: d,
         remarks: checkDetails.remarks,
         status: checkDetails.status
     });
