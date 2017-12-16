@@ -1,36 +1,40 @@
-@import url('palanquin.css');
+@import url('fonts.css');
 
 body {
-    font-family: "Palanquin";
+    font-family: "Montserrat";
 }
-
-/* MAIN CONTAINERS */
 
 #main{
     display: flex;
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 
-#main_content{
+#main_content {
     position: absolute;
-    border-left-style: solid;
-    border-color: white;
-    box-sizing: border-box;
+    border: none;
     height: 100%;
     top: 0px;
     left: 250px;
-    width: calc(100% - 250px);
-    margin: 0 auto;
-    display: table-cell;
+    width: calc(100% - 250px)
 }
 
-@media only screen and (max-height: 600px) {
-    #main_content {
-        left: 100px;
-        width: calc(100% - 100px);
-    }
+.checkbox {
+    cursor: pointer;
+    margin-right: 20px;
+    border: 1px #35865C solid;
+    width: 30px;
+    color: #35865c;
+    height: 30px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
+
+
 
 #menu-btn {
     display: none;
@@ -56,25 +60,21 @@ body {
 }
 
 #main_header{
-    top: 0px;
-    left: 0px;
     border-bottom-color: #35865C;
     border-bottom-style: solid;
     border-bottom-width: 1px;
 }
 
 #main_body {
-    margin: 10px auto;
+    margin: 10px;
     position: absolute;
     display: block;
-    width: 100%;
+    width: calc(100% - 20px);
 }
 
 .body_label{
     position: relative;
     font-size: 30px;
-    width: 50px;
-    height: 50px;
     left: 0px;
     margin: 0px;
     top: 0px;
@@ -82,9 +82,27 @@ body {
     color: #35865C;
 }
 
+input {
+    font-family: "Lato";
+}
+
 .head {
     width: calc(100% - 20px);
-    margin: 20px 10px;
+    margin: 20px 10px 5px 10px;
+    line-height: 100%;
 }
 
 
+@media only screen and (max-height: 600px) {
+    #main_content {
+        left: 100px;
+        width: calc(100% - 100px);
+        height: 100%;
+        margin: 0 auto;
+        display: table-cell;
+    }
+}
+
+.nav.label .greeting {
+    font-size: 30px;
+}

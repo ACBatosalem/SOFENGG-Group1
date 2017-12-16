@@ -2,7 +2,7 @@
   "name": "aps-dashboard",
   "version": "1.0.1",
   "scripts": {
-	"start": "node main.js"
+    "start": "node main.js"
   },
   "description": "A dashboard for the DLSU CSO-APS Team and the organizations documentation officers.",
   "main": "main.js",
@@ -15,8 +15,10 @@
     "express-session": "^1.15.6",
     "firebase": "^4.6.2",
     "googleapis": "^23.0.0",
+    "localtunnel": "^1.8.3",
     "mongodb": "^2.2.33",
-    "nodemailer": "^4.4.1"
+    "nodemailer": "^4.4.1",
+    "sqlite3": "^3.1.13"
   },
   "engines": {
     "node": ">= 8.9.2",

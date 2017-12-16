@@ -116,6 +116,7 @@ exports.service.getCompleteSubmission = getCompleteSubmission;
 
 function getCompleteSubmission (docuID) {
     var submission = submissions[docuID];
+    submission.key = docuID;
     submission.submittedBy = getUserWithOrganization(submission.user_id_org); 
     submission.checker = getUser(submission.user_id_checker); 
     submission.org = getOrganization(submission.org_id);

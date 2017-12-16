@@ -44,14 +44,14 @@
     color: #FB893C;
 }
 
-table.dataTable#table_submissions tr:nth-child(odd):hover {
+table.dataTable#table_submissions .clickable:nth-child(odd):hover {
     font-weight: bold;
     background-color: #C5DDD0;
     cursor: pointer;
     font-weight: bolder;
 }
 
-table.dataTable#table_submissions tr:nth-child(even):hover {
+table.dataTable#table_submissions .clickable:nth-child(even):hover {
     font-weight: bold;
     background-color: #C5DDD0;
     cursor: pointer;
@@ -149,8 +149,8 @@ table.dataTable.no-footer {
 
 
 #table-container {
-    width: 90%;
-    margin: 20px auto;
+    width: calc(100% - 10px);
+    margin: 0px 0px;
     overflow: auto;
 }
 

@@ -180,7 +180,7 @@ function home_aps (request, response) {
             response.render(path.join(__dirname, "./../web/aps_submissions.ejs"), {
                     user: user,
                     context: context,
-                    orgs: service.getAllOrganizations(), 
+                    organizations: service.getAllOrganizations(), 
                     submissions: service.getAllCompleteSubmissions()});
         } else {
             response.redirect(context+"/org");
@@ -445,20 +445,5 @@ function forgotPassword(request, response){
         response.send("Invalid Email");
     }
 }
-
-/*function getAcademic (orgID) {
-    var orgID = orgID;
-    var subs = {}
-    for (key in submissions) {
-        if(orgID == getUserWithOrganization(submissions[key].user_id_org).org_id) {
-            if(submissions[key].act_nature.toUpperCase() == "ACADEMIC") {
-                var sub = getCompleteSubmission(key);
-                subs[key] = sub;
-            }
-        }
-    }
-
-    return subs;
-}*/
 
 exports.execute = execute;

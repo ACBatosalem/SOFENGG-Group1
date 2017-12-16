@@ -16,6 +16,7 @@
     	<script src="<%=context%>/scripts/modal.js" type = "application/javascript"> </script>
     	<script src="<%=context%>/scripts/login.js" type = "application/javascript"> </script>
     </head>
+    
     <body>
         <!-- MAIN BG -->
         <div id="main_bg"></div>
@@ -63,20 +64,25 @@
                     </form>
                     <!-- FORM LOGIN END -->
                     
-                    <!-- FORM LOGIN START -->
+                    <!-- FORGOT PASSWORD START -->
                     <form id="forgotpassword" action="forgotPassword" method="post">
                         <!-- LABEL HEADER -->
                         <p class="label header"> Forgot password? </p>
                         
                         <!-- EMAIL -->
-                        <p class="label"> Please enter email: </p>
-                        <input type="email" id = "email" class = "login">
+                        <p class="label"> Please enter your email: </p>
+                        <input type="email" id = "email" class = "forgotpassword">
+
+                        <!-- FORGOT PASSWORD MESSAGE -->
                         <p class = "label" id = "forgot_msg_error"> </p>
-                        <!-- LOGIN MESSAGE -->
+
+                        <!-- SUBMIT BUTTON -->
                         <button class = "btn" id="btn_forgot" type="submit"> Send </button>
+
+                        <!-- SUBMIT BUTTON -->
                         <button class = "btn" id="btn_back"> Cancel </button>
                     </form>
-                    <!-- FORM LOGIN END -->
+                    <!-- FORGOT PASSWORD END -->
                 </div>
                 <!-- LOGIN CONTENT END -->
                 

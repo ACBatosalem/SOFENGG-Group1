@@ -1,0 +1,84 @@
+<!-- MODAL VIEW START -->
+<div id = "modal-view" tabindex="1">
+    <!-- MODAL BACKGROUND -->
+    <div id = "modal-bg"> </div>
+    <!-- MODAL CONTENT START -->
+    <div id = "modal-container-outer">
+        <button id = "modal-close"> </button>
+        
+        <!-- MODAL CONTAINER START -->
+        <div id = "modal-container">
+            <!-- MODAL CONTENT START -->
+            <div id = "modal-content">
+                <!-- ADD ORGANIZATION START -->
+                <div id = "add-org-form">
+                    <label class = "modal-title"> Add Organization </label> 
+                    <div class="modal-row">
+                        <label class = "modal-label"> Name </label>
+                        <input name = "name" id = "orgName" class = "modal-field">
+                    </div>
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Username </label>
+                        <input name = "username"id = "orgUsername" class = "modal-field">
+                    </div>
+                    <label id = "org-username-error" class = "error"></label>
+                    <div class = "modal-row">
+                        <button class = "addBtn" id = "addOrgButton"> 
+                            <i class = "fa fa-plus"> </i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+                <!-- ADD ORGANIZATiON END -->
+
+                <!-- ADD USER START -->
+                <div id = "add-user-form">
+                    <label class = "modal-title"> Add/Edit User </label>
+                    <div class="modal-row">
+                        <label class = "modal-label"> Name </label>
+                        <input name = "name" class = "modal-field" id = "userName" type="text">
+                    </div>     
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Username </label>
+                        <input name = "username" class = "modal-field" id = "userUsername"type="text">
+                    </div>
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Email </label>
+                        <input name = "email" class = "modal-field" id = "userEmail" type="email">
+                    </div>
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Contact </label>
+                        <input name = "contact" class = "modal-field" id = "userContact"type="tel">
+                    </div>                            
+                    
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Organization  </label>
+                        <select name = "org" class = "modal-field" id = "userOrg"> 
+                            <% for (key in organizations) { %>     
+                                <option value = "<%=key%>"> <%= organizations[key].name %> </option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <label id = "user-error" class = "error"></label>
+                    
+                    <div class = "modal-row">
+                        <button class = "modal-add addBtn" id = "addUserButton" type="submit"> 
+                            <i class = "fa fa-plus"> </i>
+                            Add
+                        </button>
+                        <button class = "modal-save addBtn" type="submit"> 
+                            <i class = "fa fa-save"> </i>
+                            Save
+                        </button>
+                    </div>
+                </div> 
+                <!-- ADD USER END -->
+            </div>
+            <!-- MODAL CONTENT END -->
+        </div>
+        <!-- MODAL CONTENT CONTAINER END -->
+    </div>
+    <!-- MODAL CONTENT END -->
+</div>
+<!-- MODAL VIEW END -->

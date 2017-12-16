@@ -20,15 +20,13 @@
 }
 
 .nav-item {
-    line-height: 50px;
-    height: 50px;
     width: 100%;
+    padding: 5px;
+    position: relative;
     color: white;
     font-family: "Palanquin";
     font-size: 20px;
 }
-
-
 
 .nav-button {
     position: relative;
@@ -38,12 +36,12 @@
     border-left-style: none;
     border-right-style: none;
     background: none;
-    font-size: 18px;
+    font-size: 15px;
     border-width: 1px;
     font-family: "Palanquin";
 }
 
-.nav-button:first-of-type {
+.nav-link:first-of-type  > .nav-button {
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: white;
@@ -61,9 +59,9 @@
 .nav.label {
     margin: 0px;
     margin-bottom: 20px;
-    font-size: 30px;    
+    font-size: 20px;    
     color: white;
-	font-family: "Palanquin";
+	font-family: "Montserrat";
     text-align: center;
 }
 
@@ -150,10 +148,10 @@
 }
 
 .triangle {
-    height: 50px;
+    height: calc(100%);
     width: 100%;
-    position: absolute;
     top: 0px;
+    position: absolute;
     right: -1px;
     background: white;
     -webkit-clip-path: polygon(90% 50%, 100% 100%, 100% 0);
@@ -234,13 +232,12 @@
         bottom: auto;
     }
     
-    #bottom_div .nav-button:first-of-type {
-        border-top: none;
+    .first {
+        margin-top: none;    
     }
     
-    .nav-button {   
-        height: 40px;
-        line-height: 40px;
+    .first:first-of-type {
+        margin-top: 1px solid white;
     }
     
     #nav {
@@ -270,20 +267,26 @@
         display: none;
     }
     
-    .filter-options {
-        margin: 2% 5% 2% 5%;
-        display: inline-flex;
-        line-height: 40px;
-    }
-    
     .nav.label {
         margin: 0px;
         margin-top: 60px;
-        margin-bottom: 0px;
-        font-size: 20px;    
-        color: white;
-        font-family: "Palanquin";
+        word-wrap: break-word;
+        margin-bottom: 20px;
+        font-size: 18px;    
         text-align: center;
+    }
+    
+    .nav.label .greeting {
+        font-size: 20px;
+    }
+    
+    .nav-link:first-of-type > .nav-button {
+        border-top: none;
+    }
+
+    
+    #top_div .nav-link:first-of-type > .nav-button {
+        border-top: 1px white solid;
     }
 }
 

@@ -14,9 +14,6 @@ function modalMessage (message, neg, negact, pos, posact, reverse) {
     
     $(modalCon).append(modalTit);
     
-    if(reverse) {
-        
-    }
     if(neg != null) {       
         $(buttonNo).addClass('modal-action-neg');
         $(buttonNo).text(neg);
@@ -43,6 +40,7 @@ function modalMessage (message, neg, negact, pos, posact, reverse) {
     
     $(modalAct).append(modalBg);
     $(modalAct).append(modalCon);
-
+    
+    $('*').blur();
     $('body').append(modalAct);
 }

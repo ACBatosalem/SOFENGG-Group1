@@ -1,0 +1,72 @@
+<!-- SIDE BAR NAVIGATION START -->
+<nav id="nav">
+    <!-- TOP ITEMS -->
+    <div id="top_div">
+        <!-- HEADER OVERLAY -->
+        <div class = "label-header-overlay"> </div>
+        <!-- HEADER IMAGE -->
+        <div class = "label-header"> </div>
+    
+        <!-- HEADER CONTENT START -->
+        <div id="header">
+            <!-- LOGIN ICON HOLDER -->
+            <div class = "icon-holder"> </div>
+            <!-- DLSU LOGO -->
+            <img id = "dlsu-logo" src="<%=context%>/resources/logo.png">
+            <!-- ICON HOLDER OVERLAY -->
+            <div class = "icon-holder-overlay"> </div>
+        </div>
+        
+        <!-- WELCOME MESSAGE -->
+        <p class="nav label"> 
+            <label class = "greeting"> Welcome    </label> <br>
+            <label> <%=user.name%>          </label> <br> 
+            <label> <%=user.org.username%>      </label> <br>
+        </p>
+        <!-- SUBMISSIONS BUTTON LINK START -->
+        <a class = "nav-link" href="<%=context%>"> 
+            <button id="submissions" class="nav-item nav-button <% if (menu == 1) { %> selected <% } %>"> 
+                    Submissions
+                <div class = "triangle"> </div>
+            </button>
+        </a>
+        <!-- SUBMISSIONS BUTTON LINK END -->
+        <!-- STATISTICS BUTTON LINK START -->
+        <a class = "nav-link" href="<%=context%>/aps/statistics"> 
+            <button class = "nav-item nav-button <% if (menu == 2) { %> selected <% } %>"> 
+                    Statistics
+                <div class = "triangle"> </div>
+            </button>
+        </a>
+        <!-- STATISTICS BUTTON LINK END -->
+
+        <% if (user.org.privilege == 'admin') { %>
+            <!-- ORGANIZATIONS BUTTON LINK START -->
+            <a class = "nav-link" href="<%=context%>/aps/accounts"> 
+                <button id="orgs" class="nav-item nav-button <% if (menu == 3) { %> selected <% } %>"> 
+                        Manage Accounts 
+                    <div class = "triangle"> </div>
+                </button>
+            </a>
+            <!-- ORGANIZATIONS BUTTON LINK END -->
+        <% } %>
+    </div>
+    <!-- BOTTOM ITEMS START -->
+    <div id="bottom_div">
+        <!-- ACCOUNT SETTINGS BUTTON -->
+        <a class = "nav-link" href="<%=context%>/aps/profile">
+            <button id="change_pw" class="nav-item nav-button <% if (menu == 4) { %> selected <% } %>"> 
+                    Account Settings
+                <div class = "triangle"> </div>
+            </button>
+        </a>
+        <!-- SIGN OUT BUTTON -->
+        <a class = "nav-link">
+            <button id="signout" class="nav-item nav-button <% if (menu == 5) { %> selected <% } %>">   
+                    Logout	                       
+            </button>
+        </a>
+    </div>
+    <!-- BOTTOM ITEMS END -->
+</nav>
+<!-- SIDE BAR NAVIGATION END -->

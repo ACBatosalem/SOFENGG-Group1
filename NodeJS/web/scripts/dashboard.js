@@ -18,7 +18,13 @@ $(document).ready(function() {
         "order": [[ 0, "desc" ]],
         "language": {
             "info": "Showing page _PAGE_ of _PAGES_",
-            "lergthMenu": "Display _MENU_ records"
+            "infoEmpty": "",
+            "lergthMenu": "Display _MENU_ records",
+            "emptyTable": "No submissions available."
+        },
+        drawCallback: function(settings) {
+            var pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+            pagination.toggle(this.api().page.info().pages > 1);
         }
     }).columns.adjust().draw();
     
@@ -53,72 +59,42 @@ $(document).ready(function() {
 
     });
     
-    $('#non-acad-box').change(function() {
+    $('#academic').click(filterCheckbox);
+    $('#nonacademic').click(filterCheckbox);
+    $("#org-pick").change(filterCheckbox);
+    
+    function filterCheckbox () {
         var orgID = $("#org-pick option:selected").attr('data-orgid');
-        var filter;
-    	if ($(this).is(':checked') && $("#acad-box").is(':checked')) {
-            filter = "all";
-        } else if ($(this).is(':checked')) {
-            filter = "non-acad";
-        } else if ($("#acad-box").is(':checked')) {
-            filter = "acad";
-        } else {
-            $("#acad-box").prop('checked', true);
-            filter = "acad";
+        var nonacad = $('#nonacademic').find('i');
+        var acad = $('#academic').find('i');
+        var filter = "";
+        
+        $(this).find('i').toggle();
+        
+        if(acad.is(':visible') && nonacad.is(':visible'))
+            filter = 'all';
+        if(acad.is(':visible') && !nonacad.is(':visible'))
+            filter = 'acad';
+        if(!acad.is(':visible') && nonacad.is(':visible'))
+            filter = 'non-acad';    
+        if(!acad.is(':visible') && !nonacad.is(':visible')) {
+            if($(this).attr('id') == acad.parent().attr('id')) { 
+                nonacad.show();
+                filter = 'non-acad';
+            } else {
+                acad.show();
+                filter = 'acad';
+            }
         }
-
+        
         console.log(filter);
-        console.log(orgID);
-
         filterSubmissions(filter, orgID);
-    });
-    
-    
-    $('#acad-box').change(function() {
-    	var orgID = $("#org-pick option:selected").attr('data-orgid');
-        var filter;
-    	if ($(this).is(':checked') && $("#non-acad-box").is(':checked')) {
-            filter = "all";
-        } else if ($(this).is(':checked')) {
-            filter = "acad";
-        } else if ($("#non-acad-box").is(':checked')) {
-            filter = "non-acad";
-        } else {
-            $("#non-acad-box").prop('checked', true);
-            filter = "non-acad";
-        }
-
-        console.log(filter);
-        console.log(orgID);
-
-        filterSubmissions(filter, orgID);
-    });
-    
-    $("#org-pick").change(function() {
-    	var orgID = $("#org-pick option:selected").attr('data-orgid');
-        var filter;
-    	if ($("#non-acad-box").is(':checked') && $("#acad-box").is(':checked')) {
-            filter = "all";
-        } else if ($("#non-acad-box").is(':checked')) {
-            filter = "non-acad";
-        } else if ($("#acad-box").is(':checked')) {
-            filter = "acad";
-        }
-
-        console.log(filter);
-        console.log(orgID);
-
-        filterSubmissions(filter, orgID);
-    });
+    }
     
     $('.half input').prop('disabled', true);
     $('.half textarea').prop('disabled', true);
     
-    $('#check').on('click', function(){
-        
-    });
-    
-    $('#table_submissions tbody').on('click', 'tr', function() {
+    $('#table_submissions tbody').on('click', '.clickable', function() {
     	var docuID = $(this).attr('data-docuID');
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
@@ -186,8 +162,10 @@ $(document).ready(function() {
     	});
     	
     	$('#modal-view').fadeIn();
-        
-        var check = true;
+        $('body').css('overflow','hidden');
+    });
+    
+    var check = true;
         $('#check').click(function(){
             if(check) {
                 $('#checker input').prop('disabled', false);
@@ -198,7 +176,7 @@ $(document).ready(function() {
                  modalMessage('Are you sure you want to change the checking details?',
                 "No",
                 function(){
-                    
+                    $('#modal-action').remove();
                 },
                 "Yes",
                 function(){
@@ -218,12 +196,12 @@ $(document).ready(function() {
                 $('#checker input').prop('disabled', false);
                 $('#checker textarea').prop('disabled', false);
                 $('#checker select').prop('disabled', false);
-                $(this).html('<i class = "fa fa-save"> </i> SUBMIT');
+                $(this).html('<i class = "fa fa-save"> </i> SAVE');
             } else {
                 modalMessage('Are you sure you want to change the checking details?',
                 "No",
                 function(){
-                    
+                    $('#modal-action').remove();
                 },
                 "Yes",
                 function(){
@@ -236,8 +214,6 @@ $(document).ready(function() {
             }
             recheck = !recheck;
         });
-        $('body').css('overflow','hidden');
-    });
     
     $(document).keyup(function(e){ 
         if (e.keyCode === 27) {
@@ -271,38 +247,6 @@ $(document).ready(function() {
     });
 });
 
-function saddRow(key, sub) {
-    var tr = document.createElement("tr");
-    var time = document.createElement("td");
-    var subBy = document.createElement("td");
-    var title = document.createElement("td");
-    var status = document.createElement("td");
-
-    $(tr).attr('data-docuID', key);
-    $(time).text(sub.timestamp);
-    $(subBy).text(sub.submittedBy.org.name);
-    $(title).text(sub.title);
-    $(status).text(sub.status);
-
-    switch (sub.status) {
-        case "EARLY APPROVED" : $(status).addClass("early_approved");
-            break;
-        case "LATE APPROVED" : $(status).addClass("late_approved");
-            break;
-        case "PENDING" : $(status).addClass("pending");
-            break;
-        case "DENIED" : $(status).addClass("denied");
-            break;
-        default : $(status).text("No Checkers Yet");
-    }
-
-    $(tr).append(time);
-    $(tr).append(subBy);
-    $(tr).append(title);
-    $(tr).append(status);
-    $("#tbody").append(tr);
-}
-
 function addRow(key, sub) {
     var classs;
 
@@ -324,23 +268,23 @@ function addRow(key, sub) {
         sub.title,
         sub.status
     ]).node();
-
+    
+    $(rowNode).attr('data-docuID', key);
+    $(rowNode).addClass('clickable');
     $(rowNode).find("td:nth-child(4)").addClass(classs);
 }
 
 function filterSubmissions(filter, orgID) {
-    //alert(filter + " " + orgID);
     $.ajax({
         type        : 'POST', 
         url         : 'aps/filterSubmissions',
         data        : {filter:filter, orgID:orgID},
         dataType    : 'json',
         success     : function(subs) {
-            console.log(subs);
             if (subs != "false") {
                 table.clear();
-                for (var key in subs) {
-                    addRow(key, subs[key]);
+                for (key in subs) {
+                    addRow(subs[key].key, subs[key]);
                 } 
                 table.draw();
             } else {

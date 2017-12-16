@@ -27,173 +27,15 @@
         <!-- BACKGROUNDS AND OVERLAYS -->
         <div id="main-bg"></div>
         <div id="main_overlay"></div>
-        <!-- MODAL VIEW START -->
-        <div id = "modal-view" tabindex="1">
-            <!-- MODAL BACKGROUND -->
-            <div id = "modal-bg"> </div>
-            <!-- MODAL CONTENT START -->
-            <div id = "modal-container-outer">
-                <button id = "modal-close"> </button>
-                
-                <!-- MODAL CONTAINER START -->
-                <div id = "modal-container">
-                    <!-- MODAL CONTENT START -->
-                    <div id = "modal-content">
-                        <!-- ADD ORGANIZATION START -->
-                        <div id = "add-org-form">
-                            <label class = "modal-title"> Add Organization </label> 
-                            <div class="modal-row">
-                                <label class = "modal-label"> Name </label>
-                                <input name = "name" id = "orgName" class = "modal-field">
-                            </div>
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Username </label>
-                                <input name = "username"id = "orgUsername" class = "modal-field">
-                            </div>
-                            <label id = "org-username-error" class = "error"></label>
-                            <div class = "modal-row">
-                                <button class = "addBtn" id = "addOrgButton"> 
-                                    <i class = "fa fa-plus"> </i>
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                        <!-- ADD ORGANIZATiON END -->
 
-                        <!-- ADD USER START -->
-                        <div id = "add-user-form">
-                            <label class = "modal-title"> Add/Edit User </label>
-                            <div class="modal-row">
-                                <label class = "modal-label"> Name </label>
-                                <input name = "name" class = "modal-field" id = "userName" type="text">
-                            </div>     
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Username </label>
-                                <input name = "username" class = "modal-field" id = "userUsername"type="text">
-                            </div>
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Email </label>
-                                <input name = "email" class = "modal-field" id = "userEmail"type="email">
-                            </div>
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Contact </label>
-                                <input name = "contact" class = "modal-field" id = "userContact"type="tel">
-                            </div>                            
-                            
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Organization  </label>
-                                <select name = "org" class = "modal-field" id = "userOrg"> 
-                                    <% for (key in organizations) { %>     
-                                    <option value = "<%=key%>"> <%= organizations[key].name %> </option>
-                                    <% } %>
-                                </select>
-                            </div>
-
-                            <label id = "user-error" class = "error"></label>
-                            
-                            <div class = "modal-row">
-                                <button class = "modal-add addBtn" id = "addUserButton" type="submit"> 
-                                    <i class = "fa fa-plus"> </i>
-                                    Add
-                                </button>
-                                <button class = "modal-save addBtn" type="submit"> 
-                                    <i class = "fa fa-save"> </i>
-                                    Save
-                                </button>
-                            </div>
-                        </div> 
-                        <!-- ADD USER END -->
-                    </div>
-                    <!-- MODAL CONTENT END -->
-                </div>
-                <!-- MODAL CONTENT CONTAINER END -->
-            </div>
-            <!-- MODAL CONTENT END -->
-        </div>
-        <!-- MODAL VIEW END -->
-
+        <% include sections/modal_orguser %>
         <!-- MAIN VIEW START -->
         <div id="main">
-            <!-- SIDE BAR NAVIGATION START -->
-            <nav id="nav">
-                <!-- TOP ITEMS -->
-                <div id="top_div">
-                    <!-- HEADER OVERLAY -->
-                    <div class = "label-header-overlay"> </div>
-                    <!-- HEADER IMAGE -->
-                    <div class = "label-header"> </div>
-                
-                    <!-- HEADER CONTENT START -->
-                    <div id="header">
-                        <!-- LOGIN ICON HOLDER -->
-                        <div class = "icon-holder"> </div>
-                        <!-- DLSU LOGO -->
-                        <img id = "dlsu-logo" src="<%=context%>/resources/logo.png">
-                        <!-- ICON HOLDER OVERLAY -->
-                        <div class = "icon-holder-overlay"> </div>
-                    </div>
-                    
-                    <!-- WELCOME MESSAGE -->
-                    <p class="nav label"> Welcome, <%=user.name%>! </p>
-                    <!-- SUBMISSIONS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>"> 
-	                    <button id="submissions" class="nav-item nav-button"> 
-	                            Submissions
-                    		<div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- SUBMISSIONS BUTTON LINK END -->
-                    <!-- STATISTICS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>/aps/statistics"> 
-	                   	<button class = "nav-item nav-button"> 
-	                           Statistics
-	                       <div class = "triangle"> </div>
-	                   	</button>
-                    </a>
-                    <!-- STATISTICS BUTTON LINK END -->
-                    <!-- ORGANIZATIONS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>/aps/accounts"> 
-	                    <button id="orgs" class="nav-item nav-button selected"> 
-	                            Manage Accounts 
-	                        <div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- ORGANIZATIONS BUTTON LINK END -->
-                </div>
-                <!-- BOTTOM ITEMS START -->
-                <div id="bottom_div">
-                    <!-- ACCOUNT SETTINGS BUTTON -->
-                    <a class = "nav-link" href="<%=context%>/aps/profile">
-	                    <button id="change_pw" class="nav-item nav-button"> 
-	                            Account Settings
-	                        <div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- SIGN OUT BUTTON -->
-                    <a class = "nav-link">
-	                    <button id="signout" class="nav-item nav-button">   
-	                            Logout	                       
-	                    </button>
-                    </a>
-                </div>
-                <!-- BOTTOM ITEMS END -->
-            </nav>
-            <!-- SIDE BAR NAVIGATION END -->
+            <% var menu = 3 %>
+            <% include sections/navigation %>
             
-           <!-- MAIN CONTENT START -->
-            <div id="main_content">
-                <!-- MESSAGE TOAST START -->
-                <div id = "add-notif" class = "toast"> 
-                    <!--  -->
-                    <b id = "username-toast"> Username </b> with password <b id = "password-toast"> password </b> has been added.
-                    <button id = "undo-toast">
-                        UNDO
-                    </button>
-                    <button id = "ok-toast"> 
-                        OKAY
-                    </button>
-                </div>
-                <!-- MESSAGE TOAST END -->
+            <!-- MAIN CONTENT START -->
+            <div id="main_content">                 
                 <!-- MAIN HEADER START -->
                 <div id="main_header">
                     <!-- MAIN HEADER TITLE -->
@@ -279,7 +121,7 @@
                                 <!-- HEADER: TIME STAMP, ORG NAME, TITLE, DATE, STATUS -->
                                 <tr class = "header"> 
                                 	<th class = "header user"> User </th>
-                                    <th class = "header delete no-sort"> Organizations </th>
+                                    <th class = "header delete no-sort"> Organization </th>
                                     <th class = "header delete no-sort"> Action </th>
                                 </tr>
                             </thead>

@@ -1,0 +1,107 @@
+<!-- MODAL VIEW START -->
+<div id = "modal-view" tabindex="1">
+    <!-- MODAL BACKGROUND -->
+    <div id = "modal-bg"> </div>
+    <!-- MODAL CONTENT START -->
+    <div id = "modal-container-outer">
+        <button id = "modal-close"> </button>
+
+        <div id = "modal-container">
+            <div id = "modal-content">
+                <div class = "half">
+                    <label class = "modal-label modal-division">
+                        <button data-form = "details" class = "selected"> DETAILS </button>
+                        <button data-form = "submission"> SUBMISSION </button>
+                    </label> 
+                    <section id = "details">
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Title </label> 
+                            <input id = "act-name" class="field" type="text"> 
+                        </div>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Organization </label>	
+                            <input id = "org-name" class="field" type="text">
+                        </div>
+
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Date/s: </label> 
+                            <textarea id = "actDate" class="field" > </textarea> 
+                        </div>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Time: </label>
+                            <input id = "time" class="field" type="text"> 
+                        </div>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Venue: </label> 
+                            <input id = "venue" class="field" type="text"> 
+                        </div>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Nature: </label> 
+                            <input id = "nature" class="field" type="text"> 
+                        </div> 
+
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Type: </label> 
+                            <input id = "type" class="field" type="text"> 
+                        </div>    
+                    </section>
+                    <section id = "submission">
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Submission Type: </label>
+                            <input id = "submissionType" class="field" type="text"> 
+                        </div> 
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Submitted By: </label>
+                            <input id = "submittedBy" class="field" type="text"> 
+                        </div>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Date Submitted: </label> 
+                            <input id = "submitDate" class="field" type="text"> 
+                        </div>  
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Type of SAS Submission: </label> 
+                            <input id = "typeSAS" class="field" type="text"> 
+                        </div>  
+                    </section>
+                </div>
+
+                <section id = "checker">
+                    <label class = "modal-label modal-division"> CHECKER </label> <br>
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Checked by: </label> 
+                        <input id = "checkedBy" class="field" type="text"> 
+                    </div> 
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Date Checked: </label>
+                        <button class = "btn time-btn"> <i class = "fa fa-clock-o"> </i> Now </button>
+                        <input id = "dateChecked" class="field" type="datetime-local"> 
+                    </div> 
+                    <div class = "modal-row">
+                        <label class = "modal-label"> Remarks: </label>
+                        <textarea id = "remarks" class="field" type="text"> </textarea>
+                    </div>
+                     <div class = "modal-row">
+                        <label class = "modal-label"> Status: </label>
+                         <select class = "field" id = "status"> 
+                            <option value selected disabled > Choose </option>
+                            <option class = "early_approved" value="EARLY APPROVED"> EARLY APPROVED </option>
+                            <option class = "late_approved"value="LATE APPROVED"> LATE APPROVED </option>
+                            <option class = "pending"value="PENDING"> PENDING </option>
+                            <option class = "denied"value="DENIED"> DENIED </option>
+                         </select>
+                    </div>
+                    <button class = "btn check-resubmit-edit" id = "check">
+                        <i class = "fa fa-check"> </i>
+                        CHECK
+                    </button>
+                    <button class = "btn check-resubmit-edit" id = "recheck">
+                        <i class = "fa fa-check-circle"> </i>
+                        RECHECK
+                    </button>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL CONTENT END -->
+</div>
+<!-- MODAL VIEW END -->

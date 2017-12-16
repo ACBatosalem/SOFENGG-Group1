@@ -36,181 +36,12 @@
         <div id="main-bg"></div>
         <div id="main_overlay"></div>
         
-        <!-- MODAL VIEW START -->
-        <div id = "modal-view" tabindex="1">
-            <!-- MODAL BACKGROUND -->
-            <div id = "modal-bg"> </div>
-            <!-- MODAL CONTENT START -->
-            <div id = "modal-container-outer">
-                <button id = "modal-close"> </button>
-                
-                <div id = "modal-container">
-                    <div id = "modal-content">
-                        <div class = "half">
-                            <label class = "modal-label modal-division">
-                                <button data-form = "details" class = "selected"> DETAILS </button>
-                                <button data-form = "submission"> SUBMISSION </button>
-                            </label> 
-                            <section id = "details">
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Title </label> 
-                                    <input id = "act-name" class="field" type="text"> 
-                                </div>
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Organization </label>	
-                                    <input id = "org-name" class="field" type="text">
-                                </div>
-                                
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Date/s: </label> 
-                                    <textarea id = "actDate" class="field" > </textarea> 
-                                </div>
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Time: </label>
-                                    <input id = "time" class="field" type="text"> 
-                                </div>
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Venue: </label> 
-                                    <input id = "venue" class="field" type="text"> 
-                                </div>
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Nature: </label> 
-                                    <input id = "nature" class="field" type="text"> 
-                                </div> 
-
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Type: </label> 
-                                    <input id = "type" class="field" type="text"> 
-                                </div>    
-                            </section>
-                            <section id = "submission">
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Submission Type: </label>
-                                    <input id = "submissionType" class="field" type="text"> 
-                                </div> 
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Submitted By: </label>
-                                    <input id = "submittedBy" class="field" type="text"> 
-                                </div>
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Date Submitted: </label> 
-                                    <input id = "submitDate" class="field" type="text"> 
-                                </div>  
-                                <div class = "modal-row">
-                                    <label class = "modal-label"> Type of SAS Submission: </label> 
-                                    <input id = "typeSAS" class="field" type="text"> 
-                                </div>  
-                            </section>
-                        </div>
-                            
-                        <section id = "checker">
-                            <label class = "modal-label modal-division"> CHECKER </label> <br>
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Checked by: </label> 
-                                <input id = "checkedBy" class="field" type="text"> 
-                            </div> 
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Date Checked: </label>
-                                <input id = "dateChecked" class="field" type="text"> 
-                            </div> 
-                            <div class = "modal-row">
-                                <label class = "modal-label"> Remarks: </label>
-                                <textarea id = "remarks" class="field" type="text"> </textarea>
-                            </div>
-                             <div class = "modal-row">
-                                <label class = "modal-label"> Status: </label>
-                                 <select class = "field" id = "status"> 
-                                    <option value selected disabled > Choose </option>
-                                    <option class = "early_approved" value="EARLY APPROVED"> EARLY APPROVED </option>
-                                    <option class = "late_approved"value="LATE APPROVED"> LATE APPROVED </option>
-                                    <option class = "pending"value="PENDING"> PENDING </option>
-                                    <option class = "denied"value="DENIED"> DENIED </option>
-                                 </select>
-                            </div>
-                            <button class = "btn check-resubmit-edit" id = "check">
-                                <i class = "fa fa-check"> </i>
-                                CHECK
-                            </button>
-                            <button class = "btn check-resubmit-edit" id = "recheck">
-                                <i class = "fa fa-check-circle"> </i>
-                                RECHECK
-                            </button>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <!-- MODAL CONTENT END -->
-        </div>
-        <!-- MODAL VIEW END -->
+        <% include sections/modal_submission %>
         
         <!-- MAIN VIEW START -->
-        <div id="main">
-            <!-- SIDE BAR NAVIGATION START -->
-            <nav id="nav">
-                <!-- TOP ITEMS -->
-                <div id="top_div">
-                    <!-- HEADER OVERLAY -->
-                    <div class = "label-header-overlay"> </div>
-                    <!-- HEADER IMAGE -->
-                    <div class = "label-header"> </div>
-                
-                    <!-- HEADER CONTENT START -->
-                    <div id="header">
-                        <!-- LOGIN ICON HOLDER -->
-                        <div class = "icon-holder"> </div>
-                        <!-- DLSU LOGO -->
-                        <img id = "dlsu-logo" src="<%=context%>/resources/logo.png">
-                        <!-- ICON HOLDER OVERLAY -->
-                        <div class = "icon-holder-overlay"> </div>
-                    </div>
-                    
-                    <!-- WELCOME MESSAGE -->
-                    <p class="nav label"> Welcome <%=user.name%> </p>
-                    <!-- SUBMISSIONS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>"> 
-	                    <button id="submissions" class="nav-item nav-button selected"> 
-	                            Submissions
-                    		<div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- SUBMISSIONS BUTTON LINK END -->
-                    <!-- STATISTICS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>/aps/statistics"> 
-	                   	<button class = "nav-item nav-button"> 
-	                           Statistics
-	                       <div class = "triangle"> </div>
-	                   	</button>
-                    </a>
-                    <!-- STATISTICS BUTTON LINK END -->
-                    <!-- ORGANIZATIONS BUTTON LINK START -->
-                    <a class = "nav-link" href="<%=context%>/aps/accounts"> 
-	                    <button id="orgs" class="nav-item nav-button"> 
-	                            Manage Accounts
-	                        <div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- ORGANIZATIONS BUTTON LINK END -->
-                </div>
-                <!-- BOTTOM ITEMS START -->
-                <div id="bottom_div">
-                    <!-- ACCOUNT SETTINGS BUTTON -->
-                    <a class = "nav-link" href="<%=context%>/aps/profile">
-	                    <button id="change_pw" class="nav-item nav-button"> 
-	                            Account Settings
-	                        <div class = "triangle"> </div>
-	                    </button>
-                    </a>
-                    <!-- SIGN OUT BUTTON -->
-                    <a class = "nav-link">
-	                    <button id="signout" class="nav-item nav-button">   
-	                            Logout	                       
-	                    </button>
-                    </a>
-                </div>
-                <!-- BOTTOM ITEMS END -->
-            </nav>
-            <!-- SIDE BAR NAVIGATION END -->
-            
+        <div id="main">   
+            <% var menu = 1; %>
+            <% include sections/navigation %>
             <!-- MAIN CONTENT START -->
             <div id="main_content">
                 <!-- MAIN HEADER START -->
@@ -218,33 +49,34 @@
                     <!-- MAIN HEADER TITLE -->
                     <h1 class="body_label head"> Submissions </h1>
                 </div>
+                
                 <!-- FILTER OPTIONS START -->
                 <div class = "filter-options">
-                    <!-- FILTER TTILE -->
-                    <label class = "label filter main"> FILTER </label>
                     <!-- ACADEMIC CHECKBOX -->
-                    <label class = "container">
-                        <input id = "acad-box" name="academic" type="checkbox" checked>
-                        <span class = "checkmark"> </span>    
-                        <label class = "label filter" for="academic"> ACADEMIC </label>
-                    </label>
+                    <div class = "flex-check"> 
+                        <label class = "label filter main"> ACADEMIC </label>
+                        <div id = "academic" class = "checkbox"> 
+                            <i class = "fa fa-check"> </i>
+                        </div>
+                    </div>
                     <!-- NON ACADEMIC CHECKBOX -->
-                    <label class = "container">
-                        <input id = "non-acad-box" name="nonacademic" type="checkbox" checked>
-                        <span class = "checkmark"> </span>    
-                        <label class = "label filter" for="nonacademic"> NON-ACADEMIC </label>
-                    </label>
+                    <div class = "flex-check">
+                        <label class = "label filter main"> NON-ACADEMIC </label>
+                        <div id = "nonacademic" class = "checkbox"> 
+                            <i class = "fa fa-check"> </i>
+                        </div>
+                    </div>
                     <!-- ORGANIZATION CHOICEBOX -->
                     <div class = "filter-container">
                         <select id = "org-pick" class = "filter_cb">
                             <option value selected data-orgid="0">
                                 All
                             </option>
-                            <% for (key in orgs) { %> 
+                            <% for (key in organizations) { %> 
 	                        	<!-- ORGS START -->
-                                <% if (orgs[key].privilege.toUpperCase() != "ADMIN") { %>
-                                    <option value= "<%=orgs[key].username%>" data-orgid= "<%=key%>">
-                                        <%= orgs[key].name %>
+                                <% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
+                                    <option value= "<%=organizations[key].username%>" data-orgid= "<%=key%>">
+                                        <%= organizations[key].name %>
                                     </option>
                                 <% } %>
                                 <!-- ORGS END -->
@@ -272,7 +104,7 @@
                             <!-- DATA: SUBMISSIONS -->    
                             <tbody id="tbody">
                             <% for (key in submissions) { %> 
-                                <tr data-docuID = "<%=key%>" >
+                                <tr data-docuID = "<%=key%>" class = "clickable" >
 	                                <td> <%= submissions[key].timestamp %> </td>
                                     <td> <%= submissions[key].org.name%> </td>
 	                                <td> <%= submissions[key].title %>  </td>
