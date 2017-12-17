@@ -117,6 +117,7 @@ $(document).ready(function() {
                 if(data.org_id == "org_1") {
                     $('#resubmit').hide();
                     $('#editSub').hide();
+                    $('#cancelAct').hide();
                     if(data.sub.status == '' || data.sub.status == null || data.sub.status == '-') {
                         check = true;
                         recheck = false;
