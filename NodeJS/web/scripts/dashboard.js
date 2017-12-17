@@ -171,10 +171,13 @@ $(document).ready(function() {
                     $("#cancelAct").prop('disabled', false);
                     if(data.sub.status == 'EARLY APPROVED' || data.sub.status == 'LATE APPROVED') {
                         click = true;
-                        $('#editSub').html('In Case of Change');
+                        $('#editSub').html('IN CASE OF CHANGE');
                         $('.eSub').prop('disabled', true);
-                        $('#resubmit').show();
+                        $('#resubmit').hide();
                         $('#editSub').show();
+                        
+                    } else if(data.sub.status == 'PENDED') {
+                        $('#resubmit').show();
                         $("#resubmit").prop('disabled', false);
                     } else {
                         $('#resubmit').hide();
@@ -439,7 +442,7 @@ function newSubmission(typeSub, typeSAS) {
             if(data.msg)
                 message = "Successfully sent a submission! Your submission will be checked within 3 - 5 working days.";
             else message = "Submission not added. Please supply missing details";
-            $('#editSub').html('In Case of Change');
+            $('#editSub').html('IN CASE OF CHANGE');
             $('#modal-action').remove();
             $('.eSub').prop('disabled', true);
 
