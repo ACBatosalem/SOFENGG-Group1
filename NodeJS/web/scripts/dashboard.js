@@ -1,5 +1,10 @@
 var check;
 var recheck;
+var click;
+var checkerName;
+var datetimeNow;
+var subKey;
+var clickedRow;
 var table;
 $(document).ready(function() {
 
@@ -40,25 +45,7 @@ $(document).ready(function() {
     });
     $("#org-pick").val($("#org-pick").attr('data-selectedOrg'));
     
-    $('button#resubmit').on('click', function(event){
-        event.stopPropagation();
-        
-        var docuID = $(this).attr('data-docuID');      
-        $('body').css('overflow', 'none');
-        modalMessage("Are you sure you want to resubmit the document for " + $('#act-name').val() + "?",
-                     "No",
-                     function(){
-                        $('body').css('overflow', 'auto');
-                        $('#modal-action').remove();
-                    },
-                     "Yes",
-                     function(){
-            
-                    },
-                     false);
-                     
-
-    });
+    
     
     $('#academic').click(filterCheckbox);
     $('#nonacademic').click(filterCheckbox);
@@ -97,7 +84,9 @@ $(document).ready(function() {
     
     $('#table_submissions tbody').on('click', '.clickable', function() {
         var docuID = $(this).attr('data-docuID');
-        console.log(docuID)
+        clickedRow = $(this);
+        subKey = docuID;
+        console.log(docuID);
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
         $('#modal-content select').val('');
@@ -108,6 +97,9 @@ $(document).ready(function() {
 			data        : {docuID:docuID},		
 			dataType    : 'json',		
 	 		success     : function(data) {
+                checkerName = data.checkerName;
+                datetimeNow = data.now;
+                $("#term").val(data.sub.term);
 	 			$("#act-name").val(data.sub.title);
 	 			$("#org-name").val(data.sub.org.name);
 	 			
@@ -124,6 +116,7 @@ $(document).ready(function() {
                 
                 if(data.org_id == "org_1") {
                     $('#resubmit').hide();
+                    $('#editSub').hide();
                     if(data.sub.status == '' || data.sub.status == null || data.sub.status == '-') {
                         check = true;
                         recheck = false;
@@ -141,10 +134,19 @@ $(document).ready(function() {
                 else {
                     $('#check').hide();
                     $('#recheck').hide();
+                    $('#editSub').hide();
+                    
+                    $("#cancelAct").prop('disabled', false);
                     if(data.sub.status == 'PENDING') {
+                        click = true;
+                        $('#editSub').html('EDIT');
+                        $('.eSub').prop('disabled', true);
                         $('#resubmit').show();
+                        $('#editSub').show();
+                        $("#resubmit").prop('disabled', false);
                     } else {
                         $('#resubmit').hide();
+
                     }
                 }
                 
@@ -183,6 +185,8 @@ $(document).ready(function() {
     
         $('#check').click(function(){
             if(check) {
+                $("#checkedBy").val(checkerName);
+                $("#dateChecked").val(datetimeNow);
                // $('#checker input').prop('disabled', false);
                 $('#checker textarea').prop('disabled', false);
                 $('#checker select').prop('disabled', false);
@@ -202,10 +206,14 @@ $(document).ready(function() {
                     $.ajax({ 		
                         type        : 'POST', 		
                         url         : 'checkSubmission',		
-                        data        : {remarks:remarks, status:status},		
+                        data        : {subKey:subKey, remarks:remarks, status:status},		
                         dataType    : 'json',		
                         success     : function(data) {
-                            if (msg == 'true') {
+                            if (data.msg == 'true') {
+                                $(clickedRow).find("td:eq(3)").removeClass();
+                                $(clickedRow).find("td:eq(3)").text(status);
+                                setClass($(clickedRow).find("td:eq(3)"), status);
+                                
                                 $('#checker input').prop('disabled', true);
                                 $('#checker textarea').prop('disabled', true);
                                 $('#checker select').prop('disabled', true);
@@ -225,6 +233,8 @@ $(document).ready(function() {
         
         $('#recheck').click(function(){
             if(recheck) {
+                $("#checkedBy").val(checkerName);
+                $("#dateChecked").val(datetimeNow);
                 //$('#checker input').prop('disabled', false);
                 $('#checker textarea').prop('disabled', false);
                 $('#checker select').prop('disabled', false);
@@ -244,10 +254,14 @@ $(document).ready(function() {
                     $.ajax({ 		
                         type        : 'POST', 		
                         url         : 'checkSubmission',		
-                        data        : {remarks:remarks, status:status},		
+                        data        : {subKey:subKey, remarks:remarks, status:status},		
                         dataType    : 'json',		
                         success     : function(data) {
-                            if (msg == 'true') {
+                            if (data.msg == 'true') {
+                                $(clickedRow).find("td:eq(3)").removeClass();
+                                $(clickedRow).find("td:eq(3)").text(status);
+                                setClass($(clickedRow).find("td:eq(3)"), status);
+
                                 $('#checker input').prop('disabled', true);
                                 $('#checker textarea').prop('disabled', true);
                                 $('#checker select').prop('disabled', true);
@@ -295,7 +309,121 @@ $(document).ready(function() {
 		
         $('body').css('overflow','auto');
     });
+
+    
+
+    $('button#editSub').click(function(){
+        
+        
+        var docuID = $(this).attr('data-docuID');      
+        if(click) {
+           // $('#checker input').prop('disabled', false);
+           $('.eSub').prop('disabled', false);
+            $(this).html('<i class = "fa fa-save"> </i> SUBMIT');
+            $("#resubmit").prop('disabled', true);
+            $("#cancelAct").prop('disabled', true);
+        } else {
+             modalMessage('Are you sure you want to change the document details?',
+            "No",
+            function(){
+                $('#modal-action').remove();
+            },
+            "Yes",
+            function(){
+                newSubmission("Special Approval Slip", "In Case of Change");
+                
+            }, true);
+        }
+        click = !click;
+                     
+
+    });
+
+    $('button#resubmit').click(function(){
+        
+            
+        $('body').css('overflow', 'none');
+        modalMessage("Are you sure you want to resubmit the document for " + $('#act-name').val() + "?",
+                     "No",
+                     function(){
+                        $('body').css('overflow', 'auto');
+                        $('#modal-action').remove();
+                    },
+                     "Yes",
+                     function(){
+                        newSubmission("Pended", "N/A");
+                    },
+                     false);
+                     
+
+    });
+
+    $('button#cancelAct').click(function(){
+        
+            
+        $('body').css('overflow', 'none');
+        modalMessage("Are you sure you want to cancel " + $('#act-name').val() + "?",
+                     "No",
+                     function(){
+                        $('body').css('overflow', 'auto');
+                        $('#modal-action').remove();
+                    },
+                     "Yes",
+                     function(){
+                        newSubmission("Special Approval Slip", "Cancellation of Activity");
+                    },
+                     false);
+                     
+
+    });
 });
+
+function newSubmission(typeSub, typeSAS) {
+    var term = $('#details #term').val();
+    var title = $('#details #act-name').val();
+    var orgName = $('#details #org-name').val();
+    var actDate = $('#details #actDate').val();
+    var time = $('#details #time').val();
+    var venue = $('#details #venue').val();
+    var nature = $('#details #nature').val();
+    var type = $('#details #type').val();
+
+    $.ajax({ 		
+        type        : 'POST', 		
+        url         : 'resubmitSubmission',		
+        data        : {term:term, act_title:title, act_date:actDate, act_time:time, act_nature:nature,
+                       act_type:type, act_venue:venue, type_sub:typeSub, 
+                       type_sas:typeSAS, org:orgName},
+        dataType    : 'json',		
+         success     : function(data) {
+            console.log(data.msg);
+            var message = "";
+
+            if(data.msg)
+                message = "Successfully sent a submission! Your submission will be checked within 3 - 5 working days.";
+            else message = "Submission not added. Please supply missing details";
+            $('#editSub').html('EDIT');
+            $('#modal-action').remove();
+            $('.eSub').prop('disabled', true);
+
+            $('body').css('overflow', 'hidden');
+            modalMessage(message,
+                        null,
+                        null,
+                        "Okay",
+                        function(){
+                            $('#modal-action').remove();  
+                            $('body').css('overflow', 'auto');
+                        },
+                        false);
+        },
+        error   	: function(xhr,status,error){		
+                console.log(xhr.responseText);
+                console.log(error);   		
+                alert(status);		
+        }
+    });
+}
 
 function addRow(key, sub) {
     var classs;
@@ -347,4 +475,18 @@ function filterSubmissions(filter, orgID) {
             alert(error);
         }
     });
+}
+
+function setClass(td, status) {
+    switch (status) {
+        case "EARLY APPROVED": $(td).addClass('early_approved');
+            break;
+        case "LATE APPROVED": $(td).addClass('late_approved');
+            break;
+        case "PENDING": $(td).addClass('pending');
+            break;
+        case "DENIED": $(td).addClass('denied');
+            break;
+        default:
+    }
 }

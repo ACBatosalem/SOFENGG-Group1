@@ -24,7 +24,7 @@ $(document).ready(function() {
     
     firebase.initializeApp(config);
     var database = firebase.database();
-    
+    s
     database.ref('notifications').on('child_added', function(snapshot) {
         if(snapshot.val() != undefined || snapshot.val() != null) {
             if(false == snapshot.val().email_sent) {
