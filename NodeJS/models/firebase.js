@@ -465,7 +465,7 @@ function addSubmission(subKey, subDetails) {
 exports.service.checkSubmission = checkSubmission;
 
 function checkSubmission(subKey, checkDetails) {
-	user_org = submission[subKey].user_id_org;
+	user_org = submissions[subKey].user_id_org;
     emailUsers = [users[user_org].email];
     for (key in users) {
         if(getUserWithOrganization(key).org.privilege == 'admin')
@@ -477,8 +477,8 @@ function checkSubmission(subKey, checkDetails) {
     addNotification({
         email_list: emailUsers.join(','),
         email_sent: false,
-        message: users[user_id_checker].name +  " has checked the submission. <br>" +
-            "Activity Title: " + submissions[subkey].title + '<br>' +
+        message: users[checkDetails.checker].name +  " has checked the submission. <br>" +
+            "Activity Title: " + submissions[subKey].title + '<br>' +
             "Checker: " + getUser(checkDetails.checker).name + ' at (' + cur + ')' + 
             "Remarks: " + checkDetails.remarks + '<br>' +
             "Status: " + checkDetails.status,
