@@ -191,7 +191,7 @@ function getCompleteSubmissionsByOrg (orgid) {
     var completeSubmissions = {};
     for (key in submissions) {
         var sub = getCompleteSubmission(key);
-        if(sub.org_id == orgid)
+        if(sub.org_id == orgid)                                             //version 3.6.7 fix
             completeSubmissions[key] = sub;
     }
 

@@ -137,7 +137,7 @@ $(document).ready(function() {
                     $('#editSub').hide();
                     
                     $("#cancelAct").prop('disabled', false);
-                    if(data.sub.status == 'PENDING') {
+                    if(data.sub.status == 'PENDED') {
                         click = true;
                         $('#editSub').html('EDIT');
                         $('.eSub').prop('disabled', true);
@@ -433,7 +433,7 @@ function addRow(key, sub) {
         break;
     case "LATE APPROVED" : classs = "late_approved";
         break;
-    case "PENDING" : classs = "pending";
+    case "PENDED" : classs = "pending";
         break;
     case "DENIED" : classs = "denied";
         break;
