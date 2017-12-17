@@ -2,6 +2,7 @@
 <nav id="nav">
     <!-- TOP ITEMS -->
     <div id="top_div">
+        <% var orgp = (user.org.privilege == 'admin')?"aps":"org"; %>
         <!-- HEADER OVERLAY -->
         <div class = "label-header-overlay"> </div>
         <!-- HEADER IMAGE -->
@@ -32,7 +33,7 @@
         </a>
         <!-- SUBMISSIONS BUTTON LINK END -->
         <!-- STATISTICS BUTTON LINK START -->
-        <a class = "nav-link" href="<%=context%>/aps/statistics"> 
+        <a class = "nav-link" href="<%- context+'/'+orgp %>/statistics"> 
             <button class = "nav-item nav-button <% if (menu == 2) { %> selected <% } %>"> 
                     Statistics
                 <div class = "triangle"> </div>
@@ -42,7 +43,7 @@
 
         <% if (user.org.privilege == 'admin') { %>
             <!-- ORGANIZATIONS BUTTON LINK START -->
-            <a class = "nav-link" href="<%=context%>/aps/accounts"> 
+            <a class = "nav-link" href="<%- context+'/'+orgp%>/accounts"> 
                 <button id="orgs" class="nav-item nav-button <% if (menu == 3) { %> selected <% } %>"> 
                         Manage Accounts 
                     <div class = "triangle"> </div>
@@ -54,7 +55,7 @@
     <!-- BOTTOM ITEMS START -->
     <div id="bottom_div">
         <!-- ACCOUNT SETTINGS BUTTON -->
-        <a class = "nav-link" href="<%=context%>/aps/profile">
+        <a class = "nav-link" href="<%- context+'/'+orgp%>/profile">
             <button id="change_pw" class="nav-item nav-button <% if (menu == 4) { %> selected <% } %>"> 
                     Account Settings
                 <div class = "triangle"> </div>

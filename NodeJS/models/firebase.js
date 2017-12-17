@@ -62,6 +62,7 @@ function initialize () {
                     'wait': true
                 });
                 
+                
                 database.ref('notifications').child(snapshot.key).child('email_sent').set(true);
             } 
         }
@@ -91,6 +92,7 @@ function initialize () {
             users = snapshot.val();
             usersTS = utils.toUTC(new Date());
             usersNum = snapshot.numChildren();
+            
         } else {
             console.log("[" + utils.toUTC(new Date()) + "] Users Access Error. " +
             usersTS==undefined||usersTS==null?"No data will be loaded.":"Accessing data last " + usersTS);
@@ -120,6 +122,7 @@ function getUserWithOrganization (userid) {
     }
     return user;
 }
+
 
 exports.service.getAllUsersWithOrganizations = getAllUsersWithOrganizations;
 
@@ -318,7 +321,7 @@ function countAcademic (orgID) {
     var orgID = orgID || null, count = 0;
     
     for (key in submissions) {
-        if(orgID == null || orgID == getUserWithOrganization(submissions[key].user_id_org).org_id) {
+        if(orgID == null || orgID == submissions[key].org_id) {
             if(submissions[key].act_nature.toUpperCase() == "ACADEMIC") {
                 count++;
             }
@@ -327,13 +330,14 @@ function countAcademic (orgID) {
 
     return count;
 }
+
 exports.service.countNonacademic = countNonacademic
 
 function countNonacademic (orgID) {
     var orgID = orgID || null, count = 0;
     
     for (key in submissions) {
-        if(orgID == null || orgID == getUserWithOrganization(submissions[key].user_id_org).org_id) {
+        if(orgID == null || orgID == submissions[key].org_id) {
             if(submissions[key].act_nature.toUpperCase() != "ACADEMIC") {
                 count++;
             }

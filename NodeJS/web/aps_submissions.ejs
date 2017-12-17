@@ -9,14 +9,13 @@
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="<%=context%>/libraries/datatables/datatables.js" type="application/javascript"> </script>
         <link type="text/css" href="<%=context%>/libraries/datatables/datatables.css" rel="stylesheet"/>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
         <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-        
         
         <!-- SCRIPTS -->
         <script> 
+            var user =  <%- JSON.stringify(user) %>;
+            user.password = null;
             var context = "<%=context%>"; 
         </script>
         <script src="<%=context%>/scripts/dashboard.js" type="application/javascript"> </script>

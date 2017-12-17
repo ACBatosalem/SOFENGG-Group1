@@ -89,6 +89,7 @@ function statisticsOrg (request, response) {
         response.redirect(context+'/home');
     } else {
         var user = service.getUserWithOrganization(request.session.uid);
+        console.log(user.org_id);
         response.render(path.join(__dirname, "./../web/orgs_statistics.ejs"), {
             user:user,
             context:context,

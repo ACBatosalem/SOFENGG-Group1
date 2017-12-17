@@ -6,6 +6,7 @@ var datetimeNow;
 var subKey;
 var clickedRow;
 var table;
+
 $(document).ready(function() {
 
     $("#org-pick").val('YAYCLUB');
@@ -45,8 +46,14 @@ $(document).ready(function() {
     });
     $("#org-pick").val($("#org-pick").attr('data-selectedOrg'));
     
-    
-    
+    // database.ref('submission').equalTo(user.user_id).orderByChild('timestamp').limitToLast(1).on('child_added', function(snapshot){
+    //    addRow(snapshot.val());
+    // });
+
+    // database.ref('submissions').orderByChild('org_id').equalTo(user.org_id).on('value', function(snapshot){
+    //     console.log(snapshot.val());
+    // });
+       
     $('#academic').click(filterCheckbox);
     $('#nonacademic').click(filterCheckbox);
     $("#org-pick").change(filterCheckbox);
@@ -75,7 +82,6 @@ $(document).ready(function() {
             }
         }
         
-        console.log(filter);
         filterSubmissions(filter, orgID);
     }
     
@@ -116,7 +122,7 @@ $(document).ready(function() {
         if($('modal-action').is(':visible')) {
             return;
         }
-        console.log(docuID);
+
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
         $('#modal-content select').val('');
@@ -433,7 +439,6 @@ function newSubmission(typeSub, typeSAS) {
                        type_sas:typeSAS, org:orgName},
         dataType    : 'json',		
          success     : function(data) {
-            console.log(data.msg);
             var message = "";
 
             if(data.msg)
