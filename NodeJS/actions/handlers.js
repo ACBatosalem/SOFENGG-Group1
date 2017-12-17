@@ -371,6 +371,7 @@ function submitSubmission(request, response) {
             var subKey = 'sub_'+numSub;
             var date = new Date();
             var d = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().split('T');
+
             var subDetails = { 
                 act_date: act_date,
                 act_nature: act_nature,
