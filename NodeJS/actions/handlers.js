@@ -37,6 +37,7 @@ execute[context+"/org/changePassword"] = changePassword;
 
 execute[context+"/aps"] = home_aps;
 execute[context+"/aps/filterSubmissions"] = filterSubmissions;
+execute[context+"/deleteSubmission"] = deleteSubmission;
 execute[context+"/aps/profile"] = profileAPS;
 execute[context+"/aps/profile/"] = profileAPS;
 execute[context+"/aps/statistics"] = statisticsAPS;
@@ -555,6 +556,15 @@ function checkSubmission(request, response) {
             status: request.body.status
         };
         service.checkSubmission(request.body.subKey, checkDetails);
+        response.send({msg: 'true'});
+    } else {
+        response.send({msg: 'false'});
+    }
+}
+
+function deleteSubmission(request, response) {
+    if (request.session.uid != null) {
+        service.deleteSubmission(request.body.subKey);
         response.send({msg: 'true'});
     } else {
         response.send({msg: 'false'});
