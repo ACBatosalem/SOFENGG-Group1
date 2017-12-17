@@ -533,20 +533,15 @@ function forgotPassword(request, response){
     var user = service.findUserByEmail(request.body.email);
 
     if(user != false) {
-        var mailOptions = {
-            from: 'jonal_ticug@dlsu.edu.ph',
-            to: request.body.email,
-            subject: '[APS Dashboard] Forgot password',
-            text: 'Your password is: ' + user.password
-        };
-        
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                response.send("Email not sent");
-            } else {
-                response.send('Email sent!');
-            }
+
+        emailService.sendMail({
+            from : "dlsucso.apsdashboard@gmail.com",
+            to : request.body.email,
+            subject: "[APS Dashboard] Forgot Password",
+            text: "Hello and thank you for using the APS Dashboard. \n" + 'Your password is: ' + user.password
         });
+        response.send('Email sent!');
+        
     } else {
         response.send("Invalid Email");
     }
