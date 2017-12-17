@@ -22,6 +22,13 @@ $(document).ready(function() {
         "autoWidth": false,
         "pageLength": 10,
         "order": [[ 0, "desc" ]],
+        "columnDefs":[{
+            "targets": -1,
+            "data": null,
+            "defaultContent": '<button class = "deletesub" data-docuID = "<%=key%>">' + 
+                '<i class = "fa fa-trash"> </i>' +
+                '</button>'
+        }],
         "language": {
             "info": "Showing page _PAGE_ of _PAGES_",
             "infoEmpty": "",
@@ -81,11 +88,41 @@ $(document).ready(function() {
     
     $('.half input').prop('disabled', true);
     $('.half textarea').prop('disabled', true);
-    
+    $('#table_submissions tbody').on('click', 'button.deletesub', function(){
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        var docuID = $(this).attr('data-docuID');
+        modalMessage('Are you sure you want to delete this submission?',
+        "No",
+        function(){
+            $('#modal-action').remove();
+        },
+        "Yes",
+        function(){
+            $.ajax({ 		
+                type        : 'POST', 		
+                url         : 'deleteSubmission',		
+                data        : {subKey:docuID},		
+                dataType    : 'json',		
+                success     : function(data) {
+                    if (data.msg == 'true') {
+                        $('tr[data-docuID='+ docuID + ']').remove();
+                        $('#modal-action').remove();
+                    } else {
+                        console.log("Failed to delete the submission!");
+                    }
+                }
+            });
+        }, true);
+    });
+
     $('#table_submissions tbody').on('click', '.clickable', function() {
         var docuID = $(this).attr('data-docuID');
         clickedRow = $(this);
         subKey = docuID;
+        if($('modal-action').is(':visible')) {
+            return;
+        }
         console.log(docuID);
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
@@ -174,14 +211,18 @@ $(document).ready(function() {
                     $("#remarks").val(data.sub.remarks);
                 else
                     $("#remarks").val('');
+                    
 			},
 			error   	: function(xhr,status,error){		
 				console.log(xhr);   		
 				alert(status);		
 			}
     	});
-    	
-    	$('#modal-view').fadeIn();
+    	if($('#modal-action').is(':visible')) {
+            return;
+        }
+        $('#modal-view').fadeIn();
+        
         $('body').css('overflow','hidden');
     });
     
@@ -281,34 +322,7 @@ $(document).ready(function() {
             recheck = !recheck;
         });
 
-        $(document).on('click', '.deletesub', function(){
-
-            var docuID = $(this).attr('data-docuID');
-
-            modalMessage('Are you sure you want to delete this submission?',
-            "No",
-            function(){
-                $('#modal-action').remove();
-            },
-            "Yes",
-            function(){
-                $.ajax({ 		
-                    type        : 'POST', 		
-                    url         : 'deleteSubmission',		
-                    data        : {subKey:docuID},		
-                    dataType    : 'json',		
-                    success     : function(data) {
-                        if (data.msg == 'true') {
-                            //delete the table row and redraw
-                            $('#modal-action').remove();
-                        } else {
-                            console.log("Failed to delete the submission!");
-                        }
-                    }
-                });
-            }, true);
-        });
-    
+           
     $(document).keyup(function(e){ 
         if (e.keyCode === 27) {
             $('#modal-view').fadeOut();
