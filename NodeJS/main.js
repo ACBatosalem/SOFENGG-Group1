@@ -6,8 +6,9 @@ var path        = require("path");
 var ejs         = require('ejs');
 
 // PERSONAL MODULES
-var handlers = require('./actions/handlers');
 var utils = require('./utils/utils');
+var notifier = require('./models/notifier');
+var handlers = require('./actions/handlers');
 
 // VARIABLES
 var app     = express();
@@ -40,3 +41,6 @@ app.use ('*', function  (request, response) {
 app.listen(port);
 console.log('[' + utils.toUTC(new Date()) + '] ' + 'Server has started');
 console.log('[' + utils.toUTC(new Date()) + '] ' + 'Server running at http://localhost:' + port + context);
+
+
+

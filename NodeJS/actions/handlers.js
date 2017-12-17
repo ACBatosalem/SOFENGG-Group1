@@ -8,18 +8,11 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // PERSONAL MODULES
 var firebase    = require("./../models/firebase");
 var utils       = require("./../utils/utils");
+var emailService= require("./../models/email");
 
 // VARIABLES
 var execute     = { };
 var context     = "/APS_Dashboard";
-
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'jonal_ticug@dlsu.edu.ph',
-        pass: 'Ayo5Get5??'
-    }
-});
 
 var numOrgs = 0;
 var numSub = 0;
@@ -215,6 +208,16 @@ function modalData(request, response) {
                    org_id: orgID});
 }
 
+function generatePassword (n) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 10; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 function addUser (request, response) {
     if(request.session.uid != null) { 
         var user_name = request.body.name;
@@ -222,6 +225,9 @@ function addUser (request, response) {
         var user_email = request.body.email;
         var user_contact = request.body.contact;
         var user_org = request.body.org;
+        
+        var randomPass = generatePassword(10);
+        
         
         if(service.findUser(user_name,user_username,user_contact,user_email)) {
             response.send("Name, username, contact number, or email already in use.");
@@ -232,8 +238,17 @@ function addUser (request, response) {
                 email: user_email,
                 contact: user_contact,
                 org_id: user_org,
-                password: "password"
+                password: randomPass
             };
+            
+            emailService.sendMail({
+                from : "dlsucso.apsdashboard@gmail.com",
+                to : user_email,
+                subject: "[APS Dashboard] Account Setup",
+                text: "Hello and thank you for using the APS Dashboard. An account was generated using this email account. " +
+                    "You may login the credentials below at https://csoaps.localtunnel.me \n" + 
+                    "Username: " + user_username + " \nPassword: " + randomPass
+            });
             service.addUser(userDetails);
             response.send("true");
             }

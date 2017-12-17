@@ -4,26 +4,75 @@ var path        = require("path");
 var serviceAccount  = require('../config/service-account-key.json');
 var dbConfig        = require('../config/database.json');
 
+firebase.initializeApp(dbConfig);
+
 var utils       = require("./../utils/utils");
 
-firebase.initializeApp(dbConfig);
-var orgs = null;
+var emailService    = require('./email');
+const notifier = require('node-notifier');
+
+var orgs = [ ];
 var orgsTS = null;
 var orgsNum;
-var users = null;
+var users = [ ];
 var usersTS = null;
 var usersNum;
-var submissions = null;
+var submissions = [ ];
 var subsNum;
 var subsTS = null;
 
 var database    = firebase.database();
+var notifications = [];
+
 exports.firebase = firebase;
 exports.service = [];
-
 exports.initialize = initialize;
+/*
+var mailOptions = {
+  from: 'jonal_ticug@dlsu.edu.ph',
+  to: 'sophia_rivera@dlsu.edu.ph',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+*/
+/*
+notifier.notify({
+    'title': 'APS Dashboard',
+    'message': 'Hello, there!',
+    'wait': true
+});
+*/
 
 function initialize () {    
+    database.ref('notifications').on('child_added', function(snapshot) {
+        if(snapshot.val() != undefined || snapshot.val() != null) {
+            notifications.push(snapshot.val());
+            
+            if(false == snapshot.val().email_sent) {
+                emailService.sendMail({
+                    from: 'dlsucso.apsdashboard@gmail.com',
+                    to: snapshot.val().email_list.split(','),
+                    subject: '[APS Dashboard] ' + snapshot.val().title,
+                    text: snapshot.val().message
+                });
+
+                notifier.notify({
+                    'title': '[' + (new Date(snapshot.val().timestamp)).toLocaleString() + '] APS Dashboard - ' + snapshot.val().title,
+                    'message': snapshot.val().message,
+                    'wait': true
+                });
+                
+                database.ref('notifications').child(snapshot.key).child('email_sent').set(true);
+            } 
+        }
+    });
+    
+    database.ref('notifications').on('child_removed', function(snapshot) {
+        if(snapshot.val() != undefined || snapshot.val() != null) {
+            delete notifications[snapshot.key];
+        }
+    });
+    
     database.ref('orgs').on('value', function(snapshot){
         if(snapshot.val() != undefined || snapshot.val() != null) {
             console.log("[" + utils.toUTC(new Date()) + "] Updated the orgs.");
@@ -65,8 +114,10 @@ exports.service.getUserWithOrganization = getUserWithOrganization;
 
 function getUserWithOrganization (userid) {
     var user = users[userid];
-    user.user_id = userid;
-    user.org = getOrganization(user.org_id);
+    if(user != null) {
+        user.user_id = userid;
+        user.org = getOrganization(user.org_id);
+    }
     return user;
 }
 
@@ -340,7 +391,7 @@ function countOrgs() {
 exports.service.countSubs = countSubs;
 
 function countSubs() {
-    return subsNum;
+    return isNaN(subsNum)?-1:subsNum;
 }
 
 exports.service.changeOrgStatus = changeOrgStatus;
@@ -360,32 +411,86 @@ exports.service.addSubmission = addSubmission;
 
 function addSubmission(subKey, subDetails) {
     database.ref("submissions").child(subKey).set({
-        act_date: subDetails.act_date,
-        act_nature: subDetails.act_nature,
-        act_time: subDetails.act_time,
-        act_type: subDetails.act_type,
-        act_venue: subDetails.act_venue,
-        datetimechecked: "-",
-        status: "-",
-        sub_type: subDetails.sub_type,
-        term: subDetails.term,
-        timestamp: subDetails.timestamp,
-        title: subDetails.act_title,
-        type_sas: subDetails.type_sas,
-        org_id: subDetails.org_id,
-        user_id_checker: "-",
-        user_id_org: subDetails.user_id_org
-      });
+    act_date: subDetails.act_date,
+    act_nature: subDetails.act_nature,
+    act_time: subDetails.act_time,
+    act_type: subDetails.act_type,
+    act_venue: subDetails.act_venue,
+    datetimechecked: "-",
+    status: "-",
+    sub_type: subDetails.sub_type,
+    term: subDetails.term,
+    timestamp: subDetails.timestamp,
+    title: subDetails.act_title,
+    type_sas: subDetails.type_sas,
+    org_id: subDetails.org_id,
+    user_id_checker: "-",
+    user_id_org: subDetails.user_id_org
+    });
+    
+    user_org = subDetails.user_id_org;
+    emailUsers = [users[user_org].email];
+    for (key in users) {
+        if(getUserWithOrganization(key).org.privilege == 'admin')
+            emailUsers.push(getUser(key).email);
+    }
 
+    addNotification({
+        email_list: emailUsers.join(','),
+        email_sent: false,
+
+        message: users[subDetails.user_id_org].name +  " of " + 
+            getUserWithOrganization(subDetails.user_id_org).org.name + 
+            " added a new submission. <br>" +
+            "Activity Title: " + subDetails.act_title + '<br>' +
+            "Activity Date: " + subDetails.act_date + '<br>',
+        timestamp: Date.now(),
+        title: "New Submission",
+        unread: false
+    });
 }
 
 exports.service.checkSubmission = checkSubmission;
 
 function checkSubmission(subKey, checkDetails) {
+    user_org = submission[subKey].user_id_org;
+    emailUsers = [users[user_org].email];
+    for (key in users) {
+        if(getUserWithOrganization(key).org.privilege == 'admin')
+            emailUsers.push(getUser(key).email);
+    }
+    
+    var cur = utils.toUTC(new Date());
+    
+    addNotification({
+        email_list: emailUsers.join(','),
+        email_sent: false,
+        message: users[user_id_checker].name +  " has checked the submission. <br>" +
+            "Activity Title: " + submissions[subkey].title + '<br>' +
+            "Checker: " + getUser(checkDetails.checker).name + ' at (' + cur + ')' + 
+            "Remarks: " + checkDetails.remarks + '<br>' +
+            "Status: " + checkDetails.status,
+        timestamp: (new Date()).toLocaleString(),
+        title: "Checked Submission",
+        unread: false
+    });
+    
     database.ref("submissions").child(subKey).update({
         user_id_checker: checkDetails.checker,
-        datetime_checked: utils.toUTC(new Date()),
+        datetime_checked: cur,
         remarks: checkDetails.remarks,
         status: checkDetails.status
     });
+}
+
+exports.service.addNotification = addNotification;
+
+function addNotification (notification) {
+    return database.ref("notifications").push(notification);
+}
+
+exports.service.deleteNotification = deleteNotification;
+
+function deleteNotification (key) {
+    return database.ref("notifications").child(key).set(null);
 }

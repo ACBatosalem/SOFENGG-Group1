@@ -1,5 +1,6 @@
 var interval;
 var submissions;
+
 $(document).ready(function() {
     $('#notif-btn').on('click', function(){
         if(open) {
@@ -12,31 +13,38 @@ $(document).ready(function() {
     });
     
     updateNotificationCount(count);
+    var config = {
+        apiKey: "AIzaSyBL3mFq5IA-6wlKsvxJCmeRvEuCrC8tp-k",
+        authDomain: "labfirebase-f292b.firebaseapp.com",
+        databaseURL: "https://labfirebase-f292b.firebaseio.com",
+        projectId: "labfirebase-f292b",
+        storageBucket: "labfirebase-f292b.appspot.com",
+        messagingSenderId: "783008488555"
+    };
     
-    firebase.database().ref('submissions').once('value', function(snapshot) {
-        submissions = snapshot.val();
+    firebase.initializeApp(config);
+    var database = firebase.database();
+    
+    database.ref('notifications').on('child_added', function(snapshot) {
+        if(snapshot.val() != undefined || snapshot.val() != null) {
+            if(false == snapshot.val().email_sent) {
+                if(snapshot.val().email_list.indexOf(user.email)) {
+                    pushNotification({
+                        title: snapshot.val().title,
+                        details: snapshot.val().message,
+                        unread: false,
+                        time: Date.parse(snapshot.val().timestamp)
+                    });    
+                } 
+            } 
+        }
     });
-
-    $('#table_submissions tbody tr').each(function(){
-        var row = $(this);
-        var key = row.attr('data-docuID');
-
-        firebase.database().ref('submissions').child(key).on('child_changed', function(snapshot) {
-            $(this).find('td').eq(3).text(snapshot.val().status);
-            
-            pushNotification(new notification(snapshot.val().title, "Some details have been updated!", Date.now(), true));
-            firebase.database().ref('submissions').once('value', function(snapshot) {
-                submissions = snapshot.val();
-            });
-        });
+    
+    database.ref('notifications').on('child_removed', function(snapshot) {
+        if(snapshot.val() != undefined || snapshot.val() != null) {
+            delete notifications[snapshot.key];
+        }
     });
-
-    $("tr.item").each(function() {
-        $this = $(this);
-        var value = $this.find("span.value").html();
-        var quantity = $this.find("input.quantity").val();
-      });
-	
 });
 
 var open = false;
@@ -50,6 +58,8 @@ function notification (title, details, time, unread) {
     this.time = time;
     this.ui = null;
 }
+
+
 
 function pushNotification (notification) {
     var item = document.createElement('li');

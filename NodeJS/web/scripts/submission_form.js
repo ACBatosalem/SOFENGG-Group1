@@ -4,6 +4,22 @@ Date.prototype.getWeekOfMonth = function(){
 }
 
 var selectedDates = [];
+function toString (now) {
+    year = "" + now.getFullYear();
+    month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+    day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+    hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+    minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+    second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+    return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+}
+
+function toStringDate (now) {
+    year = "" + now.getFullYear();
+    month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+    day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+    return year + "-" + month + "-" + day;
+}
 
 $(document).ready(function() {
     $('button#next').on('click', function(e){
@@ -104,23 +120,21 @@ $(document).ready(function() {
         submitDocument();
     });
     
+    
     $('#add-date').on('click', function(e){
         e.preventDefault();
-        var dateStr = $('#date-text').val();
-        var month = parseInt(dateStr.split('/')[0]);
-        var year = parseInt(dateStr.split('/')[2]);
-        var day = parseInt(dateStr.split('/')[1]);
-        var date = new Date(year, month-1, day);
+        var dateStr = $('#date-text').val();   
+        var date = new Date(dateStr);
         
         if(isNaN(Date.parse(dateStr))) {
             return false;
         }
         
-        if(!includes(selectedDates, date)) {
+        if(!includes(selectedDates, dateStr)) {
             if(multi) {
-                selectedDates.unshift(date);
+                selectedDates.unshift(dateStr);
             } else {
-                selectedDates = [date];
+                selectedDates = [dateStr];
                 $('.selected-dates').html('');
             }
             
@@ -129,18 +143,18 @@ $(document).ready(function() {
             var i = document.createElement('i');;
 
             $(docu).addClass('date');
-            $(docu).append((date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear());
+            $(docu).append(dateStr);
             $(i).addClass('fa');
             $(i).addClass('fa-times');
 
             $(i).on('click', function(){
-                selectedDates.splice(selectedDates.indexOf(date), 1); 
+                selectedDates.splice(selectedDates.indexOf(dateStr), 1); 
                 $(docu).remove();
                 setDate(calendar);
             });
 
             $('.clear').on('click', function(){
-                selectedDates = [date];
+                selectedDates = [dateStr];
                 $('.selected-dates').html('');
                 setDate(calendar);   
             });
@@ -165,6 +179,7 @@ $(document).ready(function() {
         var year = $('input#year').val();
         var day = parseInt($(this).text());
         var date = new Date(year, month-1, day);
+        date = toStringDate(date);
         
         if(!$(this).hasClass('selected')) {
             if(multi) {
@@ -178,13 +193,13 @@ $(document).ready(function() {
             var i = document.createElement('i');;
             
             $(docu).addClass('date');
-            $(docu).append((date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear());
+            $(docu).append(date);
             $(i).addClass('fa');
             $(i).addClass('fa-times');
 
             $(i).on('click', function(){
                 for(var i = 0; i < selectedDates.length; i++) {
-                    if (selectedDates[i].getTime() == date.getTime()) {
+                    if (selectedDates[i] == date) {
                         selectedDates.splice(i, 1); 
                         $('.date:eq(' + i +')').remove();
                     }
@@ -212,7 +227,7 @@ $(document).ready(function() {
             
         } else {
             for(var i = 0; i < selectedDates.length; i++) {
-                if (selectedDates[i].getTime() == date.getTime()) {
+                if (selectedDates[i] == date) {
                     selectedDates.splice(i, 1); 
                     $('.date:eq(' + i +')').remove();
                 }
@@ -250,9 +265,9 @@ function changeMonth (month, year) {
         $('tr:eq('+current.getWeekOfMonth()+')>td:eq(' +current.getDay()+')').html(i);
         if(current.getDay() != 0)
             $('tr:eq('+current.getWeekOfMonth()+')>td:eq(' +current.getDay()+')').removeClass('unselectable');
-        if (includes(selectedDates, current))
+        if (includes(selectedDates, toStringDate(current)))
             $('tr:eq('+current.getWeekOfMonth()+')>td:eq(' +current.getDay()+')').addClass('selected');
-        if (current.getTime() == (new Date).getTime())
+        if (toStringDate(current) == toStringDate(new Date()))
             $('tr:eq('+current.getWeekOfMonth()+')>td:eq(' +current.getDay()+')').addClass('current');
         current = new Date(year, month, i + 1);
     }
@@ -271,7 +286,7 @@ function changeMonth (month, year) {
 
 function includes (arr, current) {
     for(var i = 0; i < arr.length; i++) {
-        if(arr[i].getTime() == current.getTime())
+        if(arr[i] == current)
             return true;
     } 
     return false;
@@ -361,7 +376,7 @@ function submitDocument () {
         }
         
         if(actTypeOthers) {
-            if (actTypeOthers.trim() == '' || actTypeOthers == null) {
+            if (actTypeOthers == null || actTypeOthers.trim() == '') {
                 errorMessage += "Activity Type <br>";
                 $('#act-type-label').addClass('error');
             } else {
