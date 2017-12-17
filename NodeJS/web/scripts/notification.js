@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     database.ref('notifications').orderByChild('timestamp').on('child_added', function(snapshot) {
         if(snapshot.val() != undefined || snapshot.val() != null) {
-            if(snapshot.val().email_list.indexOf(email) != -1) {
+            if(snapshot.val().email_list.indexOf(user.email) != -1) {
                 console.log(snapshot.val().timestamp);
                     pushNotification({
                         title: snapshot.val().title,
