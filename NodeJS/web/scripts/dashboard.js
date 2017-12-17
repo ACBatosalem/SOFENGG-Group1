@@ -22,13 +22,6 @@ $(document).ready(function() {
         "autoWidth": false,
         "pageLength": 10,
         "order": [[ 0, "desc" ]],
-        "columnDefs":[{
-            "targets": -1,
-            "data": null,
-            "defaultContent": '<button class = "deletesub" data-docuID = "<%=key%>">' + 
-                '<i class = "fa fa-trash"> </i>' +
-                '</button>'
-        }],
         "language": {
             "info": "Showing page _PAGE_ of _PAGES_",
             "infoEmpty": "",
