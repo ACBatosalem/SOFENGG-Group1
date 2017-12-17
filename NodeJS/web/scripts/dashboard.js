@@ -136,11 +136,12 @@ $(document).ready(function() {
                     $('#check').hide();
                     $('#recheck').hide();
                     $('#editSub').hide();
+                    $('.deletesub').hide();
                     
                     $("#cancelAct").prop('disabled', false);
-                    if(data.sub.status == 'PENDED') {
+                    if(data.sub.status == 'EARLY APPROVED' || data.sub.status == 'LATE APPROVED') {
                         click = true;
-                        $('#editSub').html('EDIT');
+                        $('#editSub').html('In Case of Change');
                         $('.eSub').prop('disabled', true);
                         $('#resubmit').show();
                         $('#editSub').show();
@@ -279,6 +280,34 @@ $(document).ready(function() {
             }
             recheck = !recheck;
         });
+
+        $(document).on('click', '.deletesub', function(){
+
+            var docuID = $(this).attr('data-docuID');
+
+            modalMessage('Are you sure you want to delete this submission?',
+            "No",
+            function(){
+                $('#modal-action').remove();
+            },
+            "Yes",
+            function(){
+                $.ajax({ 		
+                    type        : 'POST', 		
+                    url         : 'deleteSubmission',		
+                    data        : {subKey:docuID},		
+                    dataType    : 'json',		
+                    success     : function(data) {
+                        if (data.msg == 'true') {
+                            //delete the table row and redraw
+                            $('#modal-action').remove();
+                        } else {
+                            console.log("Failed to delete the submission!");
+                        }
+                    }
+                });
+            }, true);
+        });
     
     $(document).keyup(function(e){ 
         if (e.keyCode === 27) {
@@ -403,7 +432,7 @@ function newSubmission(typeSub, typeSAS) {
             if(data.msg)
                 message = "Successfully sent a submission! Your submission will be checked within 3 - 5 working days.";
             else message = "Submission not added. Please supply missing details";
-            $('#editSub').html('EDIT');
+            $('#editSub').html('In Case of Change');
             $('#modal-action').remove();
             $('.eSub').prop('disabled', true);
 

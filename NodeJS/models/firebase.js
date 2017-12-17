@@ -523,3 +523,9 @@ exports.service.deleteNotification = deleteNotification;
 function deleteNotification (key) {
     return database.ref("notifications").child(key).set(null);
 }
+
+exports.service.deleteSubmission = deleteSubmission;
+
+function deleteSubmission(subKey) {
+    database.ref("submissions").child(subKey).remove();
+}
