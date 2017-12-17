@@ -537,7 +537,7 @@ function forgotPassword(request, response){
             from: 'jonal_ticug@dlsu.edu.ph',
             to: request.body.email,
             subject: '[APS Dashboard] Forgot password',
-            text: 'Wag mo kasi kalimutan :)\n Your password is: ' + user.password
+            text: 'Your password is: ' + user.password
         };
         
         transporter.sendMail(mailOptions, function(error, info){
