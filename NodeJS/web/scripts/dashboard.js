@@ -442,7 +442,7 @@ function addRow(key, sub) {
 
     var rowNode = table.row.add([
         sub.timestamp,
-        sub.submittedBy.org.name,
+        sub.org.name,
         sub.title,
         sub.status
     ]).node();
