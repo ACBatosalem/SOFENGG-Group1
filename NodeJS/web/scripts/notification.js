@@ -24,21 +24,21 @@ $(document).ready(function() {
     
     firebase.initializeApp(config);
     var database = firebase.database();
-    s
-    database.ref('notifications').on('child_added', function(snapshot) {
+
+    database.ref('notifications').orderByChild('timestamp').on('child_added', function(snapshot) {
         if(snapshot.val() != undefined || snapshot.val() != null) {
-            if(false == snapshot.val().email_sent) {
-                if(snapshot.val().email_list.indexOf(user.email)) {
+            if(snapshot.val().email_list.indexOf(email) != -1) {
+                console.log(snapshot.val().timestamp);
                     pushNotification({
                         title: snapshot.val().title,
                         details: snapshot.val().message,
-                        unread: false,
+                        unread: snapshot.val().unread,
                         time: Date.parse(snapshot.val().timestamp)
                     });    
                 } 
-            } 
+            }
         }
-    });
+    );
     
     database.ref('notifications').on('child_removed', function(snapshot) {
         if(snapshot.val() != undefined || snapshot.val() != null) {
@@ -111,8 +111,11 @@ function pushNotification (notification) {
 
     notificationList.push(notification);
     
+    $(item).removeClass('unread');
+
     if(notification.unread) {
         count++;
+        $(item).addClass('unread');
         updateNotificationCount(count);  
     }
     

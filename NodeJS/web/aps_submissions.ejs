@@ -103,6 +103,7 @@
                                     <th class = "header org"> Organization </th>
                                     <th class = "header title"> Title </th>   
                                     <th class = "header status"> Status </th>
+                                    <th class = "header action"> Action </th>
                                 </tr>
                             </thead>
 
@@ -135,6 +136,11 @@
                                             default: %>
                                             <td> <%=submissions[key].status%> </td>
 	                                <% } %>
+                                    <td>
+                                        <button class = "deletesub" data-docuID = "<%=key%>">
+                                            <i class = 'fa fa-trash'> </i>
+                                        </button>
+                                    </td>
 	                            </tr>
                             <% } %>
                             </tbody>

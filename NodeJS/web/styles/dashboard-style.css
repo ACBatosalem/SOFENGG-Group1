@@ -474,6 +474,19 @@ section#details {
     bottom: 5px;
 }
 
+.deletesub {
+    border: none;
+    color: #35855C;
+    font-size: 30px;
+    cursor: pointer;
+    opacity: 0.8;
+    background: none;
+}
+
+.deletesub:hover{
+    opacity: 1.0;
+}
+
 .notif-label {
     position: absolute;
     top: 0px;

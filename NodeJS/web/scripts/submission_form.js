@@ -324,6 +324,16 @@ function submitDocument () {
         }
         else sasReq = true;
     }
+
+    function validateTime(time) {
+        if (!time) {
+            return false;
+        }
+        var military = /^\s*([01]?\d|2[0-3]):[0-5]\d\s*$/i;
+        var standard = /^\s*(0?\d|1[0-2]):[0-5]\d(\s+(AM|PM))?\s*$/i;
+        return time.match(military) || time.match(standard);
+    }
+
     if(sasReq) {
         if(typeSASSub == null || typeSASSub.trim() == '') {
             errorMessage += "Type of SAS Submission <br>";
@@ -363,12 +373,17 @@ function submitDocument () {
                     errorMessage += "Activity Date/s <br>";
                     dates = $(".date").val();
                 } else {
-                    //toISOString chcuhu
-
                     dates = selectedDates.join(', ');
                 } 
                 break;
             default: dates = dateType;
+        }
+
+        if(actTime == null || actTime.trim() == '') {
+            errorMessage += "Activity Time <br>";
+            $('#act-time-label').addClass('error');
+        } else {
+            $('#act-time-label').removeClass('error');
         }
         
         if(actNature == null || actNature.trim() == '') {

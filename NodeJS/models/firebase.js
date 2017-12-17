@@ -453,12 +453,20 @@ function addSubmission(subKey, subDetails) {
 
         message: users[subDetails.user_id_org].name +  " of " + 
             getUserWithOrganization(subDetails.user_id_org).org.name + 
-            " added a new submission. <br>" +
-            "Activity Title: " + subDetails.act_title + '<br>' +
-            "Activity Date: " + subDetails.act_date + '<br>',
+            " added a new submission. \n \n" +
+            "Activity Details \n" + 
+            "Title: " + subDetails.act_title + '\n' +
+            "Date and Time: " + subDetails.act_date + ' ' + subDetails.act_time + '\n' +
+            "Term: " + subDetails.term + '\n' +
+            "Venue: " + subDetails.act_venue + '\n' +
+            "Nature: " + subDetails.act_nature + '\n' + 
+            "Type: " + subDetails.act_type + '\n\n' +
+            "Submission Details \n" + 
+            "Type of Submission: " + subDetails.sub_type + '\n' +
+            "Type Of SAS: " + subDetails.type_sas + '\n',
         timestamp: Date.now(),
-        title: "New Submission",
-        unread: false
+        title: "New Submission: " + getUserWithOrganization(subDetails.user_id_org).org.name + ' - ' + subDetails.act_title,
+        unread: true
     });
 }
 
@@ -477,14 +485,14 @@ function checkSubmission(subKey, checkDetails) {
     addNotification({
         email_list: emailUsers.join(','),
         email_sent: false,
-        message: users[checkDetails.checker].name +  " has checked the submission. <br>" +
-            "Activity Title: " + submissions[subKey].title + '<br>' +
-            "Checker: " + getUser(checkDetails.checker).name + ' at (' + cur + ')' + 
-            "Remarks: " + checkDetails.remarks + '<br>' +
+        message: users[checkDetails.checker].name +  " has checked the submission. \n" +
+            "Activity Title: " + submissions[subKey].title + '\n' +
+            "Checker: " + getUser(checkDetails.checker).name + ' at (' + cur + ')\n' + 
+            "Remarks: " + checkDetails.remarks + '\n' +
             "Status: " + checkDetails.status,
         timestamp: (new Date()).toLocaleString(),
-        title: "Checked Submission",
-        unread: false
+        title: "Checked Submission: " + getUserWithOrganization(checkDetails.checker).org.name + " - ",
+        unread: true
     });
     
     database.ref("submissions").child(subKey).update({

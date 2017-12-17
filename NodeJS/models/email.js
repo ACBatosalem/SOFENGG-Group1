@@ -9,15 +9,6 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-/*
-var mailOptions = {
-  from: 'jonal_ticug@dlsu.edu.ph',
-  to: 'sophia_rivera@dlsu.edu.ph',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
-*/
-
 exports.sendMail = function sendEmail (mailOptions) {  
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
