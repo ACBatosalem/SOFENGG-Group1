@@ -12,11 +12,18 @@
                     <label class = "modal-label modal-division">
                         <button data-form = "details" class = "selected"> DETAILS </button>
                         <button data-form = "submission"> SUBMISSION </button>
+                        
+
                     </label> 
                     <section id = "details">
+                        <button class = "btn" id = "editSub"> EDIT </button>
+                        <div class = "modal-row">
+                            <label class = "modal-label"> Term </label> 
+                            <input id = "term" class="field eSub" type="text"> 
+                        </div>
                         <div class = "modal-row">
                             <label class = "modal-label"> Title </label> 
-                            <input id = "act-name" class="field" type="text"> 
+                            <input id = "act-name" class="field eSub" type="text"> 
                         </div>
                         <div class = "modal-row">
                             <label class = "modal-label"> Organization </label>	
@@ -25,24 +32,24 @@
 
                         <div class = "modal-row">
                             <label class = "modal-label"> Date/s: </label> 
-                            <textarea id = "actDate" class="field" > </textarea> 
+                            <textarea id = "actDate" class="field eSub" > </textarea> 
                         </div>
                         <div class = "modal-row">
                             <label class = "modal-label"> Time: </label>
-                            <input id = "time" class="field" type="text"> 
+                            <input id = "time" class="field eSub" type="text"> 
                         </div>
                         <div class = "modal-row">
                             <label class = "modal-label"> Venue: </label> 
-                            <input id = "venue" class="field" type="text"> 
+                            <input id = "venue" class="field eSub" type="text"> 
                         </div>
                         <div class = "modal-row">
                             <label class = "modal-label"> Nature: </label> 
-                            <input id = "nature" class="field" type="text"> 
+                            <input id = "nature" class="field eSub" type="text"> 
                         </div> 
 
                         <div class = "modal-row">
                             <label class = "modal-label"> Type: </label> 
-                            <input id = "type" class="field" type="text"> 
+                            <input id = "type" class="field eSub" type="text"> 
                         </div>    
                     </section>
                     <section id = "submission">
@@ -99,9 +106,14 @@
                     </button>
 
                     <button class = "btn check-resubmit-edit" id = "resubmit">
-                            
-                            RESUBMIT
-                        </button>
+                        
+                        RESUBMIT
+                    </button>
+
+                    <button class = "btn check-resubmit-edit" id = "cancelAct">
+                        
+                        CANCEL ACTIVITY
+                    </button>
                 </section>
             </div>
         </div>
