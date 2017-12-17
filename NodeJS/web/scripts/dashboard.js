@@ -481,12 +481,14 @@ function addRow(key, sub) {
         sub.timestamp,
         sub.org.name,
         sub.title,
-        sub.status
+        sub.status,
+        ''
     ]).node();
     
     $(rowNode).attr('data-docuID', key);
     $(rowNode).addClass('clickable');
     $(rowNode).find("td:nth-child(4)").addClass(classs);
+    $(rowNode).find("td:nth-child(5)").html('<button class = "deletesub"> <i class = "fa fa-trash"> </i> </button>');
 }
 
 function filterSubmissions(filter, orgID) {
