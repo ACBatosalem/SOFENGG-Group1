@@ -72,8 +72,6 @@
                                 <tr class = "header"> 
                                 	<th class = "header org"> Organization </th>
                                     <th class = "header delete no-sort"> Users </th>
-                                    <th class = "header delete no-sort"> Status </th>
-                                    <th class = "header delete no-sort"> Action </th>
                                 </tr>
                             </thead>
                             <!-- THEAD END -->
@@ -83,23 +81,8 @@
                                 <tr>
                                 	<td> <%= organizations[key].name %> (<%= organizations[key].username %>) </td>
 									<td> <%= organizations[key].user_count %> </td>
-                                    <td> 
-                                        <% if (organizations[key].status == "active") { %>
-                                            <i class ="fa fa-check"> </i>
-                                        <% } else {%>
-                                            <i class ="fa fa-times"> </i>
-                                        <% } %>
-                                        <%= organizations[key].status %> 
-                                    </td>
-                                    <td>
-										<% if (organizations[key].privilege.toUpperCase() != "ADMIN") { %>
-										     <% if (organizations[key].status == "active") { %>
-                                                <i class ="iconBtn archive changeStatus fa fa-archive" value = "active" data-orgID="<%=key%>"> </i>
-                                            <% } else {%>
-                                                <i class ="iconBtn unarchive changeStatus fa fa-inbox" value = "inactive" data-orgID="<%=key%>"> </i>
-                                            <% } %>
-                                        <% } %>
-									</td>
+                                    
+                                    
                                 </tr>
                                 <% } %>
                             </tbody>
@@ -130,7 +113,7 @@
                             <tbody id = 'users-body'> 
                                 <% for (key in users) { %>     
                                 <tr>
-                                	<td> <%= users[key].name %> (<%= users[key].username %>) </td>
+                                	<td> <%= users[key].name %> <br> (<%= users[key].username %>) <br> <%= users[key].email %></td>
 									<td> <%= users[key].org.name %> </td>
                                     <td> 
                                         <i class = "iconBtn delete fa fa-trash" data-orgID="<%=key%>"> </i>
