@@ -7,10 +7,6 @@
     margin: 20px 60px 30px 60px;
 }
 
-
-
-
-
 #submission-form {
     color: #35865C;
     font-size: 20px;
@@ -26,6 +22,16 @@
     font-family: "Palanquin";
     font-size: 20px;
     padding: 10px 40px;
+}
+
+#sub-form-message {
+    color: #35865C;
+    resize: none;
+    width: 500px;
+    font-family: "Palanquin";
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
 }
 
 .form-row {

@@ -30,10 +30,31 @@ app.use(function(request, response, next) {
 // MAIN CONTROLLER
 app.use ('*', function  (request, response) {
     console.log("[" + utils.toUTC(new Date()) + "] " + request.originalUrl);
-    if(handlers.execute[request.originalUrl] != null) {
-        handlers.execute[request.originalUrl](request, response);
-    } else {
-        response.redirect(context+'/home');
+    var user = handlers.service.getUserWithOrganization(request.session.uid);
+    if(user == null) {
+        if(handlers.execute[request.originalUrl] == null) {
+            response.redirect(context+'/home');
+        } else {
+            handlers.execute[request.originalUrl](request, response);
+        }
+    } else {    
+        if(handlers.execute[request.originalUrl] != null) {
+            if(request.originalUrl.indexOf("/aps/") != -1) {
+                if(user.org.privilege.toUpperCase() == 'ADMIN')
+                    handlers.execute[request.originalUrl](request, response);
+                else 
+                    response.redirect(context+'/home/aps');     
+            } else if (request.originalUrl.indexOf("/org/") != -1) {
+                if(user.org.privilege.toUpperCase() == 'ORG')
+                    handlers.execute[request.originalUrl](request, response);
+                else
+                    response.redirect(context+'/home/org');
+            } else {    
+                handlers.execute[request.originalUrl](request, response);
+            }
+        } else {
+            response.redirect(context+'/home');
+        }
     }
 });                                                                                                                                                                                                                                                     
 

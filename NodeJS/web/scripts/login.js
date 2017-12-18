@@ -48,12 +48,10 @@ $(document).ready(function(){
 				 },	
 				 complete	: function (xhr,status) {
 					 $('#btn_forgot').prop('disabled', false);
-					 $('#btn_back').prop('disabled', true);
+					 $('#btn_back').prop('disabled', false);
 					 $('#loader-ajax').hide();
-				 }
-				});
-        //SET TEXT IF ERROR: 
-			
+				}
+			});
 		}
     });
     

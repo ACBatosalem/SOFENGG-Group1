@@ -464,14 +464,15 @@ function submitDocument () {
 
                 $('body').css('overflow', 'hidden');
                 modalMessage(message,
-                            null,
-                            null,
-                            "Okay",
-                            function(){
-                                $('#modal-action').remove();  
-                                $('body').css('overflow', 'auto');
-                            },
-                            false);
+                    null,
+                    null,
+                    "Okay",
+                    function(){
+                        $('#modal-action').remove();  
+                        $('body').css('overflow', 'auto');
+                        window.href == context+'/';
+                    },
+                    false);
             },
             error   	: function(xhr,status,error){		
                     console.log(xhr.responseText);

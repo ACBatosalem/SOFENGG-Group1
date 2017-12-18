@@ -9,10 +9,12 @@
         <script> var context = "<%=context%>"; </script>
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
         
         <!-- SCRIPTS -->
         <script src="<%=context%>/scripts/logout.js" type="application/javascript"> </script>
         <script src="<%=context%>/scripts/modal.js" type="application/javascript"> </script>
+        <script src="<%=context%>/scripts/org_form.js" type="application/javascript"> </script>
         <script src="<%=context%>/scripts/submission_form.js" type="application/javascript"> </script>
         
         <!-- STYLES -->
@@ -48,23 +50,16 @@
                             Back to Submissions 
                         </a>
                     </p>
-                    <!-- SUBMISSION FORM MESSAGE START -->
-                    <p id = "form-message"> 
-                        Kindly make sure you have submitted all necessary requirements to avoid being pended. <br>
-                        Please be cautious while logging in, make sure there are no typos and all information logged are consistent with your PPR. <br>
-                        Processing time is 3-5 working days. <br>
-                        <br>
-                        For any concerns/queries please contact: <br> 
-                        <i class="fa fa-user"> </i>
-                        Rica Culata - 09164330003 <br>
-                        <i class="fa fa-user"> </i>
-                        Victor Lacson - 09157797417 <br>             
-                    </p>
                     <!-- SUBMISSION FORM MESSAGE END -->
                     
                     <!-- SUBMISSION START -->
                     <form id = "submission-form">
+                        <div class = "form-row">
 
+                            <!-- SUBMISSION FORM MESSAGE START -->
+                            <textarea id = "sub-form-message" rows = 8 disabled>           
+                            </textarea>
+                        </div>
                         <div class = "form-row">
                             <label id = "typeSub-label"> 
                                 Type of Submission

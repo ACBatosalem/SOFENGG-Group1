@@ -50,11 +50,11 @@
 	            <div id = "chart"> </div>
 	            <div class = "count-main">
 	                <div id = "acad" class = "count-container">
-	                    <label class = "label value"> <%=academic%> </label> <br>
+	                    <label class = "label value"> <%=academic%> ( <%- academic/(academic+nonacademic)*100 %> %) </label> <br>
 	                    <label class = "label afield"> ACADEMIC </label>
 	                </div>
 	                <div id = "non-acad" class = "count-container"> 
-	                    <label class = "label value"> <%=nonacademic%> </label> <br>
+	                    <label class = "label value"> <%=nonacademic%> ( <%- nonacademic/(academic+nonacademic)*100 %> %) </label> <br>
 	                    <label class = "label afield"> NON-ACADEMIC </label>
 	
 	                </div>

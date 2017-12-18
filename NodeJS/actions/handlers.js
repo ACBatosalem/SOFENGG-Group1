@@ -53,6 +53,8 @@ execute[context+"/aps/submitSubmission"] = submitSubmission;
 
 //execute[context+"/addOrg"] = addOrg;
 
+exports.service = service;
+
 firebase.initialize();
 
 function accountsAPS (request, response) {

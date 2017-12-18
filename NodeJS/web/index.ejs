@@ -57,7 +57,10 @@
                         <p class="label" id="login_msg"> </p>
                         
                         <!-- LOGIN MESSAGE -->
-                        <button id="btn_login" type="submit" value="LOGIN"> Login </button>
+                        <button id="btn_login" type="submit" value="LOGIN"> 
+                            Login 
+                            <img src = "<%=context%>/resources/ajax-loader.gif" id = "loader-ajax">
+                        </button>
                         <br/>
                         <!-- CHANGE PASSWORD LINK -->
                         <a class="label" id="forgot_msg"> Forgot Password? </a>
@@ -71,7 +74,7 @@
                         
                         <!-- EMAIL -->
                         <p class="label"> Please enter your email: </p>
-                        <input type="email" id = "email" class = "forgotpassword">
+                        <input type="email" id = "email" class = "login forgotpassword">
 
                         <!-- FORGOT PASSWORD MESSAGE -->
                         <p class = "label" id = "forgot_msg_error"> </p>

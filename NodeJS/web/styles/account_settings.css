@@ -18,6 +18,15 @@
     margin: 0px;
 }
 
+#sub-form-message {
+    font-family: "Palanquin";
+    font-size: 16px;
+    width: calc(100% - 20px);
+    margin: 10px;
+    color: #35865C;
+    padding: 10px;
+}
+
 .field {    
     width: 250px;
     resize: none;
@@ -142,17 +151,18 @@ label#emailtitle {
     display: flex;
 }
 
-.subopt > #editsave {
+.subopt > button {
     padding: 0px 10px;
     background-color: #35865C;
     color: white;
     border: none;
+    margin: 10px;
     font-size: 20px;
     font-family: "Palanquin";
     cursor: pointer;
 }
 
-.subopt > #editsave:hover {
+.subopt > button:hover {
     background-color: #35865CCC;
     color: white;
     border: none;
