@@ -81,7 +81,9 @@ function statisticsAPS (request, response) {
             user:user,
             context:context,
             academic: service.countAcademic(),
-            nonacademic: service.countNonacademic()
+            nonacademic: service.countNonacademic(),
+            submissionWeek: service.countWeek(),
+            submissionMonth: service.countMonth()
         });
     }
 }
@@ -96,7 +98,9 @@ function statisticsOrg (request, response) {
             user:user,
             context:context,
             academic: service.countAcademic(user.org_id),
-            nonacademic: service.countNonacademic(user.org_id)
+            nonacademic: service.countNonacademic(user.org_id),
+            submissionWeek: service.countWeek(),
+            submissionMonth: service.countMonth()
         });
     }
 }
@@ -340,7 +344,6 @@ function apsNewSubmission(request, response) {
 
 function submitSubmission(request, response) {
     if(request.session.uid != null) {
-        console.log("im here na");
         var term = request.body.term;
         var type_sub = request.body.type_sub;
         var type_sas = request.body.type_sas;
@@ -355,13 +358,9 @@ function submitSubmission(request, response) {
         if (request.session.org_id != "org_1")
             submitter = request.session.org_id;
         else {
-            console.log(request.body.org);
             submitter = request.body.org;
         }
 
-        console.log(term + " "+type_sub+" " + " " + type_sas + " "+act_title);
-        console.log(act_nature +" "+ act_type + " " + act_date + " "+act_venue);
-        console.log(submitter);
         if (term == "" || term == undefined ||
             act_title == "" || act_title == undefined ||
             act_nature == "" || act_nature == undefined ||

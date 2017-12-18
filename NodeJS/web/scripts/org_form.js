@@ -11,9 +11,13 @@ $(document).ready(function() {
     
     firebase.initializeApp(config);
     var database = firebase.database();
-    
+    $('#submission-form').hide();
+    $('#ajax-loader').show();
     database.ref('message').on('value', function(snapshot) {
-        $('#sub-form-message').text(snapshot.val());
+        $('#sub-form-message').val(snapshot.val().form);
+        $('#ajax-loader').hide();
+        $('#submission-form').show();
+        autosize(document.getElementById('sub-form-message'));
     });
 
     $('#cancel').hide();
@@ -33,8 +37,8 @@ $(document).ready(function() {
             $('#sub-form-message').prop('disabled',  false);
         } else {
             edit = false;
-            console.log($('#sub-form-message').text());
-            database.ref().child('message').set($('#sub-form-message').text());
+            var data = $('#sub-form-message').val();
+            database.ref('message').child('form').set(data);
             $('#sub-form-message').prop('disabled', true);
             $('#editsave-submission').html('Edit Message');
             $('#cancel').hide();

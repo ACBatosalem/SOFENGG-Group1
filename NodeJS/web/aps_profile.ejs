@@ -6,7 +6,8 @@
         <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
-
+        <script src="<%=context%>/libraries/autosize.min.js" type="application/javascript"> </script>
+        
         <!-- SCRIPTS -->
         <script> var context = "<%=context%>"; </script>
         <script src="<%=context%>/scripts/modal.js" type="application/javascript"> </script>
@@ -43,7 +44,7 @@
                 <div id="main_body">
                     <div class = "option">
                         <label class = "title"> Submission Message </label>
-                        <textarea id = "sub-form-message" rows = "10"></textarea>
+                        <textarea id = "sub-form-message" disabled></textarea>
                         <div class = "subopt">
                             <button id = "editsave-submission" class="editAPS"> 
                                 Edit Message

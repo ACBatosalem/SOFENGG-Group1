@@ -6,11 +6,61 @@ var datetimeNow;
 var subKey;
 var clickedRow;
 var table;
+var filter = "all";
+
+var config = {
+    apiKey: "AIzaSyBL3mFq5IA-6wlKsvxJCmeRvEuCrC8tp-k",
+    authDomain: "labfirebase-f292b.firebaseapp.com",
+    databaseURL: "https://labfirebase-f292b.firebaseio.com",
+    projectId: "labfirebase-f292b",
+    storageBucket: "labfirebase-f292b.appspot.com",
+    messagingSenderId: "783008488555"
+};
+
+firebase.initializeApp(config);
+var database = firebase.database();
 
 $(document).ready(function() {
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var orgID = $("#org-pick option:selected").attr('data-orgid');
 
-    $("#org-pick").val('YAYCLUB');
+            var org = data[5];
+            var acad = data[6];
+            
+            var cond1 = false;
+            var cond2 = false;
 
+            if(orgID == 0 || orgID == null) {
+                cond1 = true;
+            } else if (orgID == org) {
+                cond1 = true;
+            } else {
+                cond1 = false;
+            }
+
+            if (filter == 'all') {
+                cond2 = true;
+            } else if (acad == 'true' && filter == 'acad') {
+                cond2 = true;
+            } else if (acad == 'false' && filter == 'non-acad') {
+                cond2 = true;
+            } else {
+                cond2 = false;
+            }
+        
+            return cond1 && cond2;
+        }
+    );
+
+    database.ref('submission').orderByChild('timestamp').endAt().limitToLast(1).on('child_added', function(snapshot){
+        addRow(snapshot.val());
+    });
+
+    database.ref('submissions').orderByChild('org_id').equalTo(user.org_id).on('value', function(snapshot){
+        console.log(snapshot.val());
+    });
+    
     table= $('#table_submissions').DataTable( {
         "scrollCollapse": true,
         "ordering": true,
@@ -22,6 +72,9 @@ $(document).ready(function() {
         "scrollX": "100%",
         "autoWidth": false,
         "pageLength": 10,
+        "columnDefs": [
+            { "visible": false, "targets": [-1, -2] }
+        ],
         "order": [[ 0, "desc" ]],
         "language": {
             "info": "Showing page _PAGE_ of _PAGES_",
@@ -45,27 +98,17 @@ $(document).ready(function() {
         $('#' + $(this).attr('data-form')).show();
     });
     $("#org-pick").val($("#org-pick").attr('data-selectedOrg'));
-    
-    // database.ref('submission').equalTo(user.user_id).orderByChild('timestamp').limitToLast(1).on('child_added', function(snapshot){
-    //    addRow(snapshot.val());
-    // });
-
-    // database.ref('submissions').orderByChild('org_id').equalTo(user.org_id).on('value', function(snapshot){
-    //     console.log(snapshot.val());
-    // });
        
     $('#academic').click(filterCheckbox);
     $('#nonacademic').click(filterCheckbox);
     $("#org-pick").change(filterCheckbox);
     
     function filterCheckbox () {
-        var orgID = $("#org-pick option:selected").attr('data-orgid');
-        var nonacad = $('#nonacademic').find('i');
-        var acad = $('#academic').find('i');
-        var filter = "";
-        
         $(this).find('i').toggle();
         
+        var nonacad = $('#nonacademic').find('i');
+        var acad = $('#academic').find('i');
+
         if(acad.is(':visible') && nonacad.is(':visible'))
             filter = 'all';
         if(acad.is(':visible') && !nonacad.is(':visible'))
@@ -81,8 +124,8 @@ $(document).ready(function() {
                 filter = 'acad';
             }
         }
-        
-        filterSubmissions(filter, orgID);
+
+        table.draw();
     }
     
     $('.half input').prop('disabled', true);
@@ -116,12 +159,13 @@ $(document).ready(function() {
     });
 
     $('#table_submissions tbody').on('click', '.clickable', function() {
+        if($('#modal-action').is(':visible')) {
+            return;
+        }
+        
         var docuID = $(this).attr('data-docuID');
         clickedRow = $(this);
         subKey = docuID;
-        if($('modal-action').is(':visible')) {
-            return;
-        }
 
         $('#modal-content input').val('');
         $('#modal-content textarea').val("");
@@ -146,8 +190,9 @@ $(document).ready(function() {
 	 			$("#actDate").val(data.sub.act_date);
 	 			
                 $("#submissionType").val(data.sub.sub_type);
-	 			$("#submittedBy").val(data.sub.submittedBy.name);
-	 			$("#submitDate").val(data.sub.timestamp);
+                if(data.sub.submittedBy != null) 
+	 			    $("#submittedBy").val(data.sub.submittedBy.name);
+                $("#submitDate").val(data.sub.timestamp);
 	 			$("#typeSAS").val(data.sub.type_sas);
                 
                 if(data.org_id == "org_1") {
@@ -190,8 +235,6 @@ $(document).ready(function() {
 
                     }
                 }
-                
-                
 
                 $('#checker input').prop('disabled', true);
                 $('#checker textarea').prop('disabled', true);
@@ -213,17 +256,16 @@ $(document).ready(function() {
                     $("#remarks").val(data.sub.remarks);
                 else
                     $("#remarks").val('');
-                    
-			},
+                
+                $('#modal-view').fadeIn();
+            },
 			error   	: function(xhr,status,error){		
 				console.log(xhr);   		
 				alert(status);		
 			}
     	});
-    	if($('#modal-action').is(':visible')) {
-            return;
-        }
-        $('#modal-view').fadeIn();
+        
+
         
         $('body').css('overflow','hidden');
     });
@@ -334,23 +376,7 @@ $(document).ready(function() {
     
     $('#modal-close').click(function(){
         $('#modal-view').fadeOut(500, function(){
-        	$("#act-name").text("Activity Title");
-    		$("#org-name").text("Organization");
-    		
-    		$("#time").text("Time: ");
-    		$("#venue").text("Venue: ");
-    		$("#nature").text("Nature of Activity: ");
-    		$("#type").text("Type of Activity: ");
-    		$("#actDate").text("Activity Date/s: ");
-    		
-            $("#submissionType").text("Submission Type: ");
-    		$("#submittedBy").text("Submitted by: ");
-    		$("#submitDate").text("Date Submitted: ");
-    		$("#typeSAS").text("Type of SAS Submission: ");
-    		
-    		$("#checkedby").text("Checked by: ");
-    		$("#dateChecked").text("Date Checked: ");
-    		$("#remarks").text("Remarks: ");
+        	clearModal();
         });
 		
         $('body').css('overflow','auto');
@@ -485,43 +511,35 @@ function addRow(key, sub) {
     default : sub.status = "No Checkers Yet";
     }
 
-    var rowNode = table.row.add([
-        sub.timestamp,
-        sub.org.name,
-        sub.title,
-        sub.status,
-        ''
-    ]).node();
+    if(user.org.privilege.toUpperCase() == 'ADMIN') {    
+        var rowNode = table.row.add([
+            sub.timestamp,
+            sub.org.name,
+            sub.title,
+            sub.status,
+            '',
+            sub.org_id,
+            sub.nature.toUpperCase()=='ACADEMIC' 
+        ]).node();
+        $(rowNode).find("td:nth-child(5)").html('<button class = "deletesub"> <i class = "fa fa-trash"> </i> </button>');
+    } else {
+        var rowNode = table.row.add([
+            sub.timestamp,
+            sub.org.name,
+            sub.title,
+            sub.status,
+            sub.org_id,
+            sub.nature.toUpperCase()=='ACADEMIC' 
+        ]).node();
+    }
     
     $(rowNode).attr('data-docuID', key);
     $(rowNode).addClass('clickable');
     $(rowNode).find("td:nth-child(4)").addClass(classs);
-    $(rowNode).find("td:nth-child(5)").html('<button class = "deletesub"> <i class = "fa fa-trash"> </i> </button>');
 }
 
-function filterSubmissions(filter, orgID) {
-    $.ajax({
-        type        : 'POST', 
-        url         : 'aps/filterSubmissions',
-        data        : {filter:filter, orgID:orgID},
-        dataType    : 'json',
-        success     : function(subs) {
-            if (subs != "false") {
-                table.clear();
-                for (key in subs) {
-                    addRow(subs[key].key, subs[key]);
-                } 
-                table.draw();
-            } else {
-                window.location = context + '/home';
-            }
-        },
-        error   : function(xhr,status,error){
-            console.log("error: " + xhr.responsetext);
-            alert(status);
-            alert(error);
-        }
-    });
+function clearModal () {
+    $('#modal-view .field').val('');
 }
 
 function setClass(td, status) {

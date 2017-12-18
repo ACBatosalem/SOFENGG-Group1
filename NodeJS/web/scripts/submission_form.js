@@ -455,7 +455,6 @@ function submitDocument () {
                            act_type:actType, act_venue:actVenue, type_sub:typeSub, type_sas:typeSASSub, org:submitter},
 			dataType    : 'json',		
 	 		success     : function(data) {
-                console.log(data.msg);
                 var message = "";
 
                 if(data.msg)

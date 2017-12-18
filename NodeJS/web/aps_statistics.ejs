@@ -1,16 +1,14 @@
 <html>
 	<head>
-		
 		<title> <%=user.org.username%> | Statistics </title>
 		<link rel="icon" type="image/gif" href="<%=context%>/resources/logo.png" />
 
-
         <!-- LIBRARIES -->
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.min.js" type="application/javascript"> </script>
-        <script src="<%=context%>/libraries/chartlist/chartlist.min.js" type="application/javascript"> </script>
-        
-        <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
-        
+       	<link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
+        <script type = "application/javascript" src="<%=context%>/libraries/highcharts/highcharts.js"></script>
+		<script type = "application/javascript" src="<%=context%>/libraries/highcharts/modules/exporting.js"></script>
+
         <!-- SCRIPTS -->
                 
         <script>
@@ -49,12 +47,12 @@
 	            <div id = "chart"> </div>
 	            <div class = "count-main">
 	                <div id = "acad" class = "count-container">
-	                    <label class = "label value"> <%=academic%> (<%- Math.round(academic/(academic+nonacademic)*100)%>%) </label> <br>
-	                    <label class = "label afield"> ACADEMIC </label>
+	                    <label class = "label value"> <%=submissionMonth%> </label> <br>
+	                    <label class = "label afield"> Submissions this month </label>
 	                </div>
 	                <div id = "non-acad" class = "count-container"> 
-	                    <label class = "label value"> <%=nonacademic%> (<%- Math.round(nonacademic/(academic+nonacademic)*100)%>%) </label> <br>
-	                    <label class = "label afield"> NON-ACADEMIC </label>
+	                    <label class = "label value"> <%=submissionWeek%> </label> <br>
+	                    <label class = "label afield"> Submissions this week </label>
 	
 	                </div>
 	            </div>      

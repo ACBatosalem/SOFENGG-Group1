@@ -10,6 +10,7 @@
         <script src="<%=context%>/libraries/jquery/jquery-3.2.1.js" type="application/javascript"> </script>
         <link type="text/css" href="<%=context%>/libraries/font-awesome-4.7.0/css/font-awesome.min.css" rel=stylesheet>
         <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+        <script src="<%=context%>/libraries/autosize.min.js" type="application/javascript"> </script>
         
         <!-- SCRIPTS -->
         <script src="<%=context%>/scripts/logout.js" type="application/javascript"> </script>
@@ -51,13 +52,16 @@
                         </a>
                     </p>
                     <!-- SUBMISSION FORM MESSAGE END -->
-                    
+                    <div id = "ajax-loader">
+                        Loading form
+                        <img id = "gif-loader" src = "<%=context%>/resources/ajax-loader2.gif">
+                    </div>
                     <!-- SUBMISSION START -->
                     <form id = "submission-form">
                         <div class = "form-row">
 
                             <!-- SUBMISSION FORM MESSAGE START -->
-                            <textarea id = "sub-form-message" rows = 8 disabled>           
+                            <textarea id = "sub-form-message" disabled>           
                             </textarea>
                         </div>
                         <div class = "form-row">

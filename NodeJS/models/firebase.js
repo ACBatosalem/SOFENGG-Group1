@@ -112,6 +112,38 @@ function initialize () {
     });
 }
 
+exports.service.countWeek = countWeek;
+
+function countWeek () {
+    var count = 0;
+
+    for (key in submissions) {
+        var d = new Date();
+        d.setDate(d.getDate() - 7);
+        d = d.toISOString().split('T')[0] + ' ' + d.toISOString().split('T')[1].substring(0,8);
+        if(d < submissions[key].timestamp) 
+            count++;
+    }
+
+    return count;
+}
+
+exports.service.countMonth = countMonth;
+
+function countMonth () {
+    var count = 0;
+    
+        for (key in submissions) {
+            var d = new Date();
+            d.setDate(d.getDate() - 30);
+            d = d.toISOString().split('T')[0] + ' ' + d.toISOString().split('T')[1].substring(0,8);
+            if(d < submissions[key].timestamp) 
+                count++;
+        }
+    
+        return count;
+}
+
 exports.service.getUserWithOrganization = getUserWithOrganization;
 
 function getUserWithOrganization (userid) {

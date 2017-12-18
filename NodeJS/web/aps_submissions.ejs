@@ -103,13 +103,15 @@
                                     <th class = "header title"> Title </th>   
                                     <th class = "header status"> Status </th>
                                     <th class = "header action"> Action </th>
+                                    <th class = "header"> orgid </th>
+                                    <th class = "header"> academic </th>
                                 </tr>
                             </thead>
 
                             <!-- DATA: SUBMISSIONS -->    
                             <tbody id="tbody">
                             <% for (key in submissions) { %> 
-                                <tr data-docuID = "<%=key%>" class = "clickable" >
+                                <tr data-docuID = "<%=key%>" class = "clickable">
 	                                <td> <%= submissions[key].timestamp %> </td>
                                     <td> <%= submissions[key].org.name%> </td>
 	                                <td> <%= submissions[key].title %>  </td>
@@ -140,6 +142,8 @@
                                             <i class = "fa fa-trash"> </i>
                                         </button>
                                     </td>
+                                    <td> <%=submissions[key].org_id%> </td>
+                                    <td> <%- submissions[key].act_nature.toUpperCase().trim()=='ACADEMIC' %> </td>
 	                            </tr>
                             <% } %>
                             </tbody>
